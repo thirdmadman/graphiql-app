@@ -5,7 +5,7 @@ import StoreProvider from '@/lib/redux/StoreProvider';
 import { Details } from './components/Details';
 import { LocaleProvider } from './localeProvider';
 import { Header } from './components/Header';
-import RequestFieldWrapper from './components/RequestFieldWrapper';
+import RequestField from './components/RequestField';
 
 export default async function Home({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
   return (
@@ -17,7 +17,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
           <div className='flex min-w-full justify-center gap-10'>
             <InputForm />
             <Suspense fallback={<div>Loading...</div>}>
-              <RequestFieldWrapper searchParams={searchParams} />
+              <RequestField searchParams={searchParams} />
             </Suspense>
           </div>
           <Details />

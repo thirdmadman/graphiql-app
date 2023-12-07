@@ -1,11 +1,15 @@
 'use client';
 
-import {disableExec, enableExec, setValue} from '@/lib/redux/features/todos/detailsSlice';
-import {useAppDispatch, useAppSelector} from '@/lib/redux/hooks';
-import {usePathname, useRouter, useSearchParams} from 'next/navigation';
-import {useState} from 'react';
+import { disableExec, enableExec, setValue } from '@/lib/redux/features/todos/detailsSlice';
+import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useContext, useState } from 'react';
+import { localeContext } from '../localeProvider';
+import { locale } from '@/locales/locale';
 
 export function InputForm() {
+  const { state } = useContext(localeContext);
+  const currentLang = state.currentLocale.id;
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -39,11 +43,13 @@ export function InputForm() {
     dispatch(enableExec());
   };
 
+  const { inputFormLabel, executeBtnTitle } = locale[currentLang];
+
   return (
     <div className='min-w-[30%]'>
       <div className='mb-5'>
         <label htmlFor='gqlq' className='block mb-2 text-sm font-medium text-gray-900 dark:text-white'>
-          Write your query
+          {inputFormLabel}
         </label>
         <textarea
           rows={20}
@@ -63,7 +69,7 @@ export function InputForm() {
         disabled={form.isExecDisable}
         onClick={() => onSubmitEvent(dataFromInput)}
       >
-        Execute!
+        {executeBtnTitle}
       </button>
     </div>
   );

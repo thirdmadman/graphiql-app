@@ -1,5 +1,6 @@
-import {request, gql, ClientError} from 'graphql-request';
-import {Disable} from './Disable';
+import { request, gql, ClientError } from 'graphql-request';
+import { Disable } from './Disable';
+import { Locale } from '@/locales/locale';
 
 const getGraphQLData = async (req: string | null = null) => {
   let document = gql`
@@ -16,15 +17,22 @@ const getGraphQLData = async (req: string | null = null) => {
 
   try {
     const resp = await request('https://spacex-production.up.railway.app/', document);
-    return {resp};
+    return { resp };
   } catch (error) {
     console.error(error);
-    return {error};
+    return { error };
   }
 };
 
-export default async function RequestField({searchParams}: {searchParams: {[key: string]: string | string[] | undefined}}) {
+type RequestFieldProps = {
+  searchParams: { [key: string]: string | string[] | undefined },
+  locale: Locale;
+}
+
+export default async function RequestField({ searchParams, locale }: RequestFieldProps) {
   let gqlRequest = '';
+  const { serverResponseTitle } = locale;
+
 
   if (searchParams) {
     if (searchParams.data && typeof searchParams.data === 'string') {
@@ -49,7 +57,7 @@ export default async function RequestField({searchParams}: {searchParams: {[key:
 
   return (
     <div className=''>
-      <p className='mb-2'>Server response</p>
+      <p className='mb-2'>{serverResponseTitle}</p>
       <pre className='p-5 bg-gray-50 '>{data}</pre>
       <Disable disabled={false} />
     </div>

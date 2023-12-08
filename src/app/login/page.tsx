@@ -2,10 +2,11 @@
 
 import {getRedirectResult, signInWithRedirect} from 'firebase/auth';
 
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useRouter} from 'next/navigation';
-import { auth, provider } from '@/lib/redux/firebase/firebase-config';
-
+import {auth, provider} from '@/lib/redux/firebase/firebase-config';
+import { LoginFrom } from '../components/LoginFrom';
+import { RegisterFrom } from '../components/RegisterFrom';
 
 export default function SignIn() {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function SignIn() {
         return;
       }
 
-      fetch('/api/auth', {
+      fetch('/api/auth/google', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${await userCred.user.getIdToken()}`,
@@ -39,6 +40,8 @@ export default function SignIn() {
       <button className='p-4 rounded-lg bg-green-200' onClick={() => signIn()}>
         Sign In With Google
       </button>
+      <LoginFrom />
+      <RegisterFrom />
     </>
   );
 }

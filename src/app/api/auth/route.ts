@@ -1,71 +1,106 @@
-import { adminAuth } from "@/lib/redux/firebase/firebase-admin-config";
-import { auth } from "firebase-admin";
-import { cookies, headers } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
-
+import {adminAuth} from '@/lib/redux/firebase/firebase-admin-config';
+import {auth} from '@/lib/redux/firebase/firebase-config';
+import {FirebaseError} from 'firebase/app';
+import {signInWithEmailAndPassword} from 'firebase/auth';
+import {NextRequest, NextResponse} from 'next/server';
 
 export async function GET(request: NextRequest) {
-  const session = cookies().get("session")?.value || "";
-  //Validate if the cookie exist in the request
+  const session = request.cookies.get('session')?.value;
+
   if (!session) {
-    return NextResponse.json({ isLogged: false }, { status: 401 });
+    return NextResponse.json({isLogged: false}, {status: 401});
   }
 
   //Use Firebase Admin to validate the session cookie
-  const decodedClaims = await auth().verifySessionCookie(session, true);
+  const decodedClaims = await adminAuth.verifySessionCookie(session, true);
 
   if (!decodedClaims) {
-    return NextResponse.json({ isLogged: false }, { status: 401 });
+    return NextResponse.json({isLogged: false}, {status: 401});
   }
 
-  return NextResponse.json({ isLogged: true }, { status: 200 });
+  return NextResponse.json({isLogged: true}, {status: 200});
 }
 
-export async function POST(request: NextRequest, response: NextResponse) {
-  const authorization = headers().get("Authorization");
-  
-  if (authorization?.startsWith("Bearer ")) {
-    const idToken = authorization.split("Bearer ")[1];
-    const decodedToken = await auth().verifyIdToken(idToken);
+export async function POST(request: NextRequest) {
+  const response = NextResponse.json({isError: true}, {status: 401});
+  const SESSION_EXPIRES_IN = 1000 * 60 * 60 * 24 * 5;
 
-    if (decodedToken) {
-      //Generate session cookie
-      const expiresIn = 60 * 60 * 24 * 5 * 1000;
-      const sessionCookie = await auth().createSessionCookie(idToken, {
-        expiresIn,
-      });
-      const options = {
-        name: "session",
-        value: sessionCookie,
-        maxAge: expiresIn,
-        httpOnly: true,
-        secure: true,
-      };
+  type TLoginData = {
+    email: string;
+    password: string;
+  };
 
-      //Add the cookie to the browser
-      cookies().set(options);
+  const loginData = (await request.json()) as TLoginData;
+
+  if (loginData && loginData.email && loginData.password) {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, loginData.email, loginData.password);
+      const {user} = userCredential;
+      const jwt = await user.getIdToken();
+
+      if (jwt) {
+        const sessionCookie = await adminAuth.createSessionCookie(jwt, {
+          expiresIn: SESSION_EXPIRES_IN,
+        });
+
+        const options = {
+          name: 'session',
+          value: sessionCookie,
+          maxAge: SESSION_EXPIRES_IN,
+          httpOnly: true,
+          secure: true,
+        };
+
+        const successResp = NextResponse.json({isError: true}, {status: 200});
+        successResp.cookies.set(options);
+        return successResp;
+      }
+    } catch (e) {
+      if (e instanceof FirebaseError) {
+        switch (e.code) {
+          case 'auth/invalid-email':
+            console.error('Invalid email address');
+            break;
+
+          default:
+            console.error(e.message);
+        }
+      } else {
+        console.error('An error occurred, please try again later.');
+      }
     }
   }
 
-  return NextResponse.json({}, { status: 200 });
+  return response;
 }
 
-export async function DELETE(request: NextRequest, response: NextResponse) {
-  const token = cookies().get("session")?.value || "";
+export async function DELETE(request: NextRequest) {
+  const token = request.cookies.get('session')?.value;
+
   if (!token) {
-    return NextResponse.json({ isLogged: false }, { status: 401 });
+    return NextResponse.json({isLogged: false}, {status: 401});
   }
-  await invalidateLogin(token);
-  return NextResponse.json({}, { status: 200 });
+
+  const response = NextResponse.json({}, {status: 200});
+
+  await invalidateLogin(token, response);
+
+  return response;
 }
 
 // Create a separate file for this utility function if you prefer that way
-export const invalidateLogin = async (token: string) => {
-  const decodedClaims = await adminAuth.verifySessionCookie(
-    token,
-    true
-  );
+export const invalidateLogin = async (token: string, response: NextResponse) => {
+  const decodedClaims = await adminAuth.verifySessionCookie(token, true);
+
   await adminAuth.revokeRefreshTokens(decodedClaims.uid);
-  cookies().delete("session");
+
+  const options = {
+    name: 'session',
+    value: '',
+    maxAge: -1,
+  };
+
+  response.cookies.set(options);
+
   return;
 };

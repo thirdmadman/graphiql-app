@@ -11,7 +11,7 @@ export default async function Home({searchParams}: {searchParams: {[key: string]
         <h2 className='text-4xl mb-5 font-extrabold dark:text-white'>From</h2>
         <div className='flex min-w-full justify-center gap-10'>
           <InputForm />
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<span className="loading loading-dots loading-sm"></span>}>
             <RequestField searchParams={searchParams} />
           </Suspense>
         </div>

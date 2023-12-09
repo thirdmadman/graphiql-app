@@ -1,29 +1,37 @@
 import {request, gql, ClientError} from 'graphql-request';
-import {Disable} from './Disable';
+import {Locale} from '@/locales/locale';
+import {RequestFieldError} from './RequestFieldError';
+import {RequestFieldBox} from './RequestFieldBox';
 
 const getGraphQLData = async (req: string | null = null) => {
-  let document = gql`
-    {
-      company {
-        ceo
-      }
-    }
-  `;
+  // let document = gql`
+  //   {
+  //     company {
+  //       ceo
+  //     }
+  //   }
+  // `;
 
-  if (req) {
-    document = req;
+  if (!req) {
+    return {resp: null};
   }
 
   try {
-    const resp = await request('https://spacex-production.up.railway.app/', document);
+    const resp = (await request('https://spacex-production.up.railway.app/', req)) as string;
     return {resp};
   } catch (error) {
     console.error(error);
-    return {error};
+    return {error, resp: null};
   }
 };
 
-export default async function RequestField({searchParams}: {searchParams: {[key: string]: string | string[] | undefined}}) {
+export type TGetGraphQLData = Awaited<ReturnType<typeof getGraphQLData>>;
+
+type RequestFieldProps = {
+  searchParams: {[key: string]: string | string[] | undefined};
+};
+
+export default async function RequestField({searchParams}: RequestFieldProps) {
   let gqlRequest = '';
 
   if (searchParams) {
@@ -35,23 +43,8 @@ export default async function RequestField({searchParams}: {searchParams: {[key:
   const resp = await getGraphQLData(gqlRequest);
 
   if (resp.error) {
-    const clientError = resp?.error as ClientError;
-    return (
-      <div>
-        <p>We are sorry, but there were error in processing request.</p>
-        <p>Text of error: {clientError.message.slice(0, 100)}...</p>
-        <Disable disabled />
-      </div>
-    );
+    return <RequestFieldError error={resp.error as ClientError} />;
   }
 
-  let data = JSON.stringify(resp.resp);
-
-  return (
-    <div className=''>
-      <p className='mb-2'>Server response</p>
-      <pre className='p-5 bg-gray-50 '>{data}</pre>
-      <Disable disabled={false} />
-    </div>
-  );
+  return <RequestFieldBox resp={resp.resp} />;
 }

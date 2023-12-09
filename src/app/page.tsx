@@ -8,6 +8,9 @@ import { Header } from './components/Header';
 import RequestField from './components/RequestField';
 
 export default async function Home({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
+
+  const susKey = searchParams.data ? searchParams.data.toString() : ''; 
+
   return (
     <StoreProvider>
       <LocaleProvider>
@@ -16,7 +19,7 @@ export default async function Home({ searchParams }: { searchParams: { [key: str
           <Header />
           <div className='flex min-w-full justify-center gap-10'>
             <InputForm />
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense key={susKey} fallback={(<div>Loading...</div>)}>
               <RequestField searchParams={searchParams} />
             </Suspense>
           </div>

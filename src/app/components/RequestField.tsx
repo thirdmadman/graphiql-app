@@ -1,5 +1,4 @@
 import {request, gql, ClientError} from 'graphql-request';
-import {Locale} from '@/locales/locale';
 import {RequestFieldError} from './RequestFieldError';
 import {RequestFieldBox} from './RequestFieldBox';
 
@@ -21,7 +20,23 @@ const getGraphQLData = async (req: string | null = null) => {
     return {resp};
   } catch (error) {
     console.error(error);
-    return {error, resp: null};
+
+    if (error instanceof ClientError) {
+      return {
+        error: {
+          type: 'ClientError',
+          message: error.message,
+        },
+        resp: null,
+      };
+    }
+
+    return {
+      error: {
+        type: 'UnknownError',
+      },
+      resp: null,
+    };
   }
 };
 
@@ -43,7 +58,7 @@ export default async function RequestField({searchParams}: RequestFieldProps) {
   const resp = await getGraphQLData(gqlRequest);
 
   if (resp.error) {
-    return <RequestFieldError error={resp.error as ClientError} />;
+    return <RequestFieldError error={resp.error} />;
   }
 
   return <RequestFieldBox resp={resp.resp} />;

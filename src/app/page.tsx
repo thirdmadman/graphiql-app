@@ -13,7 +13,7 @@ export default async function Home({searchParams}: {searchParams: {[key: string]
     <StoreProvider>
       <LocaleProvider>
         <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-          <h2 className='text-4xl mb-5 font-extrabold dark:text-white'>From</h2>
+          <h2 className='text-4xl mb-5 font-extrabold dark:text-white'>Form</h2>
           <Header />
           <div className='flex min-w-full justify-center gap-10'>
             <InputForm />

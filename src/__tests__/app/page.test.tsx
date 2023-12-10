@@ -1,8 +1,7 @@
-import {expect, test} from 'vitest';
-import {render, screen, within} from '@testing-library/react';
 import Home from '@/app/page';
-import {Suspense} from 'react';
-import RootLayout from '@/app/layout';
+import '@testing-library/jest-dom';
+
+import {render, screen} from '@testing-library/react';
 
 describe('Home page', () => {
   beforeAll(() => {
@@ -29,37 +28,38 @@ describe('Home page', () => {
     });
 
     vi.mock('../../app/components/RequestField.tsx', async () => {
-      return {
-        RequestField: () => (<p></p>),
-      };
-    });
+      const actual = await vi.importActual<typeof import('../../app/components/RequestField')>('../../app/components/RequestField');
 
-    vi.mock('next/font/google', async () => {
+      const RF = await actual.RequestField({searchParams: {data: ''}});
+
       return {
-        Inter: vi.fn(() => ({className: 'google'})),
+        RequestField: () => (RF),
       };
     });
   });
 
-  it('Should render component and not fail', async () => {
-    const {container} = render(
-      <Suspense>
-        <RootLayout>
-          <Home searchParams={{data: ''}} />
-        </RootLayout>
-      </Suspense>
-    );
-
-    console.log('container :>> ', container.innerHTML);
-
-    expect(container).not.toBeNull();
+  it('should render without failing', async () => {
+    const {container} = render(await Home({searchParams: {data: ''}}));
+    expect(container.firstElementChild).not.toBeNull();
   });
 
-  it.skip('Should render heading', () => {
-    render(<Home searchParams={{}} />);
+  it('should contain header', async () => {
+    render(await Home({searchParams: {data: ''}}));
+    expect(screen.getByText('Form')).not.toBeNull();
+  });
 
-    const heading = screen.getByText('From');
+  it('should contain input from', async () => {
+    render(await Home({searchParams: {data: ''}}));
+    expect(screen.getByText('Write your query')).not.toBeNull();
+  });
 
-    expect(heading).not.toBeNull();
+  it('should contain request box', async () => {
+    render(await Home({searchParams: {data: ''}}));
+    expect(screen.getByText('Server response')).not.toBeNull();
+  });
+
+  it('should contain controls', async () => {
+    render(await Home({searchParams: {data: ''}}));
+    expect(screen.getByText('Submit button blocked?', { exact: false })).not.toBeNull();
   });
 });

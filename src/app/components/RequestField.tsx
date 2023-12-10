@@ -46,7 +46,7 @@ type RequestFieldProps = {
   searchParams: {[key: string]: string | string[] | undefined};
 };
 
-export default async function RequestField({searchParams}: RequestFieldProps) {
+export async function RequestField({searchParams}: RequestFieldProps) {
   let gqlRequest = '';
 
   if (searchParams) {

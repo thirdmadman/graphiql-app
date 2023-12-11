@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server';
 
 //Protected routes
 export const config = {
-  matcher: ['/app/:path*'],
+  matcher: ['/protected/:path*'],
 };
 
 export async function middleware(request: NextRequest) {

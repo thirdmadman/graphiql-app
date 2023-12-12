@@ -1,5 +1,5 @@
-import { combineReducers, configureStore} from '@reduxjs/toolkit';
-import detailsReducer, {detailsSlice} from './features/todos/detailsSlice';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import detailsReducer, { detailsSlice } from './features/details/detailsSlice';
 
 const reducers = {
   [detailsSlice.name]: detailsReducer,
@@ -17,7 +17,6 @@ export function setupStore(preloadedState?: RootState) {
     preloadedState,
   });
 }
-
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppStore = ReturnType<typeof setupStore>;

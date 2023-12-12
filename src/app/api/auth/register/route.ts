@@ -1,8 +1,8 @@
-import {adminAuth} from '@/lib/redux/firebase/firebase-admin-config';
-import {NextRequest, NextResponse} from 'next/server';
+import { adminAuth } from '@/lib/firebase/firebase-admin-config';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
-  const response = NextResponse.json({isError: true}, {status: 401});
+  const response = NextResponse.json({ isError: true }, { status: 401 });
 
   type TRegisterData = {
     email: string;
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
         disabled: false,
       });
 
-      return NextResponse.json({isError: false, user}, {status: 200});
+      return NextResponse.json({ isError: false, user }, { status: 200 });
     } catch (error) {
       console.error(error);
     }

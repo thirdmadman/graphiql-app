@@ -2,8 +2,7 @@
 
 GraphiQL is a playground/IDE for graphQL requests. This is team task for RSSchool course of REACT2023Q4
 
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 

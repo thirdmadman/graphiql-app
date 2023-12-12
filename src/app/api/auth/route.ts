@@ -1,3 +1,4 @@
+import { SESSION_EXPIRES_IN } from '@/constants';
 import { adminAuth } from '@/lib/firebase/firebase-admin-config';
 import { auth } from '@/lib/firebase/firebase-config';
 import { FirebaseError } from 'firebase/app';
@@ -23,7 +24,6 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   const response = NextResponse.json({ isError: true }, { status: 401 });
-  const SESSION_EXPIRES_IN = 1000 * 60 * 60 * 24 * 5;
 
   type TLoginData = {
     email: string;

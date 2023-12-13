@@ -4,7 +4,11 @@ import { useContext } from 'react';
 import { localeContext } from '../../locales/localeProvider';
 import { locale } from '@/locales/locale';
 
-export function ResponseFieldBox({ resp }: { resp?: object }) {
+interface IResponseFieldBoxProps {
+  resp?: object;
+}
+
+export function ResponseFieldBox({ resp }: IResponseFieldBoxProps) {
   const { state } = useContext(localeContext);
   const currentLang = state.currentLocale.id;
   const localization = locale[currentLang];

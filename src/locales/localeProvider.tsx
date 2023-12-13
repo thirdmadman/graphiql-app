@@ -16,11 +16,11 @@ export const localeContext = createContext<{
   dispatch: () => null,
 });
 
-interface Props {
+interface ILocaleProviderProps {
   children?: ReactNode;
 }
 
-export function LocaleProvider({ children }: Props) {
+export function LocaleProvider({ children }: ILocaleProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (

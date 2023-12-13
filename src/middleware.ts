@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
   const session = request.cookies.get('session');
 
   if (!session) {
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(new URL('/auth/sign-in', request.url));
   }
 
   const responseAPI = await fetch(`${request.nextUrl.origin}/api/auth`, {
@@ -20,7 +20,7 @@ export async function middleware(request: NextRequest) {
   });
 
   if (responseAPI.status !== 200) {
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(new URL('/auth/sign-in', request.url));
   }
 
   return NextResponse.next();

@@ -3,14 +3,14 @@
 import { Dispatch, ReactNode, createContext, useReducer } from 'react';
 import {
   initialState,
-  localeStateType,
+  ILocaleState,
   reducer,
-  toggleLocaleActionType,
+  IToggleLocaleAction,
 } from '@/locales/context/reducer';
 
 export const localeContext = createContext<{
-  state: localeStateType;
-  dispatch: Dispatch<toggleLocaleActionType>;
+  state: ILocaleState;
+  dispatch: Dispatch<IToggleLocaleAction>;
 }>({
   state: initialState,
   dispatch: () => null,

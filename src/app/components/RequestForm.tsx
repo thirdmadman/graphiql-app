@@ -9,6 +9,11 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useContext, useState } from 'react';
 import { localeContext } from '../../locales/localeProvider';
 import { locale } from '@/locales/locale';
+import { Button } from '@nextui-org/button';
+import { Accordion, AccordionItem } from '@nextui-org/accordion';
+import { Textarea } from '@nextui-org/input';
+import { Divider } from '@nextui-org/divider';
+import { Tab, Tabs } from '@nextui-org/tabs';
 
 export function RequestForm() {
   const { state } = useContext(localeContext);
@@ -50,7 +55,7 @@ export function RequestForm() {
   const { inputFormLabel, executeBtnTitle } = locale[currentLang];
 
   return (
-    <div className="min-w-[300px] w-[30%]">
+    <div className="min-w-[300px] w-[30%] min-h-full">
       <div className="mb-5">
         <label
           htmlFor="gqlq"
@@ -58,27 +63,67 @@ export function RequestForm() {
         >
           {inputFormLabel}
         </label>
-        <textarea
-          rows={20}
-          className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Write your gql request"
-          id="gqlq"
-          onChange={(e) => onChangeEvent(e.target.value)}
-          value={dataFromInput}
-          aria-label="input from"
-        ></textarea>
+        <div className="min-h-full border border-gray-600 rounded">
+          <Textarea
+            minRows={8}
+            placeholder="Write your gql request"
+            id="gqlq"
+            onChange={(e) => onChangeEvent(e.target.value)}
+            value={dataFromInput}
+            classNames={{
+              base: "p-2",
+              inputWrapper: "p-0",
+              innerWrapper: "p-0",
+              input: "bg-black",
+            }}
+          ></Textarea>
+          <Divider />
+          <div className="flex w-full flex-col">
+            <Tabs
+              aria-label="Options"
+              classNames={{
+                base: "pl-2",
+                tabList: "p-0",
+                panel: "p-0",
+              }}
+            >
+              <Tab key="variables" title="Variables">
+                <Textarea
+                  minRows={3}
+                  classNames={{
+                    base: "p-2",
+                    inputWrapper: "p-0",
+                    innerWrapper: "p-0",
+                    input: "bg-black",
+                  }}
+                ></Textarea>
+              </Tab>
+              <Tab key="headers" title="Headers">
+                <Textarea
+                  minRows={3}
+                  classNames={{
+                    base: "p-2",
+                    inputWrapper: "p-0",
+                    innerWrapper: "p-0",
+                    input: "bg-black",
+                  }}
+                ></Textarea>
+              </Tab>
+            </Tabs>
+          </div>
+        </div>
       </div>
-      <button
-        className={
-          !form.isExecDisable
-            ? 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-            : 'text-white bg-blue-400 dark:bg-blue-500 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center'
-        }
+      <Button
+        // className={
+        //   !form.isExecDisable
+        //     ? 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+        //     : 'text-white bg-blue-400 dark:bg-blue-500 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center'
+        // }
         disabled={form.isExecDisable}
         onClick={() => onSubmitEvent(dataFromInput)}
       >
         {executeBtnTitle}
-      </button>
+      </Button>
     </div>
   );
 }

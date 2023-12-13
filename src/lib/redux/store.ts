@@ -11,13 +11,13 @@ const store = configureStore({
   reducer: combinedReducer,
 });
 
-export function setupStore(preloadedState?: RootState) {
+export function setupStore(preloadedState?: TRootState) {
   return configureStore({
     reducer: combinedReducer,
     preloadedState,
   });
 }
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppStore = ReturnType<typeof setupStore>;
-export type AppDispatch = AppStore['dispatch'];
+export type TRootState = ReturnType<typeof store.getState>;
+export type TAppStore = ReturnType<typeof setupStore>;
+export type TAppDispatch = TAppStore['dispatch'];

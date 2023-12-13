@@ -15,11 +15,11 @@ const getGraphQLData = async (req: string | null = null) => {
   return { ...resp };
 };
 
-type TResponseFieldProps = {
+interface IResponseFieldProps {
   searchParams: { [key: string]: string | string[] | undefined };
-};
+}
 
-export async function ResponseField({ searchParams }: TResponseFieldProps) {
+export async function ResponseField({ searchParams }: IResponseFieldProps) {
   let gqlRequest = '';
 
   if (searchParams) {

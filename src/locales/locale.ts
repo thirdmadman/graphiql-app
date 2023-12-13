@@ -14,16 +14,16 @@ export const ru = {
   serverResponseTitle: 'Ответ сервера',
 };
 
-export type Locale = {
+export interface ILocale {
   id: string;
   inputFormLabel: string;
   executeBtnTitle: string;
   disableExecuteBtnTitle: string;
   serverResponseTitle: string;
-};
+}
 
-type Locales = {
-  [key: string]: Locale;
-};
+interface ILocalesObject {
+  [key: string]: ILocale;
+}
 
-export const locale: Locales = { en, ru };
+export const locale: ILocalesObject = { en, ru };

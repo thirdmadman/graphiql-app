@@ -5,6 +5,11 @@ import { FirebaseError } from 'firebase/app';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { NextRequest, NextResponse } from 'next/server';
 
+interface ILoginData {
+  email: string;
+  password: string;
+}
+
 export async function GET(request: NextRequest) {
   const session = request.cookies.get('session')?.value;
 
@@ -25,12 +30,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const response = NextResponse.json({ isError: true }, { status: 401 });
 
-  type TLoginData = {
-    email: string;
-    password: string;
-  };
-
-  const loginData = (await request.json()) as TLoginData;
+  const loginData = (await request.json()) as ILoginData;
 
   if (loginData && loginData.email && loginData.password) {
     try {

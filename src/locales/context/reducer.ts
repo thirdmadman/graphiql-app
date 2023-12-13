@@ -1,21 +1,18 @@
-import { Locale, locale } from '../locale';
+import { ILocale, locale } from '../locale';
 
-export type localeStateType = {
-  currentLocale: Locale;
-};
+export interface ILocaleState {
+  currentLocale: ILocale;
+}
 
-export type toggleLocaleActionType = {
+export interface IToggleLocaleAction {
   type: string;
-};
+}
 
 export const initialState = {
   currentLocale: locale.en,
 };
 
-export function reducer(
-  state: localeStateType,
-  action: toggleLocaleActionType
-) {
+export function reducer(state: ILocaleState, action: IToggleLocaleAction) {
   switch (action.type) {
   case 'toggleLocale': {
     const newLangKey = state.currentLocale.id === 'en' ? 'ru' : 'en';

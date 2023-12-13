@@ -1,15 +1,15 @@
 import { adminAuth } from '@/lib/firebase/firebase-admin-config';
 import { NextRequest, NextResponse } from 'next/server';
 
+interface IRegisterData {
+  email: string;
+  password: string;
+}
+
 export async function POST(request: NextRequest) {
   const response = NextResponse.json({ isError: true }, { status: 401 });
 
-  type TRegisterData = {
-    email: string;
-    password: string;
-  };
-
-  const registerData = (await request.json()) as TRegisterData;
+  const registerData = (await request.json()) as IRegisterData;
 
   if (registerData && registerData.email && registerData.password) {
     try {

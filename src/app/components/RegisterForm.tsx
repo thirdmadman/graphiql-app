@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from 'react';
 
-export function RegisterFrom() {
+export function RegisterForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 

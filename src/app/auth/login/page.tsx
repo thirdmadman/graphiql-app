@@ -5,8 +5,8 @@ import { getRedirectResult, signInWithRedirect } from 'firebase/auth';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { auth, provider } from '@/lib/firebase/firebase-config';
-import { LoginFrom } from '../../components/LoginFrom';
-import { RegisterFrom } from '../../components/RegisterFrom';
+import { LoginForm } from '../../components/LoginForm';
+import { RegisterForm } from '../../components/RegisterForm';
 
 export default function SignIn() {
   const router = useRouter();
@@ -41,8 +41,8 @@ export default function SignIn() {
       <button className="p-4 rounded-lg bg-green-200" onClick={() => signIn()}>
         Sign In With Google
       </button>
-      <LoginFrom />
-      <RegisterFrom />
+      <LoginForm />
+      <RegisterForm />
     </>
   );
 }

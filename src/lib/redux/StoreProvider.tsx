@@ -2,10 +2,10 @@
 
 import { useRef } from 'react';
 import { Provider } from 'react-redux';
-import { setupStore, AppStore } from './store';
+import { setupStore, TAppStore } from './store';
 
 export function StoreProvider({ children }: { children: React.ReactNode }) {
-  const storeRef = useRef<AppStore>();
+  const storeRef = useRef<TAppStore>();
   if (!storeRef.current) {
     storeRef.current = setupStore();
   }

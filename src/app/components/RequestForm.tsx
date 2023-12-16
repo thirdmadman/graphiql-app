@@ -86,6 +86,7 @@ export function RequestForm() {
     variablesTitle,
     headersLabel,
     headersTitle,
+    prettifyBtnTitle,
   } = locale[currentLang];
 
   return (
@@ -120,6 +121,7 @@ export function RequestForm() {
           >
             {executeBtnTitle}
           </Button>
+          <Button color="primary">{prettifyBtnTitle}</Button>
         </div>
         <Accordion selectionMode="multiple">
           <AccordionItem

@@ -2,6 +2,7 @@ export const en = {
   id: 'en',
   inputFormLabel: 'Write your query',
   executeBtnTitle: 'Execute',
+  prettifyBtnTitle: 'Prettify',
   disableExecuteBtnTitle: 'Disable Execution',
   serverResponseTitle: 'Server response',
   variablesTitle: 'Variables',
@@ -14,6 +15,7 @@ export const ru = {
   id: 'ru',
   inputFormLabel: 'Напишите свой запрос',
   executeBtnTitle: 'Выполнить',
+  prettifyBtnTitle: 'Форматировать',
   disableExecuteBtnTitle: 'Запретить выполнение',
   serverResponseTitle: 'Ответ сервера',
   variablesTitle: 'Переменные',
@@ -26,6 +28,7 @@ export interface ILocale {
   id: string;
   inputFormLabel: string;
   executeBtnTitle: string;
+  prettifyBtnTitle: string;
   disableExecuteBtnTitle: string;
   serverResponseTitle: string;
   variablesTitle: string;

@@ -16,9 +16,9 @@ export function ResponseFieldBox({ resp }: IResponseFieldBoxProps) {
   const data = resp ? JSON.stringify(resp) : null;
 
   return (
-    <div className="min-w-[300px] w-[30%]">
-      <p className="mb-2">{localization.serverResponseTitle}</p>
-      <pre className="p-5 bg-gray-50">{data || 'No data to show'}</pre>
+    <div className='min-w-[300px] w-[30%]'>
+      <p className='mb-2'>{localization.serverResponseTitle}</p>
+      <pre className='p-5 bg-gray-50 text-sm text-gray-900'>{data || 'No data to show'}</pre>
     </div>
   );
 }

@@ -35,7 +35,6 @@ export function RequestForm() {
 
   const headersUri = searchParams.get('headers');
   const initialHeadersParams = headersUri ? decodeURIComponent(headersUri) : '';
-
   const [dataFromQueryInput, setDataFromQueryInput] =
     useState(initialSearchParams);
   const [dataFromVariables, setDataFromVariables] = useState(

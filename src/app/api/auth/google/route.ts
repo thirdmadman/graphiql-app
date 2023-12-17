@@ -7,6 +7,10 @@ export async function POST(request: NextRequest) {
 
   const response = NextResponse.json({}, { status: 200 });
 
+  if (!adminAuth) {
+    return NextResponse.json({}, { status: 500 });
+  }
+
   if (authorization?.startsWith('Bearer ')) {
     const idToken = authorization.split('Bearer ')[1];
     const decodedToken = await adminAuth.verifyIdToken(idToken);

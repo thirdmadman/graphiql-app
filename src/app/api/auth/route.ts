@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
   }
 
   //Use Firebase Admin to validate the session cookie
-  const decodedClaims = await adminAuth.verifySessionCookie(session, true);
+  const decodedClaims = await adminAuth?.verifySessionCookie(session, true);
 
   if (!decodedClaims) {
     return NextResponse.json({ isLogged: false }, { status: 401 });
@@ -28,11 +28,15 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  if (!auth || !adminAuth) {
+    return NextResponse.json({}, { status: 500 });
+  }
+
   const response = NextResponse.json({ isError: true }, { status: 401 });
 
   const loginData = (await request.json()) as ILoginData;
 
-  if (loginData && loginData.email && loginData.password) {
+  if (loginData?.email && loginData.password) {
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -65,12 +69,12 @@ export async function POST(request: NextRequest) {
     } catch (e) {
       if (e instanceof FirebaseError) {
         switch (e.code) {
-        case 'auth/invalid-email':
-          console.error('Invalid email address');
-          break;
+          case 'auth/invalid-email':
+            console.error('Invalid email address');
+            break;
 
-        default:
-          console.error(e.message);
+          default:
+            console.error(e.message);
         }
       } else {
         console.error('An error occurred, please try again later.');
@@ -82,6 +86,10 @@ export async function POST(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
+  if (!auth || !adminAuth) {
+    return NextResponse.json({}, { status: 500 });
+  }
+
   const token = request.cookies.get('session')?.value;
 
   if (!token) {
@@ -100,6 +108,10 @@ export const invalidateLogin = async (
   token: string,
   response: NextResponse
 ) => {
+  if (!adminAuth) {
+    return;
+  }
+
   const decodedClaims = await adminAuth.verifySessionCookie(token, true);
 
   await adminAuth.revokeRefreshTokens(decodedClaims.uid);

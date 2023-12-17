@@ -35,7 +35,9 @@ export function RequestForm() {
     : '';
 
   const [dataFromInput, setDataFromInput] = useState(initialSearchParams);
-  const [dataFromVariables, setDataFromVariables] = useState(initialVariablesParams);
+  const [dataFromVariables, setDataFromVariables] = useState(
+    initialVariablesParams
+  );
   const [dataFromHeaders, setDataFromHeaders] = useState('');
 
   const onSubmitEvent = (queryValue: string, variablesValue?: string) => {
@@ -48,7 +50,7 @@ export function RequestForm() {
 
       if (variablesValue) {
         const variablesMinified = minifyQuery(variablesValue);
-        current.set('variables', variablesMinified)
+        current.set('variables', variablesMinified);
       } else if (current.has('variables')) {
         current.delete('variables');
       }
@@ -73,61 +75,83 @@ export function RequestForm() {
 
   const onClickShowTools = () => {
     setIsEditorsShown((state) => !state);
-  }
+  };
 
   const onClickVariables = () => {
     if (!isVariablesShown) {
       setIsHeadersShown(false);
       setIsVariablesShown(true);
-    };
-  }
+    }
+  };
 
   const onChangeVariables = (value: string) => {
     setDataFromVariables(value);
     dispatch(enableExec());
-  }
+  };
 
   const onClickHeaders = () => {
     if (!isHeadersShown) {
       setIsVariablesShown(false);
       setIsHeadersShown(true);
-    };
-  }
+    }
+  };
 
   const onChangeHeaders = (value: string) => {
     setDataFromHeaders(value);
     dispatch(enableExec());
-  }
+  };
 
-  const { inputFormLabel, executeBtnTitle, variablesTab, variablesLabel, headersTab, headersLabel } = locale[currentLang];
+  const {
+    inputFormLabel,
+    executeBtnTitle,
+    variablesTab,
+    variablesLabel,
+    headersTab,
+    headersLabel,
+  } = locale[currentLang];
 
   return (
-    <div className='min-w-[400px] w-[30%] min-h-full'>
-      <div className='mb-5'>
+    <div className="min-w-[400px] w-[30%] min-h-full">
+      <div className="mb-5">
         <label
-          htmlFor='gqlq'
-          className='block mb-2 text-sm font-medium text-white'
+          htmlFor="gqlq"
+          className="block mb-2 text-sm font-medium text-white"
         >
           {inputFormLabel}
         </label>
-        <div className='h-[600px] min-h-ful bg-white border border-gray-600 flex flex-col justify-between roundeds'>
-          <div className='flex-[3_1_0%]'>
+        <div className="h-[600px] min-h-ful bg-white border border-gray-600 flex flex-col justify-between roundeds">
+          <div className="flex-[3_1_0%]">
             <textarea
               rows={20}
-              className='block p-2.5 w-full min-h-full text-sm text-gray-900 bg-gray-50 rounded-t-lg border border-gray-300 focus:outline-none resize-none'
-              placeholder='Write your gql request'
-              id='gqlq'
+              className="block p-2.5 w-full min-h-full text-sm text-gray-900 bg-gray-50 rounded-t-lg border border-gray-300 focus:outline-none resize-none"
+              placeholder="Write your gql request"
+              id="gqlq"
               onChange={(e) => onChangeEvent(e.target.value)}
               value={dataFromInput}
-              aria-label='input from'
+              aria-label="input from"
             ></textarea>
           </div>
-          <div className='flex items-center justify-between bg-white'>
-            <div className='flex'>
-              <Button className="bg-white border-1 border-solid" onClick={()=> onClickVariables()}>{variablesTab}</Button>
-              <Button className="bg-white border-1 border-solid" onClick={()=> onClickHeaders()}>{headersTab}</Button>
+          <div className="flex items-center justify-between bg-white">
+            <div className="flex">
+              <Button
+                className="bg-white border-1 border-solid"
+                onClick={() => onClickVariables()}
+              >
+                {variablesTab}
+              </Button>
+              <Button
+                className="bg-white border-1 border-solid"
+                onClick={() => onClickHeaders()}
+              >
+                {headersTab}
+              </Button>
             </div>
-            <Button isIconOnly size='sm' className='bg-white' onClick={() => onClickShowTools()}>
+            <Button
+              isIconOnly
+              size="sm"
+              className="bg-white"
+              onClick={() => onClickShowTools()}
+            >
               {isEditorsShown ? <DownIcon /> : <UpIcon />}
             </Button>
           </div>

@@ -12,6 +12,7 @@ import { locale } from '@/locales/locale';
 import { Button, Textarea } from '@nextui-org/react';
 import { DownIcon } from './DownIcon';
 import { UpIcon } from './UpIcon';
+import { minifyQuery } from '@/lib/minify/minifyFunc';
 
 export function RequestForm() {
   const { state } = useContext(localeContext);
@@ -41,10 +42,13 @@ export function RequestForm() {
     if (queryValue && queryValue.length > 0) {
       const current = new URLSearchParams(Array.from(searchParams.entries()));
 
-      current.set('data', queryValue.replace(/\s+/g, ' '));
+      const queryMinified = minifyQuery(queryValue);
+
+      current.set('data', queryMinified);
 
       if (variablesValue) {
-        current.set('variables', variablesValue.replace(/\s+/g, ' '))
+        const variablesMinified = minifyQuery(variablesValue);
+        current.set('variables', variablesMinified)
       } else if (current.has('variables')) {
         current.delete('variables');
       }

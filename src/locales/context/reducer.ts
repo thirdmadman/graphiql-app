@@ -14,11 +14,11 @@ export const initialState = {
 
 export function reducer(state: ILocaleState, action: IToggleLocaleAction) {
   switch (action.type) {
-  case 'toggleLocale': {
-    const newLangKey = state.currentLocale.id === 'en' ? 'ru' : 'en';
-    return { ...state, currentLocale: locale[newLangKey] };
-  }
-  default:
-    throw new Error();
+    case 'toggleLocale': {
+      const newLangKey = state.currentLocale.id === 'en' ? 'ru' : 'en';
+      return { ...state, currentLocale: locale[newLangKey] };
+    }
+    default:
+      throw new Error();
   }
 }

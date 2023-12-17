@@ -1,19 +1,40 @@
 import { initializeApp, getApps, cert } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
 
-const serviceAccount = JSON.parse(
-  process.env.SERVICE_ACCOUNT ? process.env.SERVICE_ACCOUNT : ''
-);
+const getAdminAuth = () => {
+  try {
+    const SERVICE_ACCOUNT = process.env.SERVICE_ACCOUNT
+      ? process.env.SERVICE_ACCOUNT
+      : '';
 
-const firebaseAdminConfig = {
-  credential: cert({
-    privateKey: serviceAccount?.private_key.replace(/\\n/gm, '\n'),
-    clientEmail: serviceAccount?.client_email,
-    projectId: serviceAccount?.project_id,
-  }),
+    if (!SERVICE_ACCOUNT && SERVICE_ACCOUNT.length < 0) {
+      return null;
+    }
+
+    const serviceAccount = JSON.parse(SERVICE_ACCOUNT) as {
+      private_key: string;
+      client_email: string;
+      project_id: string;
+    };
+
+    const firebaseAdminConfig = {
+      credential: cert({
+        privateKey: serviceAccount.private_key.replace(/\\n/gm, '\n'),
+        clientEmail: serviceAccount.client_email,
+        projectId: serviceAccount.project_id,
+      }),
+    };
+
+    const app =
+      getApps().length <= 0 ? initializeApp(firebaseAdminConfig) : getApps()[0];
+
+    console.error('app>> ', app);
+
+    return getAuth(app);
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
 };
 
-const app =
-  getApps().length <= 0 ? initializeApp(firebaseAdminConfig) : getApps()[0];
-
-export const adminAuth = getAuth(app);
+export const adminAuth = getAdminAuth();

@@ -2,27 +2,31 @@ import { ResponseFieldError } from './ResponseFieldError';
 import { ResponseFieldBox } from './ResponseFieldBox';
 import { IVariables, gqlFetchApi } from '@/lib/utils/gql-fetch';
 
-const getGraphQLData = async (req: string | null = null, variables: IVariables | null = null) => {
+const getGraphQLData = async (
+  req: string | null = null,
+  variables: IVariables | null = null
+) => {
   if (!req) {
-    return {};
+    return undefined;
   }
 
   const resp = await gqlFetchApi(
     'https://spacex-production.up.railway.app/',
     req,
     null,
-    variables,
+    variables
   );
 
   return { ...resp };
 };
 
 interface IResponseFieldProps {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string | Array<string> | undefined };
 }
 
 export async function ResponseField({ searchParams }: IResponseFieldProps) {
-  let gqlRequest, variablesString = '';
+  let gqlRequest,
+    variablesString = '';
 
   if (searchParams) {
     if (searchParams.data && typeof searchParams.data === 'string') {
@@ -33,11 +37,11 @@ export async function ResponseField({ searchParams }: IResponseFieldProps) {
     }
   }
 
-  let variables = null;
+  let variables: IVariables | null = null;
 
   if (variablesString) {
     try {
-      variables = JSON.parse(decodeURIComponent(variablesString));
+      variables = JSON.parse(decodeURIComponent(variablesString)) as IVariables;
     } catch (err) {
       let errorMsg = 'Failed to parse variables string';
       if (err instanceof Error) {
@@ -54,5 +58,5 @@ export async function ResponseField({ searchParams }: IResponseFieldProps) {
     return <ResponseFieldError error={resp.error} />;
   }
 
-  return <ResponseFieldBox resp={resp.resp} />;
+  return <ResponseFieldBox resp={resp?.resp} />;
 }

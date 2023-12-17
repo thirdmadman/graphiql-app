@@ -7,11 +7,15 @@ interface IRegisterData {
 }
 
 export async function POST(request: NextRequest) {
+  if (!adminAuth) {
+    return NextResponse.json({}, { status: 500 });
+  }
+
   const response = NextResponse.json({ isError: true }, { status: 401 });
 
   const registerData = (await request.json()) as IRegisterData;
 
-  if (registerData && registerData.email && registerData.password) {
+  if (registerData?.email && registerData.password) {
     try {
       const user = await adminAuth.createUser({
         email: registerData.email,

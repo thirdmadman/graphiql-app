@@ -6,10 +6,10 @@ import { LanguageSelector } from './components/LanguageSelector';
 import { ResponseField } from './components/ResponseField';
 import { LocaleProvider } from '@/locales/localeProvider';
 
-export default async function Home({
+export default function Home({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string | Array<string> | undefined };
 }) {
   const susKey = searchParams.data ? searchParams.data.toString() : '';
 

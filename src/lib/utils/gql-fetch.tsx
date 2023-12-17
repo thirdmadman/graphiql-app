@@ -6,9 +6,9 @@ export interface IVariables {
   [key: string]: string;
 }
 
-interface IResponseType<T> {
-  resp?: T;
-  error?: string;
+interface IResponseBody<T> {
+  data?: T;
+  errors?: Array<{ message?: string }>;
 }
 
 export async function gqlFetchApi<T extends object>(
@@ -16,7 +16,7 @@ export async function gqlFetchApi<T extends object>(
   gqlRequest: string,
   headers: IHeaders | null = null,
   variables: IVariables | null = null
-): Promise<IResponseType<T>> {
+) {
   try {
     if (!url || !gqlRequest) {
       return { error: 'URL or request parameters are required' };
@@ -38,8 +38,14 @@ export async function gqlFetchApi<T extends object>(
       body: JSON.stringify(requestBody),
     };
 
-    const responseBody = await (await fetch(url, options)).json();
-    console.error('responseBody :>> ', typeof responseBody);
+    const responseBody = (await (
+      await fetch(url, options)
+    ).json()) as IResponseBody<T>;
+
+    if (!responseBody || !responseBody?.data) {
+      return { error: 'Server response is empty' };
+    }
+
     if (responseBody?.errors && responseBody?.errors.length > 0) {
       if (responseBody?.errors[0]?.message) {
         return { error: responseBody?.errors[0]?.message };
@@ -48,7 +54,7 @@ export async function gqlFetchApi<T extends object>(
       }
     }
 
-    return { resp: responseBody!.data };
+    return { resp: responseBody.data };
   } catch (err) {
     console.error('ERROR DURING FETCH REQUEST', err);
     return { error: 'ERROR DURING FETCH REQUEST' };

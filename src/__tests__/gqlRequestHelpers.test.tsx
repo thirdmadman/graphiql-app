@@ -1,18 +1,174 @@
-import { minifyQuery } from '@/lib/utils/gql-request-helpers';
+import { prettifyQuery, minifyQuery } from '@/lib/utils/gql-formatter';
 
-const mockQuery = `query ExampleQuery {
-  company {
-    ceo
+const mockQuery = `fragment FullType on __Type {
+  kind
+  name
+  fields(includeDeprecated: true) {
+    name
+    args {
+      ...InputValue
+    }
+    type {
+      ...TypeRef
+    }
+    isDeprecated
+    deprecationReason
   }
-  roadster {
-    apoapsis_au
+  inputFields {
+    ...InputValue
+  }
+  interfaces {
+    ...TypeRef
+  }
+  enumValues(includeDeprecated: true) {
+    name
+    isDeprecated
+    deprecationReason
+  }
+  possibleTypes {
+    ...TypeRef
+  }
+}
+
+fragment InputValue on __InputValue {
+  name
+  type {
+    ...TypeRef
+  }
+  defaultValue
+}
+
+fragment TypeRef on __Type {
+  kind
+  name
+  ofType {
+    kind
+    name
+    ofType {
+      kind
+      name
+      ofType {
+        kind
+        name
+        ofType {
+          kind
+          name
+          ofType {
+            kind
+            name
+            ofType {
+              kind
+              name
+              ofType {
+                kind
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+query IntrospectionQuery {
+  __schema {
+    queryType {
+      name
+    }
+    mutationType {
+      name
+    }
+    types {
+      ...FullType
+    }
+    directives {
+      name
+      locations
+      args {
+        ...InputValue
+      }
+    }
   }
 }`;
 
-test('minifyQuery should minify the query string', () => {
-  const minified = minifyQuery(mockQuery);
+const unformattedMockQuery = `
+fragment FullType on __Type {
+  kind name
+  fields(includeDeprecated: true) {
+    name
+    args {
+      ...InputValue}
+    type {...TypeRef}
+    isDeprecated deprecationReason
+  }
+  inputFields {
+    ...InputValue
+  } interfaces {
+    ...TypeRef
+  }
+  enumValues(includeDeprecated: true) {
+    name isDeprecated
+    deprecationReason
+  }
+  possibleTypes {
+    ...TypeRef
+  }
+}
+fragment 
+InputValue 
+on __InputValue {
+  name
+  type {   ...TypeRef}
+  defaultValue
+}
+fragment TypeRef on __Type {
+  kind
+  name
+  ofType 
+{
+    kind
+    name ofType {
+      kind
+      name
+      ofType {kind 
+  name
+  ofType {
+    kind name
+          ofType {
+            kind name
+            ofType {
+              kind name
+              ofType {kind name}}}
+}}}}}
+query IntrospectionQuery {
+  __schema {
+    queryType {name}
+    mutationType {
+      name }
+    types 
+    {
+      ...FullType
+    }
+    directives { name
+      locations
+      args {...InputValue}}}
+}`;
 
-  expect(minified).toEqual(
-    'query ExampleQuery{company{ceo}roadster{apoapsis_au}}'
-  );
+describe('MinifyQuery', () => {
+  test('minifyQuery should minify the query string', () => {
+    const minified = minifyQuery(mockQuery);
+    const expectedResult =
+      'fragment FullType on __Type{kind name fields(includeDeprecated:true){name args{...InputValue}type{...TypeRef}isDeprecated deprecationReason}inputFields{...InputValue}interfaces{...TypeRef}enumValues(includeDeprecated:true){name isDeprecated deprecationReason}possibleTypes{...TypeRef}}fragment InputValue on __InputValue{name type{...TypeRef}defaultValue}fragment TypeRef on __Type{kind name ofType{kind name ofType{kind name ofType{kind name ofType{kind name ofType{kind name ofType{kind name ofType{kind name}}}}}}}}query IntrospectionQuery{__schema{queryType{name}mutationType{name}types{...FullType}directives{name locations args{...InputValue}}}}';
+
+    expect(minified).toEqual(expectedResult);
+  });
+});
+
+describe('PrettifyQuery', () => {
+  test('prettifyQuery should format the query string', () => {
+    const prettified = prettifyQuery(unformattedMockQuery);
+
+    expect(prettified).toEqual(mockQuery);
+  });
 });

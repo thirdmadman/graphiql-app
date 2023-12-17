@@ -13,7 +13,7 @@ export function ResponseFieldBox({ resp }: IResponseFieldBoxProps) {
   const currentLang = state.currentLocale.id;
   const localization = locale[currentLang];
 
-  const data = resp ? JSON.stringify(resp) : null;
+  const data = resp ? JSON.stringify(resp, null, 2) : null;
 
   return (
     <div className="min-w-[300px] w-[30%]">

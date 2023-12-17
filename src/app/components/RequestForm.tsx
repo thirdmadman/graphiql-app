@@ -12,6 +12,7 @@ import { locale } from '@/locales/locale';
 import { Accordion, AccordionItem, Button, Textarea } from '@nextui-org/react';
 import { setQueryParam } from '@/lib/utils/setQueryParam';
 import { getMinifiedString } from '@/lib/utils/minifyQueryString';
+import { prettifyQuery } from '@/lib/utils/gql-formatter';
 
 export function RequestForm() {
   const { state } = useContext(localeContext);
@@ -69,6 +70,11 @@ export function RequestForm() {
     dispatch(enableExec());
   };
 
+  const onPrettifyBtnClick = (value: string) => {
+    const prettifiedValue = prettifyQuery(value);
+    setDataFromQueryInput(prettifiedValue);
+  };
+
   const onChangeVariables = (value: string) => {
     setDataFromVariables(value);
     dispatch(enableExec());
@@ -100,12 +106,13 @@ export function RequestForm() {
         </label>
         <textarea
           rows={20}
-          className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="block p-5 w-full text-[1rem] text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Write your gql request"
           id="gqlq"
           onChange={(e) => onChangeEvent(e.target.value)}
           value={dataFromQueryInput}
           aria-label="input from"
+          spellCheck="false"
         ></textarea>
         <div className="py-2">
           <Button
@@ -121,7 +128,12 @@ export function RequestForm() {
           >
             {executeBtnTitle}
           </Button>
-          <Button color="primary">{prettifyBtnTitle}</Button>
+          <Button
+            color="primary"
+            onClick={() => onPrettifyBtnClick(dataFromQueryInput)}
+          >
+            {prettifyBtnTitle}
+          </Button>
         </div>
         <Accordion selectionMode="multiple">
           <AccordionItem

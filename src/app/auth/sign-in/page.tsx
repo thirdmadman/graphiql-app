@@ -12,27 +12,32 @@ export default function SignIn() {
   const router = useRouter();
 
   useEffect(() => {
-    getRedirectResult(auth).then(async (userCred) => {
-      if (!userCred) {
-        return;
-      }
+    auth &&
+      getRedirectResult(auth)
+        .then(async (userCred) => {
+          if (!userCred) {
+            return;
+          }
 
-      fetch('/api/auth/google', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${await userCred.user.getIdToken()}`,
-        },
-      }).then((response) => {
-        if (response.status === 200) {
-          router.push('/app');
-        }
-      });
-    });
+          await fetch('/api/auth/google', {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${await userCred.user.getIdToken()}`,
+            },
+          }).then((response) => {
+            if (response.status === 200) {
+              router.push('/app');
+            }
+          });
+        })
+        .catch((e) => console.error(e));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function signIn() {
-    signInWithRedirect(auth, provider);
+  async function signIn() {
+    if (auth && provider) {
+      await signInWithRedirect(auth, provider);
+    }
   }
 
   return (

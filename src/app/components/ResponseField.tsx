@@ -4,7 +4,7 @@ import { gqlFetchApi } from '@/lib/utils/gql-fetch';
 
 const getGraphQLData = async (req: string | null = null) => {
   if (!req) {
-    return {};
+    return undefined;
   }
 
   const resp = await gqlFetchApi(
@@ -16,7 +16,7 @@ const getGraphQLData = async (req: string | null = null) => {
 };
 
 interface IResponseFieldProps {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string | Array<string> | undefined };
 }
 
 export async function ResponseField({ searchParams }: IResponseFieldProps) {
@@ -34,5 +34,5 @@ export async function ResponseField({ searchParams }: IResponseFieldProps) {
     return <ResponseFieldError error={resp.error} />;
   }
 
-  return <ResponseFieldBox resp={resp.resp} />;
+  return <ResponseFieldBox resp={resp?.resp} />;
 }

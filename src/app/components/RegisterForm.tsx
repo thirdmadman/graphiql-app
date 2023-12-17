@@ -9,7 +9,7 @@ export function RegisterForm() {
   async function handleSubmitEvent(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
-      fetch('/api/auth/register', {
+      await fetch('/api/auth/register', {
         method: 'POST',
         headers: {
           Accept: 'application/json',

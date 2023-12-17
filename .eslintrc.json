@@ -3,9 +3,11 @@
   "extends": [
     "next/core-web-vitals",
     "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-type-checked",
+    "plugin:@typescript-eslint/stylistic-type-checked",
     "plugin:react-hooks/recommended",
-    "prettier"
+    "prettier",
+    "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -13,7 +15,9 @@
       "jsx": true
     },
     "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": true,
+    "tsconfigRootDir": "__dirname"
   },
   "env": {
     "browser": true,
@@ -21,8 +25,22 @@
     "jest": true,
     "node": true
   },
-  "plugins": ["@typescript-eslint", "react", "react-hooks"],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier"],
   "rules": {
+    "@typescript-eslint/array-type": [2, { "default": "generic" }],
+    "@typescript-eslint/consistent-indexed-object-style": [
+      2,
+      "index-signature"
+    ],
+    "@typescript-eslint/no-misused-promises": [
+      "error",
+      {
+        "checksVoidReturn": {
+          "arguments": false,
+          "attributes": false
+        }
+      }
+    ],
     "jsx-a11y/control-has-associated-label": 2,
     "jsx-a11y/label-has-for": [
       2,
@@ -57,10 +75,11 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-unsafe-argument": "error",
+    "@typescript-eslint/no-unsafe-assignment": "error",
     "@typescript-eslint/no-var-requires": "off",
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
-    "indent": ["error", 2],
     "quotes": ["error", "single"],
     "max-len": [0, 80, 2, { "ignoreUrls": true }],
     "arrow-parens": ["error", "always"],

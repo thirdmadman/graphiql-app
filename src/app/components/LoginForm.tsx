@@ -9,7 +9,7 @@ export function LoginForm() {
   async function handleSubmitEvent(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
-      fetch('/api/auth/', {
+      await fetch('/api/auth/', {
         method: 'POST',
         headers: {
           Accept: 'application/json',

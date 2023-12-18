@@ -113,10 +113,7 @@ export function RequestForm() {
   return (
     <div className="min-w-[400px] w-[30%] min-h-full">
       <div className="mb-5">
-        <label
-          htmlFor="gqlq"
-          className="block mb-2 text-sm font-medium text-white"
-        >
+        <label htmlFor="gqlq" className="block mb-2 text-sm font-medium">
           {inputFormLabel}
         </label>
         <div className="h-[600px] min-h-ful bg-white border border-gray-600 flex flex-col justify-between roundeds">

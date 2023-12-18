@@ -4,6 +4,10 @@ export const en = {
   executeBtnTitle: 'Execute',
   disableExecuteBtnTitle: 'Disable Execution',
   serverResponseTitle: 'Server response',
+  variablesTitle: 'Variables',
+  variablesLabel: 'Please, use JSON format to pass variables',
+  headersTitle: 'Headers',
+  headersLabel: 'Please, use JSON format to pass headers',
 };
 
 export const ru = {
@@ -12,6 +16,10 @@ export const ru = {
   executeBtnTitle: 'Выполнить',
   disableExecuteBtnTitle: 'Запретить выполнение',
   serverResponseTitle: 'Ответ сервера',
+  variablesTitle: 'Переменные',
+  variablesLabel: 'Пожалуйста, используйте JSON формат для передачи переменных',
+  headersTab: 'Заголовки',
+  headersLabel: 'Пожалуйста, используйте JSON формат для передачи заголовков',
 };
 
 export interface ILocale {
@@ -20,6 +28,10 @@ export interface ILocale {
   executeBtnTitle: string;
   disableExecuteBtnTitle: string;
   serverResponseTitle: string;
+  variablesTitle: string;
+  variablesLabel: string;
+  headersTitle: string;
+  headersLabel: string;
 }
 
 interface ILocalesObject {

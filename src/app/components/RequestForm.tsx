@@ -7,8 +7,10 @@ import {
 import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useContext, useState } from 'react';
-import { localeContext } from '../../locales/localeProvider';
+import { localeContext } from '@/locales/localeProvider';
 import { locale } from '@/locales/locale';
+import { Accordion, AccordionItem, Button, Textarea } from '@nextui-org/react';
+import { getMinifiedString } from '@/lib/utils/minifyQueryString';
 
 export function RequestForm() {
   const { state } = useContext(localeContext);
@@ -25,13 +27,29 @@ export function RequestForm() {
     ? decodeURIComponent(inputSource)
     : '';
 
-  const [dataFromInput, setDataFromInput] = useState(initialSearchParams);
+  const variablesUri = searchParams.get('variables');
+  const initialVariablesParams = variablesUri
+    ? decodeURIComponent(variablesUri)
+    : '';
 
-  const onSubmitEvent = (value: string) => {
-    if (value && value.length > 0) {
+  const [dataFromInput, setDataFromInput] = useState(initialSearchParams);
+  const [dataFromVariables, setDataFromVariables] = useState(
+    initialVariablesParams
+  );
+  const [dataFromHeaders, setDataFromHeaders] = useState('');
+
+  const onSubmitEvent = (queryValue: string, variablesValue?: string) => {
+    if (queryValue && queryValue.length > 0) {
       const current = new URLSearchParams(Array.from(searchParams.entries()));
 
-      current.set('data', value);
+      current.set('data', queryValue);
+
+      if (variablesValue) {
+        const variablesMinified = getMinifiedString(variablesValue);
+        current.set('variables', variablesMinified);
+      } else if (current.has('variables')) {
+        current.delete('variables');
+      }
 
       const search = current.toString();
       const query = search ? `?${search}` : '';
@@ -47,10 +65,27 @@ export function RequestForm() {
     dispatch(enableExec());
   };
 
-  const { inputFormLabel, executeBtnTitle } = locale[currentLang];
+  const onChangeVariables = (value: string) => {
+    setDataFromVariables(value);
+    dispatch(enableExec());
+  };
+
+  const onChangeHeaders = (value: string) => {
+    setDataFromHeaders(value);
+    dispatch(enableExec());
+  };
+
+  const {
+    inputFormLabel,
+    executeBtnTitle,
+    variablesLabel,
+    variablesTitle,
+    headersLabel,
+    headersTitle,
+  } = locale[currentLang];
 
   return (
-    <div className="min-w-[300px] w-[30%]">
+    <div className="min-w-[300px] w-[30%] min-h-full">
       <div className="mb-5">
         <label
           htmlFor="gqlq"
@@ -67,18 +102,40 @@ export function RequestForm() {
           value={dataFromInput}
           aria-label="input from"
         ></textarea>
+        <div className="py-2">
+          <Button
+            color="primary"
+            isDisabled={form.isExecDisable}
+            onClick={() => onSubmitEvent(dataFromInput, dataFromVariables)}
+          >
+            {executeBtnTitle}
+          </Button>
+        </div>
+        <Accordion selectionMode="multiple">
+          <AccordionItem
+            key="1"
+            aria-label={variablesTitle}
+            title={variablesTitle}
+          >
+            <Textarea
+              label={variablesLabel}
+              labelPlacement="outside"
+              minRows={4}
+              onChange={(e) => onChangeVariables(e.target.value)}
+              value={dataFromVariables}
+            ></Textarea>
+          </AccordionItem>
+          <AccordionItem key="2" aria-label={headersTitle} title={headersTitle}>
+            <Textarea
+              label={headersLabel}
+              labelPlacement="outside"
+              minRows={4}
+              onChange={(e) => onChangeHeaders(e.target.value)}
+              value={dataFromHeaders}
+            ></Textarea>
+          </AccordionItem>
+        </Accordion>
       </div>
-      <button
-        className={
-          !form.isExecDisable
-            ? 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
-            : 'text-white bg-blue-400 dark:bg-blue-500 cursor-not-allowed font-medium rounded-lg text-sm px-5 py-2.5 text-center'
-        }
-        disabled={form.isExecDisable}
-        onClick={() => onSubmitEvent(dataFromInput)}
-      >
-        {executeBtnTitle}
-      </button>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-export const minifyQuery = (query: string) => {
+export const getMinifiedString = (query: string) => {
   return query
     .replace(/\n/g, '')
     .replace(/\s*{\s*/g, '{')

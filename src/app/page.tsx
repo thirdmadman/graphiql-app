@@ -16,10 +16,10 @@ export default function Home({
   return (
     <StoreProvider>
       <LocaleProvider>
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        <main className="flex min-h-screen flex-col items-center p-24">
           <LanguageSelector />
           <h2 className="text-4xl mb-5 font-extrabold dark:text-white">Form</h2>
-          <div className="flex min-w-full justify-center gap-10 relative">
+          <div className="flex flex-wrap min-w-full justify-center gap-10 relative">
             <RequestForm />
             <Suspense key={susKey} fallback={<div>Loading...</div>}>
               <ResponseField searchParams={searchParams} />

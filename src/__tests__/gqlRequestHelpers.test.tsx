@@ -169,6 +169,6 @@ describe('PrettifyQuery', () => {
   test('prettifyQuery should format the query string', () => {
     const prettified = prettifyQuery(unformattedMockQuery);
 
-    expect(prettified).toEqual(mockQuery);
+    expect(prettified).toEqual({ query: mockQuery });
   });
 });

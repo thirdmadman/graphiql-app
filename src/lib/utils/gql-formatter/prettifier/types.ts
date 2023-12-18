@@ -16,3 +16,8 @@ export type ItemsRangePattern = {
 };
 
 export type FormatRange = (range: ItemsRange, indentSize: number) => string;
+
+export interface PrettifyResult {
+  query: string;
+  errorMessage?: string;
+}

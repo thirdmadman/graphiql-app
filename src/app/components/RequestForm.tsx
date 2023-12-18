@@ -42,6 +42,7 @@ export function RequestForm() {
     initialVariablesParams
   );
   const [dataFromHeaders, setDataFromHeaders] = useState(initialHeadersParams);
+  const [prettifyError, setPrettifyError] = useState<string | null>(null);
 
   const onSubmitEvent = (
     queryValue: string,
@@ -71,8 +72,16 @@ export function RequestForm() {
   };
 
   const onPrettifyBtnClick = (value: string) => {
+    setPrettifyError(null);
+
     const prettifiedValue = prettifyQuery(value);
-    setDataFromQueryInput(prettifiedValue);
+    const { query, errorMessage } = prettifiedValue;
+
+    if (errorMessage) {
+      setPrettifyError(errorMessage as string);
+      return;
+    }
+    setDataFromQueryInput(query as string);
   };
 
   const onChangeVariables = (value: string) => {
@@ -115,25 +124,28 @@ export function RequestForm() {
           spellCheck="false"
         ></textarea>
         <div className="py-2">
-          <Button
-            color="primary"
-            isDisabled={form.isExecDisable}
-            onClick={() =>
-              onSubmitEvent(
-                dataFromQueryInput,
-                dataFromVariables,
-                dataFromHeaders
-              )
-            }
-          >
-            {executeBtnTitle}
-          </Button>
-          <Button
-            color="primary"
-            onClick={() => onPrettifyBtnClick(dataFromQueryInput)}
-          >
-            {prettifyBtnTitle}
-          </Button>
+          <div>
+            <Button
+              color="primary"
+              isDisabled={form.isExecDisable}
+              onClick={() =>
+                onSubmitEvent(
+                  dataFromQueryInput,
+                  dataFromVariables,
+                  dataFromHeaders
+                )
+              }
+            >
+              {executeBtnTitle}
+            </Button>
+            <Button
+              color="primary"
+              onClick={() => onPrettifyBtnClick(dataFromQueryInput)}
+            >
+              {prettifyBtnTitle}
+            </Button>
+          </div>
+          {prettifyError && <span>{prettifyError}</span>}
         </div>
         <Accordion selectionMode="multiple">
           <AccordionItem

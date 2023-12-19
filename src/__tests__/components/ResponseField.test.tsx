@@ -1,6 +1,7 @@
 import { expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { ResponseField } from '@/app/components/ResponseField';
+import { StoreProvider } from '@/lib/redux/StoreProvider';
 
 describe('ResponseField', () => {
   beforeAll(() => {
@@ -28,7 +29,11 @@ describe('ResponseField', () => {
   });
 
   it('Should render component and not fail', async () => {
-    render(await ResponseField({ searchParams: { data: '' } }));
+    render(
+      <StoreProvider>
+        {await ResponseField({ searchParams: { data: '' } })}
+      </StoreProvider>
+    );
 
     expect(screen.getByText('No data to show')).not.toBeNull();
   });

@@ -10,6 +10,7 @@ import { useContext, useState } from 'react';
 import { localeContext } from '@/locales/localeProvider';
 import { locale } from '@/locales/locale';
 import { Accordion, AccordionItem, Button, Textarea } from '@nextui-org/react';
+import { setQueryParam } from '@/lib/utils/setQueryParam';
 import { getMinifiedString } from '@/lib/utils/minifyQueryString';
 
 export function RequestForm() {
@@ -32,24 +33,28 @@ export function RequestForm() {
     ? decodeURIComponent(variablesUri)
     : '';
 
-  const [dataFromInput, setDataFromInput] = useState(initialSearchParams);
+  const headersUri = searchParams.get('headers');
+  const initialHeadersParams = headersUri ? decodeURIComponent(headersUri) : '';
+
+  const [dataFromQueryInput, setDataFromQueryInput] =
+    useState(initialSearchParams);
   const [dataFromVariables, setDataFromVariables] = useState(
     initialVariablesParams
   );
-  const [dataFromHeaders, setDataFromHeaders] = useState('');
+  const [dataFromHeaders, setDataFromHeaders] = useState(initialHeadersParams);
 
-  const onSubmitEvent = (queryValue: string, variablesValue?: string) => {
+  const onSubmitEvent = (
+    queryValue: string,
+    variablesValue?: string,
+    headersValue?: string
+  ) => {
     if (queryValue && queryValue.length > 0) {
       const current = new URLSearchParams(Array.from(searchParams.entries()));
 
-      current.set('data', queryValue);
+      current.set('data', getMinifiedString(queryValue));
 
-      if (variablesValue) {
-        const variablesMinified = getMinifiedString(variablesValue);
-        current.set('variables', variablesMinified);
-      } else if (current.has('variables')) {
-        current.delete('variables');
-      }
+      setQueryParam(current, 'variables', variablesValue);
+      setQueryParam(current, 'headers', headersValue);
 
       const search = current.toString();
       const query = search ? `?${search}` : '';
@@ -59,7 +64,7 @@ export function RequestForm() {
   };
 
   const onChangeEvent = (value: string) => {
-    setDataFromInput(value);
+    setDataFromQueryInput(value);
     dispatch(setValue());
 
     dispatch(enableExec());
@@ -99,21 +104,27 @@ export function RequestForm() {
           placeholder="Write your gql request"
           id="gqlq"
           onChange={(e) => onChangeEvent(e.target.value)}
-          value={dataFromInput}
+          value={dataFromQueryInput}
           aria-label="input from"
         ></textarea>
         <div className="py-2">
           <Button
             color="primary"
             isDisabled={form.isExecDisable}
-            onClick={() => onSubmitEvent(dataFromInput, dataFromVariables)}
+            onClick={() =>
+              onSubmitEvent(
+                dataFromQueryInput,
+                dataFromVariables,
+                dataFromHeaders
+              )
+            }
           >
             {executeBtnTitle}
           </Button>
         </div>
         <Accordion selectionMode="multiple">
           <AccordionItem
-            key="1"
+            key="variables"
             aria-label={variablesTitle}
             title={variablesTitle}
           >
@@ -125,7 +136,11 @@ export function RequestForm() {
               value={dataFromVariables}
             ></Textarea>
           </AccordionItem>
-          <AccordionItem key="2" aria-label={headersTitle} title={headersTitle}>
+          <AccordionItem
+            key="headers"
+            aria-label={headersTitle}
+            title={headersTitle}
+          >
             <Textarea
               label={headersLabel}
               labelPlacement="outside"

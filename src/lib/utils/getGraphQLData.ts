@@ -6,7 +6,7 @@ export const getGraphQLData = async (searchParams: {
   let gqlRequest = '';
   let variables: IVariables | null = null;
 
-  if (!searchParams) {
+  if (!searchParams.data) {
     return undefined;
   }
 

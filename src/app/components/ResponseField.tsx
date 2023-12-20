@@ -1,6 +1,6 @@
 import { ResponseFieldError } from './ResponseFieldError';
 import { ResponseFieldBox } from './ResponseFieldBox';
-import { getGraphQLData } from '@/lib/utils/getGraphQlData';
+import { getGraphQLData } from '@/lib/utils/getGraphQLData';
 
 interface IResponseFieldProps {
   searchParams: { [key: string]: string | Array<string> | undefined };

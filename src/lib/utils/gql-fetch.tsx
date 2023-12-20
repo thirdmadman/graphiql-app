@@ -1,4 +1,4 @@
-interface IHeaders {
+export interface IHeaders {
   [key: string]: string;
 }
 
@@ -33,8 +33,8 @@ export async function gqlFetchApi<T extends object>(
     };
 
     const options = {
-      method: 'POST',
       headers: requestHeaders,
+      method: 'POST',
       body: JSON.stringify(requestBody),
     };
 
@@ -42,16 +42,16 @@ export async function gqlFetchApi<T extends object>(
       await fetch(url, options)
     ).json()) as IResponseBody<T>;
 
-    if (!responseBody || !responseBody?.data) {
-      return { error: 'Server response is empty' };
-    }
-
     if (responseBody?.errors && responseBody?.errors.length > 0) {
       if (responseBody?.errors[0]?.message) {
         return { error: responseBody?.errors[0]?.message };
       } else {
         return { error: 'Server response contains errors' };
       }
+    }
+
+    if (!responseBody || !responseBody?.data) {
+      return { error: 'Server response is empty' };
     }
 
     return { resp: responseBody.data };

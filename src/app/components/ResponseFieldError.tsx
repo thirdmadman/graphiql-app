@@ -18,7 +18,7 @@ export function ResponseFieldError({ error }: IResponseFieldErrorProps) {
   return (
     <div>
       <p>We are sorry, but there were error in processing request.</p>
-      <p>Text of error: {error ? error : 'Unknown error'}...</p>
+      <p>{error ? error : 'Unknown error'}...</p>
     </div>
   );
 }

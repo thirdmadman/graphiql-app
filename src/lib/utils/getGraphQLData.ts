@@ -19,9 +19,15 @@ export const getGraphQLData = async (searchParams: {
   const headers = getParsedQueryParam('headers', searchParams.headers);
 
   if (variables?.resp === undefined && variables?.error) {
-    return { resp: undefined, error: variables?.error };
+    return {
+      resp: undefined,
+      error: `Variables are invalid JSON: ${variables?.error}`,
+    };
   } else if (headers?.resp === undefined && headers?.error) {
-    return { resp: undefined, error: headers?.error };
+    return {
+      resp: undefined,
+      error: `Headers are invalid JSON: ${headers?.error}`,
+    };
   } else {
     const parsedVariables = variables as IVariables | null;
     const parsedHeaders = headers as IHeaders | null;

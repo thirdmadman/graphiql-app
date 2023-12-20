@@ -18,7 +18,7 @@ export const ru = {
   serverResponseTitle: 'Ответ сервера',
   variablesTitle: 'Переменные',
   variablesLabel: 'Пожалуйста, используйте JSON формат для передачи переменных',
-  headersTab: 'Заголовки',
+  headersTitle: 'Заголовки',
   headersLabel: 'Пожалуйста, используйте JSON формат для передачи заголовков',
 };
 

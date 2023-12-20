@@ -1,6 +1,4 @@
 import Home from '@/app/page';
-import '@testing-library/jest-dom';
-
 import { render, screen } from '@testing-library/react';
 
 describe('Home page', () => {
@@ -32,10 +30,14 @@ describe('Home page', () => {
         typeof import('../../app/components/ResponseField')
       >('../../app/components/ResponseField');
 
+      const { StoreProvider } = await vi.importActual<
+        typeof import('@/lib/redux/StoreProvider')
+      >('@/lib/redux/StoreProvider');
+
       const RF = await ResponseField({ searchParams: { data: '' } });
 
       return {
-        ResponseField: () => RF,
+        ResponseField: () => <StoreProvider>{RF}</StoreProvider>,
       };
     });
   });

@@ -1,9 +1,9 @@
-import { prettifyGQLQuery } from '@/lib/utils/gql-formatter/prettifier';
+import prettifyGQLQuery from '@/lib/utils/formatter/prettifier';
 import {
   FormattedMockGQLQueries,
   UnformattedMockGQLQueries,
   mockGQLQuery,
-} from '../__mocks__/mock-gql-queries';
+} from '../__mocks__/mockGQLQueries';
 
 describe('PrettifyGQLQuery format query in various cases', () => {
   test('prettifyGQLQuery should format the gql-query string', () => {

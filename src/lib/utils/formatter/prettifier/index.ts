@@ -12,7 +12,7 @@ import {
   getCurrentNestingLevel,
 } from './helpers';
 
-export function prettifyGQLQuery(query: string): IPrettifyQueryResult {
+const prettifyGQLQuery = (query: string): IPrettifyQueryResult => {
   try {
     const queryToFormat = query.includes('#')
       ? replaceCommentsToIDs(query)
@@ -53,4 +53,6 @@ export function prettifyGQLQuery(query: string): IPrettifyQueryResult {
       errorMessage: true,
     };
   }
-}
+};
+
+export default prettifyGQLQuery;

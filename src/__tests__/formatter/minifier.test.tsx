@@ -1,8 +1,8 @@
-import { minifyGQLQuery } from '@/lib/utils/gql-formatter/minifier';
+import { minifyGQLQuery } from '@/lib/utils/formatter/minifier';
 import {
   mockGQLQuery,
   minifiedMockGQLQuery,
-} from '../__mocks__/mock-gql-queries';
+} from '../__mocks__/mockGQLQueries';
 
 describe('MinifyGQLQuery', () => {
   test('minifyGQLQuery should minify query', () => {

@@ -2,6 +2,8 @@ export type TQueryItem = string | undefined;
 
 export type TQueryItemPattern = TQueryItem | null | RegExp;
 
+export type TFormatRange = (range: IRangeItems, indentSize: number) => string;
+
 export interface IRangeItems {
   prev: TQueryItem;
   current: string;
@@ -14,8 +16,6 @@ export interface IRangeItemsPattern {
   next?: TQueryItemPattern;
   nestingLevel?: number | undefined;
 }
-
-export type TFormatRange = (range: IRangeItems, indentSize: number) => string;
 
 export interface IComment {
   [type: string]: string;

@@ -4,6 +4,7 @@ import {
   SPACE,
   NEW_LINES_IN_COMMENT_REGEX,
   EMPTY_STRING,
+  NEW_LINE,
 } from '../constants';
 import { IComment } from './types';
 import { generateRandomID } from './helpers';
@@ -53,5 +54,5 @@ export const replaceIDsToComments = (query: string) => {
   });
 
   commentsStore = {};
-  return queryWithComments.replace(NEW_LINES_IN_COMMENT_REGEX, '\n');
+  return queryWithComments.replace(NEW_LINES_IN_COMMENT_REGEX, NEW_LINE);
 };

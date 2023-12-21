@@ -106,10 +106,10 @@ query allFilms { #comment after open curly bracket
       title
       url
     } #comment after close curly bracket
-    studio {
-      name
-    }
+    #studio {
+    name
   }
+}
 }
 #comment after query`,
   arguments: `{
@@ -208,10 +208,10 @@ query allFilms { #comment after open curly bracket
   films(orderBy: {releaseYear: desc }) {
     id title
 #comment between fields
-titleEN
+  titleEN
   releaseYear #comment after field query 
     image {title url} #comment after close curly bracket
-    studio {
+    #studio {
       name
     }}}
 #comment after query`,

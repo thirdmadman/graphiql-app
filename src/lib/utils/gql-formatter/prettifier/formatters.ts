@@ -22,10 +22,6 @@ const formatters = [
     { prev: COLON, current: COMMENT_ID_REGEX },
     (range) => range.current
   ),
-  new Formatter(
-    { current: COMMENT_ID_REGEX, next: null },
-    (range) => range.current
-  ),
   new Formatter({ prev: COLON }, (range) => range.current),
   new Formatter({ current: COLON, next: COMMENT_ID_REGEX }, (range) =>
     range?.next?.split(SPACE)[0].match(ONLY_COMMENT_ID_REGEX)
@@ -82,12 +78,11 @@ const formatters = [
   new Formatter(
     { current: CLOSE_CURLY_BRACKET, nestingLevel: 1 },
     (range, indentSize) =>
-      range.next
-        ? getNewLineWIthIndents(decreaseIndentSize(indentSize)) +
-          range.current +
-          getNewLineWIthIndents(decreaseIndentSize(indentSize)) +
-          NEW_LINE
-        : NEW_LINE + range.current
+      getNewLineWIthIndents(decreaseIndentSize(indentSize)) +
+      range.current +
+      (range.next
+        ? getNewLineWIthIndents(decreaseIndentSize(indentSize)) + NEW_LINE
+        : EMPTY_STRING)
   ),
   new Formatter(
     { current: CLOSE_CURLY_BRACKET },

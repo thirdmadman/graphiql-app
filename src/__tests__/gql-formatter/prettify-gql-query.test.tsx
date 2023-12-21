@@ -3,7 +3,7 @@ import {
   FormattedMockGQLQueries,
   UnformattedMockGQLQueries,
   mockGQLQuery,
-} from '../__mocks__/gql-mock-queries/MockQueries';
+} from '../__mocks__/mock-gql-queries';
 
 describe('PrettifyGQLQuery format query in various cases', () => {
   test('prettifyGQLQuery should format the gql-query string', () => {

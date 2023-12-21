@@ -1,7 +1,6 @@
 import {
   SPACE,
   ONLY_COMMENT_ID_REGEX,
-  NEW_LINE,
   EMPTY_STRING,
   DIRECTIVE_REGEX,
   OPERATION_TYPE_REGEX,
@@ -18,11 +17,7 @@ const formatGQLFields = (fields: string, indentSize: number): string => {
     const currentItem = splittedFields[i];
     const nextItem = splittedFields[i + 1];
 
-    if (currentItem.match(ONLY_COMMENT_ID_REGEX)) {
-      result +=
-        currentItem +
-        (indentSize ? getNewLineWIthIndents(indentSize) : NEW_LINE);
-    } else if (currentItem === '...' && nextItem === 'on') {
+    if (currentItem === '...' && nextItem === 'on') {
       const field = `${currentItem} ${nextItem} ${
         splittedFields[i + 2] || EMPTY_STRING
       }`;

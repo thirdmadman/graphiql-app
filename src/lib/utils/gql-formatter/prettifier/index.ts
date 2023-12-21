@@ -2,7 +2,10 @@ import { EMPTY_STRING, INDENT_STEP, COMMENT_ID_REGEX } from '../constants';
 import { IRangeItems, IPrettifyQueryResult } from './types';
 import formatters from './formatters';
 import { minifyGQLQuery } from '../minifier';
-import { replaceCommentsToIDs, replaceIDsToComments } from './format-comments';
+import {
+  replaceCommentsToIDs,
+  replaceIDsToComments,
+} from './formatQueryComments';
 import {
   splitQueryToItems,
   getRangeByIndex,
@@ -17,18 +20,15 @@ export function prettifyGQLQuery(query: string): IPrettifyQueryResult {
 
     const minifiedQuery = minifyGQLQuery(queryToFormat);
     const queryItems = splitQueryToItems(minifiedQuery);
-    const ranges: IRangeItems[] = [];
+    const ranges: Array<IRangeItems> = [];
 
     for (let i = 0; i < queryItems.length; i++) {
       ranges.push(getRangeByIndex(queryItems, i));
     }
 
     let result = EMPTY_STRING;
-    for (let i = 0; i < ranges.length; i++) {
-      const range = ranges[i];
-
-      for (let j = 0; j < formatters.length; j++) {
-        const formatter = formatters[j];
+    for (const range of ranges) {
+      for (const formatter of formatters) {
         const nestingLevel = getCurrentNestingLevel(result);
 
         const isMatch = formatter.isMatch(range, nestingLevel);
@@ -50,8 +50,7 @@ export function prettifyGQLQuery(query: string): IPrettifyQueryResult {
     console.error(error);
     return {
       query,
-      errorMessage:
-        'Request formatting error! Please ensure that request is written correctly.',
+      errorMessage: true,
     };
   }
 }

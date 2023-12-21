@@ -10,7 +10,7 @@ import {
   COMMENT_ID_REGEX,
   EMPTY_STRING,
 } from '../constants';
-import formatGQLFields from './format-gql-query-fields';
+import formatGQLFields from './formatQueryFields';
 import {
   decreaseIndentSize,
   getNewLineWIthIndents,

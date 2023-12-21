@@ -9,12 +9,10 @@ import {
 } from '../constants';
 import { IRangeItems } from './types';
 
-export const splitQueryToItems = (query: string): string[] => {
-  const result: string[] = [EMPTY_STRING];
+export const splitQueryToItems = (query: string): Array<string> => {
+  const result: Array<string> = [EMPTY_STRING];
 
-  for (let i = 0; i < query.length; i++) {
-    const char = query[i];
-
+  for (const char of query) {
     if (SPLITTERS.includes(char)) {
       result.push(char);
       result.push(EMPTY_STRING);
@@ -27,7 +25,7 @@ export const splitQueryToItems = (query: string): string[] => {
 };
 
 export const getRangeByIndex = (
-  source: string[],
+  source: Array<string>,
   index: number
 ): IRangeItems => {
   return {

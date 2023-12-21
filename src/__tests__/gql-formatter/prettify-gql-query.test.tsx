@@ -1,4 +1,4 @@
-import { prettifyGQLQuery } from '@/lib/utils/gql-formatter';
+import { prettifyGQLQuery } from '@/lib/utils/gql-formatter/prettifier';
 import {
   FormattedMockGQLQueries,
   UnformattedMockGQLQueries,

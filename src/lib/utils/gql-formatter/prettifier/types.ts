@@ -23,5 +23,5 @@ export interface IComment {
 
 export interface IPrettifyQueryResult {
   query: string;
-  errorMessage?: string;
+  errorMessage?: boolean;
 }

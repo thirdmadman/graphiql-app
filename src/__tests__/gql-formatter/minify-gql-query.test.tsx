@@ -1,4 +1,4 @@
-import { minifyQuery } from '@/lib/utils/gql-request-helpers';
+import { minifyGQLQuery } from '@/lib/utils/gql-formatter/minifier';
 import {
   mockGQLQuery,
   minifiedMockGQLQuery,
@@ -6,7 +6,7 @@ import {
 
 describe('MinifyGQLQuery', () => {
   test('minifyGQLQuery should minify query', () => {
-    const minified = minifyQuery(mockGQLQuery);
+    const minified = minifyGQLQuery(mockGQLQuery);
     expect(minified).toEqual(minifiedMockGQLQuery);
   });
 });

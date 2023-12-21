@@ -9,6 +9,8 @@ export const en = {
   variablesLabel: 'Please, use JSON format to pass variables',
   headersTitle: 'Headers',
   headersLabel: 'Please, use JSON format to pass headers',
+  prettifyError:
+    'Request formatting error! Please ensure that request is written correctly.',
 };
 
 export const ru = {
@@ -22,6 +24,8 @@ export const ru = {
   variablesLabel: 'Пожалуйста, используйте JSON формат для передачи переменных',
   headersTitle: 'Заголовки',
   headersLabel: 'Пожалуйста, используйте JSON формат для передачи заголовков',
+  prettifyError:
+    'Ошибка форматирования запроса. Пожалуйста, убедитесь, что запрос написан правильно.',
 };
 
 export interface ILocale {
@@ -35,6 +39,7 @@ export interface ILocale {
   variablesLabel: string;
   headersTitle: string;
   headersLabel: string;
+  prettifyError: string;
 }
 
 interface ILocalesObject {

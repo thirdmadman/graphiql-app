@@ -3,7 +3,6 @@ import {
   COMMENT_ID_REGEX,
   SPACE,
   NEW_LINES_IN_COMMENT_REGEX,
-  EMPTY_STRING,
   NEW_LINE,
 } from '../constants';
 import { IComment } from './types';
@@ -15,10 +14,6 @@ export const getCommentsFromGQLQuery = (query: string) => {
 
 export const getCommentsIDsFromQuery = (query: string) => {
   return query.match(COMMENT_ID_REGEX);
-};
-
-export const removeCommentsFromGQLQuery = (query: string) => {
-  return query.replace(COMMENT_REGEX, EMPTY_STRING);
 };
 
 let commentsStore: IComment = {};

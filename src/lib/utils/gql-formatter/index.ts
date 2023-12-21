@@ -1,4 +1,4 @@
-import { minifyQuery } from './minifier';
-import { prettifyQuery } from './prettifier';
+import { minifyGQLQuery } from './minifier';
+import { prettifyGQLQuery } from './prettifier';
 
-export { minifyQuery, prettifyQuery };
+export { minifyGQLQuery, prettifyGQLQuery };

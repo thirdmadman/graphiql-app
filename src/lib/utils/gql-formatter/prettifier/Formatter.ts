@@ -1,21 +1,21 @@
 import {
-  QueryItem,
-  QueryItemPattern,
-  ItemsRange,
-  ItemsRangePattern,
-  FormatRange,
+  TQueryItem,
+  TQueryItemPattern,
+  IRangeItems,
+  IRangeItemsPattern,
+  TFormatRange,
 } from './types';
 
 export class Formatter {
-  private pattern: ItemsRangePattern;
-  private formatRange: FormatRange;
+  private pattern: IRangeItemsPattern;
+  private formatRange: TFormatRange;
 
-  constructor(pattern: ItemsRangePattern, map: FormatRange) {
+  constructor(pattern: IRangeItemsPattern, map: TFormatRange) {
     this.pattern = pattern;
     this.formatRange = map;
   }
 
-  isMatch(range: ItemsRange, nestingLevel: number): boolean {
+  isMatch(range: IRangeItems, nestingLevel: number): boolean {
     return (
       (this.pattern.nestingLevel == undefined ||
         this.pattern.nestingLevel === nestingLevel) &&
@@ -25,11 +25,18 @@ export class Formatter {
     );
   }
 
-  format(range: ItemsRange, indentSize: number): string {
+  format(range: IRangeItems, indentSize: number): string {
     return this.formatRange(range, indentSize);
   }
 
-  private isPatternMatch(pattern: QueryItemPattern, item: QueryItem): boolean {
-    return pattern === undefined || pattern == item;
+  private isPatternMatch(
+    pattern: TQueryItemPattern,
+    item: TQueryItem
+  ): boolean {
+    return (
+      pattern === undefined ||
+      pattern == item ||
+      (pattern instanceof RegExp && !!item?.match(pattern))
+    );
   }
 }

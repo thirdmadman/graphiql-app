@@ -1,21 +1,27 @@
 import {
-  EMPTY_STRING,
   OPEN_CURLY_BRACKET,
   CLOSE_CURLY_BRACKET,
   COLON,
   SPACE,
   OPEN_BRACKET,
   CLOSE_BRACKET,
+  CLOSE_BRACKET_WITH_SPACES_REGEX,
+  CLOSE_CURLY_BRACKET_WITH_SPACES_REGEX,
+  COLON_WITH_SPACES_REGEX,
+  NEW_LINE_REGEX,
+  OPEN_BRACKET_WITH_SPACES_REGEX,
+  OPEN_CURLY_BRACKET_WITH_SPACES_REGEX,
+  SPACES_REGEX,
 } from '../constants';
 
-export const minifyQuery = (query: string) => {
+export const minifyGQLQuery = (query: string) => {
   return query
-    .replace(/\n/g, EMPTY_STRING)
-    .replace(/\s*{\s*/g, OPEN_CURLY_BRACKET)
-    .replace(/\s*}\s*/g, CLOSE_CURLY_BRACKET)
-    .replace(/\s*\(\s*/g, OPEN_BRACKET)
-    .replace(/\s*\)\s*/g, CLOSE_BRACKET)
-    .replace(/\s*:\s*/g, COLON)
-    .replace(/\s+/g, SPACE)
+    .replace(NEW_LINE_REGEX, SPACE)
+    .replace(OPEN_CURLY_BRACKET_WITH_SPACES_REGEX, OPEN_CURLY_BRACKET)
+    .replace(CLOSE_CURLY_BRACKET_WITH_SPACES_REGEX, CLOSE_CURLY_BRACKET)
+    .replace(OPEN_BRACKET_WITH_SPACES_REGEX, OPEN_BRACKET)
+    .replace(CLOSE_BRACKET_WITH_SPACES_REGEX, CLOSE_BRACKET)
+    .replace(COLON_WITH_SPACES_REGEX, COLON)
+    .replace(SPACES_REGEX, SPACE)
     .trim();
 };

@@ -1,23 +1,27 @@
-export type QueryItem = string | undefined;
+export type TQueryItem = string | undefined;
 
-export type QueryItemPattern = QueryItem | null;
+export type TQueryItemPattern = TQueryItem | null | RegExp;
 
-export type ItemsRange = {
-  prev: QueryItem;
+export interface IRangeItems {
+  prev: TQueryItem;
   current: string;
-  next: QueryItem;
-};
+  next: TQueryItem;
+}
 
-export type ItemsRangePattern = {
-  prev?: QueryItemPattern;
-  current?: QueryItemPattern;
-  next?: QueryItemPattern;
+export interface IRangeItemsPattern {
+  prev?: TQueryItemPattern;
+  current?: TQueryItemPattern;
+  next?: TQueryItemPattern;
   nestingLevel?: number | undefined;
-};
+}
 
-export type FormatRange = (range: ItemsRange, indentSize: number) => string;
+export type TFormatRange = (range: IRangeItems, indentSize: number) => string;
 
-export interface PrettifyResult {
+export interface IComment {
+  [type: string]: string;
+}
+
+export interface IPrettifyQueryResult {
   query: string;
   errorMessage?: string;
 }

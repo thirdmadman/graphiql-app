@@ -12,7 +12,7 @@ import { locale } from '@/locales/locale';
 import { Accordion, AccordionItem, Button, Textarea } from '@nextui-org/react';
 import { setQueryParam } from '@/lib/utils/setQueryParam';
 import { getMinifiedString } from '@/lib/utils/minifyQueryString';
-import { prettifyQuery } from '@/lib/utils/gql-formatter';
+import { prettifyGQLQuery } from '@/lib/utils/gql-formatter';
 
 export function RequestForm() {
   const { state } = useContext(localeContext);
@@ -74,14 +74,14 @@ export function RequestForm() {
   const onPrettifyBtnClick = (value: string) => {
     setPrettifyError(null);
 
-    const prettifiedValue = prettifyQuery(value);
+    const prettifiedValue = prettifyGQLQuery(value);
     const { query, errorMessage } = prettifiedValue;
 
     if (errorMessage) {
-      setPrettifyError(errorMessage as string);
+      setPrettifyError(errorMessage);
       return;
     }
-    setDataFromQueryInput(query as string);
+    setDataFromQueryInput(query);
   };
 
   const onChangeVariables = (value: string) => {

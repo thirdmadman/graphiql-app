@@ -4,38 +4,67 @@ import {
   COLON,
   OPEN_CURLY_BRACKET,
   NEW_LINE,
-  INDENT_STEP,
   CLOSE_CURLY_BRACKET,
   CLOSE_BRACKET,
+  ONLY_COMMENT_ID_REGEX,
+  COMMENT_ID_REGEX,
+  EMPTY_STRING,
 } from '../constants';
-
-const increaseIndentSize = (currentSize: number) => currentSize + INDENT_STEP;
-
-const decreaseIndentSize = (currentSize: number) => {
-  const newIndentSize = currentSize - INDENT_STEP;
-  return newIndentSize >= 0 ? newIndentSize : 0;
-};
+import formatGQLFields from './format-gql-query-fields';
+import {
+  decreaseIndentSize,
+  getNewLineWIthIndents,
+  increaseIndentSize,
+} from './helpers';
 
 const formatters = [
-  new Formatter({ current: COLON, next: SPACE }, (range) => range.current),
+  new Formatter(
+    { prev: COLON, current: COMMENT_ID_REGEX },
+    (range) => range.current
+  ),
+  new Formatter(
+    { current: COMMENT_ID_REGEX, next: null },
+    (range) => range.current
+  ),
+  new Formatter({ prev: COLON }, (range) => range.current),
+  new Formatter({ current: COLON, next: COMMENT_ID_REGEX }, (range) =>
+    range?.next?.split(SPACE)[0].match(ONLY_COMMENT_ID_REGEX)
+      ? range.current
+      : SPACE + range.current
+  ),
+  new Formatter(
+    { current: COLON },
+    (range) => range.current + (range.next === SPACE ? EMPTY_STRING : SPACE)
+  ),
   new Formatter({ current: COLON }, (range) => range.current + SPACE),
   new Formatter(
     { prev: COLON, current: OPEN_CURLY_BRACKET },
     (range) => range.current + SPACE
   ),
   new Formatter(
-    { prev: null, current: OPEN_CURLY_BRACKET },
+    { prev: ONLY_COMMENT_ID_REGEX, current: OPEN_CURLY_BRACKET },
     (range, indentSize) =>
-      range.current + NEW_LINE + SPACE.repeat(increaseIndentSize(indentSize))
+      range.current + getNewLineWIthIndents(increaseIndentSize(indentSize))
   ),
   new Formatter(
-    { current: OPEN_CURLY_BRACKET },
-    (range, indentSize) =>
-      SPACE +
-      range.current +
-      NEW_LINE +
-      SPACE.repeat(increaseIndentSize(indentSize))
+    { current: OPEN_CURLY_BRACKET, next: COMMENT_ID_REGEX },
+    (range, indentSize) => {
+      const lastItem = !range?.next
+        ?.split(SPACE)[0]
+        .match(ONLY_COMMENT_ID_REGEX)
+        ? getNewLineWIthIndents(increaseIndentSize(indentSize))
+        : EMPTY_STRING;
+      return (range.prev ? SPACE : EMPTY_STRING) + range.current + lastItem;
+    }
   ),
+  new Formatter({ current: OPEN_CURLY_BRACKET }, (range, indentSize) => {
+    const firstItem = range.prev ? SPACE : EMPTY_STRING;
+    return (
+      firstItem +
+      range.current +
+      getNewLineWIthIndents(increaseIndentSize(indentSize))
+    );
+  }),
   new Formatter(
     { current: CLOSE_CURLY_BRACKET, next: CLOSE_BRACKET },
     (range) => SPACE + range.current
@@ -43,38 +72,32 @@ const formatters = [
   new Formatter(
     { current: CLOSE_CURLY_BRACKET, next: CLOSE_CURLY_BRACKET },
     (range, indentSize) =>
-      NEW_LINE + SPACE.repeat(decreaseIndentSize(indentSize)) + range.current
+      getNewLineWIthIndents(decreaseIndentSize(indentSize)) + range.current
   ),
   new Formatter(
-    { current: CLOSE_CURLY_BRACKET, next: null, nestingLevel: 1 },
-    (range) => NEW_LINE + range.current
+    { current: CLOSE_CURLY_BRACKET, next: COMMENT_ID_REGEX },
+    (range, indentSize) =>
+      getNewLineWIthIndents(decreaseIndentSize(indentSize)) + range.current
   ),
   new Formatter(
     { current: CLOSE_CURLY_BRACKET, nestingLevel: 1 },
     (range, indentSize) =>
-      NEW_LINE +
-      SPACE.repeat(decreaseIndentSize(indentSize)) +
-      range.current +
-      NEW_LINE +
-      SPACE.repeat(decreaseIndentSize(indentSize)) +
-      NEW_LINE
+      range.next
+        ? getNewLineWIthIndents(decreaseIndentSize(indentSize)) +
+          range.current +
+          getNewLineWIthIndents(decreaseIndentSize(indentSize)) +
+          NEW_LINE
+        : NEW_LINE + range.current
   ),
   new Formatter(
     { current: CLOSE_CURLY_BRACKET },
     (range, indentSize) =>
-      NEW_LINE +
-      SPACE.repeat(decreaseIndentSize(indentSize)) +
+      getNewLineWIthIndents(decreaseIndentSize(indentSize)) +
       range.current +
-      NEW_LINE +
-      SPACE.repeat(decreaseIndentSize(indentSize))
+      getNewLineWIthIndents(decreaseIndentSize(indentSize))
   ),
-  new Formatter(
-    { next: SPACE },
-    (range, indentSize) => range.current + NEW_LINE + SPACE.repeat(indentSize)
-  ),
-  new Formatter({ nestingLevel: 0 }, (range) => range.current),
   new Formatter({}, (range, indentSize) =>
-    range.current.replaceAll(SPACE, NEW_LINE + SPACE.repeat(indentSize))
+    formatGQLFields(range.current, indentSize)
   ),
 ];
 

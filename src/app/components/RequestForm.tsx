@@ -11,7 +11,7 @@ import { localeContext } from '@/locales/localeProvider';
 import { locale } from '@/locales/locale';
 import { Accordion, AccordionItem, Button, Textarea } from '@nextui-org/react';
 import { setQueryParam } from '@/lib/utils/setQueryParam';
-import { getMinifiedString } from '@/lib/utils/minifyQueryString';
+import prettifyGQLQuery from '@/lib/utils/formatter/prettifier';
 
 export function RequestForm() {
   const { state } = useContext(localeContext);
@@ -35,13 +35,13 @@ export function RequestForm() {
 
   const headersUri = searchParams.get('headers');
   const initialHeadersParams = headersUri ? decodeURIComponent(headersUri) : '';
-
   const [dataFromQueryInput, setDataFromQueryInput] =
     useState(initialSearchParams);
   const [dataFromVariables, setDataFromVariables] = useState(
     initialVariablesParams
   );
   const [dataFromHeaders, setDataFromHeaders] = useState(initialHeadersParams);
+  const [isPrettifyError, setPrettifyError] = useState<boolean>(false);
 
   const onSubmitEvent = (
     queryValue: string,
@@ -51,7 +51,7 @@ export function RequestForm() {
     if (queryValue && queryValue.length > 0) {
       const current = new URLSearchParams(Array.from(searchParams.entries()));
 
-      current.set('data', getMinifiedString(queryValue));
+      current.set('data', queryValue);
 
       setQueryParam(current, 'variables', variablesValue);
       setQueryParam(current, 'headers', headersValue);
@@ -68,6 +68,19 @@ export function RequestForm() {
     dispatch(setValue());
 
     dispatch(enableExec());
+  };
+
+  const onPrettifyBtnClick = (value: string) => {
+    setPrettifyError(false);
+
+    const prettifiedValue = prettifyGQLQuery(value);
+    const { query, errorMessage } = prettifiedValue;
+
+    if (errorMessage) {
+      setPrettifyError(true);
+      return;
+    }
+    setDataFromQueryInput(query);
   };
 
   const onChangeVariables = (value: string) => {
@@ -87,6 +100,8 @@ export function RequestForm() {
     variablesTitle,
     headersLabel,
     headersTitle,
+    prettifyBtnTitle,
+    prettifyError,
   } = locale[currentLang];
 
   return (
@@ -100,27 +115,39 @@ export function RequestForm() {
         </label>
         <textarea
           rows={20}
-          className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="font-mono block p-5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Write your gql request"
           id="gqlq"
           onChange={(e) => onChangeEvent(e.target.value)}
           value={dataFromQueryInput}
           aria-label="input from"
+          spellCheck="false"
         ></textarea>
         <div className="py-2">
-          <Button
-            color="primary"
-            isDisabled={form.isExecDisable}
-            onClick={() =>
-              onSubmitEvent(
-                dataFromQueryInput,
-                dataFromVariables,
-                dataFromHeaders
-              )
-            }
-          >
-            {executeBtnTitle}
-          </Button>
+          <div className="flex gap-3">
+            <Button
+              color="primary"
+              isDisabled={form.isExecDisable}
+              onClick={() =>
+                onSubmitEvent(
+                  dataFromQueryInput,
+                  dataFromVariables,
+                  dataFromHeaders
+                )
+              }
+            >
+              {executeBtnTitle}
+            </Button>
+            <Button
+              color="primary"
+              onClick={() => onPrettifyBtnClick(dataFromQueryInput)}
+            >
+              {prettifyBtnTitle}
+            </Button>
+          </div>
+          {isPrettifyError && (
+            <p className="text-red-600 pt-4 h-24">{prettifyError}</p>
+          )}
         </div>
         <Accordion selectionMode="multiple">
           <AccordionItem

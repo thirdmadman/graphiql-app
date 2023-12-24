@@ -2,6 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import { TextareaField } from './TextareaField';
+import prettifyGQLQuery from '@/lib/utils/formatter/prettifier';
 
 enum Mode {
   Edit,
@@ -28,7 +29,7 @@ export function RequestWrapper() {
     <TextareaField
       mode={Mode.Edit}
       data={{
-        textareaData: { content: initialSearchParams },
+        textareaData: { content: prettifyGQLQuery(initialSearchParams).query },
         headers: initialHeadersParams,
         variables: initialVariablesParams,
       }}

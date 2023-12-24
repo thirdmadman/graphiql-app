@@ -13,6 +13,7 @@ import {
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { setQueryParam } from '@/lib/utils/setQueryParam';
 import { prettifyJSON } from '@/lib/utils/prettifyJSON';
+import prettifyGQLQuery from '@/lib/utils/formatter/prettifier';
 
 interface IContent {
   content?: object | string;
@@ -55,7 +56,9 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
       case Mode.Edit:
         return data?.textareaData.content as string;
       case Mode.Readonly:
-        return data?.textareaData.error ? '' : prettifyJSON(data)?.response;
+        return data?.textareaData.error
+          ? ''
+          : prettifyJSON(data?.textareaData.content as object)?.response;
       default:
         return '';
     }
@@ -66,6 +69,7 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
     data?.variables ?? ''
   );
   const [dataFromHeaders, setDataFromHeaders] = useState(data?.headers ?? '');
+  const [isPrettifyError, setPrettifyError] = useState<boolean>(false);
 
   const onSubmitEvent = (
     queryValue: string,
@@ -105,11 +109,26 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
     dispatch(enableExec());
   };
 
+  const onPrettifyBtnClick = (value: string) => {
+    setPrettifyError(false);
+
+    const prettifiedValue = prettifyGQLQuery(value);
+    const { query, errorMessage } = prettifiedValue;
+
+    if (errorMessage) {
+      setPrettifyError(true);
+      return;
+    }
+    setTextareaContent(query);
+  };
+
   const {
     requestFieldLabel,
     responseFieldLabel,
     executeBtnTitle,
+    prettifyBtnTitle,
     processingRequestError,
+    prettifyError,
     variablesLabel,
     variablesTitle,
     headersLabel,
@@ -147,25 +166,37 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
           value={textareaContent ?? ''}
           aria-label="input from"
           readOnly={mode === Mode.Readonly}
+          spellCheck="false"
         ></Textarea>
         {mode === Mode.Edit && (
           <>
             <div className="py-2">
-              <Button
-                color="primary"
-                isDisabled={form.isExecDisable}
-                onClick={() =>
-                  onSubmitEvent(
-                    textareaContent,
-                    dataFromVariables,
-                    dataFromHeaders
-                  )
-                }
-              >
-                {executeBtnTitle}
-              </Button>
-              {executeBtnTitle && <p></p>}
+              <div className="flex flex-row gap-1">
+                <Button
+                  color="primary"
+                  isDisabled={form.isExecDisable}
+                  onClick={() =>
+                    onSubmitEvent(
+                      textareaContent,
+                      dataFromVariables,
+                      dataFromHeaders
+                    )
+                  }
+                >
+                  {executeBtnTitle}
+                </Button>
+                {executeBtnTitle && <p></p>}
+                <Button
+                  color="primary"
+                  onClick={() => onPrettifyBtnClick(textareaContent)}
+                >
+                  {prettifyBtnTitle}
+                </Button>
+              </div>
             </div>
+            {isPrettifyError && (
+              <p className="text-red-600 pt-4 text-sm">{prettifyError}</p>
+            )}
             <Accordion selectionMode="multiple">
               <AccordionItem
                 key="variables"
@@ -200,7 +231,7 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
           <p className="text-red-600 pt-4 text-sm">{`${processingRequestError}: ${data.textareaData.error}`}</p>
         )}
         {prettifyJSON(data)?.error && (
-          <p className="text-red-600 pt-4  text-sm">{`${responseFormatError}: ${prettifyJSON(
+          <p className="text-red-600 pt-4 text-sm">{`${responseFormatError}: ${prettifyJSON(
             data
           )?.error}`}</p>
         )}

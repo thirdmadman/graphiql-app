@@ -11,8 +11,9 @@ import {
   getRangeByIndex,
   getCurrentNestingLevel,
 } from './helpers';
+import { IPrettifyResponseResult } from './types';
 
-const prettifyGQLQuery = (query: string): IPrettifyQueryResult => {
+export const prettifyGQLQuery = (query: string): IPrettifyQueryResult => {
   try {
     const queryToFormat = query.includes('#')
       ? replaceCommentsToIDs(query)
@@ -55,4 +56,16 @@ const prettifyGQLQuery = (query: string): IPrettifyQueryResult => {
   }
 };
 
-export default prettifyGQLQuery;
+export const prettifyJSON = (response?: object): IPrettifyResponseResult => {
+  try {
+    const prettified = JSON.stringify(response, null, INDENT_STEP);
+    return {
+      response: prettified,
+    };
+  } catch (error) {
+    return {
+      response: JSON.stringify(response),
+      error: error instanceof Error ? error.message : '',
+    };
+  }
+};

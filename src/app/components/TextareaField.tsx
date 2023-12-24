@@ -5,30 +5,27 @@ import { localeContext } from '@/locales/localeProvider';
 import { useContext, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
 import { Accordion, AccordionItem, Button, Textarea } from '@nextui-org/react';
-
 import {
   enableExec,
   setValue,
 } from '@/lib/redux/features/details/detailsSlice';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { setQueryParam } from '@/lib/utils/setQueryParam';
-import { prettifyJSON } from '@/lib/utils/prettifyJSON';
-import prettifyGQLQuery from '@/lib/utils/formatter/prettifier';
+import {
+  prettifyGQLQuery,
+  prettifyJSON,
+} from '@/lib/utils/formatter/prettifier';
+import { Mode } from './types';
 
-interface IContent {
+interface ITextareaData {
   content?: object | string;
   error?: string;
 }
 
 interface IData {
-  textareaData: IContent;
+  textareaData: ITextareaData;
   headers?: string;
   variables?: string;
-}
-
-enum Mode {
-  Edit,
-  Readonly,
 }
 
 interface ITextareaFieldProps {
@@ -151,10 +148,7 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
           classNames={{
             input: 'min-h-[500px]',
           }}
-          isInvalid={
-            mode === Mode.Readonly &&
-            !!(data?.textareaData.error ?? prettifyJSON(data)?.error)
-          }
+          isInvalid={mode === Mode.Readonly && !!data?.textareaData.error}
           className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 min-h-[500px]"
           placeholder={
             mode === Mode.Edit
@@ -170,33 +164,6 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
         ></Textarea>
         {mode === Mode.Edit && (
           <>
-            <div className="py-2">
-              <div className="flex flex-row gap-1">
-                <Button
-                  color="primary"
-                  isDisabled={form.isExecDisable}
-                  onClick={() =>
-                    onSubmitEvent(
-                      textareaContent,
-                      dataFromVariables,
-                      dataFromHeaders
-                    )
-                  }
-                >
-                  {executeBtnTitle}
-                </Button>
-                {executeBtnTitle && <p></p>}
-                <Button
-                  color="primary"
-                  onClick={() => onPrettifyBtnClick(textareaContent)}
-                >
-                  {prettifyBtnTitle}
-                </Button>
-              </div>
-            </div>
-            {isPrettifyError && (
-              <p className="text-red-600 pt-4 text-sm">{prettifyError}</p>
-            )}
             <Accordion selectionMode="multiple">
               <AccordionItem
                 key="variables"
@@ -225,15 +192,46 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
                 ></Textarea>
               </AccordionItem>
             </Accordion>
+            <div className="py-2">
+              <div className="flex flex-row gap-1">
+                <Button
+                  color="primary"
+                  isDisabled={form.isExecDisable}
+                  onClick={() =>
+                    onSubmitEvent(
+                      textareaContent,
+                      dataFromVariables,
+                      dataFromHeaders
+                    )
+                  }
+                >
+                  {executeBtnTitle}
+                </Button>
+                {executeBtnTitle && <p></p>}
+                <Button
+                  color="primary"
+                  onClick={() => onPrettifyBtnClick(textareaContent)}
+                >
+                  {prettifyBtnTitle}
+                </Button>
+              </div>
+            </div>
           </>
         )}
-        {data?.textareaData.error && (
-          <p className="text-red-600 pt-4 text-sm">{`${processingRequestError}: ${data.textareaData.error}`}</p>
+        {mode === Mode.Edit && isPrettifyError && (
+          <p className="text-red-600 p-2 text-sm">{prettifyError}</p>
         )}
-        {prettifyJSON(data)?.error && (
-          <p className="text-red-600 pt-4 text-sm">{`${responseFormatError}: ${prettifyJSON(
-            data
-          )?.error}`}</p>
+        {mode === Mode.Readonly && (
+          <div className="p-3">
+            {data?.textareaData.error && (
+              <p className="text-red-600 text-sm">{`${processingRequestError}: ${data.textareaData.error}`}</p>
+            )}
+            {prettifyJSON(data)?.error && (
+              <p className="text-red-600 pt-2 text-sm">{`${responseFormatError}: ${prettifyJSON(
+                data
+              )?.error}`}</p>
+            )}
+          </div>
         )}
       </div>
     </div>

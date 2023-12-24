@@ -11,7 +11,7 @@ import { localeContext } from '@/locales/localeProvider';
 import { locale } from '@/locales/locale';
 import { Accordion, AccordionItem, Button, Textarea } from '@nextui-org/react';
 import { setQueryParam } from '@/lib/utils/setQueryParam';
-import prettifyGQLQuery from '@/lib/utils/formatter/prettifier';
+import { prettifyGQLQuery } from '@/lib/utils/formatter/prettifier';
 
 export function RequestForm() {
   const { state } = useContext(localeContext);

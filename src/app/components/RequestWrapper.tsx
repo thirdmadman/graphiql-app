@@ -2,12 +2,8 @@
 
 import { useSearchParams } from 'next/navigation';
 import { TextareaField } from './TextareaField';
-import prettifyGQLQuery from '@/lib/utils/formatter/prettifier';
-
-enum Mode {
-  Edit,
-  Readonly,
-}
+import { prettifyGQLQuery } from '@/lib/utils/formatter/prettifier';
+import { Mode } from './types';
 
 export function RequestWrapper() {
   const searchParams = useSearchParams();

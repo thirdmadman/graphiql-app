@@ -61,11 +61,11 @@ export default async function Welcome() {
           </p>
         </div>
       </section>
-      <section className="px-4 py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-25 md:py-10 lg:px-8 lg:py-12">
+      <section className="px-4 py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 md:py-10 lg:px-8 lg:py-12">
         <h4 className="mb-8 text-4xl font-bold leadi text-center">
           What do we have to offer?
         </h4>
-        <ul className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           <li className="flex items-center space-x-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -162,9 +162,11 @@ export default async function Welcome() {
         </div>
       </section>
       <section className="py-8 flex flex-col items-center justify-center px-4 mx-auto sm:p-10 lg:py-12">
-        <h4 className="text-4xl font-bold leadi text-center">Our team</h4>
+        <h4 className="text-4xl mb-4 font-bold leadi text-center sm:mb-0">
+          Our team
+        </h4>
         <div className="flex justify-between items-start">
-          <div className="flex flex-col justify-center m-4 text-center sm:m-8 lg:m-12">
+          <div className="flex flex-col justify-center m-4 text-center sm:m-8">
             <Image
               alt="Person"
               className="self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full"
@@ -175,7 +177,7 @@ export default async function Welcome() {
             <p className="text-xl font-semibold leadi">thirdmadman</p>
             <p className="text-sm">Team lead</p>
           </div>
-          <div className="flex flex-col m-4 justify-center m-8 text-center sm:m-8 lg:m-12">
+          <div className="flex flex-col m-4 justify-center text-center sm:m-8">
             <Image
               alt="Person"
               className="self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full"
@@ -187,7 +189,7 @@ export default async function Welcome() {
             <p className="text-xl font-semibold leadi">nvalkovich</p>
             <p className="text-sm">Web developer</p>
           </div>
-          <div className="flex flex-col m-4 justify-center text-center sm:m-8 lg:m-12">
+          <div className="flex flex-col m-4 justify-center text-center sm:m-8">
             <Image
               alt="Person"
               className="self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full"

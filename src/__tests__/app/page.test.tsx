@@ -40,6 +40,22 @@ describe('Home page', () => {
         ResponseWrapper: () => <StoreProvider>{RF}</StoreProvider>,
       };
     });
+
+    vi.mock('../../app/components/DocumentationComponent.tsx', async () => {
+      const { DocumentationComponent } = await vi.importActual<
+        typeof import('../../app/components/DocumentationComponent')
+      >('../../app/components/DocumentationComponent');
+
+      const { StoreProvider } = await vi.importActual<
+        typeof import('@/lib/redux/StoreProvider')
+      >('@/lib/redux/StoreProvider');
+
+      const DC = await DocumentationComponent({ searchParams: { data: '' } });
+
+      return {
+        DocumentationComponent: () => <StoreProvider>{DC}</StoreProvider>,
+      };
+    });
   });
 
   it('should render without failing', () => {

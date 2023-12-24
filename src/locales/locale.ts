@@ -1,10 +1,15 @@
 export const en = {
   id: 'en',
-  inputFormLabel: 'Write your query',
+  requestFieldLabel: 'Write your query',
+  requestFieldPlaceholder: 'Write your gql request',
+  responseFieldLabel: 'Server response',
+  responseFieldPlaceholder: 'Server response',
   executeBtnTitle: 'Execute',
   prettifyBtnTitle: 'Prettify',
   disableExecuteBtnTitle: 'Disable Execution',
-  serverResponseTitle: 'Server response',
+  processingRequestError:
+    'We are sorry, but there were error in processing request',
+  responseFormatError: 'Server response formatting error',
   variablesTitle: 'Variables',
   variablesLabel: 'Please, use JSON format to pass variables',
   headersTitle: 'Headers',
@@ -15,11 +20,16 @@ export const en = {
 
 export const ru = {
   id: 'ru',
-  inputFormLabel: 'Напишите свой запрос',
+  requestFieldLabel: 'Напишите свой запрос',
+  requestFieldPlaceholder: 'Напишите свой graph-ql запрос',
+  responseFieldLabel: 'Ответ сервера',
+  responseFieldPlaceholder: 'Ответ сервера',
   executeBtnTitle: 'Выполнить',
   prettifyBtnTitle: 'Форматировать',
   disableExecuteBtnTitle: 'Запретить выполнение',
-  serverResponseTitle: 'Ответ сервера',
+  processingRequestError:
+    'Приносим извинения, но при обработке запроса произошла ошибка:',
+  responseFormatError: 'Ошибка форматирования ответа сервера:',
   variablesTitle: 'Переменные',
   variablesLabel: 'Пожалуйста, используйте JSON формат для передачи переменных',
   headersTitle: 'Заголовки',
@@ -29,17 +39,7 @@ export const ru = {
 };
 
 export interface ILocale {
-  id: string;
-  inputFormLabel: string;
-  executeBtnTitle: string;
-  prettifyBtnTitle: string;
-  disableExecuteBtnTitle: string;
-  serverResponseTitle: string;
-  variablesTitle: string;
-  variablesLabel: string;
-  headersTitle: string;
-  headersLabel: string;
-  prettifyError: string;
+  [key: string]: string;
 }
 
 interface ILocalesObject {

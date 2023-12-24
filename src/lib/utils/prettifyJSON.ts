@@ -1,18 +1,20 @@
 const spaces = 2;
 
-export const prettifyJSON = (response?: object) => {
+interface IPrettifyResponse {
+  response: string;
+  error?: string;
+}
+
+export const prettifyJSON = (response?: object): IPrettifyResponse => {
   try {
     const prettified = JSON.stringify(response, null, spaces);
     return {
       response: prettified,
     };
   } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    }
     return {
       response: JSON.stringify(response),
-      error: true,
+      error: error instanceof Error ? error.message : '',
     };
   }
 };

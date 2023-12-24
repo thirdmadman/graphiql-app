@@ -30,6 +30,5 @@ export async function POST(request: NextRequest) {
       console.error(error);
     }
   }
-
   return response;
 }

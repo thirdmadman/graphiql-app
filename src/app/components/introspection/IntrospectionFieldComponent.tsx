@@ -42,11 +42,11 @@ export function IntrospectionFieldComponent({
             <div className="pl-2 mb-2 border-l-4 border-indigo-500">
               <div>args: {field.args.length}</div>
               <div className="flex flex-col">
-                {field.args.map((arg) => (
+                {field.args.map((inputValue) => (
                   <IntrospectionInputValueComponent
                     schema={schema}
-                    key={arg.name}
-                    arg={arg}
+                    key={inputValue.name}
+                    inputValue={inputValue}
                   />
                 ))}
               </div>

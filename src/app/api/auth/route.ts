@@ -4,6 +4,7 @@ import { auth } from '@/lib/firebase/firebase-config';
 import { FirebaseError } from 'firebase/app';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { NextRequest, NextResponse } from 'next/server';
+import { invalidateLogin } from './invalidateLogin';
 
 interface ILoginData {
   email: string;
@@ -102,27 +103,3 @@ export async function DELETE(request: NextRequest) {
 
   return response;
 }
-
-// Create a separate file for this utility function if you prefer that way
-export const invalidateLogin = async (
-  token: string,
-  response: NextResponse
-) => {
-  if (!adminAuth) {
-    return;
-  }
-
-  const decodedClaims = await adminAuth.verifySessionCookie(token, true);
-
-  await adminAuth.revokeRefreshTokens(decodedClaims.uid);
-
-  const options = {
-    name: 'session',
-    value: '',
-    maxAge: -1,
-  };
-
-  response.cookies.set(options);
-
-  return;
-};

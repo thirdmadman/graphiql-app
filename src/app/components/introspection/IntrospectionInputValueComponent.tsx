@@ -26,14 +26,22 @@ export function IntrospectionInputValueComponent({
   if (inputValue.type.kind === 'LIST' || inputValue.type.kind === 'NON_NULL') {
     return (
       <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-        <div className="cursor-pointer" onClick={() => setIsOpened(!isOpened)}>
-          type: {inputValue.type.kind}:
+        <div
+          className="mb-1 cursor-pointer"
+          onClick={() => setIsOpened(!isOpened)}
+        >
+          <b>{inputValue.name}</b>
         </div>
         <div className={isOpened ? '' : 'hidden'}>
-          <IntrospectionInputValueTypeComponent
-            type={inputValue.type.ofType}
-            schema={schema}
-          />
+          <div className="pl-2 mb-2 border-l-4 border-indigo-500">
+            <div>of type: {inputValue.type.kind}:</div>
+            <div className={isOpened ? '' : 'hidden'}>
+              <IntrospectionInputValueTypeComponent
+                type={inputValue.type.ofType}
+                schema={schema}
+              />
+            </div>
+          </div>
         </div>
       </div>
     );

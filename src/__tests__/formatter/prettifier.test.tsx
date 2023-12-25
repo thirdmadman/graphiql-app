@@ -1,9 +1,16 @@
-import { prettifyGQLQuery } from '@/lib/utils/formatter/prettifier';
+import {
+  prettifyGQLQuery,
+  prettifyJSON,
+} from '@/lib/utils/formatter/prettifier';
 import {
   FormattedMockGQLQueries,
   UnformattedMockGQLQueries,
   mockGQLQuery,
 } from '../__mocks__/mockGQLQueries';
+import {
+  mockServerResponse,
+  unformattedMockServerResponse,
+} from '../__mocks__/mockServerResponse';
 
 describe('PrettifyGQLQuery format query in various cases', () => {
   test('prettifyGQLQuery should format the gql-query string', () => {
@@ -61,6 +68,14 @@ describe('PrettifyGQLQuery format query in various cases', () => {
   test('prettifyGQLQuery should format the gql-query string with comments', () => {
     expect(prettifyGQLQuery(UnformattedMockGQLQueries.comments)).toEqual({
       query: FormattedMockGQLQueries.comments,
+    });
+  });
+});
+
+describe('PrettifyJSON format JSON', () => {
+  test('PrettifyJSON should format server response', () => {
+    expect(prettifyJSON(unformattedMockServerResponse)).toEqual({
+      response: mockServerResponse,
     });
   });
 });

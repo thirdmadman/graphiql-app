@@ -7,7 +7,7 @@ export default async function Welcome() {
 
   return (
     <main className="container flex flex-col items-center mx-auto">
-      <section className="py-8 flex flex-col-reverse justify-center md:pb-12 lg:flex-row lg:justify-between lg:pb-16">
+      <section className="py-8 flex flex-col-reverse justify-center md:pb-12 lg:max-w-screen-md lg:flex-row lg:justify-between lg:pb-16">
         <Image
           priority
           src={'/images/svg/welcome_logo.svg'}
@@ -60,11 +60,11 @@ export default async function Welcome() {
           </p>
         </div>
       </section>
-      <section className="px-4 py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-md md:px-24 md:py-12 lg:px-8 lg:py-16">
+      <section className="py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-md md:py-12 lg:py-16">
         <h4 className="mb-8 text-4xl font-bold leadi text-center">
           Why do people prefer our app?
         </h4>
-        <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-x-12 gap-y-4 md:grid-cols-2 lg:grid-cols-3">
           <li className="flex px-1 items-center space-x-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -133,8 +133,8 @@ export default async function Welcome() {
           </li>
         </ul>
       </section>
-      <section className="flex flex-col-reverse justify-center px-4 py-8 mx-auto sm:max-w-xl md:max-w-full md:py-12 lg:max-w-screen-md md:px-24 lg:px-8 lg:py-16 lg:flex-row lg:justify-between">
-        <div className="flex flex-col justify-center text-center rounded-sm lg:pr-6 lg:max-w-md xl:max-w-lg lg:text-left">
+      <section className="flex flex-col-reverse justify-center py-8 mx-auto sm:max-w-xl md:max-w-full md:py-12 lg:max-w-screen-md lg:py-16 lg:flex-row lg:justify-between">
+        <div className="flex flex-col px-4 md:px-24 justify-center rounded-sm lg:pr-6 lg:text-left lg:px-0">
           <h4 className="mb-8 text-4xl font-bold leadi text-center">
             Our motivation
           </h4>

@@ -12,7 +12,7 @@ export async function DocumentationComponent({
   const headers = getParsedQueryParam('headers', searchParams.headers);
 
   const schemaResponse = await getGqlIntrospection(
-    'https://countries.trevorblades.com/graphql',
+    'https://spacex-production.up.railway.app',
     headers?.resp ?? {}
   );
 

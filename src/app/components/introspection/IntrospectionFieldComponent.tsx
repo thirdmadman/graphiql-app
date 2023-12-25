@@ -29,7 +29,7 @@ export function IntrospectionFieldComponent({
         className="mb-1 cursor-pointer"
         onClick={() => setIsOpened(!isOpened)}
       >
-        {field.name}
+        <b>{field.name}</b>
       </div>
       <div className={isOpened ? '' : 'hidden'}>
         <div>

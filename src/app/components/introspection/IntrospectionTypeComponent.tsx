@@ -25,23 +25,31 @@ export function IntrospectionTypeComponent({
   }
 
   if (type.kind === 'OBJECT') {
-    return type.fields?.map((field) => (
-      <IntrospectionFieldComponent
-        key={field.name}
-        field={field}
-        schema={schema}
-      />
-    ));
+    return (
+      <div>
+        {type.fields?.map((field) => (
+          <IntrospectionFieldComponent
+            key={field.name}
+            field={field}
+            schema={schema}
+          />
+        ))}
+      </div>
+    );
   }
 
   if (type.kind === 'INPUT_OBJECT') {
-    return type.inputFields?.map((inputValue) => (
-      <IntrospectionInputValueComponent
-        key={inputValue.name}
-        inputValue={inputValue}
-        schema={schema}
-      />
-    ));
+    return (
+      <div>
+        {type.inputFields?.map((inputValue) => (
+          <IntrospectionInputValueComponent
+            key={inputValue.name}
+            inputValue={inputValue}
+            schema={schema}
+          />
+        ))}
+      </div>
+    );
   }
 
   return (
@@ -50,17 +58,15 @@ export function IntrospectionTypeComponent({
         className="mb-1 cursor-pointer"
         onClick={() => setIsOpened(!isOpened)}
       >
-        {type.name}
+        <b>{type.name}</b>
       </div>
       <div className={isOpened ? '' : 'hidden'}>
-        <div>
-          {type.description && (
-            <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-              <div>description:</div>
-              <div className="pl-2">{type.description}</div>
-            </div>
-          )}
-        </div>
+        {type.description && (
+          <div className="pl-2 mb-2 border-l-4 border-indigo-500">
+            <div>description:</div>
+            <div className="pl-2">{type.description}</div>
+          </div>
+        )}
       </div>
     </div>
   );

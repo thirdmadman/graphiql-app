@@ -45,7 +45,7 @@ export function IntrospectionInputValueComponent({
         className="mb-1 cursor-pointer"
         onClick={() => setIsOpened(!isOpened)}
       >
-        {inputValue.name}: {inputValue.type.kind}
+        <b>{inputValue.name}</b>
       </div>
       <div className={isOpened ? '' : 'hidden'}>
         {inputValue.description && (

@@ -26,7 +26,7 @@ export function IntrospectionQueries({
         className="mb-2 cursor-pointer"
         onClick={() => setIsOpened(!isOpened)}
       >
-        {name}
+        <b>{name}</b>
       </div>
       <div className={isOpened ? '' : 'hidden'}>
         {fields?.map((field) => (

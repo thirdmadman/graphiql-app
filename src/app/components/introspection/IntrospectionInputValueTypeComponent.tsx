@@ -42,7 +42,7 @@ export function IntrospectionInputValueTypeComponent({
   return (
     <div className="pl-2 mb-2 border-l-4 border-indigo-500">
       <div className="cursor-pointer" onClick={() => setIsOpened(!isOpened)}>
-        type: {type.kind}: {type.name}
+        type: {type.kind}: <i>{type.name}</i>
       </div>
       {isOpened && (
         <GetFieldWrapper kind={type.kind} name={type.name} schema={schema} />

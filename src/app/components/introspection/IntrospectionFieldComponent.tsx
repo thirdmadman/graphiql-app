@@ -40,7 +40,7 @@ export function IntrospectionFieldComponent({
           )}
           {field.args && (
             <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-              <div>args: {field.args.length}</div>
+              <div className="mb-1">args: {field.args.length}</div>
               <div className="flex flex-col">
                 {field.args.map((inputValue) => (
                   <IntrospectionInputValueComponent

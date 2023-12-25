@@ -34,7 +34,7 @@ export function IntrospectionInputValueComponent({
         </div>
         <div className={isOpened ? '' : 'hidden'}>
           <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-            <div>of type: {inputValue.type.kind}:</div>
+            <div className="mb-1">of type: {inputValue.type.kind}:</div>
             <div className={isOpened ? '' : 'hidden'}>
               <IntrospectionInputValueTypeComponent
                 type={inputValue.type.ofType}

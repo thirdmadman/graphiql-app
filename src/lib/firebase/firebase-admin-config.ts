@@ -7,7 +7,7 @@ const getAdminAuth = () => {
       ? process.env.SERVICE_ACCOUNT
       : '';
 
-    if (!SERVICE_ACCOUNT && SERVICE_ACCOUNT.length < 0) {
+    if (!SERVICE_ACCOUNT && SERVICE_ACCOUNT.length < 2) {
       return null;
     }
 
@@ -27,8 +27,6 @@ const getAdminAuth = () => {
 
     const app =
       getApps().length <= 0 ? initializeApp(firebaseAdminConfig) : getApps()[0];
-
-    console.error('app>> ', app);
 
     return getAuth(app);
   } catch (e) {

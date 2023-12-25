@@ -28,8 +28,8 @@ export const ru = {
   prettifyBtnTitle: 'Форматировать',
   disableExecuteBtnTitle: 'Запретить выполнение',
   processingRequestError:
-    'Приносим извинения, но при обработке запроса произошла ошибка:',
-  responseFormatError: 'Ошибка форматирования ответа сервера:',
+    'Приносим извинения, но при обработке запроса произошла ошибка',
+  responseFormatError: 'Ошибка форматирования ответа сервера',
   variablesTitle: 'Переменные',
   variablesLabel: 'Пожалуйста, используйте JSON формат для передачи переменных',
   headersTitle: 'Заголовки',

@@ -55,7 +55,8 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
       case Mode.Readonly:
         return data?.textareaData.error
           ? ''
-          : prettifyJSON(data?.textareaData.content as object)?.response;
+          : prettifyJSON(data?.textareaData.content as object)?.response ??
+              'No data to show';
       default:
         return '';
     }
@@ -164,6 +165,30 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
         ></Textarea>
         {mode === Mode.Edit && (
           <>
+            <div className="py-2">
+              <div className="flex flex-row gap-1">
+                <Button
+                  color="primary"
+                  isDisabled={form.isExecDisable}
+                  onClick={() =>
+                    onSubmitEvent(
+                      textareaContent,
+                      dataFromVariables,
+                      dataFromHeaders
+                    )
+                  }
+                >
+                  {executeBtnTitle}
+                </Button>
+                {executeBtnTitle && <p></p>}
+                <Button
+                  color="primary"
+                  onClick={() => onPrettifyBtnClick(textareaContent)}
+                >
+                  {prettifyBtnTitle}
+                </Button>
+              </div>
+            </div>
             <Accordion selectionMode="multiple">
               <AccordionItem
                 key="variables"
@@ -192,30 +217,6 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
                 ></Textarea>
               </AccordionItem>
             </Accordion>
-            <div className="py-2">
-              <div className="flex flex-row gap-1">
-                <Button
-                  color="primary"
-                  isDisabled={form.isExecDisable}
-                  onClick={() =>
-                    onSubmitEvent(
-                      textareaContent,
-                      dataFromVariables,
-                      dataFromHeaders
-                    )
-                  }
-                >
-                  {executeBtnTitle}
-                </Button>
-                {executeBtnTitle && <p></p>}
-                <Button
-                  color="primary"
-                  onClick={() => onPrettifyBtnClick(textareaContent)}
-                >
-                  {prettifyBtnTitle}
-                </Button>
-              </div>
-            </div>
           </>
         )}
         {mode === Mode.Edit && isPrettifyError && (

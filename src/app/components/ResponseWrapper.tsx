@@ -11,7 +11,12 @@ export async function ResponseWrapper({ searchParams }: IResponseFieldProps) {
   return (
     <TextareaField
       mode={Mode.Readonly}
-      data={{ textareaData: { content: resp?.resp, error: resp?.error } }}
+      data={{
+        textareaData: {
+          content: resp?.resp,
+          error: resp?.error,
+        },
+      }}
     />
   );
 }

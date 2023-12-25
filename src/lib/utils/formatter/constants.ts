@@ -22,6 +22,7 @@ export const OPEN_BRACKET_WITH_SPACES_REGEX = /\s*\(\s*/g;
 export const CLOSE_BRACKET_WITH_SPACES_REGEX = /\s*\)\s*/g;
 export const COLON_WITH_SPACES_REGEX = /\s*:\s*/g;
 export const SPACES_REGEX = /\s+/g;
+export const NEW_LINES_REGEX = /\n+/g;
 
 export const NEW_LINES_IN_COMMENT_REGEX = /(?<=(\n)?(\s*)?#.*(\n)?)(\n+)/g;
 export const COMMENT_REGEX = /(\n)?(\s*)?#.*(\n)?/g;

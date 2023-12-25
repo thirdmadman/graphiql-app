@@ -4,6 +4,7 @@ import {
   SPACE,
   NEW_LINES_IN_COMMENT_REGEX,
   NEW_LINE,
+  NEW_LINES_REGEX,
 } from '../constants';
 import { IComment } from './types';
 import { generateRandomID } from './helpers';
@@ -45,9 +46,13 @@ export const replaceIDsToComments = (query: string) => {
 
   IDS?.forEach((ID: string) => {
     const comment = commentsStore[ID];
-    queryWithComments = queryWithComments.replace(ID, comment);
+    queryWithComments = queryWithComments.replace(
+      ID,
+      comment.replace(NEW_LINES_REGEX, NEW_LINE)
+    );
   });
 
   commentsStore = {};
+
   return queryWithComments.replace(NEW_LINES_IN_COMMENT_REGEX, NEW_LINE);
 };

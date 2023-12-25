@@ -26,7 +26,8 @@ export function IntrospectionTypeComponent({
 
   if (type.kind === 'OBJECT') {
     return (
-      <div>
+      <div className="pl-2 mb-2 border-l-4 border-indigo-500">
+        <div className="mb-1">fields:</div>
         {type.fields?.map((field) => (
           <IntrospectionFieldComponent
             key={field.name}
@@ -40,7 +41,8 @@ export function IntrospectionTypeComponent({
 
   if (type.kind === 'INPUT_OBJECT') {
     return (
-      <div>
+      <div className="pl-2 mb-2 border-l-4 border-indigo-500">
+        <div className="mb-1">input fields:</div>
         {type.inputFields?.map((inputValue) => (
           <IntrospectionInputValueComponent
             key={inputValue.name}

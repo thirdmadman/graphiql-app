@@ -1,21 +1,22 @@
 'use client';
 
 import {
-  IntrospectionOutputTypeRef,
+  IntrospectionInputTypeRef,
   IntrospectionSchema,
 } from '@/lib/utils/gql/introspectionImportedTypes';
+
 import { useState } from 'react';
 import { GetFieldWrapper } from './GetFieldWrapper';
 
-interface IIntrospectionOutputTypeComponentProps {
-  type: IntrospectionOutputTypeRef | undefined | null;
+interface IIntrospectionInputValueTypeComponentProps {
+  type: IntrospectionInputTypeRef | undefined | null;
   schema: IntrospectionSchema;
 }
 
-export function IntrospectionOutputTypeComponent({
-  schema,
+export function IntrospectionInputValueTypeComponent({
   type,
-}: IIntrospectionOutputTypeComponentProps) {
+  schema,
+}: IIntrospectionInputValueTypeComponentProps) {
   const [isOpened, setIsOpened] = useState(false);
 
   if (!type) {
@@ -29,7 +30,7 @@ export function IntrospectionOutputTypeComponent({
           type: {type.kind}:
         </div>
         <div className={isOpened ? '' : 'hidden'}>
-          <IntrospectionOutputTypeComponent
+          <IntrospectionInputValueTypeComponent
             type={type.ofType}
             schema={schema}
           />

@@ -7,6 +7,7 @@ import {
 
 import { useState } from 'react';
 import { IntrospectionFieldComponent } from './IntrospectionFieldComponent';
+import { IntrospectionInputValueComponent } from './IntrospectionInputValueComponent';
 
 interface IIntrospectionTypeComponentProps {
   type: IntrospectionType | undefined | null;
@@ -28,6 +29,16 @@ export function IntrospectionTypeComponent({
       <IntrospectionFieldComponent
         key={field.name}
         field={field}
+        schema={schema}
+      />
+    ));
+  }
+
+  if (type.kind === 'INPUT_OBJECT') {
+    return type.inputFields?.map((inputValue) => (
+      <IntrospectionInputValueComponent
+        key={inputValue.name}
+        inputValue={inputValue}
         schema={schema}
       />
     ));

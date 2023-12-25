@@ -4,13 +4,13 @@ import { IntrospectionSchema } from '@/lib/utils/gql/introspectionImportedTypes'
 import { GqlSchemaIntrospection } from '@/lib/utils/gql/GqlSchemaIntrospection';
 import { IntrospectionTypeComponent } from './IntrospectionTypeComponent';
 
-interface IGetFieldProps {
+interface IGetFieldWrapperProps {
   kind: string;
   name: string;
   schema: IntrospectionSchema;
 }
 
-export function GetField({ schema, kind, name }: IGetFieldProps) {
+export function GetFieldWrapper({ schema, kind, name }: IGetFieldWrapperProps) {
   if (!schema || !kind || !name) {
     return;
   }
@@ -23,9 +23,5 @@ export function GetField({ schema, kind, name }: IGetFieldProps) {
     return;
   }
 
-  return (
-    <div className="">
-      <IntrospectionTypeComponent type={type} schema={schema} />
-    </div>
-  );
+  return <IntrospectionTypeComponent type={type} schema={schema} />;
 }

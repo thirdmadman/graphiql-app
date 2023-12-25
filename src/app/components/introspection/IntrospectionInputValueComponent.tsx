@@ -6,19 +6,37 @@ import {
 } from '@/lib/utils/gql/introspectionImportedTypes';
 
 import { useState } from 'react';
+import { IntrospectionInputValueTypeComponent } from './IntrospectionInputValueTypeComponent';
 
 interface IIntrospectionInputValueComponentProps {
-  arg: IntrospectionInputValue | undefined | null;
+  inputValue: IntrospectionInputValue | undefined | null;
   schema: IntrospectionSchema;
 }
 
 export function IntrospectionInputValueComponent({
-  arg,
+  inputValue,
+  schema,
 }: IIntrospectionInputValueComponentProps) {
   const [isOpened, setIsOpened] = useState(false);
 
-  if (!arg) {
+  if (!inputValue) {
     return;
+  }
+
+  if (inputValue.type.kind === 'LIST' || inputValue.type.kind === 'NON_NULL') {
+    return (
+      <div className="pl-2 mb-2 border-l-4 border-indigo-500">
+        <div className="cursor-pointer" onClick={() => setIsOpened(!isOpened)}>
+          type: {inputValue.type.kind}:
+        </div>
+        <div className={isOpened ? '' : 'hidden'}>
+          <IntrospectionInputValueTypeComponent
+            type={inputValue.type.ofType}
+            schema={schema}
+          />
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -27,19 +45,28 @@ export function IntrospectionInputValueComponent({
         className="mb-1 cursor-pointer"
         onClick={() => setIsOpened(!isOpened)}
       >
-        {arg.name}: {arg.type.kind}
+        {inputValue.name}: {inputValue.type.kind}
       </div>
       <div className={isOpened ? '' : 'hidden'}>
-        {arg.description && (
+        {inputValue.description && (
           <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-            description: {arg.description}
+            description: {inputValue.description}
           </div>
         )}
-        {arg.defaultValue && (
+        {inputValue.defaultValue && (
           <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-            defaultValue: {arg.defaultValue}
+            defaultValue: {inputValue.defaultValue}
           </div>
         )}
+        <div className="pl-2 mb-2 border-l-4 border-indigo-500">
+          <div>type: {inputValue.type.kind}:</div>
+          <div>
+            <IntrospectionInputValueTypeComponent
+              type={inputValue.type}
+              schema={schema}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

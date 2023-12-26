@@ -15,11 +15,7 @@ import {
   prettifyGQLQuery,
   prettifyJSON,
 } from '@/lib/utils/formatter/prettifier';
-
-export enum Mode {
-  Edit,
-  Readonly,
-}
+import { Mode } from './types';
 
 interface ITextareaData {
   content?: object | string;

@@ -1,6 +1,6 @@
 import { getGraphQLData } from '@/lib/utils/getGraphQLData';
 import { TextareaField } from './TextareaField';
-import { Mode } from './TextareaField';
+import { Mode } from './types';
 
 interface IResponseFieldProps {
   searchParams: { [key: string]: string | Array<string> | undefined };

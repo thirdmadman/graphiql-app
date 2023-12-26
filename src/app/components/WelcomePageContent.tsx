@@ -39,18 +39,18 @@ export function WelcomeContent({
   } = locale[currentLang];
 
   return (
-    <main className="container flex flex-col items-center mx-auto">
-      <section className="py-8 flex flex-col-reverse justify-center md:pb-12 lg:max-w-screen-md lg:flex-row lg:justify-between lg:pb-16">
+    <main className="container max-w-screen-xl mx-auto py-24 px-6 sm:px-8 md:px-12 lg:px-24 xl:px-32 xl:py-32">
+      <section className="relative pb-32 gap-y-10 min-w-full flex flex-col-reverse items-center lg:flex-row lg:justify-between">
         <Image
           priority
           src={'/images/svg/welcome_logo.svg'}
           alt="Logo"
           width={450}
           height={450}
-          className="py-4 mx-auto lg:py-0"
+          className=""
         />
-        <div className="flex flex-col justify-center text-center rounded-sm lg:pl-6 lg:max-w-md xl:max-w-lg lg:text-left">
-          <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-6 lg:justify-start">
+        <div className="w-full flex flex-col justify-center items-end">
+          <div className="min-w-full flex flex-col py-4 space-y-4 sm:items-end sm:justify-end sm:flex-row sm:space-y-0 sm:space-x-6 lg:justify-end">
             {userId ? (
               <Link
                 size="lg"
@@ -66,7 +66,7 @@ export function WelcomeContent({
                   size="lg"
                   rel="noopener norefferer"
                   href="/auth/sign-in"
-                  className="block px-6 py-3 rounded-lg bg-purple-100 text-purple-700 shadow-md"
+                  className="block px-6 py-3 text-center rounded-lg bg-purple-100 text-purple-700 shadow-md"
                 >
                   {signinBtnTitle}
                 </Link>
@@ -81,92 +81,80 @@ export function WelcomeContent({
               </>
             )}
           </div>
-          <h3 className="mt-8 mb-6 text-4xl font-bold leadi sm:text-5xl sm:mt-12">
+          <h3 className="mt-8 mb-6 text-4xl text-center self-center font-bold leadi md:text-5xl  lg:self-end lg:text-right lg:text-6xl">
             {welcomeSectionTitle1}
             <br></br>
             {welcomeSectionTitle2}
             <br></br>
           </h3>
-          <p className="text-lg px-4 md:px-24 md:py-0 md:text-justify lg:p-0">
+          <p className="max-w-lg text-lg text-center self-center lg:self-end lg:text-right">
             {welcomeSectionText}
           </p>
         </div>
       </section>
-      <section className="py-8 mx-auto sm:max-w-xl md:px-24 md:max-w-full lg:max-w-screen-md md:py-12 lg:px-0 lg:py-16">
-        <h4 className="mb-8 text-4xl font-bold leadi text-center">
+      <section className="pb-32 min-w-full">
+        <h4 className="mb-16 text-4xl font-bold leadi text-center">
           {benefitsSectionTitle}
         </h4>
-        <ul className="grid gap-x-4 gap-y-4 grid-cols-1 md:grid-cols-2 lg:gap-x-12 lg:grid-cols-3">
-          <li className="flex px-32 items-center space-x-2 md:px-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-              className="w-5 h-5 fill-current"
-            >
-              <path d="M426.072,86.928A238.75,238.75,0,0,0,88.428,424.572,238.75,238.75,0,0,0,426.072,86.928ZM257.25,462.5c-114,0-206.75-92.748-206.75-206.75S143.248,49,257.25,49,464,141.748,464,255.75,371.252,462.5,257.25,462.5Z"></path>
-              <polygon points="221.27 305.808 147.857 232.396 125.23 255.023 221.27 351.063 388.77 183.564 366.142 160.937 221.27 305.808"></polygon>
-            </svg>
+        <ul className="grid gap-y-6 justify-around md:gap-y-8 md:grid-cols-[repeat(2,_minmax(0,_max-content))] xl:gap-y-12 xl:grid-cols-[repeat(3,_minmax(0,_max-content))]">
+          <li className="flex px-1 w-fit items-center space-x-2">
+            <Image
+              alt=""
+              width={20}
+              height={20}
+              src="/images/svg/welcome_checkmark.svg"
+            />
             <span>{benefitsSectionListItem1}</span>
           </li>
-          <li className="flex px-32 items-center space-x-2 md:px-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-              className="w-5 h-5 fill-current"
-            >
-              <path d="M426.072,86.928A238.75,238.75,0,0,0,88.428,424.572,238.75,238.75,0,0,0,426.072,86.928ZM257.25,462.5c-114,0-206.75-92.748-206.75-206.75S143.248,49,257.25,49,464,141.748,464,255.75,371.252,462.5,257.25,462.5Z"></path>
-              <polygon points="221.27 305.808 147.857 232.396 125.23 255.023 221.27 351.063 388.77 183.564 366.142 160.937 221.27 305.808"></polygon>
-            </svg>
+          <li className="flex px-1 w-fit items-center space-x-2">
+            <Image
+              alt=""
+              width={20}
+              height={20}
+              src="/images/svg/welcome_checkmark.svg"
+            />
             <span>{benefitsSectionListItem2}</span>
           </li>
-          <li className="flex px-32 items-center space-x-2 md:px-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-              className="w-5 h-5 fill-current"
-            >
-              <path d="M426.072,86.928A238.75,238.75,0,0,0,88.428,424.572,238.75,238.75,0,0,0,426.072,86.928ZM257.25,462.5c-114,0-206.75-92.748-206.75-206.75S143.248,49,257.25,49,464,141.748,464,255.75,371.252,462.5,257.25,462.5Z"></path>
-              <polygon points="221.27 305.808 147.857 232.396 125.23 255.023 221.27 351.063 388.77 183.564 366.142 160.937 221.27 305.808"></polygon>
-            </svg>
+          <li className="flex px-1 w-fit items-center space-x-2">
+            <Image
+              alt=""
+              width={20}
+              height={20}
+              src="/images/svg/welcome_checkmark.svg"
+            />
             <span>{benefitsSectionListItem3}</span>
           </li>
-          <li className="flex px-32 items-center space-x-2 md:px-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-              className="w-5 h-5 fill-current"
-            >
-              <path d="M426.072,86.928A238.75,238.75,0,0,0,88.428,424.572,238.75,238.75,0,0,0,426.072,86.928ZM257.25,462.5c-114,0-206.75-92.748-206.75-206.75S143.248,49,257.25,49,464,141.748,464,255.75,371.252,462.5,257.25,462.5Z"></path>
-              <polygon points="221.27 305.808 147.857 232.396 125.23 255.023 221.27 351.063 388.77 183.564 366.142 160.937 221.27 305.808"></polygon>
-            </svg>
+          <li className="flex px-1 w-fit items-center space-x-2">
+            <Image
+              alt=""
+              width={20}
+              height={20}
+              src="/images/svg/welcome_checkmark.svg"
+            />
             <span>{benefitsSectionListItem4}</span>
           </li>
-          <li className="flex px-32 items-center space-x-2 md:px-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-              className="w-5 h-5 fill-current"
-            >
-              <path d="M426.072,86.928A238.75,238.75,0,0,0,88.428,424.572,238.75,238.75,0,0,0,426.072,86.928ZM257.25,462.5c-114,0-206.75-92.748-206.75-206.75S143.248,49,257.25,49,464,141.748,464,255.75,371.252,462.5,257.25,462.5Z"></path>
-              <polygon points="221.27 305.808 147.857 232.396 125.23 255.023 221.27 351.063 388.77 183.564 366.142 160.937 221.27 305.808"></polygon>
-            </svg>
+          <li className="flex px-1 w-fit items-center space-x-2">
+            <Image
+              alt=""
+              width={20}
+              height={20}
+              src="/images/svg/welcome_checkmark.svg"
+            />
             <span>{benefitsSectionListItem5}</span>
           </li>
-          <li className="flex px-32 items-center space-x-2 md:px-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-              className="w-5 h-5 fill-current"
-            >
-              <path d="M426.072,86.928A238.75,238.75,0,0,0,88.428,424.572,238.75,238.75,0,0,0,426.072,86.928ZM257.25,462.5c-114,0-206.75-92.748-206.75-206.75S143.248,49,257.25,49,464,141.748,464,255.75,371.252,462.5,257.25,462.5Z"></path>
-              <polygon points="221.27 305.808 147.857 232.396 125.23 255.023 221.27 351.063 388.77 183.564 366.142 160.937 221.27 305.808"></polygon>
-            </svg>
+          <li className="flex px-1 w-fit items-center space-x-2">
+            <Image
+              alt=""
+              width={20}
+              height={20}
+              src="/images/svg/welcome_checkmark.svg"
+            />
             <span>{benefitsSectionListItem6}</span>
           </li>
         </ul>
       </section>
-      <section className="flex flex-col-reverse justify-center py-8 mx-auto sm:max-w-xl md:max-w-full md:py-12 lg:max-w-screen-md lg:py-16 lg:flex-row lg:justify-between">
-        <div className="flex flex-col px-4 md:px-24 justify-center rounded-sm lg:pr-6 lg:text-left lg:px-0">
+      <section className="pb-32 min-w-full flex flex-col-reverse justify-center items-center gap-10 lg:flex-row lg:justify-between">
+        <div className="flex flex-col max-w-lg">
           <h4 className="mb-8 text-4xl font-bold leadi text-center">
             {motivationSectionTitle}
           </h4>
@@ -182,14 +170,14 @@ export function WelcomeContent({
           alt="Project"
           width={250}
           height={250}
-          className="py-4 mx-auto lg:py-0"
+          className=""
         />
       </section>
-      <section className="py-8 flex flex-col items-center justify-center px-4 mx-auto md:py-12 lg:py-16">
-        <h4 className="text-4xl mb-4 font-bold leadi text-center sm:mb-8">
+      <section className="min-w-full flex flex-col items-center justify-center">
+        <h4 className="text-4xl mb-16 font-bold leadi text-center">
           {teamSectionTitle}
         </h4>
-        <div className="flex justify-between items-start">
+        <div className="flex flex-wrap justify-around items-start gap-y-5">
           <div className="flex flex-col justify-center mx-4 text-center sm:mx-8">
             <Image
               alt="Person"

@@ -8,6 +8,7 @@ import {
 import { useState } from 'react';
 import { IntrospectionFieldComponent } from './IntrospectionFieldComponent';
 import { IntrospectionInputValueComponent } from './IntrospectionInputValueComponent';
+import { EnumTypeComponent } from './EnumTypeComponent';
 
 interface IIntrospectionTypeComponentProps {
   type: IntrospectionType | undefined | null;
@@ -52,6 +53,11 @@ export function IntrospectionTypeComponent({
         ))}
       </div>
     );
+  }
+
+  if (type.kind === 'ENUM') {
+    console.error(type);
+    return <EnumTypeComponent type={type} schema={schema} />;
   }
 
   return (

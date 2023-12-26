@@ -38,7 +38,11 @@ export const ru = {
     'Ошибка форматирования запроса. Пожалуйста, убедитесь, что запрос написан правильно.',
 };
 
-export interface ILocale {
+export type TLocale = typeof en;
+
+interface ILocalesObject {
+  [key: string]: TLocale;
+}
   [key: string]: string;
 }
 

@@ -43,11 +43,5 @@ export type TLocale = typeof en;
 interface ILocalesObject {
   [key: string]: TLocale;
 }
-  [key: string]: string;
-}
-
-interface ILocalesObject {
-  [key: string]: ILocale;
-}
 
 export const locale: ILocalesObject = { en, ru };

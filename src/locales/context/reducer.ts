@@ -1,7 +1,7 @@
-import { ILocale, locale } from '../locale';
+import { TLocale, locale } from '../locale';
 
 export interface ILocaleState {
-  currentLocale: ILocale;
+  currentLocale: TLocale;
 }
 
 export interface IToggleLocaleAction {

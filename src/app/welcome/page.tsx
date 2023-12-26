@@ -1,5 +1,5 @@
 import { getUser } from '@/lib/firebase/getUser';
-import { WelcomeContent } from '../components/welcomePageContent';
+import { WelcomeContent } from '../components/WelcomePageContent';
 
 export default async function Welcome() {
   const userId = await getUser();

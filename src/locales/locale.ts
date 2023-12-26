@@ -86,9 +86,7 @@ export const ru = {
   teamSectionRole2: 'Разработчик',
 };
 
-<<<<<<< HEAD
 export type TLocale = typeof en;
-=======
 export interface ILocale {
   id: string;
   inputFormLabel: string;
@@ -122,7 +120,6 @@ export interface ILocale {
   teamSectionRole1: string;
   teamSectionRole2: string;
 }
->>>>>>> feat: add wrapper and localization for welcome page
 
 interface ILocalesObject {
   [key: string]: TLocale;

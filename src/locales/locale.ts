@@ -87,39 +87,6 @@ export const ru = {
 };
 
 export type TLocale = typeof en;
-export interface ILocale {
-  id: string;
-  inputFormLabel: string;
-  executeBtnTitle: string;
-  prettifyBtnTitle: string;
-  disableExecuteBtnTitle: string;
-  serverResponseTitle: string;
-  variablesTitle: string;
-  variablesLabel: string;
-  headersTitle: string;
-  headersLabel: string;
-  prettifyError: string;
-  signinBtnTitle: string;
-  signupBtnTitle: string;
-  mainBtnTitle: string;
-  welcomeSectionTitle1: string;
-  welcomeSectionTitle2: string;
-  welcomeSectionText: string;
-  benefitsSectionTitle: string;
-  benefitsSectionListItem1: string;
-  benefitsSectionListItem2: string;
-  benefitsSectionListItem3: string;
-  benefitsSectionListItem4: string;
-  benefitsSectionListItem5: string;
-  benefitsSectionListItem6: string;
-  motivationSectionTitle: string;
-  motivationSectionText1: string;
-  motivationSectionText2: string;
-  motivationSectionText3: string;
-  teamSectionTitle: string;
-  teamSectionRole1: string;
-  teamSectionRole2: string;
-}
 
 interface ILocalesObject {
   [key: string]: TLocale;

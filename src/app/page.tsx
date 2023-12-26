@@ -25,7 +25,7 @@ export default function Home({
         <main className="flex min-h-screen flex-col items-center p-24">
           <LanguageSelector />
           <h2 className="text-4xl mb-5 font-extrabold dark:text-white">Form</h2>
-          <div className="flex flex-wrap min-w-full justify-center relative">
+          <div className="flex flex-wrap min-w-full justify-center gap-10 relative">
             <RequestWrapper />
             <Suspense
               key={susKey}

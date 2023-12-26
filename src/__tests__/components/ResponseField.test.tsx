@@ -1,9 +1,9 @@
 import { expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { ResponseField } from '@/app/components/ResponseField';
+import { ResponseWrapper } from '@/app/components/ResponseWrapper';
 import { StoreProvider } from '@/lib/redux/StoreProvider';
 
-describe('ResponseField', () => {
+describe('Response Wrapper', () => {
   beforeAll(() => {
     vi.mock('next/navigation', async () => {
       const actual = await vi.importActual('next/navigation');
@@ -31,7 +31,7 @@ describe('ResponseField', () => {
   it('Should render component and not fail', async () => {
     render(
       <StoreProvider>
-        {await ResponseField({ searchParams: { data: '' } })}
+        {await ResponseWrapper({ searchParams: { data: '' } })}
       </StoreProvider>
     );
 

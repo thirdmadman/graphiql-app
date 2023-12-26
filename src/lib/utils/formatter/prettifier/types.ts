@@ -25,3 +25,8 @@ export interface IPrettifyQueryResult {
   query: string;
   errorMessage?: boolean;
 }
+
+export interface IPrettifyResponseResult {
+  response: string;
+  error?: string;
+}

@@ -25,19 +25,19 @@ describe('Home page', () => {
       };
     });
 
-    vi.mock('../../app/components/ResponseField.tsx', async () => {
-      const { ResponseField } = await vi.importActual<
-        typeof import('../../app/components/ResponseField')
-      >('../../app/components/ResponseField');
+    vi.mock('../../app/components/ResponseWrapper.tsx', async () => {
+      const { ResponseWrapper } = await vi.importActual<
+        typeof import('../../app/components/ResponseWrapper')
+      >('../../app/components/ResponseWrapper');
 
       const { StoreProvider } = await vi.importActual<
         typeof import('@/lib/redux/StoreProvider')
       >('@/lib/redux/StoreProvider');
 
-      const RF = await ResponseField({ searchParams: { data: '' } });
+      const RF = await ResponseWrapper({ searchParams: { data: '' } });
 
       return {
-        ResponseField: () => <StoreProvider>{RF}</StoreProvider>,
+        ResponseWrapper: () => <StoreProvider>{RF}</StoreProvider>,
       };
     });
   });

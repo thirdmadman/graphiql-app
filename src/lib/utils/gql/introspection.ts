@@ -4,7 +4,6 @@ import { IntrospectionResponse } from './introspectionImportedTypes';
 export const gqlIntrospectionQuery = `
 query IntrospectionQuery {
   __schema {
-    description
     queryType {
       name
     }

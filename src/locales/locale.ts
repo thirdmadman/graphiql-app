@@ -34,7 +34,7 @@ export const en = {
   motivationSectionText1:
     'Our team is really interested in the idea of writing a project using the latest web app development technologies. Thanks to the RS-school React course, we got acquainted with such a wonderful framework as Next.js.',
   motivationSectionText2:
-    'Therefore, we decided to apply the Next.js App Router paradigm for building our application with API routes and middleware. We opted to design our application with React&apos;s latest features, such as server-side components, Suspense, and others.',
+    'Therefore, we decided to apply the Next.js App Router paradigm for building our application with API routes and middleware. We opted to design our application with React latest features, such as server-side components, Suspense, and others.',
   motivationSectionText3:
     'While working on this project, we significantly enhanced our teamwork and coding skills. And overall, it was a very entertaining and useful experience for us.',
   teamSectionTitle: 'Our team',

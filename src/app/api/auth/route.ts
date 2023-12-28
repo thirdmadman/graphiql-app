@@ -69,14 +69,27 @@ export async function POST(request: NextRequest) {
       }
     } catch (e) {
       if (e instanceof FirebaseError) {
+        let errorMessage = '';
         switch (e.code) {
-          case 'auth/invalid-email':
-            console.error('Invalid email address');
+          case 'auth/too-many-requests':
+            errorMessage =
+              'Too many requests. Access to this account has been temporarily disabled due to many failed login attempts. Please try again later.';
             break;
-
+          case 'auth/invalid-credential':
+            errorMessage =
+              'Invalid credentials. Please check the entered data.';
+            break;
           default:
-            console.error(e.message);
+            errorMessage = e.message;
         }
+        return NextResponse.json(
+          {
+            message: errorMessage,
+          },
+          {
+            status: 401,
+          }
+        );
       } else {
         console.error('An error occurred, please try again later.');
       }

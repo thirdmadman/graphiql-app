@@ -5,9 +5,15 @@ import { FormData } from '../auth/types';
 import { useRouter } from 'next/navigation';
 import { signInFormSchema } from '@/lib/yup/formSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useState } from 'react';
+
+interface errorResponse {
+  message: string;
+}
 
 export function LoginForm() {
   const router = useRouter();
+  const [signInError, setSignInError] = useState<string | null>(null);
 
   const {
     register,
@@ -20,21 +26,26 @@ export function LoginForm() {
 
   const onSubmit = async (data: FormData) => {
     try {
-      await fetch('/api/auth/', {
+      const response = await fetch('/api/auth/', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
-      }).then((response) => {
-        if (response.status === 200) {
-          // eslint-disable-next-line @typescript-eslint/no-floating-promises
-          router.replace('/');
-        }
       });
+
+      if (response.status === 200) {
+        router.replace('/');
+      } else {
+        const data = (await response.json()) as errorResponse;
+        setSignInError(data.message);
+        throw new Error(data.message);
+      }
     } catch (e) {
-      console.error('e :>> ', e);
+      if (e instanceof Error) {
+        console.error('Error: ', e.message);
+      }
     }
   };
 
@@ -61,6 +72,7 @@ export function LoginForm() {
             placeholder="name@company.com"
             onChange={emailReg.onChange}
             ref={emailReg.ref}
+            onFocus={() => setSignInError(null)}
             onBlur={emailReg.onBlur}
             className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           />
@@ -82,6 +94,7 @@ export function LoginForm() {
             name={passwordReg.name}
             onChange={passwordReg.onChange}
             ref={passwordReg.ref}
+            onFocus={() => setSignInError(null)}
             onBlur={passwordReg.onBlur}
             className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           />
@@ -105,6 +118,9 @@ export function LoginForm() {
         >
           Sign in
         </button>
+      )}
+      {signInError && (
+        <p className="text-xs text-red-600 text-center">{signInError}</p>
       )}
     </form>
   );

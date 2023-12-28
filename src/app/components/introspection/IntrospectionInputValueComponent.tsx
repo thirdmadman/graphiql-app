@@ -7,6 +7,7 @@ import {
 
 import { useState } from 'react';
 import { IntrospectionInputValueTypeComponent } from './IntrospectionInputValueTypeComponent';
+import { DescriptionFieldComponent } from './shared/DescriptionFieldComponent';
 
 interface IIntrospectionInputValueComponentProps {
   inputValue: IntrospectionInputValue | undefined | null;
@@ -56,11 +57,7 @@ export function IntrospectionInputValueComponent({
         <b>{inputValue.name}</b>
       </div>
       <div className={isOpened ? '' : 'hidden'}>
-        {inputValue.description && (
-          <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-            description: {inputValue.description}
-          </div>
-        )}
+        <DescriptionFieldComponent description={inputValue.description} />
         {inputValue.defaultValue && (
           <div className="pl-2 mb-2 border-l-4 border-indigo-500">
             defaultValue: {inputValue.defaultValue}

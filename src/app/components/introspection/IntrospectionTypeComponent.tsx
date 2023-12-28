@@ -6,9 +6,10 @@ import {
 } from '@/lib/utils/gql/introspectionImportedTypes';
 
 import { useState } from 'react';
-import { IntrospectionFieldComponent } from './IntrospectionFieldComponent';
 import { IntrospectionInputValueComponent } from './IntrospectionInputValueComponent';
-import { EnumTypeComponent } from './EnumTypeComponent';
+import { EnumTypeComponent } from './enum/EnumTypeComponent';
+import { DescriptionFieldComponent } from './shared/DescriptionFieldComponent';
+import { IntrospectionObjectTypeComponent } from './IntrospectionObjectTypeComponent';
 
 interface IIntrospectionTypeComponentProps {
   type: IntrospectionType | undefined | null;
@@ -26,18 +27,7 @@ export function IntrospectionTypeComponent({
   }
 
   if (type.kind === 'OBJECT') {
-    return (
-      <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-        <div className="mb-1">fields:</div>
-        {type.fields?.map((field) => (
-          <IntrospectionFieldComponent
-            key={field.name}
-            field={field}
-            schema={schema}
-          />
-        ))}
-      </div>
-    );
+    return <IntrospectionObjectTypeComponent type={type} schema={schema} />;
   }
 
   if (type.kind === 'INPUT_OBJECT') {
@@ -56,7 +46,6 @@ export function IntrospectionTypeComponent({
   }
 
   if (type.kind === 'ENUM') {
-    console.error(type);
     return <EnumTypeComponent type={type} schema={schema} />;
   }
 
@@ -69,12 +58,7 @@ export function IntrospectionTypeComponent({
         <b>{type.name}</b>
       </div>
       <div className={isOpened ? '' : 'hidden'}>
-        {type.description && (
-          <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-            <div>description:</div>
-            <div className="pl-2">{type.description}</div>
-          </div>
-        )}
+        <DescriptionFieldComponent description={type.description} />
       </div>
     </div>
   );

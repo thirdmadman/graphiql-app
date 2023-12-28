@@ -12,6 +12,8 @@ interface IIntrospectionRootProps {
 export function IntrospectionRoot({ schema }: IIntrospectionRootProps) {
   const schemaIntrospection = new GqlSchemaIntrospection(schema);
 
+  console.error(schema);
+
   const allQueryFields = schemaIntrospection.getAllQueries();
 
   if (!allQueryFields) {
@@ -19,8 +21,8 @@ export function IntrospectionRoot({ schema }: IIntrospectionRootProps) {
   }
 
   return (
-    <div className="flex flex-col pl-2 border-l-4 border-indigo-500">
-      <div>Documentation Explorer</div>
+    <div className="flex flex-col pl-2 border-l-4 border-indigo-500 self-start">
+      <div className="text-lg mb-4">Documentation Explorer</div>
       <IntrospectionQueries
         schema={schema}
         fields={allQueryFields}

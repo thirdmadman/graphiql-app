@@ -39,7 +39,9 @@ export function LoginForm() {
         router.replace('/');
       } else {
         const data = (await response.json()) as errorResponse;
-        setSignInError(data.message);
+        response.status === 401
+          ? setSignInError(data.message)
+          : setSignInError('An error occurred, please try again later');
         throw new Error(data.message);
       }
     } catch (e) {
@@ -106,7 +108,6 @@ export function LoginForm() {
       {Object.entries(errors).length ? (
         <button
           type="submit"
-          disabled
           className="w-full px-8 py-3 font-semibold rounded-md bg-purple-100 dark:text-black "
         >
           Sign in

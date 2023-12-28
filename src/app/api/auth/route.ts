@@ -33,66 +33,67 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({}, { status: 500 });
   }
 
-  const response = NextResponse.json({ isError: true }, { status: 401 });
+  const response = NextResponse.json({ isError: false }, { status: 401 });
 
-  const loginData = (await request.json()) as ILoginData;
+  try {
+    const loginData = (await request.json()) as ILoginData;
 
-  if (loginData?.email && loginData.password) {
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        loginData.email,
-        loginData.password
-      );
-      const { user } = userCredential;
-      const jwt = await user.getIdToken();
-
-      if (jwt) {
-        const sessionCookie = await adminAuth.createSessionCookie(jwt, {
-          expiresIn: SESSION_EXPIRES_IN,
-        });
-
-        const options = {
-          name: 'session',
-          value: sessionCookie,
-          maxAge: SESSION_EXPIRES_IN,
-          httpOnly: true,
-          secure: true,
-        };
-
-        const successResp = NextResponse.json(
-          { isError: true },
-          { status: 200 }
+    if (loginData?.email && loginData.password) {
+      try {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          loginData.email,
+          loginData.password
         );
-        successResp.cookies.set(options);
-        return successResp;
-      }
-    } catch (e) {
-      if (e instanceof FirebaseError) {
-        let errorMessage = '';
-        switch (e.code) {
-          case 'auth/too-many-requests':
-            errorMessage =
-              'Too many requests. Access to this account has been temporarily disabled due to many failed login attempts. Please try again later.';
-            break;
-          case 'auth/invalid-credential':
-            errorMessage =
-              'Invalid credentials. Please check the entered data.';
-            break;
-          default:
-            errorMessage = e.message;
+        const { user } = userCredential;
+        const jwt = await user.getIdToken();
+
+        if (jwt) {
+          const sessionCookie = await adminAuth.createSessionCookie(jwt, {
+            expiresIn: SESSION_EXPIRES_IN,
+          });
+
+          const options = {
+            name: 'session',
+            value: sessionCookie,
+            maxAge: SESSION_EXPIRES_IN,
+            httpOnly: true,
+            secure: true,
+          };
+
+          const successResp = NextResponse.json(
+            { isError: false },
+            { status: 200 }
+          );
+          successResp.cookies.set(options);
+          return successResp;
         }
-        return NextResponse.json(
-          {
-            message: errorMessage,
-          },
-          {
-            status: 401,
+      } catch (e) {
+        let errorMessage = '';
+        if (e instanceof FirebaseError) {
+          switch (e.code) {
+            case 'auth/too-many-requests':
+              errorMessage =
+                'Too many requests. Access to this account has been temporarily disabled due to many failed login attempts. Please try again later.';
+              break;
+            case 'auth/invalid-credential':
+              errorMessage =
+                'Invalid credentials. Please check the entered data.';
+              break;
+            default:
+              errorMessage = `Authorization service error. ${
+                e.code && `(Firebase error code: ${e.code})`
+              }`;
           }
-        );
-      } else {
-        console.error('An error occurred, please try again later.');
+        } else {
+          errorMessage = 'An error occurred, please try again later.';
+        }
+        return NextResponse.json({ message: errorMessage }, { status: 401 });
       }
+    }
+  } catch (e) {
+    if (e instanceof Error) {
+      return NextResponse.json({ message: e.message }, { status: 400 });
     }
   }
 

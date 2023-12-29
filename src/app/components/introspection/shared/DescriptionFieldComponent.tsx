@@ -14,7 +14,9 @@ export function DescriptionFieldComponent({
       <div className="mb-1">
         <b>description</b>
       </div>
-      <div>{description}</div>
+      <div>
+        <i>{description}</i>
+      </div>
     </div>
   );
 }

@@ -7,21 +7,21 @@ import {
 import { IntrospectionFieldComponent } from './IntrospectionFieldComponent';
 import { useState } from 'react';
 
-interface IIntrospectionQueriesProps {
+interface IIntrospectionFieldsCollectionProps {
   schema: IntrospectionSchema;
   fields: Array<IntrospectionField> | undefined | null;
   name: string;
 }
 
-export function IntrospectionQueries({
+export function IntrospectionFieldsCollection({
   schema,
   fields,
   name,
-}: IIntrospectionQueriesProps) {
+}: IIntrospectionFieldsCollectionProps) {
   const [isOpened, setIsOpened] = useState(false);
 
   return (
-    <div className="flex flex-col pl-2 border-l-4 border-indigo-500">
+    <div className="flex mb-2 flex-col pl-2 border-l-4 border-indigo-500">
       <div
         className="mb-2 cursor-pointer"
         onClick={() => setIsOpened(!isOpened)}

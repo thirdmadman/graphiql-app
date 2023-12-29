@@ -15,11 +15,13 @@ import { IntrospectionScalarTypeComponent } from './scalar/IntrospectionScalarTy
 interface IIntrospectionTypeComponentProps {
   type: IntrospectionType | undefined | null;
   schema: IntrospectionSchema;
+  isOpenedSet?: boolean;
 }
 
 export function IntrospectionTypeComponent({
   type,
   schema,
+  isOpenedSet = false,
 }: IIntrospectionTypeComponentProps) {
   if (!type) {
     return;
@@ -30,7 +32,7 @@ export function IntrospectionTypeComponent({
       <IntrospectionObjectTypeComponent
         type={type}
         schema={schema}
-        isOpenedSet
+        isOpenedSet={isOpenedSet}
       />
     );
   }
@@ -40,14 +42,18 @@ export function IntrospectionTypeComponent({
       <IntrospectionInputObjectTypeComponent
         type={type}
         schema={schema}
-        isOpenedSet
+        isOpenedSet={isOpenedSet}
       />
     );
   }
 
   if (type.kind === 'ENUM') {
     return (
-      <IntrospectionEnumTypeComponent type={type} schema={schema} isOpenedSet />
+      <IntrospectionEnumTypeComponent
+        type={type}
+        schema={schema}
+        isOpenedSet={isOpenedSet}
+      />
     );
   }
 
@@ -56,7 +62,7 @@ export function IntrospectionTypeComponent({
       <IntrospectionInterfaceTypeComponent
         type={type}
         schema={schema}
-        isOpenedSet
+        isOpenedSet={isOpenedSet}
       />
     );
   }
@@ -66,7 +72,7 @@ export function IntrospectionTypeComponent({
       <IntrospectionUnionTypeComponent
         type={type}
         schema={schema}
-        isOpenedSet
+        isOpenedSet={isOpenedSet}
       />
     );
   }
@@ -76,7 +82,7 @@ export function IntrospectionTypeComponent({
       <IntrospectionScalarTypeComponent
         type={type}
         schema={schema}
-        isOpenedSet
+        isOpenedSet={isOpenedSet}
       />
     );
   }

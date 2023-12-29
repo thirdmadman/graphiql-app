@@ -6,9 +6,15 @@ interface IGetFieldWrapperProps {
   kind: string;
   name: string;
   schema: IntrospectionSchema;
+  isOpenedSet?: boolean;
 }
 
-export function GetFieldWrapper({ schema, kind, name }: IGetFieldWrapperProps) {
+export function GetFieldWrapper({
+  schema,
+  kind,
+  name,
+  isOpenedSet = false,
+}: IGetFieldWrapperProps) {
   if (!schema || !kind || !name) {
     return;
   }
@@ -21,5 +27,11 @@ export function GetFieldWrapper({ schema, kind, name }: IGetFieldWrapperProps) {
     return;
   }
 
-  return <IntrospectionTypeComponent type={type} schema={schema} />;
+  return (
+    <IntrospectionTypeComponent
+      type={type}
+      schema={schema}
+      isOpenedSet={isOpenedSet}
+    />
+  );
 }

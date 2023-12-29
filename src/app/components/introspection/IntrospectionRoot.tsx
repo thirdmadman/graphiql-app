@@ -2,7 +2,7 @@
 
 import { IntrospectionSchema } from '@/lib/utils/gql/introspectionImportedTypes';
 
-import { IntrospectionQueries } from './IntrospectionQueries';
+import { IntrospectionFieldsCollection } from './IntrospectionFieldsCollection';
 import { GqlSchemaIntrospection } from '@/lib/utils/gql/GqlSchemaIntrospection';
 
 interface IIntrospectionRootProps {
@@ -15,6 +15,7 @@ export function IntrospectionRoot({ schema }: IIntrospectionRootProps) {
   console.error(schema);
 
   const allQueryFields = schemaIntrospection.getAllQueries();
+  const allMutationFields = schemaIntrospection.getAllMutations();
 
   if (!allQueryFields) {
     return;
@@ -23,10 +24,15 @@ export function IntrospectionRoot({ schema }: IIntrospectionRootProps) {
   return (
     <div className="flex flex-col pl-2 border-l-4 border-indigo-500 self-start">
       <div className="text-lg mb-4">Documentation Explorer</div>
-      <IntrospectionQueries
+      <IntrospectionFieldsCollection
         schema={schema}
         fields={allQueryFields}
         name={schemaIntrospection?.queryName ?? 'query'}
+      />
+      <IntrospectionFieldsCollection
+        schema={schema}
+        fields={allMutationFields}
+        name={schemaIntrospection?.mutationName ?? 'mutation'}
       />
     </div>
   );

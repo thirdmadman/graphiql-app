@@ -6,7 +6,7 @@ import {
   IntrospectionSchema,
 } from '@/lib/utils/gql/introspectionImportedTypes';
 import { useState } from 'react';
-import { GetFieldWrapper } from '../GetFieldWrapper';
+import { GetFieldWrapper } from './GetFieldWrapper';
 
 interface IInterfaceFieldComponentProps {
   type:

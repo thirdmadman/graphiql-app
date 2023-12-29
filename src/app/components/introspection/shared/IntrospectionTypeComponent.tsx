@@ -5,12 +5,12 @@ import {
   IntrospectionType,
 } from '@/lib/utils/gql/introspectionImportedTypes';
 
-import { IntrospectionEnumTypeComponent } from './enum/IntrospectionEnumTypeComponent';
-import { IntrospectionObjectTypeComponent } from './object/IntrospectionObjectTypeComponent';
-import { IntrospectionInputObjectTypeComponent } from './input/IntrospectionInputObjectTypeComponent';
-import { IntrospectionInterfaceTypeComponent } from './interface/IntrospectionInterfaceTypeComponent';
-import { IntrospectionUnionTypeComponent } from './union/IntrospectionUnionTypeComponent';
-import { IntrospectionScalarTypeComponent } from './scalar/IntrospectionScalarTypeComponent';
+import { IntrospectionEnumTypeComponent } from '../enum/IntrospectionEnumTypeComponent';
+import { IntrospectionObjectTypeComponent } from '../object/IntrospectionObjectTypeComponent';
+import { IntrospectionInputObjectTypeComponent } from '../input/IntrospectionInputObjectTypeComponent';
+import { IntrospectionInterfaceTypeComponent } from '../interface/IntrospectionInterfaceTypeComponent';
+import { IntrospectionUnionTypeComponent } from '../union/IntrospectionUnionTypeComponent';
+import { IntrospectionScalarTypeComponent } from '../scalar/IntrospectionScalarTypeComponent';
 
 interface IIntrospectionTypeComponentProps {
   type: IntrospectionType | undefined | null;

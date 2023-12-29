@@ -5,7 +5,7 @@ import {
   IntrospectionType,
 } from '@/lib/utils/gql/introspectionImportedTypes';
 import { useState } from 'react';
-import { GetFieldWrapper } from './GetFieldWrapper';
+import { GetFieldWrapper } from './shared/GetFieldWrapper';
 
 interface IAllFieldsTypeFieldComponentProps {
   fields: Array<IntrospectionType> | undefined | null;

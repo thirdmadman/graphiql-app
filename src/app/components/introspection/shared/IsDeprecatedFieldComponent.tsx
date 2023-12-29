@@ -12,9 +12,6 @@ export function IsDeprecatedFieldComponent({
   }
 
   return (
-    <SimpleBlockComponent
-      title={<b>isDeprecated</b>}
-      inside={String(isDeprecated)}
-    />
+    <SimpleBlockComponent title={<b>isDeprecated: {String(isDeprecated)}</b>} />
   );
 }

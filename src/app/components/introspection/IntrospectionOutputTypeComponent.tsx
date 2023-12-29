@@ -6,6 +6,7 @@ import {
 } from '@/lib/utils/gql/introspectionImportedTypes';
 import { useState } from 'react';
 import { GetFieldWrapper } from './shared/GetFieldWrapper';
+import { FoldableBlockComponent } from './shared/FoldableBlockComponent';
 
 interface IIntrospectionOutputTypeComponentProps {
   type: IntrospectionOutputTypeRef | undefined | null;
@@ -24,20 +25,15 @@ export function IntrospectionOutputTypeComponent({
 
   if (type.kind === 'LIST' || type.kind === 'NON_NULL') {
     return (
-      <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-        <div
-          className="mb-1 cursor-pointer"
-          onClick={() => setIsOpened(!isOpened)}
-        >
-          type: {type.kind}:
-        </div>
-        <div className={isOpened ? '' : 'hidden'}>
+      <FoldableBlockComponent
+        title={`type: ${type.kind}:`}
+        inside={
           <IntrospectionOutputTypeComponent
             type={type.ofType}
             schema={schema}
           />
-        </div>
-      </div>
+        }
+      />
     );
   }
 

@@ -7,6 +7,7 @@ import {
 
 import { useState } from 'react';
 import { GetFieldWrapper } from '../shared/GetFieldWrapper';
+import { FoldableBlockComponent } from '../shared/FoldableBlockComponent';
 
 interface IIntrospectionInputValueTypeComponentProps {
   type: IntrospectionInputTypeRef | undefined | null;
@@ -25,17 +26,15 @@ export function IntrospectionInputValueTypeComponent({
 
   if (type.kind === 'LIST' || type.kind === 'NON_NULL') {
     return (
-      <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-        <div className="cursor-pointer" onClick={() => setIsOpened(!isOpened)}>
-          of type: {type.kind}:
-        </div>
-        <div className={isOpened ? '' : 'hidden'}>
+      <FoldableBlockComponent
+        title={`of type: ${type.kind}:`}
+        inside={
           <IntrospectionInputValueTypeComponent
             type={type.ofType}
             schema={schema}
           />
-        </div>
-      </div>
+        }
+      />
     );
   }
 

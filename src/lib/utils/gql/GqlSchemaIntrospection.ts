@@ -27,6 +27,14 @@ export class GqlSchemaIntrospection {
     return queryRoot?.fields;
   }
 
+  getAllMutations() {
+    const queryRoot = this.types.find(
+      (el) => el.kind === 'OBJECT' && el.name === this.mutationName
+    ) as IntrospectionObjectType | undefined;
+
+    return queryRoot?.fields;
+  }
+
   getType(kind: string, name: string) {
     const fieldType = this.types.find(
       (el) => el.kind === kind && el.name === name

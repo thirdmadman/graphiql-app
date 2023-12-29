@@ -4,6 +4,7 @@ import { IntrospectionSchema } from '@/lib/utils/gql/introspectionImportedTypes'
 
 import { IntrospectionFieldsCollection } from './IntrospectionFieldsCollection';
 import { GqlSchemaIntrospection } from '@/lib/utils/gql/GqlSchemaIntrospection';
+import { AllFieldsTypeFieldComponent } from './AllFieldsTypeFieldComponent';
 
 interface IIntrospectionRootProps {
   schema: IntrospectionSchema;
@@ -40,6 +41,7 @@ export function IntrospectionRoot({ schema }: IIntrospectionRootProps) {
         fields={allSubscriptionFields}
         name={schemaIntrospection?.subscriptionName ?? 'subscription'}
       />
+      <AllFieldsTypeFieldComponent fields={schema.types} schema={schema} />
     </div>
   );
 }

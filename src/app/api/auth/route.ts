@@ -5,6 +5,7 @@ import { FirebaseError } from 'firebase/app';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { invalidateLogin } from './invalidateLogin';
+import { SignInErrorCodes } from '@/locales/locale';
 
 interface ILoginData {
   email: string;
@@ -69,26 +70,30 @@ export async function POST(request: NextRequest) {
           return successResp;
         }
       } catch (e) {
-        let errorMessage = '';
+        let message = '';
+        let errorCode = '';
         if (e instanceof FirebaseError) {
           switch (e.code) {
             case 'auth/too-many-requests':
-              errorMessage =
+              message =
                 'Too many requests. Access to this account has been temporarily disabled due to many failed login attempts. Please try again later.';
+              errorCode = SignInErrorCodes.TooManyRequests;
               break;
             case 'auth/invalid-credential':
-              errorMessage =
-                'Invalid credentials. Please check the entered data.';
+              message = 'Invalid credentials. Please check the entered data.';
+              errorCode = SignInErrorCodes.InvalidCredentials;
               break;
             default:
-              errorMessage = `Authorization service error. ${
+              message = `Authorization service error. ${
                 e.code && `(Firebase error code: ${e.code})`
               }`;
+              errorCode = SignInErrorCodes.AuthServiseError;
           }
         } else {
-          errorMessage = 'An error occurred, please try again later.';
+          message = 'An error occurred, please try again later.';
+          errorCode = SignInErrorCodes.UnknownError;
         }
-        return NextResponse.json({ message: errorMessage }, { status: 401 });
+        return NextResponse.json({ message, errorCode }, { status: 401 });
       }
     }
   } catch (e) {

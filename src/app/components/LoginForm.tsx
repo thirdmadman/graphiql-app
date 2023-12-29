@@ -9,11 +9,22 @@ import { useState } from 'react';
 
 interface errorResponse {
   message: string;
+  errorCode: SignInErrorCodes;
 }
+
+import {
+  SignInErrorCodes,
+  formValidationErrors,
+  locale,
+} from '@/locales/locale';
 
 export function LoginForm() {
   const router = useRouter();
   const [signInError, setSignInError] = useState<string | null>(null);
+  const currentLang = 'ru';
+  const curentLocale = locale[currentLang];
+
+  const { emailLabel, passwordLabel, signInBtn } = locale[currentLang];
 
   const {
     register,
@@ -40,7 +51,7 @@ export function LoginForm() {
       } else {
         const data = (await response.json()) as errorResponse;
         response.status === 401
-          ? setSignInError(data.message)
+          ? setSignInError(curentLocale[data.errorCode])
           : setSignInError('An error occurred, please try again later');
         throw new Error(data.message);
       }
@@ -64,7 +75,7 @@ export function LoginForm() {
       <div className="space-y-4">
         <div className="space-y-2">
           <label htmlFor="email" className="block text-sm">
-            Email address
+            {emailLabel}
           </label>
           <input
             type="email"
@@ -79,20 +90,22 @@ export function LoginForm() {
             className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           />
           {errors.email?.message && (
-            <p className="text-xs text-red-600">{errors.email?.message}</p>
+            <p className="text-xs text-red-600">
+              {curentLocale[errors.email?.message as formValidationErrors]}
+            </p>
           )}
         </div>
         <div className="space-y-2">
           <div className="flex justify-between">
             <label htmlFor="password" className="text-sm">
-              Password
+              {passwordLabel}
             </label>
           </div>
           <input
             type="password"
             id="password"
             aria-label="password"
-            placeholder="*****"
+            placeholder="********"
             name={passwordReg.name}
             onChange={passwordReg.onChange}
             ref={passwordReg.ref}
@@ -101,25 +114,22 @@ export function LoginForm() {
             className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           />
           {errors.password?.message && (
-            <p className="text-xs text-red-600">{errors.password?.message}</p>
+            <p className="text-xs text-red-600">
+              {curentLocale[errors.password?.message as formValidationErrors]}
+            </p>
           )}
         </div>
       </div>
-      {Object.entries(errors).length ? (
-        <button
-          type="submit"
-          className="w-full px-8 py-3 font-semibold rounded-md bg-purple-100 dark:text-black "
-        >
-          Sign in
-        </button>
-      ) : (
-        <button
-          type="submit"
-          className="w-full px-8 py-3 font-semibold rounded-md bg-purple-200 dark:text-black "
-        >
-          Sign in
-        </button>
-      )}
+
+      <button
+        type="submit"
+        className="w-full px-8 py-3 font-semibold rounded-md bg-purple-100 
+          dark:text-black "
+        disabled={!!Object.entries(errors).length}
+      >
+        {signInBtn}
+      </button>
+
       {signInError && (
         <p className="text-xs text-red-600 text-center">{signInError}</p>
       )}

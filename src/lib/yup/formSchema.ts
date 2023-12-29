@@ -1,12 +1,13 @@
 import * as yup from 'yup';
+import { formValidationErrors } from '@/locales/locale';
 
 export const signInFormSchema = yup.object().shape({
   email: yup
     .string()
-    .email('Invalid email address')
-    .required('Email is a required field'),
+    .email(formValidationErrors.InvalidEmail)
+    .required(formValidationErrors.RequiredField),
   password: yup
     .string()
-    .min(8, 'Password must be 8 or more characters')
-    .required('Password is required field'),
+    .min(8, formValidationErrors.PasswordLength)
+    .required(formValidationErrors.RequiredField),
 });

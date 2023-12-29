@@ -7,12 +7,23 @@ import {
 
 import { useState } from 'react';
 import { IntrospectionInputValueTypeComponent } from './IntrospectionInputValueTypeComponent';
-import { DescriptionFieldComponent } from './shared/DescriptionFieldComponent';
+import { DescriptionFieldComponent } from '../shared/DescriptionFieldComponent';
+import { IsDeprecatedFieldComponent } from '../shared/IsDeprecatedFieldComponent';
+import { DeprecationReasonComponent } from '../shared/DeprecationReasonComponent';
 
 interface IIntrospectionInputValueComponentProps {
   inputValue: IntrospectionInputValue | undefined | null;
   schema: IntrospectionSchema;
 }
+
+// interface IntrospectionInputValue {
+//   name: string;
+//   description?: Maybe<string>;
+//   type: IntrospectionInputTypeRef;
+//   defaultValue: Maybe<string>;
+//   isDeprecated?: boolean;
+//   deprecationReason?: Maybe<string>;
+// }
 
 export function IntrospectionInputValueComponent({
   inputValue,
@@ -58,11 +69,6 @@ export function IntrospectionInputValueComponent({
       </div>
       <div className={isOpened ? '' : 'hidden'}>
         <DescriptionFieldComponent description={inputValue.description} />
-        {inputValue.defaultValue && (
-          <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-            defaultValue: {inputValue.defaultValue}
-          </div>
-        )}
         <div className="pl-2 mb-2 border-l-4 border-indigo-500">
           <div>type: {inputValue.type.kind}:</div>
           <div>
@@ -72,6 +78,16 @@ export function IntrospectionInputValueComponent({
             />
           </div>
         </div>
+        {inputValue.defaultValue && (
+          <div className="pl-2 mb-2 border-l-4 border-indigo-500">
+            defaultValue: {inputValue.defaultValue}
+          </div>
+        )}
+        <IsDeprecatedFieldComponent isDeprecated={inputValue.isDeprecated} />
+        <DeprecationReasonComponent
+          isDeprecated={inputValue.isDeprecated}
+          deprecationReason={inputValue.deprecationReason}
+        />
       </div>
     </div>
   );

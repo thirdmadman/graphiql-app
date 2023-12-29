@@ -14,7 +14,7 @@ export function DescriptionFieldComponent({
   return (
     <SimpleBlockComponent
       title={<b>description</b>}
-      inside={<i>{description}</i>}
+      inside={<i className="block max-w-[300px]">{description}</i>}
     />
   );
 }

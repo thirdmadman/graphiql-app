@@ -16,7 +16,7 @@ export function DeprecationReasonComponent({
   return (
     <SimpleBlockComponent
       title={<b>deprecationReason</b>}
-      inside={deprecationReason}
+      inside={<i className="block max-w-[300px]">{deprecationReason}</i>}
     />
   );
 }

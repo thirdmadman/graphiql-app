@@ -16,6 +16,7 @@ export function IntrospectionRoot({ schema }: IIntrospectionRootProps) {
 
   const allQueryFields = schemaIntrospection.getAllQueries();
   const allMutationFields = schemaIntrospection.getAllMutations();
+  const allSubscriptionFields = schemaIntrospection.getAllSubscriptions();
 
   if (!allQueryFields) {
     return;
@@ -33,6 +34,11 @@ export function IntrospectionRoot({ schema }: IIntrospectionRootProps) {
         schema={schema}
         fields={allMutationFields}
         name={schemaIntrospection?.mutationName ?? 'mutation'}
+      />
+      <IntrospectionFieldsCollection
+        schema={schema}
+        fields={allSubscriptionFields}
+        name={schemaIntrospection?.subscriptionName ?? 'subscription'}
       />
     </div>
   );

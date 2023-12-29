@@ -5,8 +5,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from './ErrorMessage';
+import { useState } from 'react';
+import { PasswordStrengthBar } from './PasswordStrengthBar';
 
 interface FormData {
+  name: string;
   email: string;
   password: string;
   passwordConfirmation: string;
@@ -22,6 +25,13 @@ export function RegisterForm() {
     mode: 'onChange',
     resolver: yupResolver(formSchema),
   });
+
+  const {
+    onChange: onNameChange,
+    onBlur: onNameBlur,
+    name: nameName,
+    ref: nameRef,
+  } = register('name');
 
   const {
     onChange: onEmailChange,
@@ -51,6 +61,8 @@ export function RegisterForm() {
     ref: termsRef,
   } = register('terms');
 
+  const [password, setPassword] = useState('');
+
   async function handleSubmitEvent(data: FormData) {
     const email = data.email;
     const password = data.password;
@@ -74,6 +86,27 @@ export function RegisterForm() {
       className="space-y-4 md:space-y-6"
       onSubmit={handleSubmit(handleSubmitEvent)}
     >
+      <div>
+        <label
+          htmlFor="name"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          Your name
+        </label>
+        <input
+          type="text"
+          name={nameName}
+          ref={nameRef}
+          onChange={onNameChange}
+          onBlur={onNameBlur}
+          className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="name"
+          aria-label="name"
+        />
+        {errors.name?.message && (
+          <ErrorMessage message={errors.name?.message} />
+        )}
+      </div>
       <div>
         <label
           htmlFor="email"
@@ -103,15 +136,19 @@ export function RegisterForm() {
           Password
         </label>
         <input
-          type="password"
+          type="text"
           name={passwordName}
           ref={passwordRef}
-          onChange={onPasswordChange}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            onPasswordChange;
+          }}
           onBlur={onPasswordBlur}
           placeholder="••••••••"
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           aria-label="password"
         />
+        <PasswordStrengthBar password={password} />
         {errors.password?.message && (
           <ErrorMessage message={errors.password?.message} />
         )}
@@ -124,7 +161,7 @@ export function RegisterForm() {
           Confirm password
         </label>
         <input
-          type="password"
+          type="text"
           name={confirmationName}
           ref={confirmationRef}
           onChange={onConfirmationChange}

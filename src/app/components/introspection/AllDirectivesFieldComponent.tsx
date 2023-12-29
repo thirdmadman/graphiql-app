@@ -4,8 +4,8 @@ import {
   IntrospectionDirective,
   IntrospectionSchema,
 } from '@/lib/utils/gql/introspectionImportedTypes';
-import { useState } from 'react';
 import { IntrospectionDirectiveComponent } from './directive/IntrospectionDirectiveComponent';
+import { FoldableBlockComponent } from './shared/FoldableBlockComponent';
 
 interface IAllDirectivesFieldComponentProps {
   fields: Array<IntrospectionDirective> | undefined | null;
@@ -16,28 +16,20 @@ export function AllDirectivesFieldComponent({
   fields,
   schema,
 }: IAllDirectivesFieldComponentProps) {
-  const [isOpened, setIsOpened] = useState(false);
-
-  if (!fields || !schema) {
+  if (!fields || fields.length === 0 || !schema) {
     return;
   }
 
   return (
-    <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-      <div
-        className="mb-2 cursor-pointer"
-        onClick={() => setIsOpened(!isOpened)}
-      >
-        <b>directives</b>
-      </div>
-      {isOpened &&
-        fields.map((directive) => (
-          <IntrospectionDirectiveComponent
-            directive={directive}
-            key={directive.name}
-            schema={schema}
-          />
-        ))}
-    </div>
+    <FoldableBlockComponent
+      title={<b>directives</b>}
+      inside={fields.map((directive) => (
+        <IntrospectionDirectiveComponent
+          directive={directive}
+          key={directive.name}
+          schema={schema}
+        />
+      ))}
+    />
   );
 }

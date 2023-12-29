@@ -25,7 +25,7 @@ export function IntrospectionRoot({ schema }: IIntrospectionRootProps) {
   }
 
   return (
-    <div className="flex flex-col pl-2 border-l-4 border-indigo-500 self-start">
+    <div className="pl-2 border-l-4 border-indigo-500">
       <div className="text-lg mb-4">Documentation Explorer</div>
       <IntrospectionFieldsCollection
         schema={schema}

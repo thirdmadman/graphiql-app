@@ -1,12 +1,9 @@
-'use client';
-
 import {
   IntrospectionField,
   IntrospectionSchema,
 } from '@/lib/utils/gql/introspectionImportedTypes';
 import { IntrospectionFieldComponent } from './IntrospectionFieldComponent';
-import { useState } from 'react';
-
+import { FoldableBlockComponent } from './shared/FoldableBlockComponent';
 interface IIntrospectionFieldsCollectionProps {
   schema: IntrospectionSchema;
   fields: Array<IntrospectionField> | undefined | null;
@@ -18,25 +15,20 @@ export function IntrospectionFieldsCollection({
   fields,
   name,
 }: IIntrospectionFieldsCollectionProps) {
-  const [isOpened, setIsOpened] = useState(false);
+  if (!fields || fields.length === 0) {
+    return;
+  }
 
   return (
-    <div className="flex mb-2 flex-col pl-2 border-l-4 border-indigo-500">
-      <div
-        className="mb-2 cursor-pointer"
-        onClick={() => setIsOpened(!isOpened)}
-      >
-        <b>{name}</b>
-      </div>
-      <div className={isOpened ? '' : 'hidden'}>
-        {fields?.map((field) => (
-          <IntrospectionFieldComponent
-            key={`${field.type.kind}_${field.name}`}
-            field={field}
-            schema={schema}
-          />
-        ))}
-      </div>
-    </div>
+    <FoldableBlockComponent
+      title={<b>{name}</b>}
+      inside={fields?.map((field) => (
+        <IntrospectionFieldComponent
+          key={`${field.type.kind}_${field.name}`}
+          field={field}
+          schema={schema}
+        />
+      ))}
+    />
   );
 }

@@ -37,6 +37,7 @@ export function AllFieldsTypeFieldComponent({
             kind={field.kind}
             name={field.name}
             schema={schema}
+            isOpenedSet
           />
         ))}
     </div>

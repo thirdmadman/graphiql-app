@@ -8,6 +8,7 @@ import {
 import { useState } from 'react';
 import { IntrospectionEnumValueComponent } from './IntrospectionEnumValueCopmponent';
 import { DescriptionFieldComponent } from '../shared/DescriptionFieldComponent';
+import { SimpleBlockComponent } from '../shared/SimpleBlockComponent';
 
 interface IIntrospectionEnumTypeComponentProps {
   type: IntrospectionEnumType | undefined | null;
@@ -42,15 +43,15 @@ export function IntrospectionEnumTypeComponent({
       </div>
       <div className={isOpened ? '' : 'hidden'}>
         <DescriptionFieldComponent description={type.description} />
-        <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-          <div className="mb-1">ENUM values:</div>
-          {type.enumValues.map((value) => (
+        <SimpleBlockComponent
+          title={`ENUM values: ${type.enumValues.length}`}
+          inside={type.enumValues.map((value) => (
             <IntrospectionEnumValueComponent
               value={value}
               key={`${type.name}_${value.name}`}
             />
           ))}
-        </div>
+        />
       </div>
     </div>
   );

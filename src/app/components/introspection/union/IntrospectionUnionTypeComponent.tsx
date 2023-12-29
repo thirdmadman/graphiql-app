@@ -5,6 +5,7 @@ import {
 import { DescriptionFieldComponent } from '../shared/DescriptionFieldComponent';
 import { useState } from 'react';
 import { PossibleTypeFieldComponent } from '../shared/PossibleTypeFieldComponent';
+import { SimpleBlockComponent } from '../shared/SimpleBlockComponent';
 
 interface IIntrospectionUnionTypeComponentProps {
   type: IntrospectionUnionType | undefined | null;
@@ -41,16 +42,16 @@ export function IntrospectionUnionTypeComponent({
       <div className={isOpened ? '' : 'hidden'}>
         <DescriptionFieldComponent description={type.description} />
         {type.possibleTypes && type.possibleTypes.length > 0 && (
-          <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-            <div className="mb-1">possible types:</div>
-            {type.possibleTypes?.map((possibleType) => (
+          <SimpleBlockComponent
+            title={'possible types:'}
+            inside={type.possibleTypes?.map((possibleType) => (
               <PossibleTypeFieldComponent
                 key={possibleType.name}
                 type={possibleType}
                 schema={schema}
               />
             ))}
-          </div>
+          />
         )}
       </div>
     </div>

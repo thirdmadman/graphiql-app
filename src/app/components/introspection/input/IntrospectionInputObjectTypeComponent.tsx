@@ -5,6 +5,7 @@ import {
 import { DescriptionFieldComponent } from '../shared/DescriptionFieldComponent';
 import { IntrospectionInputValueComponent } from './IntrospectionInputValueComponent';
 import { useState } from 'react';
+import { SimpleBlockComponent } from '../shared/SimpleBlockComponent';
 
 interface IIntrospectionInputObjectTypeComponentProps {
   type: IntrospectionInputObjectType | undefined | null;
@@ -40,16 +41,16 @@ export function IntrospectionInputObjectTypeComponent({
       </div>
       <div className={isOpened ? '' : 'hidden'}>
         <DescriptionFieldComponent description={type.description} />
-        <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-          <div className="mb-1">input fields:</div>
-          {type.inputFields?.map((inputValue) => (
+        <SimpleBlockComponent
+          title={'input fields:'}
+          inside={type.inputFields?.map((inputValue) => (
             <IntrospectionInputValueComponent
               key={inputValue.name}
               inputValue={inputValue}
               schema={schema}
             />
           ))}
-        </div>
+        />
       </div>
     </div>
   );

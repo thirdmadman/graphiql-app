@@ -10,6 +10,7 @@ import { IntrospectionInputValueTypeComponent } from './IntrospectionInputValueT
 import { DescriptionFieldComponent } from '../shared/DescriptionFieldComponent';
 import { IsDeprecatedFieldComponent } from '../shared/IsDeprecatedFieldComponent';
 import { DeprecationReasonComponent } from '../shared/DeprecationReasonComponent';
+import { SimpleBlockComponent } from '../shared/SimpleBlockComponent';
 
 interface IIntrospectionInputValueComponentProps {
   inputValue: IntrospectionInputValue | undefined | null;
@@ -74,9 +75,9 @@ export function IntrospectionInputValueComponent({
           schema={schema}
         />
         {inputValue.defaultValue && (
-          <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-            defaultValue: {inputValue.defaultValue}
-          </div>
+          <SimpleBlockComponent
+            title={`defaultValue: ${inputValue.defaultValue}`}
+          />
         )}
         <IsDeprecatedFieldComponent isDeprecated={inputValue.isDeprecated} />
         <DeprecationReasonComponent

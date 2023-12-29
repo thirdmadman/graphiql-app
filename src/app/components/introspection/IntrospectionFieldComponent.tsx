@@ -10,6 +10,7 @@ import { IntrospectionInputValueComponent } from './input/IntrospectionInputValu
 import { DescriptionFieldComponent } from './shared/DescriptionFieldComponent';
 import { IsDeprecatedFieldComponent } from './shared/IsDeprecatedFieldComponent';
 import { DeprecationReasonComponent } from './shared/DeprecationReasonComponent';
+import { SimpleBlockComponent } from './shared/SimpleBlockComponent';
 
 interface IIntrospectionFieldProps {
   field: IntrospectionField | undefined | null;
@@ -46,18 +47,16 @@ export function IntrospectionFieldComponent({
       <div className={isOpened ? '' : 'hidden'}>
         <DescriptionFieldComponent description={field.description} />
         {field.args && field.args.length > 0 && (
-          <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-            <div className="mb-1">args: {field.args.length}</div>
-            <div className="flex flex-col">
-              {field.args.map((inputValue) => (
-                <IntrospectionInputValueComponent
-                  schema={schema}
-                  key={inputValue.name}
-                  inputValue={inputValue}
-                />
-              ))}
-            </div>
-          </div>
+          <SimpleBlockComponent
+            title={`args: ${field.args.length}`}
+            inside={field.args.map((inputValue) => (
+              <IntrospectionInputValueComponent
+                schema={schema}
+                key={inputValue.name}
+                inputValue={inputValue}
+              />
+            ))}
+          />
         )}
         <IntrospectionOutputTypeComponent type={field.type} schema={schema} />
         <IsDeprecatedFieldComponent isDeprecated={field.isDeprecated} />

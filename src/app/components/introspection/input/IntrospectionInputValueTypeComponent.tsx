@@ -53,7 +53,12 @@ export function IntrospectionInputValueTypeComponent({
       )}
 
       {isOpened && (
-        <GetFieldWrapper kind={type.kind} name={type.name} schema={schema} />
+        <GetFieldWrapper
+          kind={type.kind}
+          name={type.name}
+          schema={schema}
+          isOpenedSet
+        />
       )}
     </>
   );

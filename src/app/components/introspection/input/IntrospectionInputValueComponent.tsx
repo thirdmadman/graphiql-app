@@ -69,15 +69,10 @@ export function IntrospectionInputValueComponent({
       </div>
       <div className={isOpened ? '' : 'hidden'}>
         <DescriptionFieldComponent description={inputValue.description} />
-        <div className="pl-2 mb-2 border-l-4 border-indigo-500">
-          <div>type: {inputValue.type.kind}:</div>
-          <div>
-            <IntrospectionInputValueTypeComponent
-              type={inputValue.type}
-              schema={schema}
-            />
-          </div>
-        </div>
+        <IntrospectionInputValueTypeComponent
+          type={inputValue.type}
+          schema={schema}
+        />
         {inputValue.defaultValue && (
           <div className="pl-2 mb-2 border-l-4 border-indigo-500">
             defaultValue: {inputValue.defaultValue}

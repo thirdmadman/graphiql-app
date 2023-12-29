@@ -46,7 +46,7 @@ export function IntrospectionObjectTypeComponent({
             title={'fields:'}
             inside={type.fields?.map((field) => (
               <IntrospectionFieldComponent
-                key={field.name}
+                key={`${type.name}_${field.name}`}
                 field={field}
                 schema={schema}
               />
@@ -58,7 +58,7 @@ export function IntrospectionObjectTypeComponent({
               title={'interfaces:'}
               inside={type.interfaces?.map((interfaceType) => (
                 <InterfaceFieldComponent
-                  key={interfaceType.name}
+                  key={`${type.name}_${interfaceType.name}`}
                   type={interfaceType}
                   schema={schema}
                 />

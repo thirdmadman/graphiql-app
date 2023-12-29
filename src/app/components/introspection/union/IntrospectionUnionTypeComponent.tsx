@@ -45,7 +45,7 @@ export function IntrospectionUnionTypeComponent({
               title={'possible types:'}
               inside={type.possibleTypes?.map((possibleType) => (
                 <PossibleTypeFieldComponent
-                  key={possibleType.name}
+                  key={`${type.name}_${possibleType.name}`}
                   type={possibleType}
                   schema={schema}
                 />

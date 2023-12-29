@@ -48,7 +48,7 @@ export function IntrospectionInterfaceTypeComponent({
             title={'fields:'}
             inside={type.fields?.map((inputValue) => (
               <IntrospectionFieldComponent
-                key={inputValue.name}
+                key={`${type.name}_${inputValue.name}`}
                 field={inputValue}
                 schema={schema}
               />
@@ -59,7 +59,7 @@ export function IntrospectionInterfaceTypeComponent({
               title={'interfaces:'}
               inside={type.interfaces?.map((interfaceType) => (
                 <InterfaceFieldComponent
-                  key={interfaceType.name}
+                  key={`${type.name}_${interfaceType.name}`}
                   type={interfaceType}
                   schema={schema}
                 />
@@ -72,7 +72,7 @@ export function IntrospectionInterfaceTypeComponent({
               title={'possible types:'}
               inside={type.possibleTypes?.map((possibleType) => (
                 <PossibleTypeFieldComponent
-                  key={possibleType.name}
+                  key={`${type.name}_${possibleType.name}`}
                   type={possibleType}
                   schema={schema}
                 />

@@ -31,7 +31,7 @@ export function IntrospectionFieldsCollection({
       <div className={isOpened ? '' : 'hidden'}>
         {fields?.map((field) => (
           <IntrospectionFieldComponent
-            key={field.name}
+            key={`${field.type.kind}_${field.name}`}
             field={field}
             schema={schema}
           />

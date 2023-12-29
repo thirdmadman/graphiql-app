@@ -45,7 +45,7 @@ export function IntrospectionFieldComponent({
               inside={field.args.map((inputValue) => (
                 <IntrospectionInputValueComponent
                   schema={schema}
-                  key={inputValue.name}
+                  key={`${field.name}_${inputValue.name}`}
                   inputValue={inputValue}
                 />
               ))}

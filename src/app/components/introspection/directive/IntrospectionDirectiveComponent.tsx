@@ -48,7 +48,7 @@ export function IntrospectionDirectiveComponent({
             <SimpleBlockComponent
               title={`locations: ${directive.locations.length}`}
               inside={directive.locations.map((location) => (
-                <div key={location}>
+                <div key={`${directive.name}_${location}`}>
                   <b>{location}</b>
                 </div>
               ))}
@@ -60,7 +60,7 @@ export function IntrospectionDirectiveComponent({
               inside={directive.args.map((inputValue) => (
                 <IntrospectionInputValueComponent
                   schema={schema}
-                  key={inputValue.name}
+                  key={`${directive.name}_${inputValue.name}`}
                   inputValue={inputValue}
                 />
               ))}

@@ -5,7 +5,7 @@ import { FormData } from '../auth/types';
 import { useRouter } from 'next/navigation';
 import { signInFormSchema } from '@/lib/yup/formSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 interface errorResponse {
   message: string;
@@ -17,14 +17,23 @@ import {
   formValidationErrors,
   locale,
 } from '@/locales/locale';
+import { localeContext } from '@/locales/localeProvider';
 
 export function LoginForm() {
   const router = useRouter();
-  const [signInError, setSignInError] = useState<string | null>(null);
-  const currentLang = 'ru';
-  const curentLocale = locale[currentLang];
+  const [signInError, setSignInError] = useState<
+    SignInErrorCodes | string | null
+  >(null);
 
-  const { emailLabel, passwordLabel, signInBtn } = locale[currentLang];
+  const { state } = useContext(localeContext);
+  const currentLang = state.currentLocale.id;
+
+  const {
+    emailLabel,
+    passwordLabel,
+    signInBtn,
+    [SignInErrorCodes.UnknownError]: UnknownError,
+  } = locale[currentLang];
 
   const {
     register,
@@ -51,8 +60,8 @@ export function LoginForm() {
       } else {
         const data = (await response.json()) as errorResponse;
         response.status === 401
-          ? setSignInError(curentLocale[data.errorCode])
-          : setSignInError('An error occurred, please try again later');
+          ? setSignInError(data.errorCode)
+          : setSignInError(UnknownError);
         throw new Error(data.message);
       }
     } catch (e) {
@@ -91,7 +100,11 @@ export function LoginForm() {
           />
           {errors.email?.message && (
             <p className="text-xs text-red-600">
-              {curentLocale[errors.email?.message as formValidationErrors]}
+              {
+                locale[currentLang][
+                  errors.email?.message as formValidationErrors
+                ]
+              }
             </p>
           )}
         </div>
@@ -115,7 +128,11 @@ export function LoginForm() {
           />
           {errors.password?.message && (
             <p className="text-xs text-red-600">
-              {curentLocale[errors.password?.message as formValidationErrors]}
+              {
+                locale[currentLang][
+                  errors.password?.message as formValidationErrors
+                ]
+              }
             </p>
           )}
         </div>
@@ -131,7 +148,9 @@ export function LoginForm() {
       </button>
 
       {signInError && (
-        <p className="text-xs text-red-600 text-center">{signInError}</p>
+        <p className="text-xs text-red-600 text-center">
+          {locale[currentLang][signInError as SignInErrorCodes]}
+        </p>
       )}
     </form>
   );

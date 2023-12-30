@@ -37,14 +37,8 @@ export default function Home({
               <ResponseWrapper searchParams={searchParams} />
             </Suspense>
           </div>
-          <div className="py-10">
-            <Suspense
-              key={generateSuspenseKeyBySearchParams(searchParams, [
-                'url',
-                'headers',
-              ])}
-              fallback={<div>Loading...</div>}
-            >
+          <div className="py-10 w-full flex">
+            <Suspense key={susKey} fallback={<div>Loading...</div>}>
               <DocumentationComponent searchParams={searchParams} />
             </Suspense>
           </div>

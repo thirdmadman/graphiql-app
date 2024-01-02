@@ -6,6 +6,10 @@ export const getGraphQLData = async (searchParams: {
 }) => {
   let gqlRequest = '';
 
+  if (!searchParams.url) {
+    return undefined;
+  }
+
   if (!searchParams.data) {
     return undefined;
   }
@@ -13,6 +17,8 @@ export const getGraphQLData = async (searchParams: {
   if (searchParams.data && typeof searchParams.data === 'string') {
     gqlRequest = searchParams.data;
   }
+
+  const url = decodeURIComponent(String(searchParams.url));
 
   const variables = getParsedQueryParam('variables', searchParams.variables);
 
@@ -33,7 +39,7 @@ export const getGraphQLData = async (searchParams: {
     const parsedHeaders = headers as IHeaders | null;
 
     const resp = await gqlFetchApi(
-      'https://spacex-production.up.railway.app/',
+      url,
       gqlRequest,
       parsedHeaders,
       parsedVariables

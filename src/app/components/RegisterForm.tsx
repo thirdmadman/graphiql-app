@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from './ErrorMessage';
-import React, { useImperativeHandle, useRef, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { PasswordStrengthBar } from './PasswordStrengthBar';
 import { useRouter } from 'next/navigation';
 
@@ -24,6 +24,9 @@ interface ErrorResponse {
 
 export function RegisterForm() {
   const router = useRouter();
+
+  const [password, setPassword] = useState('');
+
   const {
     register,
     handleSubmit,
@@ -51,10 +54,13 @@ export function RegisterForm() {
     onChange: onPasswordChange,
     onBlur: onPasswordBlur,
     name: passwordName,
-    ref,
+    ref: passwordRef,
   } = register('password');
 
-  const passwordRef = useRef<HTMLInputElement>(null);
+  const onChangePassword = async (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    await onPasswordChange(e);
+  };
 
   const {
     onChange: onConfirmationChange,
@@ -69,8 +75,6 @@ export function RegisterForm() {
     name: termsName,
     ref: termsRef,
   } = register('terms');
-
-  useImperativeHandle(ref, () => passwordRef.current);
 
   const [signUpError, setSignUpError] = useState<string | null>(null);
 
@@ -181,15 +185,13 @@ export function RegisterForm() {
           type="text"
           name={passwordName}
           ref={passwordRef}
-          onChange={onPasswordChange}
+          onChange={onChangePassword}
           onBlur={onPasswordBlur}
           placeholder="••••••••"
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           aria-label="password"
         />
-        {passwordRef.current?.value && (
-          <PasswordStrengthBar password={passwordRef.current?.value} />
-        )}
+        {password && <PasswordStrengthBar password={password} />}
         {errors.password?.message && (
           <ErrorMessage message={errors.password?.message} />
         )}

@@ -1,27 +1,29 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 //Protected routes
 export const config = {
-  matcher: ['/protected/:path*'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
 };
 
-export async function middleware(request: NextRequest) {
-  const session = request.cookies.get('session');
+export function middleware(request: NextRequest) {
+  try {
+    const session = request.cookies.get('session');
 
-  if (!session) {
+    if (session) {
+      if (
+        request.nextUrl.pathname.includes('sign-up') ||
+        request.nextUrl.pathname.includes('sign-in')
+      ) {
+        return NextResponse.redirect(new URL('/', request.url));
+      }
+    }
+
+    if (!session && request.url === `${request.nextUrl.origin}/`) {
+      return NextResponse.redirect(new URL('/auth/sign-in', request.url));
+    }
+
+    return NextResponse.next();
+  } catch (e) {
     return NextResponse.redirect(new URL('/auth/sign-in', request.url));
   }
-
-  const responseAPI = await fetch(`${request.nextUrl.origin}/api/auth`, {
-    headers: {
-      Cookie: `session=${session?.value}`,
-    },
-  });
-
-  if (responseAPI.status !== 200) {
-    return NextResponse.redirect(new URL('/auth/sign-in', request.url));
-  }
-
-  return NextResponse.next();
 }

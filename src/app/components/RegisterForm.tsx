@@ -5,8 +5,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from './ErrorMessage';
-import { useState } from 'react';
+import React, { useImperativeHandle, useRef, useState } from 'react';
 import { PasswordStrengthBar } from './PasswordStrengthBar';
+import { useRouter } from 'next/navigation';
 
 interface FormData {
   name: string;
@@ -16,7 +17,13 @@ interface FormData {
   terms?: boolean | undefined;
 }
 
+interface ErrorResponse {
+  message: string;
+  errorCode: string;
+}
+
 export function RegisterForm() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -44,8 +51,10 @@ export function RegisterForm() {
     onChange: onPasswordChange,
     onBlur: onPasswordBlur,
     name: passwordName,
-    ref: passwordRef,
+    ref,
   } = register('password');
+
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const {
     onChange: onConfirmationChange,
@@ -61,21 +70,54 @@ export function RegisterForm() {
     ref: termsRef,
   } = register('terms');
 
-  const [password, setPassword] = useState('');
+  useImperativeHandle(ref, () => passwordRef.current);
+
+  const [signUpError, setSignUpError] = useState<string | null>(null);
 
   async function handleSubmitEvent(data: FormData) {
+    const name = data.name;
     const email = data.email;
     const password = data.password;
 
     try {
-      await fetch('/api/auth/register', {
+      const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ name, email, password }),
       });
+
+      if (response.status === 200) {
+        try {
+          const response = await fetch('/api/auth/', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+
+          if (response.status === 200) {
+            router.replace('/');
+          } else {
+            const data = (await response.json()) as ErrorResponse;
+            throw new Error(data.message);
+          }
+        } catch (e) {
+          if (e instanceof Error) {
+            console.error('Error: ', e.message);
+          }
+        }
+      } else {
+        const data = (await response.json()) as ErrorResponse;
+        response.status === 401
+          ? setSignUpError(data.message)
+          : setSignUpError('UnknownError');
+        throw new Error(data.message);
+      }
     } catch (e) {
       console.error('e :>> ', e);
     }
@@ -139,16 +181,15 @@ export function RegisterForm() {
           type="text"
           name={passwordName}
           ref={passwordRef}
-          onChange={(e) => {
-            setPassword(e.target.value);
-            onPasswordChange;
-          }}
+          onChange={onPasswordChange}
           onBlur={onPasswordBlur}
           placeholder="••••••••"
           className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           aria-label="password"
         />
-        <PasswordStrengthBar password={password} />
+        {passwordRef.current?.value && (
+          <PasswordStrengthBar password={passwordRef.current?.value} />
+        )}
         {errors.password?.message && (
           <ErrorMessage message={errors.password?.message} />
         )}
@@ -212,6 +253,9 @@ export function RegisterForm() {
       >
         Create an account
       </button>
+      {signUpError && (
+        <p className="text-xs text-red-600 text-center">{signUpError}</p>
+      )}
       <p className="text-sm font-light text-gray-500 dark:text-gray-400">
         Already have an account?{' '}
         <Link

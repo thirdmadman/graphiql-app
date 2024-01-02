@@ -1,12 +1,19 @@
 'use clinet';
 
 import React, { useEffect, useState } from 'react';
+import { ErrorMessage } from './ErrorMessage';
 
 interface IProgress {
   [key: string]: string;
 }
 
-export function PasswordStrengthBar({ password }: { password: string }) {
+export function PasswordStrengthBar({
+  password,
+  errorMessage,
+}: {
+  password: string;
+  errorMessage: string | undefined;
+}) {
   const [validate, setValidate] = useState({
     has8digit: false,
     has10digit: false,
@@ -73,7 +80,7 @@ export function PasswordStrengthBar({ password }: { password: string }) {
   };
 
   return (
-    <>
+    <div className="flex flex-col absolute w-full">
       {strength > 0 ? (
         <progress
           hidden={password.length === 0}
@@ -85,9 +92,12 @@ export function PasswordStrengthBar({ password }: { password: string }) {
           max="4"
         />
       ) : null}
-      <p className="text-right text-sm" hidden={password.length === 0}>
-        {feedback}
-      </p>
-    </>
+      <div className="flex items-center justify-end">
+        {errorMessage && <ErrorMessage message={errorMessage} />}
+        <p className="text-sm" hidden={password.length === 0}>
+          {feedback}
+        </p>
+      </div>
+    </div>
   );
 }

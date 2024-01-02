@@ -49,10 +49,10 @@ export default function Login() {
   return (
     <div className="p-5 mt-5 light">
       <div className="w-full max-w-md p-4 rounded-md shadow sm:p-8 dark:bg-gray-900 dark:text-gray-100">
-        <h2 className="mb-3 text-3xl font-semibold text-center">
+        <h2 className="mb-5 text-3xl font-semibold text-center">
           {signInTitle}
         </h2>
-        <p className="text-sm text-center dark:text-gray-400">
+        <p className="text-sm text-center dark:text-gray-400 mb-8">
           {dontHaveAccount}
           <Link
             href={'/auth/sign-up'}
@@ -63,7 +63,7 @@ export default function Login() {
           </Link>
         </p>
         <LoginForm />
-        <div className="flex items-center w-full my-4">
+        <div className="flex items-center w-full">
           <hr className="w-full dark:text-gray-400" />
           <p className="px-3 dark:text-gray-400">{or}</p>
           <hr className="w-full dark:text-gray-400" />

@@ -78,11 +78,11 @@ export function LoginForm() {
     <form
       noValidate={true}
       action=""
-      className="my-8 space-y-8"
+      className="my-8 space-y-4"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="space-y-4">
-        <div className="space-y-2">
+      <div>
+        <div className="space-y-2 mb-2">
           <label htmlFor="email" className="block text-sm">
             {emailLabel}
           </label>
@@ -98,15 +98,13 @@ export function LoginForm() {
             onBlur={emailReg.onBlur}
             className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           />
-          {errors.email?.message && (
-            <p className="text-xs text-red-600">
-              {
-                locale[currentLang][
+          <p className="text-xs text-red-600 min-h-[16px]">
+            {errors.email?.message
+              ? locale[currentLang][
                   errors.email?.message as formValidationErrors
                 ]
-              }
-            </p>
-          )}
+              : ' '}
+          </p>
         </div>
         <div className="space-y-2">
           <div className="flex justify-between">
@@ -126,15 +124,13 @@ export function LoginForm() {
             onBlur={passwordReg.onBlur}
             className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           />
-          {errors.password?.message && (
-            <p className="text-xs text-red-600">
-              {
-                locale[currentLang][
+          <p className="text-xs text-red-600 min-h-[16px]">
+            {errors.password?.message
+              ? locale[currentLang][
                   errors.password?.message as formValidationErrors
                 ]
-              }
-            </p>
-          )}
+              : ' '}
+          </p>
         </div>
       </div>
 
@@ -148,7 +144,7 @@ export function LoginForm() {
       </button>
 
       {signInError && (
-        <p className="text-xs text-red-600 text-center">
+        <p className="text-xs text-red-600 text-center min-h-[16px]">
           {locale[currentLang][signInError as SignInErrorCodes]}
         </p>
       )}

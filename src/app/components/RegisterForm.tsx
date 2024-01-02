@@ -132,7 +132,16 @@ export function RegisterForm() {
       className="space-y-6 md:space-y-8"
       onSubmit={handleSubmit(handleSubmitEvent)}
     >
-      <div>
+      <p className="text-sm text-center font-light text-gray-500 dark:text-gray-400">
+        Already have an account?{' '}
+        <Link
+          href={'/auth/sign-in'}
+          className="font-medium text-black dark:text-gray-400 focus:underline hover:underline"
+        >
+          Login here
+        </Link>
+      </p>
+      <div className="relative">
         <label
           htmlFor="name"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -153,7 +162,7 @@ export function RegisterForm() {
           <ErrorMessage message={errors.name?.message} />
         )}
       </div>
-      <div>
+      <div className="relative">
         <label
           htmlFor="email"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -201,7 +210,7 @@ export function RegisterForm() {
           <ErrorMessage message={errors.password?.message} />
         )}
       </div>
-      <div>
+      <div className="relative">
         <label
           htmlFor="password-confirmation"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -222,7 +231,7 @@ export function RegisterForm() {
           <ErrorMessage message={errors.passwordConfirmation?.message} />
         )}
       </div>
-      <div>
+      <div className="relative">
         <div className="flex items-start">
           <div className="flex items-center h-5">
             <input
@@ -243,7 +252,7 @@ export function RegisterForm() {
             >
               I accept the{' '}
               <Link
-                className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                className="font-medium text-black dark:text-gray-400 focus:underline hover:underline"
                 href="#"
               >
                 Terms and Conditions
@@ -263,15 +272,6 @@ export function RegisterForm() {
       {signUpError && (
         <p className="text-xs text-red-600 text-center">{signUpError}</p>
       )}
-      <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-        Already have an account?{' '}
-        <Link
-          href={'/auth/sign-in'}
-          className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-        >
-          Login here
-        </Link>
-      </p>
     </form>
   );
 }

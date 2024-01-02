@@ -30,7 +30,7 @@ export function RegisterForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<FormData>({
     mode: 'onChange',
     resolver: yupResolver(formSchema),
@@ -128,15 +128,12 @@ export function RegisterForm() {
   }
 
   return (
-    <form
-      className="space-y-6 md:space-y-8"
-      onSubmit={handleSubmit(handleSubmitEvent)}
-    >
+    <form className="space-y-8" onSubmit={handleSubmit(handleSubmitEvent)}>
       <p className="text-sm text-center font-light text-gray-500 dark:text-gray-400">
         Already have an account?{' '}
         <Link
           href={'/auth/sign-in'}
-          className="font-medium text-black dark:text-gray-400 focus:underline hover:underline"
+          className="font-medium text-red-700 dark:text-gray-400 focus:underline hover:underline"
         >
           Login here
         </Link>
@@ -146,7 +143,7 @@ export function RegisterForm() {
           htmlFor="name"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
-          Your name
+          Name
         </label>
         <input
           type="text"
@@ -154,7 +151,7 @@ export function RegisterForm() {
           ref={nameRef}
           onChange={onNameChange}
           onBlur={onNameBlur}
-          className="mb-1 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="mb-1 block w-full px-3 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           placeholder="name"
           aria-label="name"
         />
@@ -167,7 +164,7 @@ export function RegisterForm() {
           htmlFor="email"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
-          Your email
+          Email adress
         </label>
         <input
           type="email"
@@ -175,7 +172,7 @@ export function RegisterForm() {
           ref={emailRef}
           onChange={onEmailChange}
           onBlur={onEmailBlur}
-          className="mb-1 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="mb-1 block w-full px-3 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           placeholder="name@company.com"
           aria-label="email"
         />
@@ -191,13 +188,13 @@ export function RegisterForm() {
           Password
         </label>
         <input
-          type="text"
+          type="password"
           name={passwordName}
           ref={passwordRef}
           onChange={onChangePassword}
           onBlur={onPasswordBlur}
           placeholder="••••••••"
-          className="mb-1 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="mb-1 block w-full px-3 py-2 border rounded-lg text-security:disc dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           aria-label="password"
         />
         {password && (
@@ -218,13 +215,13 @@ export function RegisterForm() {
           Confirm password
         </label>
         <input
-          type="text"
+          type="password"
           name={confirmationName}
           ref={confirmationRef}
           onChange={onConfirmationChange}
           onBlur={onConfirmationBlur}
           placeholder="••••••••"
-          className="mb-1 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="mb-1 block w-full px-3 py-2 border rounded-lg -webkit-text-security:disc dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           aria-label="password-confirmation"
         />
         {errors.passwordConfirmation?.message && (
@@ -264,10 +261,9 @@ export function RegisterForm() {
       </div>
       <button
         type="submit"
-        className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-        disabled={!isValid}
+        className="w-full px-8 py-3 font-semibold rounded-lg bg-red-100 text-red-700 hover:opacity-80 active:opacity-disabled transition-opacity"
       >
-        Create an account
+        Sign up
       </button>
       {signUpError && (
         <p className="text-xs text-red-600 text-center">{signUpError}</p>

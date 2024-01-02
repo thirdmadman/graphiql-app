@@ -25,7 +25,9 @@ export default function Home({
         <main className="flex min-h-screen flex-col items-center p-24">
           <LanguageSelector />
           <h2 className="text-4xl mb-5 font-extrabold dark:text-white">Form</h2>
-          <UrlInput urlOverwrite={String(searchParams?.url)} />
+          <UrlInput
+            urlOverwrite={searchParams?.url && String(searchParams?.url)}
+          />
           <div className="flex flex-wrap min-w-full justify-center gap-10 relative">
             <RequestWrapper />
             <Suspense

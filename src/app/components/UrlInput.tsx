@@ -8,11 +8,11 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 interface UrlInputProps {
-  urlOverwrite?: string;
+  urlOverwrite?: string | undefined;
 }
 
 export function UrlInput({ urlOverwrite = '' }: UrlInputProps) {
-  const [url, setUrl] = useState(urlOverwrite);
+  const [url, setUrl] = useState(urlOverwrite || '');
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();

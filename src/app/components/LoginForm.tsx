@@ -83,7 +83,7 @@ export function LoginForm() {
     >
       <div>
         <div className="space-y-2 mb-2">
-          <label htmlFor="email" className="block text-sm">
+          <label htmlFor="email" className="block text-sm font-medium">
             {emailLabel}
           </label>
           <input
@@ -96,7 +96,7 @@ export function LoginForm() {
             ref={emailReg.ref}
             onFocus={() => setSignInError(null)}
             onBlur={emailReg.onBlur}
-            className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+            className="w-full px-3 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           />
           <p className="text-xs text-red-600 min-h-[16px]">
             {errors.email?.message
@@ -108,7 +108,7 @@ export function LoginForm() {
         </div>
         <div className="space-y-2">
           <div className="flex justify-between">
-            <label htmlFor="password" className="text-sm">
+            <label htmlFor="password" className="text-sm font-medium">
               {passwordLabel}
             </label>
           </div>
@@ -116,13 +116,13 @@ export function LoginForm() {
             type="password"
             id="password"
             aria-label="password"
-            placeholder="********"
+            placeholder="••••••••"
             name={passwordReg.name}
             onChange={passwordReg.onChange}
             ref={passwordReg.ref}
             onFocus={() => setSignInError(null)}
             onBlur={passwordReg.onBlur}
-            className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+            className="w-full px-3 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           />
           <p className="text-xs text-red-600 min-h-[16px]">
             {errors.password?.message
@@ -136,8 +136,8 @@ export function LoginForm() {
 
       <button
         type="submit"
-        className="w-full px-8 py-3 font-semibold rounded-md bg-purple-100 
-          dark:text-black "
+        className="w-full px-8 py-3 font-semibold rounded-lg bg-purple-100 
+          dark:text-black hover:opacity-80 active:opacity-disabled transition-opacity text-purple-700"
         disabled={!!Object.entries(errors).length}
       >
         {signInBtn}

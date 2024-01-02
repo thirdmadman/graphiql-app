@@ -24,24 +24,24 @@ export const signInErrorsRu = {
     'Произошла ошибка. Пожалуйста, повторите попытку позже',
 };
 
-export const formInputsEn = {
+export const formLabelsEn = {
   emailLabel: 'Email address',
   passwordLabel: 'Password',
 };
 
-export const formInputsRu = {
+export const formLabelsRu = {
   emailLabel: 'Адрес электронной почты',
   passwordLabel: 'Пароль',
 };
 
 export const signInPageEn = {
   signInTitle: 'Login to your account',
-  dontHaveAccount: 'Dont have account?',
+  dontHaveAccount: 'Dont have an account?',
   signInBtn: 'Sign in',
   signUpLink: 'Sign up here',
   loginWithGoogleBtn: 'Login with Google',
   or: 'OR',
-  ...formInputsEn,
+  ...formLabelsEn,
   ...signInErrorsEn,
 };
 
@@ -52,7 +52,7 @@ export const signInPageRu = {
   signUpLink: 'Зарегистрироваться',
   loginWithGoogleBtn: 'Войти через Google',
   or: 'ИЛИ',
-  ...formInputsRu,
+  ...formLabelsRu,
   ...signInErrorsRu,
 };
 

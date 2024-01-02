@@ -47,16 +47,16 @@ export default function Login() {
     locale[currentLang];
 
   return (
-    <div className="p-5 mt-5 light">
-      <div className="w-full max-w-md p-4 rounded-md shadow sm:p-8 dark:bg-gray-900 dark:text-gray-100">
-        <h2 className="mb-5 text-3xl font-semibold text-center">
+    <div className="w-full p-5 mt-5 light">
+      <div className="w-full mx-auto p-6 rounded-lg shadow sm:max-w-md sm:p-8 dark:bg-gray-900 dark:text-gray-100">
+        <h2 className="mb-5 text-3xl font-bold text-center leading-tight tracking-tight">
           {signInTitle}
         </h2>
-        <p className="text-sm text-center dark:text-gray-400 mb-8">
+        <p className="text-sm font-light text-center dark:text-gray-400 mb-10">
           {dontHaveAccount}
           <Link
             href={'/auth/sign-up'}
-            className="text-black dark:text-gray-400 font-bold focus:underline hover:underline"
+            className="text-black dark:text-gray-400 font-bold focus:underline hover:underline text-purple-700"
             rel="noopener noreferrer"
           >
             {`  ${signUpLink}`}
@@ -73,7 +73,7 @@ export default function Login() {
             aria-label="Login with Google"
             type="button"
             onClick={() => signInWithGoogle()}
-            className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ri focus:ri dark:border-gray-400 focus:ri"
+            className="flex items-center justify-center w-full p-4 space-x-4 border rounded-lg focus:ri focus:ri dark:border-gray-400 focus:ri mt-8 hover:opacity-80 active:opacity-disabled transition-opacity"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

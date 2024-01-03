@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 //Protected routes
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/auth/:path*', '/'],
 };
 
 export function middleware(request: NextRequest) {

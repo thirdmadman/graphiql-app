@@ -144,7 +144,7 @@ export function RegisterForm() {
         Already have an account?{' '}
         <Link
           href={'/auth/sign-in'}
-          className="font-medium text-red-700 dark:text-gray-400 focus:underline hover:underline"
+          className="font-medium text-gray-700 dark:text-gray-400 focus:underline hover:underline"
         >
           Login here
         </Link>
@@ -284,7 +284,7 @@ export function RegisterForm() {
             >
               I accept the{' '}
               <Link
-                className="font-medium text-black dark:text-gray-400 focus:underline hover:underline"
+                className="font-medium text-gray-700 dark:text-gray-400 focus:underline hover:underline"
                 href="#"
               >
                 Terms and Conditions
@@ -296,7 +296,7 @@ export function RegisterForm() {
       </div>
       <button
         type="submit"
-        className="w-full px-8 py-3 font-semibold rounded-lg bg-red-100 text-red-700 hover:opacity-80 active:opacity-disabled transition-opacity"
+        className="w-full px-8 py-3 font-semibold rounded-lg bg-green-100 text-gray-700 hover:opacity-80 active:opacity-disabled transition-opacity"
       >
         Sign up
       </button>

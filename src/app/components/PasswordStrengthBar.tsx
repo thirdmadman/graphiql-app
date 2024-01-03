@@ -1,7 +1,9 @@
 'use clinet';
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ErrorMessage } from './ErrorMessage';
+import { locale } from '@/locales/locale';
+import { localeContext } from '@/locales/localeProvider';
 
 interface IProgress {
   [key: string]: string;
@@ -14,6 +16,10 @@ export function PasswordStrengthBar({
   password: string;
   errorMessage: string | undefined;
 }) {
+  const { state } = useContext(localeContext);
+  const currentLang = state.currentLocale.id;
+  const { weak, okay, good, strong } = locale[currentLang];
+
   const [validate, setValidate] = useState({
     has8digit: false,
     has10digit: false,
@@ -66,10 +72,10 @@ export function PasswordStrengthBar({
   );
 
   const feedback = {
-    1: 'weak',
-    2: 'okay',
-    3: 'good',
-    4: 'strong',
+    1: weak,
+    2: okay,
+    3: good,
+    4: strong,
   }[strength];
 
   const progressConfig: IProgress = {

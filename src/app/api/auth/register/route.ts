@@ -1,7 +1,9 @@
 import { adminAuth } from '@/lib/firebase/firebase-admin-config';
+import { SignUpErrorCodes } from '@/locales/locale';
 import type { FirebaseAuthError } from 'firebase-admin/lib/utils/error';
 import { FirebaseError } from 'firebase/app';
 import { NextRequest, NextResponse } from 'next/server';
+export { SignUpErrorCodes } from '@/locales/locale';
 
 interface IRegisterData {
   name: string;
@@ -41,17 +43,17 @@ export async function POST(request: NextRequest) {
           case 'auth/email-already-exists':
             message =
               'The provided email is already in use by an existing user';
-            errorCode = 'EmailAlreadyExistsError';
+            errorCode = SignUpErrorCodes.EmailAlreadyExists;
             break;
           default:
             message = `Authorization service error. ${
               e.code && `(Firebase error code: ${e.code})`
             }`;
-            errorCode = 'AuthServiseError';
+            errorCode = SignUpErrorCodes.AuthServiseError;
         }
       } else {
         message = 'An error occurred, please try again later.';
-        errorCode = 'UnknownError';
+        errorCode = SignUpErrorCodes.UnknownError;
       }
       return NextResponse.json({ message, errorCode }, { status: 401 });
     }

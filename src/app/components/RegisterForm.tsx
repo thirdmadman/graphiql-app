@@ -9,7 +9,11 @@ import React, { ChangeEvent, useContext, useState } from 'react';
 import { PasswordStrengthBar } from './PasswordStrengthBar';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { locale } from '@/locales/locale';
+import {
+  SignUpErrorCodes,
+  formValidationErrors,
+  locale,
+} from '@/locales/locale';
 import { localeContext } from '@/locales/localeProvider';
 
 interface FormData {
@@ -22,7 +26,7 @@ interface FormData {
 
 interface ErrorResponse {
   message: string;
-  errorCode: string;
+  errorCode: SignUpErrorCodes;
 }
 
 export function RegisterForm() {
@@ -94,7 +98,9 @@ export function RegisterForm() {
     ref: termsRef,
   } = register('terms');
 
-  const [signUpError, setSignUpError] = useState<string | null>(null);
+  const [signUpError, setSignUpError] = useState<
+    SignUpErrorCodes | string | null
+  >(null);
 
   const [type, setType] = useState('password');
 
@@ -146,8 +152,8 @@ export function RegisterForm() {
       } else {
         const data = (await response.json()) as ErrorResponse;
         response.status === 401
-          ? setSignUpError(data.message)
-          : setSignUpError('UnknownError');
+          ? setSignUpError(data.errorCode)
+          : setSignUpError(SignUpErrorCodes.UnknownError);
         throw new Error(data.message);
       }
     } catch (e) {
@@ -184,7 +190,11 @@ export function RegisterForm() {
           aria-label="name"
         />
         {errors.name?.message && (
-          <ErrorMessage message={errors.name?.message} />
+          <ErrorMessage
+            message={
+              locale[currentLang][errors.name?.message as formValidationErrors]
+            }
+          />
         )}
       </div>
       <div className="relative">
@@ -205,7 +215,11 @@ export function RegisterForm() {
           aria-label="email"
         />
         {errors.email?.message && (
-          <ErrorMessage message={errors.email?.message} />
+          <ErrorMessage
+            message={
+              locale[currentLang][errors.email?.message as formValidationErrors]
+            }
+          />
         )}
       </div>
       <div className="relative">
@@ -252,11 +266,21 @@ export function RegisterForm() {
         {password && (
           <PasswordStrengthBar
             password={password}
-            errorMessage={errors.password?.message}
+            errorMessage={
+              locale[currentLang][
+                errors.password?.message as formValidationErrors
+              ]
+            }
           />
         )}
         {!password && errors.password?.message && (
-          <ErrorMessage message={errors.password?.message} />
+          <ErrorMessage
+            message={
+              locale[currentLang][
+                errors.password?.message as formValidationErrors
+              ]
+            }
+          />
         )}
       </div>
       <div className="relative">
@@ -277,7 +301,13 @@ export function RegisterForm() {
           aria-label="password-confirmation"
         />
         {errors.passwordConfirmation?.message && (
-          <ErrorMessage message={errors.passwordConfirmation?.message} />
+          <ErrorMessage
+            message={
+              locale[currentLang][
+                errors.passwordConfirmation?.message as formValidationErrors
+              ]
+            }
+          />
         )}
       </div>
       <div className="relative">
@@ -309,7 +339,13 @@ export function RegisterForm() {
             </label>
           </div>
         </div>
-        {errors.terms?.type && <ErrorMessage message={errors.terms?.type} />}
+        {errors.terms?.type && (
+          <ErrorMessage
+            message={
+              locale[currentLang][errors.terms?.type as formValidationErrors]
+            }
+          />
+        )}
       </div>
       <button
         type="submit"
@@ -318,7 +354,9 @@ export function RegisterForm() {
         {signupBtn}
       </button>
       {signUpError && (
-        <p className="text-xs text-red-600 text-center">{signUpError}</p>
+        <p className="text-xs text-red-600 text-center">
+          {locale[currentLang][signUpError as SignUpErrorCodes]}
+        </p>
       )}
     </form>
   );

@@ -37,6 +37,20 @@ export const signupFormLabelsRu = {
   termsLabel: 'Я принимаю',
 };
 
+export const passwordStrengthEn = {
+  weak: 'weak',
+  okay: 'okay',
+  good: 'good',
+  strong: 'strong',
+};
+
+export const passwordStrengthRu = {
+  weak: 'слабый',
+  okay: 'средний',
+  good: 'надежный',
+  strong: 'сложный',
+};
+
 export const signupPageEn = {
   signupTitle: 'Create an account',
   alreadyHaveAccount: 'Already have an account?',
@@ -45,6 +59,7 @@ export const signupPageEn = {
   signupBtn: 'Sign up',
   ...signupFormLabelsEn,
   ...signupErrorsEn,
+  ...passwordStrengthEn,
 };
 
 export const signupPageRu = {
@@ -55,6 +70,7 @@ export const signupPageRu = {
   signupBtn: 'Зарегистрироваться',
   ...signupFormLabelsRu,
   ...signupErrorsRu,
+  ...passwordStrengthRu,
 };
 
 export enum formValidationErrors {
@@ -64,8 +80,9 @@ export enum formValidationErrors {
   NameLength = 'NameLength',
   NameLetters = 'NameLetters',
   PasswordNumber = 'PasswordNumber',
-  PassswordLetter = 'PasswordLetter',
+  PasswordLetter = 'PasswordLetter',
   PasswordCharacter = 'PasswordCharacter',
+  PasswordMatch = 'PasswordMatch',
   Terms = 'Terms',
 }
 
@@ -76,9 +93,10 @@ const formValidationErrorsEn = {
   [formValidationErrors.NameLength]: 'Must be 2 or more characters',
   [formValidationErrors.NameLetters]: 'Must contain only letters',
   [formValidationErrors.PasswordNumber]: 'Must contain at least one number',
-  [formValidationErrors.PassswordLetter]: 'Must contain at least one letter',
+  [formValidationErrors.PasswordLetter]: 'Must contain at least one letter',
   [formValidationErrors.PasswordCharacter]:
     'Must contain at least one special character',
+  [formValidationErrors.PasswordMatch]: 'Passwords do not match',
   [formValidationErrors.Terms]: 'You should accept terms and conditions',
 };
 
@@ -92,10 +110,11 @@ const formValidationErrorsRu = {
   [formValidationErrors.NameLetters]: 'Должно содержать только буквы',
   [formValidationErrors.PasswordNumber]:
     'Должен содержать как минимум одну цифру',
-  [formValidationErrors.PassswordLetter]:
+  [formValidationErrors.PasswordLetter]:
     'Должен содержать как минимум одну букву',
   [formValidationErrors.PasswordCharacter]:
-    'Должен содержать как минимум один специальный символ',
+    'Должен содержать как минимум один спецсимвол',
+  [formValidationErrors.PasswordMatch]: 'Введенные пароли не совпадают',
   [formValidationErrors.Terms]: 'Вы должны принять условия и положения',
 };
 

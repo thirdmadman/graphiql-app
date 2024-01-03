@@ -9,7 +9,7 @@ export interface IToggleLocaleAction {
 }
 
 export const initialState = {
-  currentLocale: locale.ru,
+  currentLocale: locale.en,
 };
 
 export function reducer(state: ILocaleState, action: IToggleLocaleAction) {

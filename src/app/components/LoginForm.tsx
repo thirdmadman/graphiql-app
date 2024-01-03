@@ -1,13 +1,29 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { formSchema } from '@/lib/yup/formSchema';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Input } from '@nextui-org/react';
+
+import { FormData } from '../auth/types';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const router = useRouter();
+  const [focusEmail, setFocusEmail] = useState(false);
+  const [focusPassword, setFocusPassword] = useState(false);
 
-  async function handleSubmitEvent(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    mode: 'onChange',
+    resolver: yupResolver(formSchema),
+  });
+
+  const onSubmit = async (data: FormData) => {
     try {
       await fetch('/api/auth/', {
         method: 'POST',
@@ -15,56 +31,84 @@ export function LoginForm() {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify(data),
+      }).then((response) => {
+        if (response.status === 200) {
+          // eslint-disable-next-line @typescript-eslint/no-floating-promises
+          router.replace('/');
+        }
       });
     } catch (e) {
       console.error('e :>> ', e);
     }
-  }
+  };
+
+  const emailReg = register('email');
+  const passwordReg = register('password');
 
   return (
-    <form className="max-w-sm mx-auto" onSubmit={(e) => handleSubmitEvent(e)}>
-      Sign in with email and password
-      <div className="mb-5">
-        <label
-          htmlFor="email"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Input your email
-          <input
-            id="email"
-            name="email"
-            className="bg-gray-50 mt-4 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            type="email"
-            autoComplete="on"
-            onChange={(e) => setEmail(e.target.value)}
-            aria-label="email"
-          />
-        </label>
+    <form
+      className="flex flex-col w-[300px] max-w-sm mx-auto mb-4 mt-4 font-bold leadi text-center"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <div className="max-w-sm w-[100%] mx-auto mb-1 mt-7 font-normal text-center">
+        <Input
+          label="Email"
+          id="email"
+          type="text"
+          autoComplete="on"
+          aria-label="email"
+          className="h-[90px]"
+          size={'md'}
+          onChange={emailReg.onChange}
+          onBlur={() => setFocusEmail(false)}
+          onFocus={() => setFocusEmail(true)}
+          name={emailReg.name}
+          description={
+            !errors.email && focusEmail
+              ? 'Valid email format: you@example.com'
+              : ''
+          }
+          ref={emailReg.ref}
+          errorMessage={errors.email?.message ?? ''}
+        />
+        <Input
+          label="Password"
+          id="password"
+          type="password"
+          autoComplete="on"
+          aria-label="password"
+          className="h-[95px]"
+          size={'md'}
+          onChange={passwordReg.onChange}
+          onBlur={() => setFocusPassword(false)}
+          name={passwordReg.name}
+          ref={passwordReg.ref}
+          onFocus={() => setFocusPassword(true)}
+          errorMessage={errors.password?.message ?? ''}
+          description={
+            !errors.password && focusPassword
+              ? 'Must be at least 6 characters. Use uppercase and lovercase letters, numbers, special symbols'
+              : ''
+          }
+        />
       </div>
-      <div className="mb-5">
-        <label
-          htmlFor="password"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      {Object.entries(errors).length ? (
+        <button
+          type="submit"
+          className="block px-6 py-3 text-center rounded-lg bg-purple-100 text-purple-700 shadow-md"
+          disabled
         >
-          Input your password
-          <input
-            id="password"
-            name="password"
-            className="bg-gray-50 mt-4 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            type="password"
-            autoComplete="on"
-            onChange={(e) => setPassword(e.target.value)}
-            aria-label="password"
-          />
-        </label>
-      </div>
-      <button
-        type="submit"
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      >
-        Sign in
-      </button>
+          Sign in
+        </button>
+      ) : (
+        <button
+          type="submit"
+          className="block px-6 py-3 text-center rounded-lg bg-purple-100 text-purple-700 shadow-md"
+        >
+          Sign in
+        </button>
+      )}
     </form>
   );
 }

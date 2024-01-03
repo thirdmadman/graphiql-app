@@ -8,6 +8,7 @@ import { ErrorMessage } from './ErrorMessage';
 import React, { ChangeEvent, useState } from 'react';
 import { PasswordStrengthBar } from './PasswordStrengthBar';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 interface FormData {
   name: string;
@@ -77,6 +78,16 @@ export function RegisterForm() {
   } = register('terms');
 
   const [signUpError, setSignUpError] = useState<string | null>(null);
+
+  const [type, setType] = useState('password');
+
+  const toggleType = () => {
+    if (type === 'password') {
+      setType('text');
+    } else {
+      setType('password');
+    }
+  };
 
   async function handleSubmitEvent(data: FormData) {
     const name = data.name;
@@ -187,16 +198,40 @@ export function RegisterForm() {
         >
           Password
         </label>
-        <input
-          type="password"
-          name={passwordName}
-          ref={passwordRef}
-          onChange={onChangePassword}
-          onBlur={onPasswordBlur}
-          placeholder="••••••••"
-          className="mb-1 block w-full px-3 py-2 border rounded-lg text-security:disc dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
-          aria-label="password"
-        />
+        <div className="mb-1 flex">
+          <input
+            type={type}
+            name={passwordName}
+            ref={passwordRef}
+            onChange={onChangePassword}
+            onBlur={onPasswordBlur}
+            placeholder="••••••••"
+            className="block w-full px-3 py-2 border rounded-lg text-security:disc dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+            aria-label="password"
+          />
+          <span
+            className="flex justify-around items-center"
+            onClick={toggleType}
+          >
+            {type === 'password' ? (
+              <Image
+                src={'/images/svg/eye.svg'}
+                width={25}
+                height={25}
+                alt="eye"
+                className="absolute mr-14"
+              />
+            ) : (
+              <Image
+                src={'/images/svg/eye_slash.svg'}
+                width={25}
+                height={25}
+                alt="eye_slash"
+                className="absolute mr-14"
+              />
+            )}
+          </span>
+        </div>
         {password && (
           <PasswordStrengthBar
             password={password}
@@ -215,7 +250,7 @@ export function RegisterForm() {
           Confirm password
         </label>
         <input
-          type="password"
+          type={type}
           name={confirmationName}
           ref={confirmationRef}
           onChange={onConfirmationChange}

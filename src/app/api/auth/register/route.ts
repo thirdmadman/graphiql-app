@@ -38,11 +38,6 @@ export async function POST(request: NextRequest) {
       let errorCode = '';
       if (isFirebaseAuthError) {
         switch (e.code) {
-          case 'auth/too-many-requests':
-            message =
-              'Too many requests. Access to this account has been temporarily disabled due to many failed login attempts. Please try again later.';
-            errorCode = 'TooManyRequestsError';
-            break;
           case 'auth/email-already-exists':
             message =
               'The provided email is already in use by an existing user';

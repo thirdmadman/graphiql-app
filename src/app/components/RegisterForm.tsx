@@ -1,14 +1,16 @@
 'use client';
 
-import { formSchema } from '@/lib/yup/formSchema';
+import { formSchema } from '@/lib/yup/signupValidationSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from './ErrorMessage';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useContext, useState } from 'react';
 import { PasswordStrengthBar } from './PasswordStrengthBar';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { locale } from '@/locales/locale';
+import { localeContext } from '@/locales/localeProvider';
 
 interface FormData {
   name: string;
@@ -25,6 +27,21 @@ interface ErrorResponse {
 
 export function RegisterForm() {
   const router = useRouter();
+  const { state } = useContext(localeContext);
+  const currentLang = state.currentLocale.id;
+
+  const {
+    alreadyHaveAccount,
+    signinLink,
+    termsLink,
+    signupBtn,
+    nameLabel,
+    namePlaceholder,
+    emailLabel,
+    passwordLabel,
+    confirmPasswordLabel,
+    termsLabel,
+  } = locale[currentLang];
 
   const [password, setPassword] = useState('');
 
@@ -141,12 +158,12 @@ export function RegisterForm() {
   return (
     <form className="space-y-8" onSubmit={handleSubmit(handleSubmitEvent)}>
       <p className="text-sm text-center font-light text-gray-500 dark:text-gray-400">
-        Already have an account?{' '}
+        {alreadyHaveAccount}{' '}
         <Link
           href={'/auth/sign-in'}
           className="font-medium text-gray-700 dark:text-gray-400 focus:underline hover:underline"
         >
-          Login here
+          {signinLink}
         </Link>
       </p>
       <div className="relative">
@@ -154,7 +171,7 @@ export function RegisterForm() {
           htmlFor="name"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
-          Name
+          {nameLabel}
         </label>
         <input
           type="text"
@@ -163,7 +180,7 @@ export function RegisterForm() {
           onChange={onNameChange}
           onBlur={onNameBlur}
           className="mb-1 block w-full px-3 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
-          placeholder="name"
+          placeholder={namePlaceholder}
           aria-label="name"
         />
         {errors.name?.message && (
@@ -175,7 +192,7 @@ export function RegisterForm() {
           htmlFor="email"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
-          Email adress
+          {emailLabel}
         </label>
         <input
           type="email"
@@ -196,7 +213,7 @@ export function RegisterForm() {
           htmlFor="password"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
-          Password
+          {passwordLabel}
         </label>
         <div className="mb-1 flex">
           <input
@@ -247,7 +264,7 @@ export function RegisterForm() {
           htmlFor="password-confirmation"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
-          Confirm password
+          {confirmPasswordLabel}
         </label>
         <input
           type={type}
@@ -282,12 +299,12 @@ export function RegisterForm() {
               htmlFor="terms"
               className="font-light text-gray-500 dark:text-gray-300"
             >
-              I accept the{' '}
+              {termsLabel}{' '}
               <Link
                 className="font-medium text-gray-700 dark:text-gray-400 focus:underline hover:underline"
                 href="#"
               >
-                Terms and Conditions
+                {termsLink}
               </Link>
             </label>
           </div>
@@ -298,7 +315,7 @@ export function RegisterForm() {
         type="submit"
         className="w-full px-8 py-3 font-semibold rounded-lg bg-green-100 text-gray-700 hover:opacity-80 active:opacity-disabled transition-opacity"
       >
-        Sign up
+        {signupBtn}
       </button>
       {signUpError && (
         <p className="text-xs text-red-600 text-center">{signUpError}</p>

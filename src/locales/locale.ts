@@ -1,3 +1,104 @@
+export enum SignUpErrorCodes {
+  EmailAlreadyExists = 'EmailAlreadyExistsError',
+  AuthServiseError = 'AuthServiseError',
+  UnknownError = 'UnknownError',
+}
+
+const signupErrorsEn = {
+  [SignUpErrorCodes.EmailAlreadyExists]:
+    'The provided email is already in use by an existing user',
+  [SignUpErrorCodes.AuthServiseError]: 'Authorization service error.',
+  [SignUpErrorCodes.UnknownError]: 'An error occurred, please try again later',
+};
+
+export const signupErrorsRu = {
+  [SignUpErrorCodes.EmailAlreadyExists]:
+    'Данный адрес электронной почты уже используется',
+  [SignUpErrorCodes.AuthServiseError]: 'Ошибка авторизации.',
+  [SignUpErrorCodes.UnknownError]:
+    'Произошла ошибка. Пожалуйста, повторите попытку позже',
+};
+
+export const signupFormLabelsEn = {
+  nameLabel: 'Name',
+  namePlaceholder: 'name',
+  emailLabel: 'Email address',
+  passwordLabel: 'Password',
+  confirmPasswordLabel: 'Confirm password',
+  termsLabel: 'I accept the',
+};
+
+export const signupFormLabelsRu = {
+  nameLabel: 'Имя',
+  namePlaceholder: 'имя',
+  emailLabel: 'Адрес электронной почты',
+  passwordLabel: 'Пароль',
+  confirmPasswordLabel: 'Подтвердите пароль',
+  termsLabel: 'Я принимаю',
+};
+
+export const signupPageEn = {
+  signupTitle: 'Create an account',
+  alreadyHaveAccount: 'Already have an account?',
+  signinLink: 'Login here',
+  termsLink: 'Terms and Conditions',
+  signupBtn: 'Sign up',
+  ...signupFormLabelsEn,
+  ...signupErrorsEn,
+};
+
+export const signupPageRu = {
+  signupTitle: 'Создать аккаунт',
+  alreadyHaveAccount: 'Уже есть аккаунт?',
+  signinLink: 'Войти',
+  termsLink: 'Условия и положения',
+  signupBtn: 'Зарегистрироваться',
+  ...signupFormLabelsRu,
+  ...signupErrorsRu,
+};
+
+export enum formValidationErrors {
+  RequiredField = 'RequiredField',
+  InvalidEmail = 'InvalidEmail',
+  PasswordLength = 'PasswordLength',
+  NameLength = 'NameLength',
+  NameLetters = 'NameLetters',
+  PasswordNumber = 'PasswordNumber',
+  PassswordLetter = 'PasswordLetter',
+  PasswordCharacter = 'PasswordCharacter',
+  Terms = 'Terms',
+}
+
+const formValidationErrorsEn = {
+  [formValidationErrors.RequiredField]: 'Required field',
+  [formValidationErrors.InvalidEmail]: 'Please enter a valid email address',
+  [formValidationErrors.PasswordLength]: 'Must be 8 or more characters',
+  [formValidationErrors.NameLength]: 'Must be 2 or more characters',
+  [formValidationErrors.NameLetters]: 'Must contain only letters',
+  [formValidationErrors.PasswordNumber]: 'Must contain at least one number',
+  [formValidationErrors.PassswordLetter]: 'Must contain at least one letter',
+  [formValidationErrors.PasswordCharacter]:
+    'Must contain at least one special character',
+  [formValidationErrors.Terms]: 'You should accept terms and conditions',
+};
+
+const formValidationErrorsRu = {
+  [formValidationErrors.RequiredField]: 'Обязательное поле',
+  [formValidationErrors.InvalidEmail]:
+    'Введите корректный адрес электронной почты',
+  [formValidationErrors.PasswordLength]:
+    'Должен состоять из 8 или более символов',
+  [formValidationErrors.NameLength]: 'Должно состоять из 2 или более символов',
+  [formValidationErrors.NameLetters]: 'Должно содержать только буквы',
+  [formValidationErrors.PasswordNumber]:
+    'Должен содержать как минимум одну цифру',
+  [formValidationErrors.PassswordLetter]:
+    'Должен содержать как минимум одну букву',
+  [formValidationErrors.PasswordCharacter]:
+    'Должен содержать как минимум один специальный символ',
+  [formValidationErrors.Terms]: 'Вы должны принять условия и положения',
+};
+
 export const en = {
   id: 'en',
   requestFieldLabel: 'Write your query',
@@ -40,6 +141,8 @@ export const en = {
   teamSectionTitle: 'Our team',
   teamSectionRole1: 'Team lead',
   teamSectionRole2: 'Web developer',
+  ...signupPageEn,
+  ...formValidationErrorsEn,
 };
 
 export const ru = {
@@ -84,6 +187,8 @@ export const ru = {
   teamSectionTitle: 'Наша команда',
   teamSectionRole1: 'Тимлид',
   teamSectionRole2: 'Разработчик',
+  ...signupPageRu,
+  ...formValidationErrorsRu,
 };
 
 export type TLocale = typeof en;

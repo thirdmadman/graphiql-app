@@ -158,7 +158,11 @@ export function RegisterForm() {
   }
 
   return (
-    <form className="space-y-8" onSubmit={handleSubmit(handleSubmitEvent)}>
+    <form
+      className="space-y-8"
+      onSubmit={handleSubmit(handleSubmitEvent)}
+      noValidate
+    >
       <p className="text-sm text-center font-light text-gray-500 dark:text-gray-400">
         {alreadyHaveAccount}{' '}
         <Link

@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
               message = `Authorization service error. ${
                 e.code && `(Firebase error code: ${e.code})`
               }`;
-              errorCode = SignInErrorCodes.AuthServiseError;
+              errorCode = SignInErrorCodes.AuthServiceError;
           }
         } else {
           message = 'An error occurred, please try again later.';

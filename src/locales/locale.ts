@@ -1,7 +1,7 @@
 export enum SignInErrorCodes {
   TooManyRequests = 'TooManyRequestsError',
   InvalidCredentials = 'InvalidCredentialsError',
-  AuthServiseError = 'AuthServiseError',
+  AuthServiceError = 'AuthServiceError',
   UnknownError = 'UnknownError',
 }
 
@@ -10,7 +10,7 @@ const signInErrorsEn = {
     'Too many requests. Access to this account has been temporarily disabled due to many failed login attempts. Please try again later.',
   [SignInErrorCodes.InvalidCredentials]:
     'Invalid credentials. Please check the entered data.',
-  [SignInErrorCodes.AuthServiseError]: 'Authorization service error.',
+  [SignInErrorCodes.AuthServiceError]: 'Authorization service error.',
   [SignInErrorCodes.UnknownError]: 'An error occurred, please try again later',
 };
 
@@ -19,7 +19,7 @@ export const signInErrorsRu = {
     'Слишком много запросов. Доступ к этой учетной записи временно отключен из-за множества неудачных попыток входа. Пожалуйста, повторите попытку позже.',
   [SignInErrorCodes.InvalidCredentials]:
     'Неверные учетные данные. Пожалуйста, проверьте введенные данные',
-  [SignInErrorCodes.AuthServiseError]: 'Ошибка авторизации.',
+  [SignInErrorCodes.AuthServiceError]: 'Ошибка авторизации.',
   [SignInErrorCodes.UnknownError]:
     'Произошла ошибка. Пожалуйста, повторите попытку позже',
 };

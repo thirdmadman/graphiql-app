@@ -14,8 +14,6 @@ interface IIntrospectionRootProps {
 export function IntrospectionRoot({ schema }: IIntrospectionRootProps) {
   const schemaIntrospection = new GqlSchemaIntrospection(schema);
 
-  console.error(schema);
-
   const allQueryFields = schemaIntrospection.getAllQueries();
   const allMutationFields = schemaIntrospection.getAllMutations();
   const allSubscriptionFields = schemaIntrospection.getAllSubscriptions();

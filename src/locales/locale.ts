@@ -61,26 +61,6 @@ export const signInPageRu = {
   ...signInErrorsRu,
 };
 
-export enum formValidationErrors {
-  RequiredField = 'RequiredField',
-  InvalidEmail = 'InvalidEmail',
-  PasswordLength = 'PasswordLength',
-}
-
-const formValidationErrorsEn = {
-  [formValidationErrors.RequiredField]: 'Required field',
-  [formValidationErrors.InvalidEmail]: 'Invalid email address',
-  [formValidationErrors.PasswordLength]:
-    'Password must be 8 or more characters',
-};
-
-const formValidationErrorsRu = {
-  [formValidationErrors.RequiredField]: 'Обязательное поле',
-  [formValidationErrors.InvalidEmail]: 'Неверный адрес электронной почты',
-  [formValidationErrors.PasswordLength]:
-    'Пароль должен состоять из 8 или более символов',
-};
-
 export enum SignUpErrorCodes {
   EmailAlreadyExists = 'EmailAlreadyExistsError',
   AuthServiceError = 'AuthServiceError',
@@ -243,10 +223,9 @@ export const en = {
   teamSectionTitle: 'Our team',
   teamSectionRole1: 'Team lead',
   teamSectionRole2: 'Web developer',
+  ...formValidationErrorsEn,
   ...signInPageEn,
-  ...formValidationErrorsEn,
   ...signupPageEn,
-  ...formValidationErrorsEn,
 };
 
 export const ru = {
@@ -291,10 +270,9 @@ export const ru = {
   teamSectionTitle: 'Наша команда',
   teamSectionRole1: 'Тимлид',
   teamSectionRole2: 'Разработчик',
+  ...formValidationErrorsRu,
   ...signInPageRu,
-  ...formValidationErrorsRu,
   ...signupPageRu,
-  ...formValidationErrorsRu,
 };
 
 export type TLocale = typeof en;

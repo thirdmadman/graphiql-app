@@ -62,11 +62,11 @@ export function LoginForm() {
         response.status === 401
           ? setSignInError(data.errorCode)
           : setSignInError(UnknownError);
-        throw new Error(data.message);
       }
     } catch (e) {
       if (e instanceof Error) {
         console.error('Error: ', e.message);
+        setSignInError(UnknownError);
       }
     }
   };
@@ -145,7 +145,7 @@ export function LoginForm() {
 
       {signInError && (
         <p className="text-xs text-red-600 text-center min-h-[16px]">
-          {locale[currentLang][signInError as SignInErrorCodes]}
+          {locale[currentLang][signInError as SignInErrorCodes] ?? UnknownError}
         </p>
       )}
     </form>

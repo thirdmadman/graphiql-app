@@ -1,20 +1,20 @@
 export enum SignUpErrorCodes {
   EmailAlreadyExists = 'EmailAlreadyExistsError',
-  AuthServiseError = 'AuthServiseError',
+  AuthServiceError = 'AuthServiceError',
   UnknownError = 'UnknownError',
 }
 
 const signupErrorsEn = {
   [SignUpErrorCodes.EmailAlreadyExists]:
     'The provided email is already in use by an existing user',
-  [SignUpErrorCodes.AuthServiseError]: 'Authorization service error.',
+  [SignUpErrorCodes.AuthServiceError]: 'Authorization service error.',
   [SignUpErrorCodes.UnknownError]: 'An error occurred, please try again later',
 };
 
 export const signupErrorsRu = {
   [SignUpErrorCodes.EmailAlreadyExists]:
     'Данный адрес электронной почты уже используется',
-  [SignUpErrorCodes.AuthServiseError]: 'Ошибка авторизации.',
+  [SignUpErrorCodes.AuthServiceError]: 'Ошибка авторизации.',
   [SignUpErrorCodes.UnknownError]:
     'Произошла ошибка. Пожалуйста, повторите попытку позже',
 };

@@ -140,24 +140,20 @@ export function RegisterForm() {
 
           if (response.status === 200) {
             router.replace('/');
-          } else {
-            const data = (await response.json()) as ErrorResponse;
-            throw new Error(data.message);
           }
         } catch (e) {
-          if (e instanceof Error) {
-            console.error('Error: ', e.message);
-          }
+          router.push('/auth/sign-in');
         }
       } else {
         const data = (await response.json()) as ErrorResponse;
         response.status === 401
           ? setSignUpError(data.errorCode)
           : setSignUpError(SignUpErrorCodes.UnknownError);
-        throw new Error(data.message);
       }
     } catch (e) {
-      console.error('e :>> ', e);
+      if (e instanceof Error) {
+        setSignUpError(SignUpErrorCodes.UnknownError);
+      }
     }
   }
 
@@ -250,7 +246,7 @@ export function RegisterForm() {
                 width={25}
                 height={25}
                 alt="eye"
-                className="absolute mr-14"
+                className="absolute mr-14 cursor-pointer"
               />
             ) : (
               <Image
@@ -258,7 +254,7 @@ export function RegisterForm() {
                 width={25}
                 height={25}
                 alt="eye_slash"
-                className="absolute mr-14"
+                className="absolute mr-14 cursor-pointer"
               />
             )}
           </span>

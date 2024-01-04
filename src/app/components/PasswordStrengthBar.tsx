@@ -1,4 +1,4 @@
-'use clinet';
+'use client';
 
 import React, { useContext, useEffect, useState } from 'react';
 import { ErrorMessage } from './ErrorMessage';

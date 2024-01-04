@@ -1,8 +1,8 @@
 'use client';
 
 import {
-  IntrospectionSchema,
-  IntrospectionType,
+  IIntrospectionSchema,
+  TIntrospectionType,
 } from '@/lib/utils/gql/introspectionImportedTypes';
 
 import { IntrospectionEnumTypeComponent } from '../enum/IntrospectionEnumTypeComponent';
@@ -13,8 +13,8 @@ import { IntrospectionUnionTypeComponent } from '../union/IntrospectionUnionType
 import { IntrospectionScalarTypeComponent } from '../scalar/IntrospectionScalarTypeComponent';
 
 interface IIntrospectionTypeComponentProps {
-  type: IntrospectionType | undefined | null;
-  schema: IntrospectionSchema;
+  type: TIntrospectionType | undefined | null;
+  schema: IIntrospectionSchema;
   isOpenedSet?: boolean;
 }
 

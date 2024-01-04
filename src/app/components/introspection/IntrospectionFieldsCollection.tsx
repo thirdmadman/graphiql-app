@@ -1,12 +1,12 @@
 import {
-  IntrospectionField,
-  IntrospectionSchema,
+  IIntrospectionField,
+  IIntrospectionSchema,
 } from '@/lib/utils/gql/introspectionImportedTypes';
 import { IntrospectionFieldComponent } from './IntrospectionFieldComponent';
 import { FoldableBlockComponent } from './shared/FoldableBlockComponent';
 interface IIntrospectionFieldsCollectionProps {
-  schema: IntrospectionSchema;
-  fields: Array<IntrospectionField> | undefined | null;
+  schema: IIntrospectionSchema;
+  fields: Array<IIntrospectionField> | undefined | null;
   name: string;
 }
 

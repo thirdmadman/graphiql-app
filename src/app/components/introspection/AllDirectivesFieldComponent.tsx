@@ -1,15 +1,15 @@
 'use client';
 
 import {
-  IntrospectionDirective,
-  IntrospectionSchema,
+  IIntrospectionDirective,
+  IIntrospectionSchema,
 } from '@/lib/utils/gql/introspectionImportedTypes';
 import { IntrospectionDirectiveComponent } from './directive/IntrospectionDirectiveComponent';
 import { FoldableBlockComponent } from './shared/FoldableBlockComponent';
 
 interface IAllDirectivesFieldComponentProps {
-  fields: Array<IntrospectionDirective> | undefined | null;
-  schema: IntrospectionSchema;
+  fields: Array<IIntrospectionDirective> | undefined | null;
+  schema: IIntrospectionSchema;
 }
 
 export function AllDirectivesFieldComponent({

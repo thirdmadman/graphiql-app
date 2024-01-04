@@ -1,5 +1,5 @@
 import { gqlFetchApi } from '../fetchGraphQl';
-import { IntrospectionResponse } from './introspectionImportedTypes';
+import { IIntrospectionResponse } from './introspectionImportedTypes';
 
 export const gqlIntrospectionQuery = `
 query IntrospectionQuery {
@@ -120,5 +120,5 @@ export const getGqlIntrospection = async (url: string, headers = {}) => {
     return { error: resp.error };
   }
 
-  return { schema: resp.resp as IntrospectionResponse };
+  return { schema: resp.resp as IIntrospectionResponse };
 };

@@ -1,6 +1,6 @@
 import {
-  IntrospectionInputObjectType,
-  IntrospectionSchema,
+  IIntrospectionInputObjectType,
+  IIntrospectionSchema,
 } from '@/lib/utils/gql/introspectionImportedTypes';
 import { DescriptionFieldComponent } from '../shared/DescriptionFieldComponent';
 import { IntrospectionInputValueComponent } from './IntrospectionInputValueComponent';
@@ -8,17 +8,10 @@ import { SimpleBlockComponent } from '../shared/SimpleBlockComponent';
 import { FoldableBlockComponent } from '../shared/FoldableBlockComponent';
 
 interface IIntrospectionInputObjectTypeComponentProps {
-  type: IntrospectionInputObjectType | undefined | null;
-  schema: IntrospectionSchema;
+  type: IIntrospectionInputObjectType | undefined | null;
+  schema: IIntrospectionSchema;
   isOpenedSet: boolean;
 }
-
-// interface IntrospectionInputObjectType {
-//   kind: 'INPUT_OBJECT';
-//   name: string;
-//   description?: Maybe<string>;
-//   inputFields: Array<IntrospectionInputValue>;
-// }
 
 export function IntrospectionInputObjectTypeComponent({
   type,

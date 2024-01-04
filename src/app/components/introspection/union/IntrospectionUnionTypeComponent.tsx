@@ -1,6 +1,6 @@
 import {
-  IntrospectionSchema,
-  IntrospectionUnionType,
+  IIntrospectionSchema,
+  IIntrospectionUnionType,
 } from '@/lib/utils/gql/introspectionImportedTypes';
 import { DescriptionFieldComponent } from '../shared/DescriptionFieldComponent';
 import { PossibleTypeFieldComponent } from '../shared/PossibleTypeFieldComponent';
@@ -8,17 +8,10 @@ import { SimpleBlockComponent } from '../shared/SimpleBlockComponent';
 import { FoldableBlockComponent } from '../shared/FoldableBlockComponent';
 
 interface IIntrospectionUnionTypeComponentProps {
-  type: IntrospectionUnionType | undefined | null;
-  schema: IntrospectionSchema;
+  type: IIntrospectionUnionType | undefined | null;
+  schema: IIntrospectionSchema;
   isOpenedSet?: boolean;
 }
-
-// interface IntrospectionUnionType {
-//   kind: 'UNION';
-//   name: string;
-//   description?: Maybe<string>;
-//   possibleTypes: Array<IntrospectionNamedTypeRef<IntrospectionObjectType>>;
-// }
 
 export function IntrospectionUnionTypeComponent({
   type,

@@ -1,16 +1,16 @@
 'use client';
 
 import {
-  IntrospectionNamedTypeRef,
-  IntrospectionObjectType,
-  IntrospectionSchema,
+  IIntrospectionNamedTypeRef,
+  IIntrospectionObjectType,
+  IIntrospectionSchema,
 } from '@/lib/utils/gql/introspectionImportedTypes';
 import { useState } from 'react';
 import { GetFieldWrapper } from './GetFieldWrapper';
 
 interface IPossibleTypeFieldComponentProps {
-  type: IntrospectionNamedTypeRef<IntrospectionObjectType> | undefined | null;
-  schema: IntrospectionSchema;
+  type: IIntrospectionNamedTypeRef<IIntrospectionObjectType> | undefined | null;
+  schema: IIntrospectionSchema;
 }
 
 export function PossibleTypeFieldComponent({

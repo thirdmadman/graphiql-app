@@ -1,19 +1,19 @@
 import {
-  IntrospectionInputTypeRef,
-  IntrospectionInputValue,
-  IntrospectionObjectType,
-  IntrospectionSchema,
-  IntrospectionType,
+  TIntrospectionInputTypeRef,
+  IIntrospectionInputValue,
+  IIntrospectionObjectType,
+  IIntrospectionSchema,
+  TIntrospectionType,
 } from './introspectionImportedTypes';
 
 export class GqlSchemaIntrospection {
-  schema: IntrospectionSchema;
+  schema: IIntrospectionSchema;
   queryName: string | undefined = undefined;
   mutationName: string | undefined = undefined;
   subscriptionName: string | undefined = undefined;
-  types: Array<IntrospectionType>;
+  types: Array<TIntrospectionType>;
 
-  constructor(schema: IntrospectionSchema) {
+  constructor(schema: IIntrospectionSchema) {
     this.schema = schema;
     this.queryName = schema.queryType?.name;
     this.mutationName = schema?.mutationType?.name;
@@ -24,7 +24,7 @@ export class GqlSchemaIntrospection {
   getAllQueries() {
     const queryRoot = this.types.find(
       (el) => el.kind === 'OBJECT' && el.name === this.queryName
-    ) as IntrospectionObjectType | undefined;
+    ) as IIntrospectionObjectType | undefined;
 
     return queryRoot?.fields;
   }
@@ -32,7 +32,7 @@ export class GqlSchemaIntrospection {
   getAllMutations() {
     const queryRoot = this.types.find(
       (el) => el.kind === 'OBJECT' && el.name === this.mutationName
-    ) as IntrospectionObjectType | undefined;
+    ) as IIntrospectionObjectType | undefined;
 
     return queryRoot?.fields;
   }
@@ -40,7 +40,7 @@ export class GqlSchemaIntrospection {
   getAllSubscriptions() {
     const queryRoot = this.types.find(
       (el) => el.kind === 'OBJECT' && el.name === this.subscriptionName
-    ) as IntrospectionObjectType | undefined;
+    ) as IIntrospectionObjectType | undefined;
 
     return queryRoot?.fields;
   }
@@ -53,13 +53,13 @@ export class GqlSchemaIntrospection {
     return fieldType;
   }
 
-  getInputObjectType(type: IntrospectionInputTypeRef) {
+  getInputObjectType(type: TIntrospectionInputTypeRef) {
     if (this.types && type) {
       const fieldType = this.types.find(
         (el) => el.kind === type.kind && el.name === type.name
       );
 
-      return fieldType as IntrospectionInputValue | undefined;
+      return fieldType as IIntrospectionInputValue | undefined;
     }
   }
 }

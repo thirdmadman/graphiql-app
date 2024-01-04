@@ -1,11 +1,11 @@
-import { IntrospectionSchema } from '@/lib/utils/gql/introspectionImportedTypes';
+import { IIntrospectionSchema } from '@/lib/utils/gql/introspectionImportedTypes';
 import { GqlSchemaIntrospection } from '@/lib/utils/gql/GqlSchemaIntrospection';
 import { IntrospectionTypeComponent } from './IntrospectionTypeComponent';
 
 interface IGetFieldWrapperProps {
   kind: string;
   name: string;
-  schema: IntrospectionSchema;
+  schema: IIntrospectionSchema;
   isOpenedSet?: boolean;
 }
 

@@ -1,23 +1,16 @@
 import {
-  IntrospectionScalarType,
-  IntrospectionSchema,
+  IIntrospectionScalarType,
+  IIntrospectionSchema,
 } from '@/lib/utils/gql/introspectionImportedTypes';
 import { DescriptionFieldComponent } from '../shared/DescriptionFieldComponent';
 import { SimpleBlockComponent } from '../shared/SimpleBlockComponent';
 import { FoldableBlockComponent } from '../shared/FoldableBlockComponent';
 
 interface IIntrospectionScalarTypeComponentProps {
-  type: IntrospectionScalarType | undefined | null;
-  schema: IntrospectionSchema;
+  type: IIntrospectionScalarType | undefined | null;
+  schema: IIntrospectionSchema;
   isOpenedSet?: boolean;
 }
-
-// interface IntrospectionScalarType {
-//   kind: 'SCALAR';
-//   name: string;
-//   description?: Maybe<string>;
-//   specifiedByURL?: Maybe<string>;
-// }
 
 export function IntrospectionScalarTypeComponent({
   type,

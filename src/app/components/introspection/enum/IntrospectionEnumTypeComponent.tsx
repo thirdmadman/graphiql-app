@@ -1,6 +1,6 @@
 import {
-  IntrospectionEnumType,
-  IntrospectionSchema,
+  IIntrospectionEnumType,
+  IIntrospectionSchema,
 } from '@/lib/utils/gql/introspectionImportedTypes';
 
 import { IntrospectionEnumValueComponent } from './IntrospectionEnumValueCopmponent';
@@ -9,17 +9,10 @@ import { SimpleBlockComponent } from '../shared/SimpleBlockComponent';
 import { FoldableBlockComponent } from '../shared/FoldableBlockComponent';
 
 interface IIntrospectionEnumTypeComponentProps {
-  type: IntrospectionEnumType | undefined | null;
-  schema: IntrospectionSchema;
+  type: IIntrospectionEnumType | undefined | null;
+  schema: IIntrospectionSchema;
   isOpenedSet?: boolean;
 }
-
-// IntrospectionEnumType {
-//   kind: 'ENUM';
-//   name: string;
-//   description?: Maybe<string>;
-//   enumValues: Array<IntrospectionEnumValue>;
-// }
 
 export function IntrospectionEnumTypeComponent({
   type,

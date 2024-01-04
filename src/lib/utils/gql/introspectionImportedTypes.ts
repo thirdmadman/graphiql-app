@@ -24,156 +24,156 @@ export enum DirectiveLocation {
   INPUT_FIELD_DEFINITION = 'INPUT_FIELD_DEFINITION',
 }
 
-export interface IntrospectionEnumValue {
+export interface IIntrospectionEnumValue {
   name: string;
   description?: Maybe<string>;
   isDeprecated: boolean;
   deprecationReason: Maybe<string>;
 }
 
-export interface IntrospectionScalarType {
+export interface IIntrospectionScalarType {
   kind: 'SCALAR';
   name: string;
   description?: Maybe<string>;
   specifiedByURL?: Maybe<string>;
 }
 
-export type IntrospectionOutputType =
-  | IntrospectionScalarType
-  | IntrospectionObjectType
-  | IntrospectionInterfaceType
-  | IntrospectionUnionType
-  | IntrospectionEnumType;
+export type TIntrospectionOutputType =
+  | IIntrospectionScalarType
+  | IIntrospectionObjectType
+  | IIntrospectionInterfaceType
+  | IIntrospectionUnionType
+  | IIntrospectionEnumType;
 
-export type IntrospectionOutputTypeRef =
-  | IntrospectionNamedTypeRef<IntrospectionOutputType>
-  | IntrospectionListTypeRef<IntrospectionOutputTypeRef>
-  | IntrospectionNonNullTypeRef<
-      | IntrospectionNamedTypeRef<IntrospectionOutputType>
-      | IntrospectionListTypeRef<IntrospectionOutputTypeRef>
+export type TIntrospectionOutputTypeRef =
+  | IIntrospectionNamedTypeRef<TIntrospectionOutputType>
+  | IIntrospectionListTypeRef<TIntrospectionOutputTypeRef>
+  | IIntrospectionNonNullTypeRef<
+      | IIntrospectionNamedTypeRef<TIntrospectionOutputType>
+      | IIntrospectionListTypeRef<TIntrospectionOutputTypeRef>
     >;
 
-export type IntrospectionInputType =
-  | IntrospectionScalarType
-  | IntrospectionEnumType
-  | IntrospectionInputObjectType;
+export type TIntrospectionInputType =
+  | IIntrospectionScalarType
+  | IIntrospectionEnumType
+  | IIntrospectionInputObjectType;
 
-export type IntrospectionInputTypeRef =
-  | IntrospectionNamedTypeRef<IntrospectionInputType>
-  | IntrospectionListTypeRef<IntrospectionInputTypeRef>
-  | IntrospectionNonNullTypeRef<
-      | IntrospectionNamedTypeRef<IntrospectionInputType>
-      | IntrospectionListTypeRef<IntrospectionInputTypeRef>
+export type TIntrospectionInputTypeRef =
+  | IIntrospectionNamedTypeRef<TIntrospectionInputType>
+  | IIntrospectionListTypeRef<TIntrospectionInputTypeRef>
+  | IIntrospectionNonNullTypeRef<
+      | IIntrospectionNamedTypeRef<TIntrospectionInputType>
+      | IIntrospectionListTypeRef<TIntrospectionInputTypeRef>
     >;
 
-export interface IntrospectionField {
+export interface IIntrospectionField {
   name: string;
   description?: Maybe<string>;
-  args: Array<IntrospectionInputValue>;
-  type: IntrospectionOutputTypeRef;
+  args: Array<IIntrospectionInputValue>;
+  type: TIntrospectionOutputTypeRef;
   isDeprecated: boolean;
   deprecationReason: Maybe<string>;
 }
-export interface IntrospectionInputValue {
+export interface IIntrospectionInputValue {
   name: string;
   description?: Maybe<string>;
-  type: IntrospectionInputTypeRef;
+  type: TIntrospectionInputTypeRef;
   defaultValue: Maybe<string>;
   isDeprecated?: boolean;
   deprecationReason?: Maybe<string>;
 }
 
-export interface IntrospectionObjectType {
+export interface IIntrospectionObjectType {
   kind: 'OBJECT';
   name: string;
   description?: Maybe<string>;
-  fields: Array<IntrospectionField>;
-  interfaces: Array<IntrospectionNamedTypeRef<IntrospectionInterfaceType>>;
+  fields: Array<IIntrospectionField>;
+  interfaces: Array<IIntrospectionNamedTypeRef<IIntrospectionInterfaceType>>;
 }
 
-export interface IntrospectionInterfaceType {
+export interface IIntrospectionInterfaceType {
   kind: 'INTERFACE';
   name: string;
   description?: Maybe<string>;
-  fields: Array<IntrospectionField>;
-  interfaces: Array<IntrospectionNamedTypeRef<IntrospectionInterfaceType>>;
-  possibleTypes: Array<IntrospectionNamedTypeRef<IntrospectionObjectType>>;
+  fields: Array<IIntrospectionField>;
+  interfaces: Array<IIntrospectionNamedTypeRef<IIntrospectionInterfaceType>>;
+  possibleTypes: Array<IIntrospectionNamedTypeRef<IIntrospectionObjectType>>;
 }
 
-export interface IntrospectionUnionType {
+export interface IIntrospectionUnionType {
   kind: 'UNION';
   name: string;
   description?: Maybe<string>;
-  possibleTypes: Array<IntrospectionNamedTypeRef<IntrospectionObjectType>>;
+  possibleTypes: Array<IIntrospectionNamedTypeRef<IIntrospectionObjectType>>;
 }
 
-export interface IntrospectionEnumType {
+export interface IIntrospectionEnumType {
   kind: 'ENUM';
   name: string;
   description?: Maybe<string>;
-  enumValues: Array<IntrospectionEnumValue>;
+  enumValues: Array<IIntrospectionEnumValue>;
 }
 
-export interface IntrospectionInputObjectType {
+export interface IIntrospectionInputObjectType {
   kind: 'INPUT_OBJECT';
   name: string;
   description?: Maybe<string>;
-  inputFields: Array<IntrospectionInputValue>;
+  inputFields: Array<IIntrospectionInputValue>;
 }
 
-export type IntrospectionTypeRef =
-  | IntrospectionNamedTypeRef
-  | IntrospectionListTypeRef
-  | IntrospectionNonNullTypeRef<
-      IntrospectionNamedTypeRef | IntrospectionListTypeRef
+export type TIntrospectionTypeRef =
+  | IIntrospectionNamedTypeRef
+  | IIntrospectionListTypeRef
+  | IIntrospectionNonNullTypeRef<
+      IIntrospectionNamedTypeRef | IIntrospectionListTypeRef
     >;
 
-export interface IntrospectionListTypeRef<
-  T extends IntrospectionTypeRef = IntrospectionTypeRef,
+export interface IIntrospectionListTypeRef<
+  T extends TIntrospectionTypeRef = TIntrospectionTypeRef,
 > {
   kind: 'LIST';
   ofType: T;
 }
 
-export interface IntrospectionNonNullTypeRef<
-  T extends IntrospectionTypeRef = IntrospectionTypeRef,
+export interface IIntrospectionNonNullTypeRef<
+  T extends TIntrospectionTypeRef = TIntrospectionTypeRef,
 > {
   kind: 'NON_NULL';
   ofType: T;
 }
 
-export type IntrospectionType =
-  | IntrospectionScalarType
-  | IntrospectionObjectType
-  | IntrospectionInterfaceType
-  | IntrospectionUnionType
-  | IntrospectionEnumType
-  | IntrospectionInputObjectType;
+export type TIntrospectionType =
+  | IIntrospectionScalarType
+  | IIntrospectionObjectType
+  | IIntrospectionInterfaceType
+  | IIntrospectionUnionType
+  | IIntrospectionEnumType
+  | IIntrospectionInputObjectType;
 
-export interface IntrospectionNamedTypeRef<
-  T extends IntrospectionType = IntrospectionType,
+export interface IIntrospectionNamedTypeRef<
+  T extends TIntrospectionType = TIntrospectionType,
 > {
   kind: T['kind'];
   name: string;
 }
 
-export interface IntrospectionDirective {
+export interface IIntrospectionDirective {
   name: string;
   description?: Maybe<string>;
   isRepeatable?: boolean;
   locations: Array<DirectiveLocation>;
-  args: Array<IntrospectionInputValue>;
+  args: Array<IIntrospectionInputValue>;
 }
 
-export interface IntrospectionSchema {
+export interface IIntrospectionSchema {
   description?: Maybe<string>;
-  queryType: IntrospectionNamedTypeRef<IntrospectionObjectType>;
-  mutationType: Maybe<IntrospectionNamedTypeRef<IntrospectionObjectType>>;
-  subscriptionType: Maybe<IntrospectionNamedTypeRef<IntrospectionObjectType>>;
-  types: Array<IntrospectionType>;
-  directives: Array<IntrospectionDirective>;
+  queryType: IIntrospectionNamedTypeRef<IIntrospectionObjectType>;
+  mutationType: Maybe<IIntrospectionNamedTypeRef<IIntrospectionObjectType>>;
+  subscriptionType: Maybe<IIntrospectionNamedTypeRef<IIntrospectionObjectType>>;
+  types: Array<TIntrospectionType>;
+  directives: Array<IIntrospectionDirective>;
 }
 
-export interface IntrospectionResponse {
-  __schema: IntrospectionSchema;
+export interface IIntrospectionResponse {
+  __schema: IIntrospectionSchema;
 }

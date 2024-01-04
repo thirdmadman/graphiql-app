@@ -1,15 +1,15 @@
 'use client';
 
 import {
-  IntrospectionSchema,
-  IntrospectionType,
+  IIntrospectionSchema,
+  TIntrospectionType,
 } from '@/lib/utils/gql/introspectionImportedTypes';
 import { useState } from 'react';
 import { GetFieldWrapper } from './shared/GetFieldWrapper';
 
 interface IAllFieldsTypeFieldComponentProps {
-  fields: Array<IntrospectionType> | undefined | null;
-  schema: IntrospectionSchema;
+  fields: Array<TIntrospectionType> | undefined | null;
+  schema: IIntrospectionSchema;
 }
 
 export function AllFieldsTypeFieldComponent({

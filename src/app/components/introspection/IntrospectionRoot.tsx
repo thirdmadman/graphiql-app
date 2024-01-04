@@ -1,6 +1,6 @@
 'use client';
 
-import { IntrospectionSchema } from '@/lib/utils/gql/introspectionImportedTypes';
+import { IIntrospectionSchema } from '@/lib/utils/gql/introspectionImportedTypes';
 
 import { IntrospectionFieldsCollection } from './IntrospectionFieldsCollection';
 import { GqlSchemaIntrospection } from '@/lib/utils/gql/GqlSchemaIntrospection';
@@ -8,7 +8,7 @@ import { AllFieldsTypeFieldComponent } from './AllFieldsTypeFieldComponent';
 import { AllDirectivesFieldComponent } from './AllDirectivesFieldComponent';
 
 interface IIntrospectionRootProps {
-  schema: IntrospectionSchema;
+  schema: IIntrospectionSchema;
 }
 
 export function IntrospectionRoot({ schema }: IIntrospectionRootProps) {

@@ -1,19 +1,19 @@
 'use client';
 
 import {
-  IntrospectionInterfaceType,
-  IntrospectionNamedTypeRef,
-  IntrospectionSchema,
+  IIntrospectionInterfaceType,
+  IIntrospectionNamedTypeRef,
+  IIntrospectionSchema,
 } from '@/lib/utils/gql/introspectionImportedTypes';
 import { useState } from 'react';
 import { GetFieldWrapper } from './GetFieldWrapper';
 
 interface IInterfaceFieldComponentProps {
   type:
-    | IntrospectionNamedTypeRef<IntrospectionInterfaceType>
+    | IIntrospectionNamedTypeRef<IIntrospectionInterfaceType>
     | undefined
     | null;
-  schema: IntrospectionSchema;
+  schema: IIntrospectionSchema;
 }
 
 export function InterfaceFieldComponent({

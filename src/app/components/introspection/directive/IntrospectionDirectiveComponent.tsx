@@ -1,6 +1,6 @@
 import {
-  IntrospectionDirective,
-  IntrospectionSchema,
+  IIntrospectionDirective,
+  IIntrospectionSchema,
 } from '@/lib/utils/gql/introspectionImportedTypes';
 
 import { DescriptionFieldComponent } from '../shared/DescriptionFieldComponent';
@@ -9,17 +9,9 @@ import { SimpleBlockComponent } from '../shared/SimpleBlockComponent';
 import { FoldableBlockComponent } from '../shared/FoldableBlockComponent';
 
 interface IIntrospectionDirectiveComponentProps {
-  directive: IntrospectionDirective | undefined | null;
-  schema: IntrospectionSchema;
+  directive: IIntrospectionDirective | undefined | null;
+  schema: IIntrospectionSchema;
 }
-
-// interface IntrospectionDirective {
-//   name: string;
-//   description?: Maybe<string>;
-//   isRepeatable?: boolean;
-//   locations: Array<DirectiveLocation>;
-//   args: Array<IntrospectionInputValue>;
-// }
 
 export function IntrospectionDirectiveComponent({
   directive,

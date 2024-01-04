@@ -1,8 +1,8 @@
 'use client';
 
 import {
-  IntrospectionInputTypeRef,
-  IntrospectionSchema,
+  TIntrospectionInputTypeRef,
+  IIntrospectionSchema,
 } from '@/lib/utils/gql/introspectionImportedTypes';
 
 import { useState } from 'react';
@@ -10,8 +10,8 @@ import { GetFieldWrapper } from '../shared/GetFieldWrapper';
 import { FoldableBlockComponent } from '../shared/FoldableBlockComponent';
 
 interface IIntrospectionInputValueTypeComponentProps {
-  type: IntrospectionInputTypeRef | undefined | null;
-  schema: IntrospectionSchema;
+  type: TIntrospectionInputTypeRef | undefined | null;
+  schema: IIntrospectionSchema;
 }
 
 export function IntrospectionInputValueTypeComponent({

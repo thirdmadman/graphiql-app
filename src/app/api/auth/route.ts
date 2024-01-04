@@ -92,6 +92,9 @@ export async function POST(request: NextRequest) {
         case 'auth/invalid-credential':
           errorCode = SignInErrorCodes.InvalidCredentials;
           break;
+        case 'auth/network-request-failed':
+          errorCode = SignInErrorCodes.AuthNetworkFailed;
+          break;
         default:
           errorCode = SignInErrorCodes.AuthServiceError;
           message = `${signInPageEn[errorCode]} ${

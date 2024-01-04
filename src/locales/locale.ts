@@ -2,6 +2,7 @@ export enum SignInErrorCodes {
   TooManyRequests = 'TooManyRequestsError',
   InvalidCredentials = 'InvalidCredentialsError',
   AuthServiceError = 'AuthServiceError',
+  AuthNetworkFailed = 'AuthNetworkFailed',
   UnknownError = 'UnknownError',
 }
 
@@ -12,6 +13,8 @@ const signInErrorsEn = {
     'Invalid credentials. Please check the entered data.',
   [SignInErrorCodes.AuthServiceError]: 'Authorization service error.',
   [SignInErrorCodes.UnknownError]: 'An error occurred, please try again later',
+  [SignInErrorCodes.AuthNetworkFailed]:
+    'Network request failed. Please try again later',
 };
 
 export const signInErrorsRu = {
@@ -22,6 +25,8 @@ export const signInErrorsRu = {
   [SignInErrorCodes.AuthServiceError]: 'Ошибка авторизации.',
   [SignInErrorCodes.UnknownError]:
     'Произошла ошибка. Пожалуйста, повторите попытку позже',
+  [SignInErrorCodes.AuthNetworkFailed]:
+    'Ошибка выполнения сетевого запроса. Пожалуйста, повторите попытку позже.',
 };
 
 export const formLabelsEn = {

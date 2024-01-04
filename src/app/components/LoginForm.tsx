@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import { signInFormSchema } from '@/lib/yup/formSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useContext, useState } from 'react';
+import { ErrorMessage } from './ErrorMessage';
+import Image from 'next/image';
 
 interface errorResponse {
   message: string;
@@ -24,6 +26,15 @@ export function LoginForm() {
   const [signInError, setSignInError] = useState<
     SignInErrorCodes | string | null
   >(null);
+  const [type, setType] = useState('password');
+
+  const toggleType = () => {
+    if (type === 'password') {
+      setType('text');
+    } else {
+      setType('password');
+    }
+  };
 
   const { state } = useContext(localeContext);
   const currentLang = state.currentLocale.id;
@@ -76,45 +87,45 @@ export function LoginForm() {
   const passwordReg = register('password');
 
   return (
-    <form
-      noValidate={true}
-      action=""
-      className="my-8 space-y-4"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <div>
-        <div className="space-y-2 mb-2">
-          <label htmlFor="email" className="block text-sm font-medium">
-            {emailLabel}
-          </label>
-          <input
-            type="email"
-            id="email"
-            name={emailReg.name}
-            aria-label="email"
-            placeholder="name@company.com"
-            onChange={emailReg.onChange}
-            ref={emailReg.ref}
-            onFocus={() => setSignInError(null)}
-            onBlur={emailReg.onBlur}
-            className="w-full px-3 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+    <form className="space-y-8" onSubmit={handleSubmit(onSubmit)} noValidate>
+      <div className="relative">
+        <label
+          htmlFor="email"
+          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        >
+          {emailLabel}
+        </label>
+        <input
+          type="email"
+          name={emailReg.name}
+          aria-label="email"
+          placeholder="name@company.com"
+          onChange={emailReg.onChange}
+          ref={emailReg.ref}
+          onFocus={() => setSignInError(null)}
+          onBlur={emailReg.onBlur}
+          className="mb-1 block w-full px-3 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+        />
+        {errors.email?.message && (
+          <ErrorMessage
+            message={
+              locale[currentLang][errors.email?.message as formValidationErrors]
+            }
           />
-          <p className="text-xs text-red-600 min-h-[16px]">
-            {errors.email?.message
-              ? locale[currentLang][
-                  errors.email?.message as formValidationErrors
-                ]
-              : ' '}
-          </p>
+        )}
+      </div>
+      <div className="relative">
+        <div className="flex justify-between">
+          <label
+            htmlFor="password"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            {passwordLabel}
+          </label>
         </div>
-        <div className="space-y-2">
-          <div className="flex justify-between">
-            <label htmlFor="password" className="text-sm font-medium">
-              {passwordLabel}
-            </label>
-          </div>
+        <div className="mb-1 flex">
           <input
-            type="password"
+            type={type}
             id="password"
             aria-label="password"
             placeholder="••••••••"
@@ -123,29 +134,52 @@ export function LoginForm() {
             ref={passwordReg.ref}
             onFocus={() => setSignInError(null)}
             onBlur={passwordReg.onBlur}
-            className="w-full px-3 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+            className="block w-full px-3 py-2 border rounded-lg text-security:disc dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           />
-          <p className="text-xs text-red-600 min-h-[16px]">
-            {errors.password?.message
-              ? locale[currentLang][
-                  errors.password?.message as formValidationErrors
-                ]
-              : ' '}
-          </p>
+          <span
+            className="flex justify-around items-center"
+            onClick={toggleType}
+          >
+            {type === 'password' ? (
+              <Image
+                src={'/images/svg/eye.svg'}
+                width={25}
+                height={25}
+                alt="eye"
+                className="absolute mr-14 cursor-pointer"
+              />
+            ) : (
+              <Image
+                src={'/images/svg/eye_slash.svg'}
+                width={25}
+                height={25}
+                alt="eye_slash"
+                className="absolute mr-14 cursor-pointer"
+              />
+            )}
+          </span>
         </div>
+        {errors.password?.message && (
+          <ErrorMessage
+            message={
+              locale[currentLang][
+                errors.password?.message as formValidationErrors
+              ]
+            }
+          />
+        )}
       </div>
 
       <button
         type="submit"
-        className="w-full px-8 py-3 font-semibold rounded-lg bg-purple-100 
-          dark:text-black hover:opacity-80 active:opacity-disabled transition-opacity text-purple-700"
-        disabled={!!Object.entries(errors).length}
+        className="w-full px-8 py-3 mb-8 font-semibold rounded-lg bg-purple-100 text-gray-700  hover:opacity-80 active:opacity-disabled transition-opacity 
+          dark:text-black"
       >
         {signInBtn}
       </button>
 
       {signInError && (
-        <p className="text-xs text-red-600 text-center min-h-[16px]">
+        <p className="text-xs text-red-600 text-center">
           {locale[currentLang][signInError as SignInErrorCodes] ?? UnknownError}
         </p>
       )}

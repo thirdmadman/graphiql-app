@@ -47,28 +47,28 @@ export default function Login() {
     locale[currentLang];
 
   return (
-    <div className="w-full p-5 mt-5 light">
-      <div className="w-full mx-auto p-6 rounded-lg shadow sm:max-w-md sm:p-8 dark:bg-gray-900 dark:text-gray-100">
-        <h2 className="mb-5 text-3xl font-bold text-center leading-tight tracking-tight">
+    <div className="w-full p-5 mt-5 light space-y-8">
+      <div className="w-full mx-auto rounded-lg shadow sm:max-w-md sm:p-8 dark:bg-gray-900 dark:text-gray-100">
+        <h2 className="mb-6 text-3xl text-center font-bold  leading-tight tracking-tight">
           {signInTitle}
         </h2>
-        <p className="text-sm font-light text-center dark:text-gray-400 mb-10">
+        <p className="text-sm text-center font-light text-gray-500 dark:text-gray-400 mb-10">
           {dontHaveAccount}
           <Link
             href={'/auth/sign-up'}
-            className="text-black dark:text-gray-400 font-bold focus:underline hover:underline text-purple-700"
+            className="font-medium text-gray-700 dark:text-gray-400 focus:underline hover:underline"
             rel="noopener noreferrer"
           >
             {`  ${signUpLink}`}
           </Link>
         </p>
         <LoginForm />
-        <div className="flex items-center w-full">
+        <div className="flex items-center w-full mt-8">
           <hr className="w-full dark:text-gray-400" />
           <p className="px-3 dark:text-gray-400">{or}</p>
           <hr className="w-full dark:text-gray-400" />
         </div>
-        <div className="my-6 space-y-4">
+        <div className="my-6 space-y-6">
           <button
             aria-label="Login with Google"
             type="button"

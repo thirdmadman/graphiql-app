@@ -5,7 +5,7 @@ import { FirebaseError } from 'firebase/app';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { invalidateLogin } from './invalidateLogin';
-import { SignInErrorCodes } from '@/locales/locale';
+import { SignInErrorCodes, signInPageEn } from '@/locales/locale';
 
 interface ILoginData {
   email: string;
@@ -34,75 +34,81 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({}, { status: 500 });
   }
 
-  const response = NextResponse.json({ isError: false }, { status: 401 });
+  const response = NextResponse.json({ isError: true }, { status: 401 });
+
+  let loginData: ILoginData | null = null;
 
   try {
-    const loginData = (await request.json()) as ILoginData;
-
-    if (loginData?.email && loginData.password) {
-      try {
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          loginData.email,
-          loginData.password
-        );
-        const { user } = userCredential;
-        const jwt = await user.getIdToken();
-
-        if (jwt) {
-          const sessionCookie = await adminAuth.createSessionCookie(jwt, {
-            expiresIn: SESSION_EXPIRES_IN,
-          });
-
-          const options = {
-            name: 'session',
-            value: sessionCookie,
-            maxAge: SESSION_EXPIRES_IN,
-            httpOnly: true,
-            secure: true,
-          };
-
-          const successResp = NextResponse.json(
-            { isError: false },
-            { status: 200 }
-          );
-          successResp.cookies.set(options);
-          return successResp;
-        }
-      } catch (e) {
-        let message = '';
-        let errorCode = '';
-        if (e instanceof FirebaseError) {
-          switch (e.code) {
-            case 'auth/too-many-requests':
-              message =
-                'Too many requests. Access to this account has been temporarily disabled due to many failed login attempts. Please try again later.';
-              errorCode = SignInErrorCodes.TooManyRequests;
-              break;
-            case 'auth/invalid-credential':
-              message = 'Invalid credentials. Please check the entered data.';
-              errorCode = SignInErrorCodes.InvalidCredentials;
-              break;
-            default:
-              message = `Authorization service error. ${
-                e.code && `(Firebase error code: ${e.code})`
-              }`;
-              errorCode = SignInErrorCodes.AuthServiceError;
-          }
-        } else {
-          message = 'An error occurred, please try again later.';
-          errorCode = SignInErrorCodes.UnknownError;
-        }
-        return NextResponse.json({ message, errorCode }, { status: 401 });
-      }
-    }
+    loginData = (await request.json()) as ILoginData;
   } catch (e) {
     if (e instanceof Error) {
       return NextResponse.json({ message: e.message }, { status: 400 });
     }
+    return NextResponse.json(SignInErrorCodes.UnknownError, { status: 400 });
   }
 
-  return response;
+  if (!loginData?.email || !loginData?.password) {
+    return response;
+  }
+
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      loginData.email,
+      loginData.password
+    );
+    const { user } = userCredential;
+    const jwt = await user.getIdToken();
+
+    if (!jwt) {
+      return response;
+    }
+
+    const sessionCookie = await adminAuth.createSessionCookie(jwt, {
+      expiresIn: SESSION_EXPIRES_IN,
+    });
+
+    const options = {
+      name: 'session',
+      value: sessionCookie,
+      maxAge: SESSION_EXPIRES_IN,
+      httpOnly: true,
+      secure: true,
+    };
+
+    const successResp = NextResponse.json({ isError: false }, { status: 200 });
+    successResp.cookies.set(options);
+
+    return successResp;
+  } catch (e) {
+    let message = '';
+    let errorCode: SignInErrorCodes;
+
+    if (e instanceof FirebaseError) {
+      switch (e.code) {
+        case 'auth/too-many-requests':
+          errorCode = SignInErrorCodes.TooManyRequests;
+          break;
+        case 'auth/invalid-credential':
+          errorCode = SignInErrorCodes.InvalidCredentials;
+          break;
+        default:
+          errorCode = SignInErrorCodes.AuthServiceError;
+          message = `${signInPageEn[errorCode]} ${
+            e.code && `Firebase error code: ${e.code}`
+          }`;
+      }
+    } else {
+      errorCode = SignInErrorCodes.UnknownError;
+    }
+
+    const errorMessage = message ? message : signInPageEn[errorCode];
+
+    return NextResponse.json(
+      { message: errorMessage, errorCode },
+      { status: 401 }
+    );
+  }
 }
 
 export async function DELETE(request: NextRequest) {

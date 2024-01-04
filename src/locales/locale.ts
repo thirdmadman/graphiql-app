@@ -1,3 +1,123 @@
+export enum SignUpErrorCodes {
+  EmailAlreadyExists = 'EmailAlreadyExistsError',
+  AuthServiceError = 'AuthServiceError',
+  UnknownError = 'UnknownError',
+}
+
+const signupErrorsEn = {
+  [SignUpErrorCodes.EmailAlreadyExists]:
+    'The provided email is already in use by an existing user',
+  [SignUpErrorCodes.AuthServiceError]: 'Authorization service error.',
+  [SignUpErrorCodes.UnknownError]: 'An error occurred, please try again later',
+};
+
+export const signupErrorsRu = {
+  [SignUpErrorCodes.EmailAlreadyExists]:
+    'Данный адрес электронной почты уже используется',
+  [SignUpErrorCodes.AuthServiceError]: 'Ошибка авторизации.',
+  [SignUpErrorCodes.UnknownError]:
+    'Произошла ошибка. Пожалуйста, повторите попытку позже',
+};
+
+export const signupFormLabelsEn = {
+  nameLabel: 'Name',
+  namePlaceholder: 'name',
+  emailLabel: 'Email address',
+  passwordLabel: 'Password',
+  confirmPasswordLabel: 'Confirm password',
+  termsLabel: 'I accept the',
+};
+
+export const signupFormLabelsRu = {
+  nameLabel: 'Имя',
+  namePlaceholder: 'имя',
+  emailLabel: 'Адрес электронной почты',
+  passwordLabel: 'Пароль',
+  confirmPasswordLabel: 'Подтвердите пароль',
+  termsLabel: 'Я принимаю',
+};
+
+export const passwordStrengthEn = {
+  weak: 'weak',
+  okay: 'okay',
+  good: 'good',
+  strong: 'strong',
+};
+
+export const passwordStrengthRu = {
+  weak: 'слабый',
+  okay: 'средний',
+  good: 'надежный',
+  strong: 'сложный',
+};
+
+export const signupPageEn = {
+  signupTitle: 'Create an account',
+  alreadyHaveAccount: 'Already have an account?',
+  signinLink: 'Login here',
+  termsLink: 'Terms and Conditions',
+  signupBtn: 'Sign up',
+  ...signupFormLabelsEn,
+  ...signupErrorsEn,
+  ...passwordStrengthEn,
+};
+
+export const signupPageRu = {
+  signupTitle: 'Создать аккаунт',
+  alreadyHaveAccount: 'Уже есть аккаунт?',
+  signinLink: 'Войти',
+  termsLink: 'Условия и положения',
+  signupBtn: 'Зарегистрироваться',
+  ...signupFormLabelsRu,
+  ...signupErrorsRu,
+  ...passwordStrengthRu,
+};
+
+export enum formValidationErrors {
+  RequiredField = 'RequiredField',
+  InvalidEmail = 'InvalidEmail',
+  PasswordLength = 'PasswordLength',
+  NameLength = 'NameLength',
+  NameLetters = 'NameLetters',
+  PasswordNumber = 'PasswordNumber',
+  PasswordLetter = 'PasswordLetter',
+  PasswordCharacter = 'PasswordCharacter',
+  PasswordMatch = 'PasswordMatch',
+  Terms = 'Terms',
+}
+
+const formValidationErrorsEn = {
+  [formValidationErrors.RequiredField]: 'Required field',
+  [formValidationErrors.InvalidEmail]: 'Please enter a valid email address',
+  [formValidationErrors.PasswordLength]: 'Must be 8 or more characters',
+  [formValidationErrors.NameLength]: 'Must be 2 or more characters',
+  [formValidationErrors.NameLetters]: 'Must contain only letters',
+  [formValidationErrors.PasswordNumber]: 'Must contain at least one number',
+  [formValidationErrors.PasswordLetter]: 'Must contain at least one letter',
+  [formValidationErrors.PasswordCharacter]:
+    'Must contain at least one special character',
+  [formValidationErrors.PasswordMatch]: 'Passwords do not match',
+  [formValidationErrors.Terms]: 'You should accept terms and conditions',
+};
+
+const formValidationErrorsRu = {
+  [formValidationErrors.RequiredField]: 'Обязательное поле',
+  [formValidationErrors.InvalidEmail]:
+    'Введите корректный адрес электронной почты',
+  [formValidationErrors.PasswordLength]:
+    'Должен состоять из 8 или более символов',
+  [formValidationErrors.NameLength]: 'Должно состоять из 2 или более символов',
+  [formValidationErrors.NameLetters]: 'Должно содержать только буквы',
+  [formValidationErrors.PasswordNumber]:
+    'Должен содержать как минимум одну цифру',
+  [formValidationErrors.PasswordLetter]:
+    'Должен содержать как минимум одну букву',
+  [formValidationErrors.PasswordCharacter]:
+    'Должен содержать как минимум один спецсимвол',
+  [formValidationErrors.PasswordMatch]: 'Введенные пароли не совпадают',
+  [formValidationErrors.Terms]: 'Вы должны принять условия и положения',
+};
+
 export const en = {
   id: 'en',
   requestFieldLabel: 'Write your query',
@@ -40,6 +160,8 @@ export const en = {
   teamSectionTitle: 'Our team',
   teamSectionRole1: 'Team lead',
   teamSectionRole2: 'Web developer',
+  ...signupPageEn,
+  ...formValidationErrorsEn,
 };
 
 export const ru = {
@@ -84,6 +206,8 @@ export const ru = {
   teamSectionTitle: 'Наша команда',
   teamSectionRole1: 'Тимлид',
   teamSectionRole2: 'Разработчик',
+  ...signupPageRu,
+  ...formValidationErrorsRu,
 };
 
 export type TLocale = typeof en;

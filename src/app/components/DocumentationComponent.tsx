@@ -11,9 +11,20 @@ export async function DocumentationComponent({
 }: IDocumentationComponentProps) {
   const headers = getParsedQueryParam('headers', searchParams.headers);
 
-  const schemaResponse = await getGqlIntrospection(
-    'https://spacex-production.up.railway.app',
+  if (!searchParams?.url) {
+    return (
+      <div
+        className="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+        role="alert"
+      >
+        In order to access Documentation Explorer, provide correct url to
+        graphql endpoint.
+      </div>
+    );
+  }
 
+  const schemaResponse = await getGqlIntrospection(
+    String(searchParams.url),
     headers?.resp ?? {}
   );
 

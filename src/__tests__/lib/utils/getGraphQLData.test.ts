@@ -19,10 +19,16 @@ describe('getGraphQLData', () => {
     vi.clearAllMocks();
   });
 
+  it('should return undef if url not present', async () => {
+    const result = await getGraphQLData({ url: undefined });
+
+    expect(result).toBeUndefined();
+  });
+
   it('should return undef if gql query not present', async () => {
     const result = await getGraphQLData({ data: undefined });
 
-    expect(result).not.toBeNull();
+    expect(result).toBeUndefined();
   });
 
   it('should parse in gql query only sting', async () => {

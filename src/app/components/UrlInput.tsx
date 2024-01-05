@@ -38,8 +38,13 @@ export function UrlInput({ urlOverwrite = '' }: UrlInputProps) {
         className="mb-5 mr-5"
         value={url}
         onChange={(e) => setUrl(e.currentTarget.value)}
+        data-testid={'input'}
       />
-      <Button color="primary" onClick={() => setNewUrl(url)}>
+      <Button
+        color="primary"
+        onClick={() => setNewUrl(url)}
+        data-testid={'button'}
+      >
         Save
       </Button>
     </div>

@@ -8,6 +8,7 @@ import { ResponseWrapper } from './components/ResponseWrapper';
 import { RequestWrapper } from './components/RequestWrapper';
 import { generateSuspenseKeyBySearchParams } from '@/lib/utils/generateSuspenseKeyBySearchParams';
 import { UrlInput } from './components/UrlInput';
+import { DocumentationComponent } from './components/DocumentationComponent';
 
 enum Mode {
   Edit,
@@ -38,7 +39,13 @@ export default function Home({
             </Suspense>
           </div>
           <div className="py-10 w-full flex">
-            <Suspense key={susKey} fallback={<div>Loading...</div>}>
+            <Suspense
+              key={generateSuspenseKeyBySearchParams(searchParams, [
+                'url',
+                'headers',
+              ])}
+              fallback={<div>Loading...</div>}
+            >
               <DocumentationComponent searchParams={searchParams} />
             </Suspense>
           </div>

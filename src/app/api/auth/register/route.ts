@@ -45,6 +45,10 @@ export async function POST(request: NextRequest) {
               'The provided email is already in use by an existing user';
             errorCode = SignUpErrorCodes.EmailAlreadyExists;
             break;
+          case 'auth/invalid-email':
+            message = 'The provided email address is invalid';
+            errorCode = SignUpErrorCodes.AuthInvalidEmailError;
+            break;
           default:
             message = `Authorization service error. ${
               err.code && `(Firebase error code: ${err.code})`

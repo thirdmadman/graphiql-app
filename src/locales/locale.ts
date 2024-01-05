@@ -1,3 +1,66 @@
+export enum SignInErrorCodes {
+  TooManyRequests = 'TooManyRequestsError',
+  InvalidCredentials = 'InvalidCredentialsError',
+  AuthServiceError = 'AuthServiceError',
+  AuthNetworkFailed = 'AuthNetworkFailed',
+  UnknownError = 'UnknownError',
+}
+
+const signInErrorsEn = {
+  [SignInErrorCodes.TooManyRequests]:
+    'Too many requests. Access to this account has been temporarily disabled due to many failed login attempts. Please try again later.',
+  [SignInErrorCodes.InvalidCredentials]:
+    'Invalid credentials. Please check the entered data.',
+  [SignInErrorCodes.AuthServiceError]: 'Authorization service error.',
+  [SignInErrorCodes.UnknownError]: 'An error occurred, please try again later',
+  [SignInErrorCodes.AuthNetworkFailed]:
+    'Network request failed. Please try again later',
+};
+
+export const signInErrorsRu = {
+  [SignInErrorCodes.TooManyRequests]:
+    'Слишком много запросов. Доступ к этой учетной записи временно отключен из-за множества неудачных попыток входа. Пожалуйста, повторите попытку позже.',
+  [SignInErrorCodes.InvalidCredentials]:
+    'Неверные учетные данные. Пожалуйста, проверьте введенные данные',
+  [SignInErrorCodes.AuthServiceError]: 'Ошибка авторизации.',
+  [SignInErrorCodes.UnknownError]:
+    'Произошла ошибка. Пожалуйста, повторите попытку позже',
+  [SignInErrorCodes.AuthNetworkFailed]:
+    'Ошибка выполнения сетевого запроса. Пожалуйста, повторите попытку позже.',
+};
+
+export const formLabelsEn = {
+  emailLabel: 'Email address',
+  passwordLabel: 'Password',
+};
+
+export const formLabelsRu = {
+  emailLabel: 'Адрес электронной почты',
+  passwordLabel: 'Пароль',
+};
+
+export const signInPageEn = {
+  signInTitle: 'Login to your account',
+  dontHaveAccount: 'Dont have an account?',
+  signInBtn: 'Sign in',
+  signUpLink: 'Sign up here',
+  loginWithGoogleBtn: 'Login with Google',
+  or: 'OR',
+  ...formLabelsEn,
+  ...signInErrorsEn,
+};
+
+export const signInPageRu = {
+  signInTitle: 'Войдите в свой аккаунт',
+  dontHaveAccount: 'Не имеете аккаунта?',
+  signInBtn: 'Войти',
+  signUpLink: 'Зарегистрироваться',
+  loginWithGoogleBtn: 'Войти через Google',
+  or: 'ИЛИ',
+  ...formLabelsRu,
+  ...signInErrorsRu,
+};
+
 export enum SignUpErrorCodes {
   EmailAlreadyExists = 'EmailAlreadyExistsError',
   AuthServiceError = 'AuthServiceError',
@@ -160,8 +223,9 @@ export const en = {
   teamSectionTitle: 'Our team',
   teamSectionRole1: 'Team lead',
   teamSectionRole2: 'Web developer',
-  ...signupPageEn,
   ...formValidationErrorsEn,
+  ...signInPageEn,
+  ...signupPageEn,
 };
 
 export const ru = {
@@ -206,8 +270,9 @@ export const ru = {
   teamSectionTitle: 'Наша команда',
   teamSectionRole1: 'Тимлид',
   teamSectionRole2: 'Разработчик',
-  ...signupPageRu,
   ...formValidationErrorsRu,
+  ...signInPageRu,
+  ...signupPageRu,
 };
 
 export type TLocale = typeof en;

@@ -12,6 +12,8 @@ beforeAll(() => {
   });
 });
 
+const mockUrl = 'https://spacex-production.up.railway.app/';
+
 describe('getGraphQLData', () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -24,25 +26,28 @@ describe('getGraphQLData', () => {
   });
 
   it('should parse in gql query only sting', async () => {
-    await getGraphQLData({ data: {} as string });
+    await getGraphQLData({ data: {} as string, url: mockUrl });
 
-    expect(mocks.gqlFetchApi).toBeCalledWith(
-      'https://spacex-production.up.railway.app/',
-      '',
-      null,
-      null
-    );
+    expect(mocks.gqlFetchApi).toBeCalledWith(mockUrl, '', null, null);
   });
 
   it('should return error on invalid variables', async () => {
-    const result = await getGraphQLData({ data: '{}', variables: 'no' });
+    const result = await getGraphQLData({
+      data: '{}',
+      variables: 'no',
+      url: mockUrl,
+    });
 
     expect(result?.resp).toBeUndefined();
     expect(result?.error).not.toBeUndefined();
   });
 
   it('should return error on invalid headers', async () => {
-    const result = await getGraphQLData({ data: '{}', headers: 'no' });
+    const result = await getGraphQLData({
+      data: '{}',
+      headers: 'no',
+      url: mockUrl,
+    });
 
     expect(result?.resp).toBeUndefined();
     expect(result?.error).not.toBeUndefined();
@@ -53,10 +58,11 @@ describe('getGraphQLData', () => {
       data: '{}',
       headers: '{"field": "headers"}',
       variables: '{"field": "variables"}',
+      url: mockUrl,
     });
 
     expect(mocks.gqlFetchApi).toBeCalledWith(
-      'https://spacex-production.up.railway.app/',
+      mockUrl,
       '{}',
       { field: 'headers' },
       { field: 'variables' }

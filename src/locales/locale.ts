@@ -64,6 +64,7 @@ export const signInPageRu = {
 export enum SignUpErrorCodes {
   EmailAlreadyExists = 'EmailAlreadyExistsError',
   AuthServiceError = 'AuthServiceError',
+  AuthInvalidEmailError = 'AuthInvalidEmailError',
   UnknownError = 'UnknownError',
 }
 
@@ -71,6 +72,8 @@ const signupErrorsEn = {
   [SignUpErrorCodes.EmailAlreadyExists]:
     'The provided email is already in use by an existing user',
   [SignUpErrorCodes.AuthServiceError]: 'Authorization service error.',
+  [SignUpErrorCodes.AuthInvalidEmailError]:
+    'The provided email address is invalid',
   [SignUpErrorCodes.UnknownError]: 'An error occurred, please try again later',
 };
 
@@ -78,6 +81,8 @@ export const signupErrorsRu = {
   [SignUpErrorCodes.EmailAlreadyExists]:
     'Данный адрес электронной почты уже используется',
   [SignUpErrorCodes.AuthServiceError]: 'Ошибка авторизации.',
+  [SignUpErrorCodes.AuthInvalidEmailError]:
+    'Данный адрес электронной почты недействителен',
   [SignUpErrorCodes.UnknownError]:
     'Произошла ошибка. Пожалуйста, повторите попытку позже',
 };

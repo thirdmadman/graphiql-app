@@ -6,6 +6,8 @@ import { LocaleProvider } from '@/locales/localeProvider';
 import { TextareaField } from './components/TextareaField';
 import { ResponseWrapper } from './components/ResponseWrapper';
 import { RequestWrapper } from './components/RequestWrapper';
+import { generateSuspenseKeyBySearchParams } from '@/lib/utils/generateSuspenseKeyBySearchParams';
+import { UrlInput } from './components/UrlInput';
 
 enum Mode {
   Edit,
@@ -17,18 +19,19 @@ export default function Home({
 }: {
   searchParams: { [key: string]: string | Array<string> | undefined };
 }) {
-  const susKey = searchParams.data ? searchParams.data.toString() : '';
-
   return (
     <StoreProvider>
       <LocaleProvider>
         <main className="flex min-h-screen flex-col items-center p-24">
           <LanguageSelector />
           <h2 className="text-4xl mb-5 font-extrabold dark:text-white">Form</h2>
+          <UrlInput
+            urlOverwrite={searchParams?.url && String(searchParams?.url)}
+          />
           <div className="flex flex-wrap min-w-full justify-center gap-10 relative">
             <RequestWrapper />
             <Suspense
-              key={susKey}
+              key={generateSuspenseKeyBySearchParams(searchParams)}
               fallback={<TextareaField mode={Mode.Readonly} isLoading={true} />}
             >
               <ResponseWrapper searchParams={searchParams} />

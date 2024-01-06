@@ -14,7 +14,7 @@ describe('DocumentationComponent', () => {
       await DocumentationComponent({ searchParams: { url: 'http://a.com' } })
     );
 
-    expect(container).not.toBeNull();
+    expect(container.firstChild).not.toBeNull();
   });
 
   it('should return info message if url is not valid url', async () => {

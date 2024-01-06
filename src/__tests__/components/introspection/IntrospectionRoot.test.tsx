@@ -11,6 +11,6 @@ describe('DeprecationReasonComponent', () => {
       />
     );
 
-    expect(container).not.toBeNull();
+    expect(container.firstChild).not.toBeNull();
   });
 });

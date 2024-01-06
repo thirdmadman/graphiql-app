@@ -10,7 +10,7 @@ describe('DeprecationReasonComponent', () => {
       />
     );
 
-    expect(container).not.toBeNull();
+    expect(container.firstChild).not.toBeNull();
   });
 
   it('should not render component if isDeprecated false', () => {

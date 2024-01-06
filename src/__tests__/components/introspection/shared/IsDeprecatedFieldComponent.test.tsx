@@ -7,7 +7,7 @@ describe('IsDeprecatedFieldComponent', () => {
       <IsDeprecatedFieldComponent isDeprecated={true} />
     );
 
-    expect(container).not.toBeNull();
+    expect(container.firstChild).not.toBeNull();
   });
 
   it('should not render component if isDeprecated false', () => {

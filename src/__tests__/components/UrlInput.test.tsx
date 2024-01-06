@@ -41,7 +41,7 @@ describe('UrlInput', () => {
   it('should render component and not fail', () => {
     const { container } = render(<UrlInput />);
 
-    expect(container).not.toBeNull();
+    expect(container.firstChild).not.toBeNull();
   });
 
   it('should render input and button', () => {

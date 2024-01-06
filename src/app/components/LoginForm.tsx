@@ -149,6 +149,7 @@ export function LoginForm() {
                 height={25}
                 alt="eye"
                 className="absolute mr-14 cursor-pointer"
+                data-testid="eye-svg"
               />
             ) : (
               <Image
@@ -157,6 +158,7 @@ export function LoginForm() {
                 height={25}
                 alt="eye_slash"
                 className="absolute mr-14 cursor-pointer"
+                data-testid="eye-slash-svg"
               />
             )}
           </span>

@@ -2,14 +2,6 @@ import SignIn from '@/app/auth/sign-in/page';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-vi.mock('@/app/components/Login', async () => {
-  const actual = await vi.importActual('@/app/components/Login');
-  return {
-    ...actual,
-    signInWithGoogle: vi.fn(),
-  };
-});
-
 describe('SignIn page', () => {
   beforeAll(() => {
     beforeEach(() => {
@@ -42,21 +34,6 @@ describe('SignIn page', () => {
     expect(screen.getByText('Sign in')).not.toBeNull();
   });
 
-  it('should contain email adress field', () => {
-    render(SignIn());
-    expect(screen.getByText('Email address')).not.toBeNull();
-  });
-
-  it('should contain password field', () => {
-    render(SignIn());
-    expect(screen.getByText('Password')).not.toBeNull();
-  });
-
-  it('should contain sign in button', () => {
-    render(SignIn());
-    expect(screen.getByText('Sign in')).not.toBeNull();
-  });
-
   it('should render errors on pressing submit', async () => {
     render(SignIn());
     await userEvent.click(screen.getByText('Sign in'));
@@ -83,5 +60,17 @@ describe('SignIn page', () => {
     render(SignIn());
     await userEvent.type(screen.getByTestId('password'), 'test');
     expect(screen.getByText('Must be 8 or more characters')).not.toBeNull();
+  });
+
+  it('should toggle password type on eye icon click', async () => {
+    render(SignIn());
+    await userEvent.type(screen.getByTestId('password'), 'test');
+    await userEvent.click(screen.getByTestId('eye-svg'));
+    expect(screen.getByTestId('password').getAttribute('type')).toBe('text');
+
+    await userEvent.click(screen.getByTestId('eye-slash-svg'));
+    expect(screen.getByTestId('password').getAttribute('type')).toBe(
+      'password'
+    );
   });
 });

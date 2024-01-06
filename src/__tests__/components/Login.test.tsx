@@ -2,7 +2,7 @@ import Login from '@/app/components/Login';
 import { render, screen } from '@testing-library/react';
 import { en } from '@/locales/locale';
 
-describe('Login page', () => {
+describe('Login', () => {
   beforeAll(() => {
     vi.mock('react', async () => {
       const actual = await vi.importActual('react');
@@ -39,7 +39,6 @@ describe('Login page', () => {
 
   it('should contain singup link', () => {
     render(Login());
-    expect(screen.getByRole('link')).not.toBeNull();
     expect(
       screen
         .getByTestId<HTMLAnchorElement>('sign-up-link')

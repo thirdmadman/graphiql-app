@@ -1,5 +1,17 @@
 import { Logout } from '@/app/components/Logout';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+
+const mocks = vi.hoisted(() => {
+  return {
+    push: vi.fn(() => ({})),
+    fetch: vi.fn(() => ({
+      json: () => ({}),
+      status: 200,
+    })),
+  };
+});
+
+vi.stubGlobal('fetch', mocks.fetch);
 
 describe('Logout page', () => {
   beforeAll(() => {
@@ -9,7 +21,7 @@ describe('Logout page', () => {
         ...actual,
         useRouter() {
           return {
-            push: vi.fn(() => {}),
+            push: mocks.push,
           };
         },
       };
@@ -24,5 +36,16 @@ describe('Logout page', () => {
   it('should render logout button', () => {
     render(Logout());
     expect(screen.getByTestId('logout-btn')).not.toBeNull();
+  });
+
+  it('should redirect after logout button click', async () => {
+    render(Logout());
+
+    const button = screen.getByTestId('logout-btn');
+
+    fireEvent.click(button);
+    await waitFor(() => {
+      expect(mocks.push).toBeCalledWith('/auth/sign-in');
+    });
   });
 });

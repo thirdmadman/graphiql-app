@@ -1,16 +1,18 @@
 import { NextRequest, NextResponse, URLPattern } from 'next/server';
 
-type TMiddlewareRouteHandler = (request: NextRequest) => NextResponse<unknown>;
-type TMiddlewareAsyncRouteHandler = (
+export type TMiddlewareRouteHandler = (
+  request: NextRequest
+) => NextResponse<unknown>;
+export type TMiddlewareAsyncRouteHandler = (
   request: NextRequest
 ) => Promise<NextResponse<unknown>>;
 
-interface MiddlewareRoute {
+export interface MiddlewareRoute {
   matcher: string;
   handler: TMiddlewareRouteHandler | TMiddlewareAsyncRouteHandler;
 }
 
-const isAuth = async (request: NextRequest) => {
+export const isAuth = async (request: NextRequest) => {
   const session = request.cookies.get('session');
 
   if (!session) {
@@ -30,7 +32,7 @@ const isAuth = async (request: NextRequest) => {
   }
 };
 
-const middlewareProtectedHandler = async (request: NextRequest) => {
+export const middlewareProtectedHandler = async (request: NextRequest) => {
   const isUserAuth = await isAuth(request);
 
   if (!isUserAuth) {
@@ -40,7 +42,7 @@ const middlewareProtectedHandler = async (request: NextRequest) => {
   return NextResponse.next();
 };
 
-const middlewareSignHandler = async (request: NextRequest) => {
+export const middlewareSignHandler = async (request: NextRequest) => {
   const isUserAuth = await isAuth(request);
 
   if (isUserAuth) {
@@ -50,12 +52,12 @@ const middlewareSignHandler = async (request: NextRequest) => {
   return NextResponse.next();
 };
 
-const routes: Array<MiddlewareRoute> = [
+export const routes: Array<MiddlewareRoute> = [
   { matcher: '/auth/:path*', handler: middlewareSignHandler },
   { matcher: '/protected/:path*', handler: middlewareProtectedHandler },
 ];
 
-const middlewareRequestReducer = (
+export const middlewareRequestReducer = (
   routes: Array<MiddlewareRoute>,
   request: NextRequest
 ) => {

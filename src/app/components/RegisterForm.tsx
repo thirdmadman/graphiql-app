@@ -168,6 +168,7 @@ export function RegisterForm() {
         <Link
           href={'/auth/sign-in'}
           className="font-medium text-gray-700 dark:text-gray-400 focus:underline hover:underline"
+          data-testid="signin"
         >
           {signinLink}
         </Link>
@@ -188,6 +189,7 @@ export function RegisterForm() {
           className="mb-1 block w-full px-3 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           placeholder={namePlaceholder}
           aria-label="name"
+          data-testid="name"
         />
         {errors.name?.message && (
           <ErrorMessage
@@ -213,6 +215,7 @@ export function RegisterForm() {
           className="mb-1 block w-full px-3 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           placeholder="name@company.com"
           aria-label="email"
+          data-testid="email"
         />
         {errors.email?.message && (
           <ErrorMessage
@@ -239,10 +242,12 @@ export function RegisterForm() {
             placeholder="••••••••"
             className="block w-full px-3 py-2 border rounded-lg text-security:disc dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
             aria-label="password"
+            data-testid="password"
           />
           <span
             className="flex justify-around items-center"
             onClick={toggleType}
+            data-testid="eye"
           >
             {type === 'password' ? (
               <Image
@@ -299,6 +304,7 @@ export function RegisterForm() {
           placeholder="••••••••"
           className="mb-1 block w-full px-3 py-2 border rounded-lg -webkit-text-security:disc dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           aria-label="password-confirmation"
+          data-testid="confirm-password"
         />
         {errors.passwordConfirmation?.message && (
           <ErrorMessage
@@ -322,6 +328,7 @@ export function RegisterForm() {
               type="checkbox"
               className="mb-1 w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
               aria-label="terms"
+              data-testid="terms"
             />
           </div>
           <div className="ml-3 text-sm">

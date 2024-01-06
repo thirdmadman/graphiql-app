@@ -4,7 +4,7 @@ import { IIntrospectionSchema } from '@/lib/utils/gql/introspectionImportedTypes
 import { render } from '@testing-library/react';
 
 describe('IntrospectionInputValueComponent', () => {
-  it('should not render component if type not present', () => {
+  it('should not render component if inputValue not present', () => {
     const { container } = render(
       <IntrospectionInputValueComponent
         inputValue={undefined}

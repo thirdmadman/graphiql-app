@@ -58,6 +58,7 @@ export default function Login() {
             href={'/auth/sign-up'}
             className="font-medium text-gray-700 dark:text-gray-400 focus:underline hover:underline"
             rel="noopener noreferrer"
+            data-testid="sign-up-link"
           >
             {`  ${signUpLink}`}
           </Link>
@@ -74,6 +75,7 @@ export default function Login() {
             type="button"
             onClick={() => signInWithGoogle()}
             className="flex items-center justify-center w-full p-4 space-x-4 border rounded-lg focus:ri focus:ri dark:border-gray-400 focus:ri mt-8 hover:opacity-80 active:opacity-disabled transition-opacity"
+            data-testid="login-google-btn"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

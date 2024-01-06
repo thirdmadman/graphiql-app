@@ -97,6 +97,7 @@ export function LoginForm() {
         </label>
         <input
           type="email"
+          data-testid="email"
           name={emailReg.name}
           aria-label="email"
           placeholder="name@company.com"
@@ -126,6 +127,7 @@ export function LoginForm() {
         <div className="mb-1 flex">
           <input
             type={type}
+            data-testid="password"
             id="password"
             aria-label="password"
             placeholder="••••••••"
@@ -147,6 +149,7 @@ export function LoginForm() {
                 height={25}
                 alt="eye"
                 className="absolute mr-14 cursor-pointer"
+                data-testid="eye-svg"
               />
             ) : (
               <Image
@@ -155,6 +158,7 @@ export function LoginForm() {
                 height={25}
                 alt="eye_slash"
                 className="absolute mr-14 cursor-pointer"
+                data-testid="eye-slash-svg"
               />
             )}
           </span>
@@ -172,6 +176,7 @@ export function LoginForm() {
 
       <button
         type="submit"
+        data-testid="sign-in-btn"
         className="w-full px-8 py-3 mb-8 font-semibold rounded-lg bg-purple-100 text-gray-700  hover:opacity-80 active:opacity-disabled transition-opacity 
           dark:text-black"
       >

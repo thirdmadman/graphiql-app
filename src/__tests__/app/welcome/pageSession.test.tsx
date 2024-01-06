@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 
 vi.mock('@/lib/firebase/getUser', () => {
   return {
-    getUser: vi.fn(() => null),
+    getUser: vi.fn(() => ({})),
   };
 });
 
@@ -13,14 +13,9 @@ describe('Welcome page', () => {
     expect(container.firstElementChild).not.toBeNull();
   });
 
-  it('should contain sign in button title', async () => {
+  it('should contain main button title', async () => {
     render(await Welcome());
-    expect(screen.getByText('Sign In')).not.toBeNull();
-  });
-
-  it('should contain sign in button title', async () => {
-    render(await Welcome());
-    expect(screen.getByText('Sign Up')).not.toBeNull();
+    expect(screen.getByText('Main')).not.toBeNull();
   });
 
   it('should contain welcome section text', async () => {

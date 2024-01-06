@@ -7,7 +7,7 @@ describe('SimpleBlockComponent', () => {
       <SimpleBlockComponent title={'block title'} />
     );
 
-    expect(container).not.toBeNull();
+    expect(container.firstChild).not.toBeNull();
   });
 
   it('should not render component if title undef or null', () => {

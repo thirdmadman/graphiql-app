@@ -7,7 +7,7 @@ describe('DescriptionFieldComponent', () => {
       <DescriptionFieldComponent description={'some description'} />
     );
 
-    expect(container).not.toBeNull();
+    expect(container.firstChild).not.toBeNull();
   });
 
   it('should not render component if description undef', () => {

@@ -137,7 +137,7 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
   } = locale[currentLang];
 
   return (
-    <div className="min-w-[300px] w-[30%] min-h-full">
+    <div className="min-w-[300px] w-[48%] min-h-full">
       <div className="mb-5">
         <label
           htmlFor="gqlq"

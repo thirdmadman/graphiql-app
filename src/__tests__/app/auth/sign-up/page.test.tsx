@@ -17,6 +17,10 @@ vi.mock('next/navigation', async () => {
   };
 });
 
+vi.mock('@/app/components/shared/header/Header', () => ({
+  Header: () => <div>HEADER</div>,
+}));
+
 describe('Sign-up page', () => {
   it('should render without failing', () => {
     const { container } = render(SignUp());

@@ -240,6 +240,7 @@ export const en = {
     'We are sorry, but documentation is not available at the moment',
   urlInputSave: 'Save',
   urlInputPlaceholder: 'Enter url of graphql endpoint',
+  languageSelectTitle: 'Language',
 };
 
 export const ru = {
@@ -295,6 +296,7 @@ export const ru = {
   documentationExplorerErrorNoSchema:
     'Сожалеем, но документация на данный момент недоступна',
   urlInputSave: 'Сохранить',
+  languageSelectTitle: 'Язык',
   urlInputPlaceholder: 'Введите URL-адрес конечной точки GraphQL',
 };
 

@@ -3,6 +3,7 @@ import { LanguageSelector } from '../LanguageSelector';
 import { Logout } from '../Logout';
 import Image from 'next/image';
 import Link from 'next/link';
+import { LocaleByNameExtractor } from '@/locales/LocaleByNameExtractor';
 
 export function HeaderContent({
   userId = null,
@@ -14,7 +15,7 @@ export function HeaderContent({
       <div className="container flex justify-between h-16 mx-auto">
         <Link
           rel="noopener noreferrer"
-          href="/welcome"
+          href="/"
           aria-label="Back to homepage"
           className="flex items-center p-2"
         >
@@ -38,14 +39,14 @@ export function HeaderContent({
                 href="/auth/sign-in"
                 className="block px-6 py-3 text-center rounded-lg bg-purple-100 text-purple-700 shadow-md"
               >
-                Sign In
+                <LocaleByNameExtractor localeName="signinBtnTitle" />
               </Link>
               <Link
                 rel="noopener norefferer"
                 href="/auth/sign-up"
                 className="block px-6 py-3 text-center rounded-lg bg-red-100 text-red-700 shadow-md"
               >
-                Sign Up
+                <LocaleByNameExtractor localeName="signupBtnTitle" />
               </Link>
             </>
           )}

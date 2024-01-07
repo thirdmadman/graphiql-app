@@ -1,10 +1,13 @@
 'use client';
 
+import { useLocale } from '@/locales/useLocale';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
 export function Logout() {
   const router = useRouter();
+
+  const locale = useLocale();
 
   async function logOut() {
     try {
@@ -24,7 +27,7 @@ export function Logout() {
       onClick={() => logOut()}
       data-testid="logout-btn"
     >
-      Logout
+      {locale.signOutButtonText}
     </button>
   );
 }

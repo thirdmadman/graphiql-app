@@ -241,6 +241,7 @@ export const en = {
   urlInputSave: 'Save',
   urlInputPlaceholder: 'Enter url of graphql endpoint',
   languageSelectTitle: 'Language',
+  signOutButtonText: 'Sign out',
 };
 
 export const ru = {
@@ -298,6 +299,7 @@ export const ru = {
   urlInputSave: 'Сохранить',
   languageSelectTitle: 'Язык',
   urlInputPlaceholder: 'Введите URL-адрес конечной точки GraphQL',
+  signOutButtonText: 'Выйти',
 };
 
 export type TLocale = typeof en;

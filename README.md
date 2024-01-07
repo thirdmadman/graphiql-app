@@ -5,6 +5,12 @@ GraphiQL is a playground/IDE for graphQL requests. This is team task for RSSchoo
 This project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 
+## Built With
+
+- [React](https://react.dev/)
+- [NEXT.JS](https://nextjs.org/)
+- [NextUI](https://nextui.org/)
+
 ## Getting Started
 
 
@@ -28,7 +34,7 @@ pnpm add
 bun install
 ```
 
-3. Set up Firebase project according to "Setting up Firebase" section in this article https://blog.logrocket.com/user-authentication-firebase-react-apps/
+3. Set up Firebase project according to "Setting up Firebase" section in this article: https://blog.logrocket.com/user-authentication-firebase-react-apps/
 
 4. Rename `.env.local.example` to `.env.local` and enter config data from you Firebase project in it
 
@@ -42,7 +48,7 @@ NEXT_PUBLIC_FIREBASE_APP_ID =
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID =
 ```
 
-5. Get SEVICE_ACCOUNT key in your Firebase Project according to this article https://clemfournier.medium.com/how-to-get-my-firebase-service-account-key-file-f0ec97a21620
+5. Get SEVICE_ACCOUNT key in your Firebase Project according to this article: https://clemfournier.medium.com/how-to-get-my-firebase-service-account-key-file-f0ec97a21620
 
 6.  and also put in `.env.local`
 

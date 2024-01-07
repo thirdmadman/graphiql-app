@@ -6,4 +6,7 @@ import { afterEach } from 'vitest';
 
 afterEach(() => {
   cleanup();
+  vi.clearAllMocks();
+  vi.resetAllMocks();
+  vi.resetModules();
 });

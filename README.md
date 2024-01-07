@@ -10,15 +10,13 @@ This project bootstrapped with [`create-next-app`](https://github.com/vercel/nex
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-
-2. Clone the repo
+1. Clone the repo
 
 ```sh
 git clone https://github.com/thirdmadman/graphiql-app.git
 ```
 
-3. Install NPM packages
+2. Install NPM packages
 
 ```sh
 npm install
@@ -30,9 +28,9 @@ pnpm add
 bun install
 ```
 
-4. Set up Firebase project according to "Setting up Firebase" section in this article https://blog.logrocket.com/user-authentication-firebase-react-apps/
+3. Set up Firebase project according to "Setting up Firebase" section in this article https://blog.logrocket.com/user-authentication-firebase-react-apps/
 
-5. Rename `.env.local.example` to `.env.local` and enter config data from you Firebase project in it
+4. Rename `.env.local.example` to `.env.local` and enter config data from you Firebase project in it
 
 ```sh
 NEXT_PUBLIC_FIREBASE_API_KEY =

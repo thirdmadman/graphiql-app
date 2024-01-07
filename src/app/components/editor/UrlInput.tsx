@@ -1,6 +1,7 @@
 'use client';
 
 import { setQueryParam } from '@/lib/utils/setQueryParam';
+import { useLocale } from '@/locales/useLocale';
 import { Button } from '@nextui-org/button';
 import { Input } from '@nextui-org/input';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -16,6 +17,7 @@ export function UrlInput({ urlOverwrite = '' }: UrlInputProps) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
+  const locale = useLocale();
 
   const setNewUrl = (url: string) => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
@@ -45,7 +47,7 @@ export function UrlInput({ urlOverwrite = '' }: UrlInputProps) {
         onClick={() => setNewUrl(url)}
         data-testid={'button'}
       >
-        Save
+        {locale.urlInputSave}
       </Button>
     </div>
   );

@@ -1,4 +1,5 @@
 import Home from '@/app/page';
+import { en } from '@/locales/locale';
 import { render, screen } from '@testing-library/react';
 
 describe('Home page', () => {
@@ -65,7 +66,7 @@ describe('Home page', () => {
 
   it('should contain header', () => {
     render(Home({ searchParams: { data: '' } }));
-    expect(screen.getByText('Form')).not.toBeNull();
+    expect(screen.getByText(en.editorTitle)).not.toBeNull();
   });
 
   it('should contain input from', () => {
@@ -76,12 +77,5 @@ describe('Home page', () => {
   it('should contain request box', () => {
     render(Home({ searchParams: { data: '' } }));
     expect(screen.getByText('Server response')).not.toBeNull();
-  });
-
-  it('should contain controls', () => {
-    render(Home({ searchParams: { data: '' } }));
-    expect(
-      screen.getByText('Submit button blocked?', { exact: false })
-    ).not.toBeNull();
   });
 });

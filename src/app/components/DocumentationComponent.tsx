@@ -1,6 +1,7 @@
 import { getGqlIntrospection } from '@/lib/utils/gql/introspection';
 import { IntrospectionRoot } from './introspection/IntrospectionRoot';
 import { getParsedQueryParam } from '@/lib/utils/getParsedQueryParam';
+import { LocaleByNameExtractor } from '@/locales/LocaleByNameExtractor';
 
 interface IDocumentationComponentProps {
   searchParams: { [key: string]: string | Array<string> | undefined };
@@ -18,8 +19,7 @@ export async function DocumentationComponent({
         role="alert"
         data-testid="no-url"
       >
-        In order to access Documentation Explorer, provide correct url to
-        graphql endpoint.
+        <LocaleByNameExtractor localeName="documentationExplorerErrorUrl" />
       </div>
     );
   }
@@ -38,8 +38,7 @@ export async function DocumentationComponent({
         role="alert"
         data-testid="error"
       >
-        <span className="font-medium">We are sorry,</span> but documentation is
-        not available at the moment
+        <LocaleByNameExtractor localeName="documentationExplorerErrorNoSchema" />
       </div>
     );
   }

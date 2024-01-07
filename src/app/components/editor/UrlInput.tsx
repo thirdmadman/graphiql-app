@@ -36,7 +36,7 @@ export function UrlInput({ urlOverwrite = '' }: UrlInputProps) {
         type="url"
         label="URL"
         labelPlacement={'outside'}
-        placeholder="Enter url of graphql endpoint"
+        placeholder={locale.urlInputPlaceholder}
         className="mb-5 mr-5"
         value={url}
         onChange={(e) => setUrl(e.currentTarget.value)}

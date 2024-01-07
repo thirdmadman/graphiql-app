@@ -1,4 +1,4 @@
-import { UrlInput } from '@/app/components/UrlInput';
+import { UrlInput } from '@/app/components/editor/UrlInput';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 const mocks = vi.hoisted(() => {

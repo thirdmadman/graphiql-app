@@ -6,9 +6,10 @@ import { TextareaField } from './components/TextareaField';
 import { ResponseWrapper } from './components/ResponseWrapper';
 import { RequestWrapper } from './components/RequestWrapper';
 import { generateSuspenseKeyBySearchParams } from '@/lib/utils/generateSuspenseKeyBySearchParams';
-import { UrlInput } from './components/UrlInput';
+import { UrlInput } from './components/editor/UrlInput';
 import { DocumentationComponent } from './components/DocumentationComponent';
 import { EditorTitle } from './components/editor/EditorTitle';
+import { LocaleByNameExtractor } from '@/locales/LocaleByNameExtractor';
 
 enum Mode {
   Edit,
@@ -44,7 +45,11 @@ export default function Home({
                 'url',
                 'headers',
               ])}
-              fallback={<div>Loading...</div>}
+              fallback={
+                <div>
+                  <LocaleByNameExtractor localeName="loadingText" />
+                </div>
+              }
             >
               <DocumentationComponent searchParams={searchParams} />
             </Suspense>

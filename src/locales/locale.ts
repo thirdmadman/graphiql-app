@@ -232,6 +232,13 @@ export const en = {
   ...signInPageEn,
   ...signupPageEn,
   editorTitle: 'GraphQL editor',
+  loadingText: 'Loading...',
+  documentationExplorerTitle: 'Documentation Explorer',
+  documentationExplorerErrorUrl:
+    'In order to access Documentation Explorer, provide correct url to graphql endpoint.',
+  documentationExplorerErrorNoSchema:
+    'We are sorry, but documentation is not available at the moment',
+  urlInputSave: 'Save',
 };
 
 export const ru = {
@@ -280,6 +287,13 @@ export const ru = {
   ...signInPageRu,
   ...signupPageRu,
   editorTitle: 'GraphQL редактор',
+  loadingText: 'Загрузка...',
+  documentationExplorerTitle: 'Обозреватель документации',
+  documentationExplorerErrorUrl:
+    'Чтобы получить доступ к обозревателю документации, укажите правильный URL-адрес graphql endpoint',
+  documentationExplorerErrorNoSchema:
+    'Сожалеем, но документация на данный момент недоступна',
+  urlInputSave: 'Сохранить',
 };
 
 export type TLocale = typeof en;

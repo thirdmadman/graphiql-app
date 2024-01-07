@@ -1,7 +1,7 @@
 'use client';
 
 import { useContext } from 'react';
-import { localeContext } from '../../locales/localeProvider';
+import { localeContext } from '../../../locales/localeProvider';
 
 export function LanguageSelector() {
   const { state, dispatch } = useContext(localeContext);

@@ -1,6 +1,6 @@
 import { getUser } from '@/lib/firebase/getUser';
 import React from 'react';
-import { Logout } from '../components/Logout';
+import { Logout } from '../components/shared/Logout';
 
 async function App() {
   const user = await getUser();

@@ -1,4 +1,4 @@
-import { Logout } from '@/app/components/Logout';
+import { Logout } from '@/app/components/shared/Logout';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
 const mocks = vi.hoisted(() => {

@@ -7,7 +7,7 @@ import {
   IIntrospectionScalarType,
   IIntrospectionSchema,
   IIntrospectionUnionType,
-} from '@/lib/utils/gql/introspectionImportedTypes';
+} from '@/types/introspectionImportedTypes';
 import { screen, render } from '@testing-library/react';
 
 describe('IntrospectionTypeComponent', () => {

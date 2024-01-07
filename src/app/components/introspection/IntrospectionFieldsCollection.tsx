@@ -1,7 +1,7 @@
 import {
   IIntrospectionField,
   IIntrospectionSchema,
-} from '@/lib/utils/gql/introspectionImportedTypes';
+} from '@/types/introspectionImportedTypes';
 import { IntrospectionFieldComponent } from './IntrospectionFieldComponent';
 import { FoldableBlockComponent } from './shared/FoldableBlockComponent';
 interface IIntrospectionFieldsCollectionProps {

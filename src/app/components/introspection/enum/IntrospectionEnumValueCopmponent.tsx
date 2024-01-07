@@ -1,4 +1,4 @@
-import { IIntrospectionEnumValue } from '@/lib/utils/gql/introspectionImportedTypes';
+import { IIntrospectionEnumValue } from '@/types/introspectionImportedTypes';
 import { DescriptionFieldComponent } from '../shared/DescriptionFieldComponent';
 import { IsDeprecatedFieldComponent } from '../shared/IsDeprecatedFieldComponent';
 import { DeprecationReasonComponent } from '../shared/DeprecationReasonComponent';

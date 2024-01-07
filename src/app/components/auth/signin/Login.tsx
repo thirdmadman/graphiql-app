@@ -5,7 +5,7 @@ import { getRedirectResult, signInWithRedirect } from 'firebase/auth';
 import { useContext, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { auth, provider } from '@/lib/firebase/firebase-config';
-import { LoginForm } from '@/app/components/LoginForm';
+import { LoginForm } from '@/app/components/auth/signin/LoginForm';
 import { locale } from '@/locales/locale';
 import { localeContext } from '@/locales/localeProvider';
 

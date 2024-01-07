@@ -3,7 +3,7 @@
 import {
   IIntrospectionSchema,
   TIntrospectionType,
-} from '@/lib/utils/gql/introspectionImportedTypes';
+} from '@/types/introspectionImportedTypes';
 
 import { IntrospectionEnumTypeComponent } from '../enum/IntrospectionEnumTypeComponent';
 import { IntrospectionObjectTypeComponent } from '../object/IntrospectionObjectTypeComponent';

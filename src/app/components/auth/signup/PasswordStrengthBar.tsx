@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useContext, useEffect, useState } from 'react';
-import { ErrorMessage } from './ErrorMessage';
+import { ErrorMessage } from '../../shared/ErrorMessage';
 import { locale } from '@/locales/locale';
 import { localeContext } from '@/locales/localeProvider';
 

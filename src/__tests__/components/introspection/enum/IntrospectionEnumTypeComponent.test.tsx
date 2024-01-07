@@ -1,5 +1,5 @@
 import { IntrospectionEnumTypeComponent } from '@/app/components/introspection/enum/IntrospectionEnumTypeComponent';
-import { IIntrospectionSchema } from '@/lib/utils/gql/introspectionImportedTypes';
+import { IIntrospectionSchema } from '@/types/introspectionImportedTypes';
 
 import { render } from '@testing-library/react';
 

@@ -3,7 +3,7 @@
 import {
   TIntrospectionOutputTypeRef,
   IIntrospectionSchema,
-} from '@/lib/utils/gql/introspectionImportedTypes';
+} from '@/types/introspectionImportedTypes';
 import { useState } from 'react';
 import { GetFieldWrapper } from './shared/GetFieldWrapper';
 import { FoldableBlockComponent } from './shared/FoldableBlockComponent';

@@ -1,12 +1,12 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { FormData } from '../auth/types';
+import { FormData } from '../../../../types/loginFormTypes';
 import { useRouter } from 'next/navigation';
 import { signInFormSchema } from '@/lib/yup/formSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useContext, useState } from 'react';
-import { ErrorMessage } from './ErrorMessage';
+import { ErrorMessage } from '../../shared/ErrorMessage';
 import Image from 'next/image';
 
 interface errorResponse {

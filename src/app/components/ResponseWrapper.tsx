@@ -1,5 +1,5 @@
 import { getGraphQLData } from '@/lib/utils/gql/getGraphQLData';
-import { TextareaField } from './TextareaField';
+import { TextareaField } from './editor/TextareaField';
 import { Mode } from './types';
 
 interface IResponseFieldProps {

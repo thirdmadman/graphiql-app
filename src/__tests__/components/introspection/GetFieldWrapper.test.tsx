@@ -1,6 +1,6 @@
 import { mockGqlSchemaIntrospection } from '@/__tests__/__mocks__/mockGqlSchemaIntrospection';
 import { GetFieldWrapper } from '@/app/components/introspection/shared/GetFieldWrapper';
-import { IIntrospectionSchema } from '@/lib/utils/gql/introspectionImportedTypes';
+import { IIntrospectionSchema } from '@/types/introspectionImportedTypes';
 
 import { render } from '@testing-library/react';
 

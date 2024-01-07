@@ -1,6 +1,6 @@
 import { gqlIntrospectionQuery } from '@/constants';
 import { gqlFetchApi } from './fetchGraphQl';
-import { IIntrospectionResponse } from './introspectionImportedTypes';
+import { IIntrospectionResponse } from '../../../types/introspectionImportedTypes';
 
 export const getGqlIntrospection = async (url: string, headers = {}) => {
   const resp = await gqlFetchApi(url, gqlIntrospectionQuery, headers);

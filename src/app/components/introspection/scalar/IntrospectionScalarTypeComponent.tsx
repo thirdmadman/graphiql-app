@@ -1,7 +1,7 @@
 import {
   IIntrospectionScalarType,
   IIntrospectionSchema,
-} from '@/lib/utils/gql/introspectionImportedTypes';
+} from '@/types/introspectionImportedTypes';
 import { DescriptionFieldComponent } from '../shared/DescriptionFieldComponent';
 import { SimpleBlockComponent } from '../shared/SimpleBlockComponent';
 import { FoldableBlockComponent } from '../shared/FoldableBlockComponent';

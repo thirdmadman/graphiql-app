@@ -1,5 +1,5 @@
-import { LanguageSelector } from '@/app/components/LanguageSelector';
-import Login from '@/app/components/Login';
+import { LanguageSelector } from '@/app/components/shared/LanguageSelector';
+import Login from '@/app/components/auth/signin/Login';
 import { StoreProvider } from '@/lib/redux/StoreProvider';
 import { LocaleProvider } from '@/locales/localeProvider';
 

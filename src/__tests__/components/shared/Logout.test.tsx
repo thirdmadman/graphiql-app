@@ -26,6 +26,10 @@ describe('Logout page', () => {
         },
       };
     });
+
+    vi.mock('@/locales/useLocale', () => ({
+      useLocale: () => ({ signOutButtonText: 'Signout' }),
+    }));
   });
 
   it('should render without failing', () => {

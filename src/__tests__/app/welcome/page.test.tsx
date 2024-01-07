@@ -13,6 +13,10 @@ vi.mock('@/lib/firebase/getUser', () => {
   };
 });
 
+vi.mock('@/app/components/shared/header/Header', () => ({
+  Header: () => <div>HEADER</div>,
+}));
+
 describe('Welcome page', () => {
   it('should render without failing', async () => {
     const { container } = render(await Welcome());

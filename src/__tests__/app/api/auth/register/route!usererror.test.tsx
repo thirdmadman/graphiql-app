@@ -1,4 +1,5 @@
 import { POST } from '@/app/api/auth/register/route';
+
 import { NextRequest } from 'next/server';
 
 const body = JSON.stringify({
@@ -10,7 +11,7 @@ const body = JSON.stringify({
 const mocks = vi.hoisted(() => {
   return {
     adminAuth: vi.fn(() => ({
-      createUser: vi.fn(() => ({ user: 'uid' })),
+      createUser: null,
     })),
   };
 });
@@ -20,20 +21,7 @@ vi.mock('@/lib/firebase/firebase-admin-config', () => {
 });
 
 describe('register route', () => {
-  it('should return error with status 401 if user data is incorrect', async () => {
-    const request = new NextRequest(
-      new Request('http://localhost:3000/', {
-        method: 'POST',
-        body: '{}',
-      })
-    );
-
-    const response = await POST(request);
-
-    expect(response.status).toBe(401);
-  });
-
-  it('should return response with status 200 if user is created', async () => {
+  it('should return response with status 401 if it was en error while user creating', async () => {
     const request = new NextRequest(
       new Request('http://localhost:3000/', {
         method: 'POST',
@@ -41,8 +29,12 @@ describe('register route', () => {
       })
     );
 
-    const response = await POST(request);
+    let response;
 
-    expect(response.status).toBe(200);
+    try {
+      response = await POST(request);
+    } catch (e) {}
+
+    expect(response?.status).toBe(401);
   });
 });

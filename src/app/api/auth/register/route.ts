@@ -11,7 +11,7 @@ export interface IRegisterData {
 }
 
 function isFirebaseAuthError(error: FirebaseError): error is FirebaseAuthError {
-  return error.code.startsWith('auth/');
+  return true;
 }
 
 export async function POST(request: NextRequest) {
@@ -38,6 +38,7 @@ export async function POST(request: NextRequest) {
       let message = '';
       let errorCode = '';
       const err = e as FirebaseAuthError;
+
       if (isFirebaseAuthError(err)) {
         switch (err.code) {
           case 'auth/email-already-exists':

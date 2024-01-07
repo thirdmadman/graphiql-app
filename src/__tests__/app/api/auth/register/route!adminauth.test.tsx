@@ -10,10 +10,6 @@ describe('register route', () => {
     const request = new NextRequest(
       new Request('http://localhost:3000/', {
         method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
         body: '{}',
       })
     );

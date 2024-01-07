@@ -35,6 +35,6 @@ describe('Response Wrapper', () => {
       </StoreProvider>
     );
 
-    expect(screen.getByText('No data to show')).not.toBeNull();
+    expect(screen.findByText('No data to show')).not.toBeNull();
   });
 });

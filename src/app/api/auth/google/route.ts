@@ -5,8 +5,6 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
   const authorization = request.headers.get('Authorization');
 
-  const response = NextResponse.json({}, { status: 200 });
-
   if (!adminAuth) {
     return NextResponse.json({}, { status: 500 });
   }
@@ -27,10 +25,11 @@ export async function POST(request: NextRequest) {
         httpOnly: true,
         secure: true,
       };
-
+      const response = NextResponse.json({}, { status: 200 });
       response.cookies.set(options);
+      return response;
     }
   }
 
-  return response;
+  return NextResponse.json({}, { status: 401 });
 }

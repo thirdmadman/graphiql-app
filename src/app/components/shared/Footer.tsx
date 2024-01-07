@@ -35,7 +35,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="protected" className="hover:underline">
+                <Link href="/editor" className="hover:underline">
                   Editor
                 </Link>
               </li>

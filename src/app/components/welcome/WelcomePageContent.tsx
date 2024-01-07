@@ -55,7 +55,7 @@ export function WelcomeContent({
               <Link
                 size="lg"
                 rel="noopener norefferer"
-                href="/"
+                href="/editor"
                 className="block px-6 py-3 text-center rounded-lg bg-green-100 text-gray-700 shadow-md"
               >
                 {mainBtnTitle}

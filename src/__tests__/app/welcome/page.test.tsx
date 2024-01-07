@@ -1,4 +1,4 @@
-import Welcome from '@/app/welcome/page';
+import Welcome from '@/app/page';
 import { render, screen } from '@testing-library/react';
 
 const mocks = vi.hoisted(() => {
@@ -70,6 +70,6 @@ describe('Welcome page', () => {
   it('should contain main button title when user is authenticated', async () => {
     mocks.getUser.mockReturnValueOnce({} as unknown as null);
     render(await Welcome());
-    expect(screen.getByText('Main')).not.toBeNull();
+    expect(screen.getByText('Editor')).not.toBeNull();
   });
 });

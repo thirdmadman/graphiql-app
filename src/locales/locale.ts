@@ -206,7 +206,7 @@ export const en = {
     'Request formatting error! Please ensure that request is written correctly.',
   signinBtnTitle: 'Sign In',
   signupBtnTitle: 'Sign Up',
-  mainBtnTitle: 'Main',
+  mainBtnTitle: 'Editor',
   welcomeSectionTitle1: 'Welcome',
   welcomeSectionTitle2: 'to the GraphiQL',
   welcomeSectionText:
@@ -264,7 +264,7 @@ export const ru = {
     'Ошибка форматирования запроса. Пожалуйста, убедитесь, что запрос написан правильно.',
   signinBtnTitle: 'Войти',
   signupBtnTitle: 'Регистрация',
-  mainBtnTitle: 'Главная',
+  mainBtnTitle: 'Редактор',
   welcomeSectionTitle1: 'Добро пожаловать',
   welcomeSectionTitle2: 'в GraphiQL',
   welcomeSectionText:

@@ -54,7 +54,7 @@ export const middlewareSignHandler = async (request: NextRequest) => {
 
 export const routes: Array<MiddlewareRoute> = [
   { matcher: '/auth/:path*', handler: middlewareSignHandler },
-  { matcher: '/protected/:path*', handler: middlewareProtectedHandler },
+  { matcher: '/editor/:path*', handler: middlewareProtectedHandler },
 ];
 
 export const middlewareRequestReducer = (

@@ -1,5 +1,8 @@
 import { EMPTY_STRING, INDENT_STEP, COMMENT_ID_REGEX } from '../constants';
-import { IRangeItems, IPrettifyQueryResult } from './types';
+import {
+  IRangeItems,
+  IPrettifyQueryResult,
+} from '../../../../types/prettifierTypes';
 import formatters from './formatters';
 import { minifyGQLQuery } from '../minifier';
 import {
@@ -11,7 +14,7 @@ import {
   getRangeByIndex,
   getCurrentNestingLevel,
 } from './helpers';
-import { IPrettifyResponseResult } from './types';
+import { IPrettifyResponseResult } from '../../../../types/prettifierTypes';
 
 export const prettifyGQLQuery = (query: string): IPrettifyQueryResult => {
   try {

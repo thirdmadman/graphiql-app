@@ -4,7 +4,7 @@ import { formSchema } from '@/lib/yup/signupValidationSchema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import { ErrorMessage } from './ErrorMessage';
+import { ErrorMessage } from '../../shared/ErrorMessage';
 import React, { ChangeEvent, useContext, useState } from 'react';
 import { PasswordStrengthBar } from './PasswordStrengthBar';
 import { useRouter } from 'next/navigation';

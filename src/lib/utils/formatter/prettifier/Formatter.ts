@@ -4,7 +4,7 @@ import {
   IRangeItems,
   IRangeItemsPattern,
   TFormatRange,
-} from './types';
+} from '../../../../types/prettifierTypes';
 
 export class Formatter {
   private pattern: IRangeItemsPattern;

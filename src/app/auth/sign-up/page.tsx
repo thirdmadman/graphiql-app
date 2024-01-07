@@ -1,5 +1,5 @@
-import { LanguageSelector } from '@/app/components/LanguageSelector';
-import { SignUpContent } from '@/app/components/SignUpContent';
+import { LanguageSelector } from '@/app/components/shared/LanguageSelector';
+import { SignUpContent } from '@/app/components/auth/signup/SignUpContent';
 import { StoreProvider } from '@/lib/redux/StoreProvider';
 import { LocaleProvider } from '@/locales/localeProvider';
 

@@ -7,7 +7,7 @@ import {
   SPACE,
   SPLITTERS,
 } from '../constants';
-import { IRangeItems } from './types';
+import { IRangeItems } from '../../../../types/prettifierTypes';
 
 export const splitQueryToItems = (query: string): Array<string> => {
   const result: Array<string> = [EMPTY_STRING];

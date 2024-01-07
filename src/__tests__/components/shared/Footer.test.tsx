@@ -1,4 +1,4 @@
-import { Footer } from '@/app/components/Footer';
+import { Footer } from '@/app/components/shared/Footer';
 import { render, screen } from '@testing-library/react';
 
 describe('Footer', () => {

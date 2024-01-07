@@ -15,7 +15,7 @@ import {
   prettifyGQLQuery,
   prettifyJSON,
 } from '@/lib/utils/formatter/prettifier';
-import { Mode } from './types';
+import { Mode } from '../types';
 
 interface ITextareaData {
   content?: object | string;

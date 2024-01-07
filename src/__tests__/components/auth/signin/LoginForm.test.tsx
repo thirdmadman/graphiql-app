@@ -1,8 +1,8 @@
-import Login from '@/app/components/Login';
-import { render, screen } from '@testing-library/react';
+import { LoginForm } from '@/app/components/auth/signin/LoginForm';
 import { en } from '@/locales/locale';
+import { render, screen } from '@testing-library/react';
 
-describe('Login', () => {
+describe('Login Form', () => {
   beforeAll(() => {
     vi.mock('react', async () => {
       const actual = await vi.importActual('react');
@@ -32,22 +32,10 @@ describe('Login', () => {
     });
   });
 
-  it('should render without failing', () => {
-    const { container } = render(Login());
-    expect(container.firstElementChild).not.toBeNull();
-  });
-
-  it('should contain singup link', () => {
-    render(Login());
-    expect(
-      screen
-        .getByTestId<HTMLAnchorElement>('sign-up-link')
-        .href.includes('/auth/sign-up')
-    ).to.be.true;
-  });
-
-  it('should contain signinWitnGoogle button', () => {
-    render(Login());
-    expect(screen.getByTestId('login-google-btn')).not.toBeNull();
+  it('should render the basic fields', () => {
+    render(<LoginForm />);
+    expect(screen.getByTestId('email')).not.toBeNull();
+    expect(screen.getByTestId('password')).not.toBeNull();
+    expect(screen.getByTestId('password')).not.toBeNull();
   });
 });

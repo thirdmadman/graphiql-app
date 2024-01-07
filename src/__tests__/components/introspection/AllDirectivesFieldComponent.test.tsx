@@ -2,7 +2,7 @@ import { AllDirectivesFieldComponent } from '@/app/components/introspection/AllD
 import {
   IIntrospectionDirective,
   IIntrospectionSchema,
-} from '@/lib/utils/gql/introspectionImportedTypes';
+} from '@/types/introspectionImportedTypes';
 
 import { screen, render } from '@testing-library/react';
 

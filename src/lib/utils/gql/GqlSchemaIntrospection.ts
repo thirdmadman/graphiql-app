@@ -4,7 +4,7 @@ import {
   IIntrospectionObjectType,
   IIntrospectionSchema,
   TIntrospectionType,
-} from './introspectionImportedTypes';
+} from '../../../types/introspectionImportedTypes';
 
 export class GqlSchemaIntrospection {
   schema: IIntrospectionSchema;

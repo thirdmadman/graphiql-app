@@ -1,7 +1,7 @@
 import {
   IIntrospectionInterfaceType,
   IIntrospectionSchema,
-} from '@/lib/utils/gql/introspectionImportedTypes';
+} from '@/types/introspectionImportedTypes';
 import { DescriptionFieldComponent } from '../shared/DescriptionFieldComponent';
 import { IntrospectionFieldComponent } from '../IntrospectionFieldComponent';
 import { InterfaceFieldComponent } from '../shared/InterfaceFieldComponent';

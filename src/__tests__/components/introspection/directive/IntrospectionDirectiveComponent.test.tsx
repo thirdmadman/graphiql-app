@@ -1,5 +1,5 @@
 import { IntrospectionDirectiveComponent } from '@/app/components/introspection/directive/IntrospectionDirectiveComponent';
-import { IIntrospectionSchema } from '@/lib/utils/gql/introspectionImportedTypes';
+import { IIntrospectionSchema } from '@/types/introspectionImportedTypes';
 
 import { render } from '@testing-library/react';
 

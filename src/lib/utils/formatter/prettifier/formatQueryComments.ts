@@ -6,7 +6,7 @@ import {
   NEW_LINE,
   NEW_LINES_REGEX,
 } from '../constants';
-import { IComment } from './types';
+import { IComment } from '../../../../types/prettifierTypes';
 import { generateRandomID } from './helpers';
 
 export const getCommentsFromGQLQuery = (query: string) => {

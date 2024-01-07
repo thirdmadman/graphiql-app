@@ -3,7 +3,7 @@ import {
   IIntrospectionInterfaceType,
   IIntrospectionNamedTypeRef,
   IIntrospectionSchema,
-} from '@/lib/utils/gql/introspectionImportedTypes';
+} from '@/types/introspectionImportedTypes';
 import { render } from '@testing-library/react';
 
 describe('InterfaceFieldComponent', () => {

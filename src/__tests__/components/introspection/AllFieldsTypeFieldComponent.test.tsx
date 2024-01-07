@@ -1,5 +1,5 @@
 import { AllFieldsTypeFieldComponent } from '@/app/components/introspection/AllFieldsTypeFieldComponent';
-import { IIntrospectionSchema } from '@/lib/utils/gql/introspectionImportedTypes';
+import { IIntrospectionSchema } from '@/types/introspectionImportedTypes';
 
 import { screen, render, fireEvent } from '@testing-library/react';
 

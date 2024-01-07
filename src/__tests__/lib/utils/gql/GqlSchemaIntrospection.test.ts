@@ -6,7 +6,7 @@ import {
   scalarType,
 } from '@/__tests__/__mocks__/mockGqlSchemaIntrospection';
 import { GqlSchemaIntrospection } from '@/lib/utils/gql/GqlSchemaIntrospection';
-import { IIntrospectionSchema } from '@/lib/utils/gql/introspectionImportedTypes';
+import { IIntrospectionSchema } from '@/types/introspectionImportedTypes';
 
 describe('GqlSchemaIntrospection', () => {
   it('should correctly extract all queries', () => {

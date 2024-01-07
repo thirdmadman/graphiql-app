@@ -1,10 +1,10 @@
 import { Suspense } from 'react';
 import { StoreProvider } from '@/lib/redux/StoreProvider';
-import { LanguageSelector } from './components/LanguageSelector';
+import { LanguageSelector } from './components/shared/LanguageSelector';
 import { LocaleProvider } from '@/locales/localeProvider';
-import { TextareaField } from './components/TextareaField';
+import { TextareaField } from './components/editor/TextareaField';
 import { ResponseWrapper } from './components/ResponseWrapper';
-import { RequestWrapper } from './components/RequestWrapper';
+import { RequestWrapper } from './components/editor/RequestWrapper';
 import { generateSuspenseKeyBySearchParams } from '@/lib/utils/generateSuspenseKeyBySearchParams';
 import { UrlInput } from './components/editor/UrlInput';
 import { DocumentationComponent } from './components/DocumentationComponent';

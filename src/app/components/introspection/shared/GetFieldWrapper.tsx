@@ -1,4 +1,4 @@
-import { IIntrospectionSchema } from '@/lib/utils/gql/introspectionImportedTypes';
+import { IIntrospectionSchema } from '@/types/introspectionImportedTypes';
 import { GqlSchemaIntrospection } from '@/lib/utils/gql/GqlSchemaIntrospection';
 import { IntrospectionTypeComponent } from './IntrospectionTypeComponent';
 

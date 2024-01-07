@@ -1,6 +1,6 @@
 'use client';
 
-import { IIntrospectionSchema } from '@/lib/utils/gql/introspectionImportedTypes';
+import { IIntrospectionSchema } from '@/types/introspectionImportedTypes';
 
 import { IntrospectionFieldsCollection } from './IntrospectionFieldsCollection';
 import { GqlSchemaIntrospection } from '@/lib/utils/gql/GqlSchemaIntrospection';

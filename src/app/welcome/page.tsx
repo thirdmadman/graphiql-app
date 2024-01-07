@@ -1,6 +1,6 @@
 import { getUser } from '@/lib/firebase/getUser';
-import { WelcomeContent } from '../components/WelcomePageContent';
-import { LanguageSelector } from '@/app/components/LanguageSelector';
+import { WelcomeContent } from '../components/welcome/WelcomePageContent';
+import { LanguageSelector } from '@/app/components/shared/LanguageSelector';
 import { StoreProvider } from '@/lib/redux/StoreProvider';
 import { LocaleProvider } from '@/locales/localeProvider';
 

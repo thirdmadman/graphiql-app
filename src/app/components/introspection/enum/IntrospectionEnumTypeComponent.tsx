@@ -1,7 +1,7 @@
 import {
   IIntrospectionEnumType,
   IIntrospectionSchema,
-} from '@/lib/utils/gql/introspectionImportedTypes';
+} from '@/types/introspectionImportedTypes';
 
 import { IntrospectionEnumValueComponent } from './IntrospectionEnumValueCopmponent';
 import { DescriptionFieldComponent } from '../shared/DescriptionFieldComponent';

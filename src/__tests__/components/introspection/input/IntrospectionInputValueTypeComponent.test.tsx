@@ -1,5 +1,5 @@
 import { IntrospectionInputValueTypeComponent } from '@/app/components/introspection/input/IntrospectionInputValueTypeComponent';
-import { IIntrospectionSchema } from '@/lib/utils/gql/introspectionImportedTypes';
+import { IIntrospectionSchema } from '@/types/introspectionImportedTypes';
 
 import { render } from '@testing-library/react';
 

@@ -3,7 +3,7 @@
 import {
   IIntrospectionDirective,
   IIntrospectionSchema,
-} from '@/lib/utils/gql/introspectionImportedTypes';
+} from '@/types/introspectionImportedTypes';
 import { IntrospectionDirectiveComponent } from './directive/IntrospectionDirectiveComponent';
 import { FoldableBlockComponent } from './shared/FoldableBlockComponent';
 

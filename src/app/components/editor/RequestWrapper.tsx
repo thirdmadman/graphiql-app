@@ -3,7 +3,7 @@
 import { useSearchParams } from 'next/navigation';
 import { TextareaField } from './TextareaField';
 import { prettifyGQLQuery } from '@/lib/utils/formatter/prettifier';
-import { Mode } from './types';
+import { Mode } from '../types';
 
 export function RequestWrapper() {
   const searchParams = useSearchParams();

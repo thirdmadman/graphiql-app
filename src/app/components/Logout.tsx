@@ -12,8 +12,8 @@ export function Logout() {
         method: 'DELETE',
       });
       router.push('/auth/sign-in');
-    } catch (e) {
-      console.error('e :>> ', e);
+    } catch {
+      router.refresh();
     }
   }
 

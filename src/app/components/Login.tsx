@@ -31,7 +31,7 @@ export default function Login() {
             }
           });
         })
-        .catch((e) => console.error(e));
+        .catch(() => router.replace('/auth/sign-up'));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

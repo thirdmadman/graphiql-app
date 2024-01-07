@@ -30,7 +30,6 @@ export const getAdminAuth = () => {
 
     return getAuth(app);
   } catch (e) {
-    console.error(e);
     return null;
   }
 };

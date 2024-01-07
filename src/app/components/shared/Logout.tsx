@@ -6,7 +6,6 @@ import React from 'react';
 
 export function Logout() {
   const router = useRouter();
-
   const locale = useLocale();
 
   async function logOut() {

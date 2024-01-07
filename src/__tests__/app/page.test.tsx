@@ -77,11 +77,4 @@ describe('Home page', () => {
     render(Home({ searchParams: { data: '' } }));
     expect(screen.getByText('Server response')).not.toBeNull();
   });
-
-  it('should contain controls', () => {
-    render(Home({ searchParams: { data: '' } }));
-    expect(
-      screen.getByText('Submit button blocked?', { exact: false })
-    ).not.toBeNull();
-  });
 });

@@ -239,6 +239,7 @@ export const en = {
   documentationExplorerErrorNoSchema:
     'We are sorry, but documentation is not available at the moment',
   urlInputSave: 'Save',
+  urlInputPlaceholder: 'Enter url of graphql endpoint',
 };
 
 export const ru = {
@@ -294,6 +295,7 @@ export const ru = {
   documentationExplorerErrorNoSchema:
     'Сожалеем, но документация на данный момент недоступна',
   urlInputSave: 'Сохранить',
+  urlInputPlaceholder: 'Введите URL-адрес конечной точки GraphQL',
 };
 
 export type TLocale = typeof en;

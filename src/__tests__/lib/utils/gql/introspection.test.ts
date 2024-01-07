@@ -8,7 +8,7 @@ const mocks = vi.hoisted(() => {
 
 describe('getGqlIntrospection', () => {
   beforeAll(() => {
-    vi.mock('@/lib/utils/fetchGraphQl', () => {
+    vi.mock('@/lib/utils/gql/fetchGraphQl', () => {
       return {
         gqlFetchApi: mocks.gqlFetchApi,
       };

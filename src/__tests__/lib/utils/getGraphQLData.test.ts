@@ -1,4 +1,4 @@
-import { getGraphQLData } from '@/lib/utils/getGraphQLData';
+import { getGraphQLData } from '@/lib/utils/gql/getGraphQLData';
 
 const mocks = vi.hoisted(() => {
   return {
@@ -7,7 +7,7 @@ const mocks = vi.hoisted(() => {
 });
 
 beforeAll(() => {
-  vi.mock('@/lib/utils/fetchGraphQl', () => {
+  vi.mock('@/lib/utils/gql/fetchGraphQl', () => {
     return { gqlFetchApi: mocks.gqlFetchApi };
   });
 });

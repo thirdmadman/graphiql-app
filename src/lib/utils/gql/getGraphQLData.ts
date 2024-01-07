@@ -1,4 +1,4 @@
-import { getParsedQueryParam } from './getParsedQueryParam';
+import { getParsedQueryParam } from '../getParsedQueryParam';
 import { IHeaders, IVariables, gqlFetchApi } from './fetchGraphQl';
 
 export const getGraphQLData = async (searchParams: {

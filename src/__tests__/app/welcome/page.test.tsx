@@ -70,6 +70,6 @@ describe('Welcome page', () => {
   it('should contain main button title when user is authenticated', async () => {
     mocks.getUser.mockReturnValueOnce({} as unknown as null);
     render(await Welcome());
-    expect(screen.getByText('Main')).not.toBeNull();
+    expect(screen.getByText('Editor')).not.toBeNull();
   });
 });

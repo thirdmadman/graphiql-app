@@ -56,7 +56,6 @@ export async function gqlFetchApi<T extends object>(
 
     return { resp: responseBody.data };
   } catch (err) {
-    console.error('ERROR DURING FETCH REQUEST', err);
     return { error: 'ERROR DURING FETCH REQUEST' };
   }
 }

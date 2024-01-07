@@ -73,11 +73,9 @@ export function LoginForm() {
         response.status === 401
           ? setSignInError(data.errorCode)
           : setSignInError(UnknownError);
-        console.error('Error: ', data.message);
       }
     } catch (e) {
       if (e instanceof Error) {
-        console.error('Error: ', e.message);
         setSignInError(UnknownError);
       }
     }

@@ -1,8 +1,6 @@
 'use client';
 
-import { locale } from '@/locales/locale';
-import { localeContext } from '@/locales/localeProvider';
-import { useContext, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/lib/redux/hooks';
 import { Accordion, AccordionItem, Button, Textarea } from '@nextui-org/react';
 import {
@@ -16,6 +14,7 @@ import {
   prettifyJSON,
 } from '@/lib/utils/formatter/prettifier';
 import { Mode } from '../types';
+import { useLocale } from '@/locales/useLocale';
 
 interface ITextareaData {
   content?: object | string;
@@ -37,16 +36,32 @@ interface ITextareaFieldProps {
 export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const { state } = useContext(localeContext);
-  const currentLang = state.currentLocale.id;
+  const currentLang = useLocale();
+  const {
+    requestFieldLabel,
+    responseFieldLabel,
+    executeBtnTitle,
+    prettifyBtnTitle,
+    processingRequestError,
+    prettifyError,
+    variablesLabel,
+    variablesTitle,
+    headersLabel,
+    headersTitle,
+    responseFormatError,
+    requestFieldPlaceholder,
+    responseFieldPlaceholder,
+    loadingText,
+  } = currentLang;
+
   const searchParams = useSearchParams();
 
   const dispatch = useAppDispatch();
   const form = useAppSelector((store) => store.form);
 
-  const getTextareaContent = (): string => {
+  const getTextareaContent = useCallback((): string => {
     if (isLoading) {
-      return 'Loading...';
+      return loadingText;
     }
 
     switch (mode) {
@@ -56,18 +71,29 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
         return data?.textareaData.error
           ? ''
           : prettifyJSON(data?.textareaData.content as object)?.response ??
-              'No data to show';
+              responseFieldPlaceholder;
       default:
         return '';
     }
-  };
+  }, [
+    data?.textareaData,
+    isLoading,
+    loadingText,
+    mode,
+    responseFieldPlaceholder,
+  ]);
 
-  const [textareaContent, setTextareaContent] = useState(getTextareaContent);
+  const [textareaContent, setTextareaContent] = useState('');
   const [dataFromVariables, setDataFromVariables] = useState(
     data?.variables ?? ''
   );
   const [dataFromHeaders, setDataFromHeaders] = useState(data?.headers ?? '');
   const [isPrettifyError, setPrettifyError] = useState<boolean>(false);
+
+  useEffect(() => {
+    const content = getTextareaContent();
+    setTextareaContent(content);
+  }, [setTextareaContent, getTextareaContent]);
 
   const onSubmitEvent = (
     queryValue: string,
@@ -119,22 +145,6 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
     }
     setTextareaContent(query);
   };
-
-  const {
-    requestFieldLabel,
-    responseFieldLabel,
-    executeBtnTitle,
-    prettifyBtnTitle,
-    processingRequestError,
-    prettifyError,
-    variablesLabel,
-    variablesTitle,
-    headersLabel,
-    headersTitle,
-    responseFormatError,
-    requestFieldPlaceholder,
-    responseFieldPlaceholder,
-  } = locale[currentLang];
 
   return (
     <div className="min-w-[300px] w-[48%] min-h-full">

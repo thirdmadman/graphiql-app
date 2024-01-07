@@ -231,6 +231,7 @@ export const en = {
   ...formValidationErrorsEn,
   ...signInPageEn,
   ...signupPageEn,
+  editorTitle: 'GraphQL editor',
 };
 
 export const ru = {
@@ -278,6 +279,7 @@ export const ru = {
   ...formValidationErrorsRu,
   ...signInPageRu,
   ...signupPageRu,
+  editorTitle: 'GraphQL редактор',
 };
 
 export type TLocale = typeof en;

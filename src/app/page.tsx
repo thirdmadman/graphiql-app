@@ -8,6 +8,7 @@ import { RequestWrapper } from './components/RequestWrapper';
 import { generateSuspenseKeyBySearchParams } from '@/lib/utils/generateSuspenseKeyBySearchParams';
 import { UrlInput } from './components/UrlInput';
 import { DocumentationComponent } from './components/DocumentationComponent';
+import { EditorTitle } from './components/editor/EditorTitle';
 
 enum Mode {
   Edit,
@@ -24,7 +25,7 @@ export default function Home({
       <LocaleProvider>
         <main className="container flex min-h-screen flex-col items-center max-w-screen-xxl mx-auto py-24 px-2 sm:px-8 md:px-12 lg:px-24 xl:px-32 xl:py-32">
           <LanguageSelector />
-          <h2 className="text-4xl mb-5 font-extrabold dark:text-white">Form</h2>
+          <EditorTitle />
           <UrlInput
             urlOverwrite={searchParams?.url && String(searchParams?.url)}
           />

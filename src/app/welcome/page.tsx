@@ -1,6 +1,6 @@
 import { getUser } from '@/lib/firebase/getUser';
 import { WelcomeContent } from '../components/welcome/WelcomePageContent';
-import { LanguageSelector } from '@/app/components/shared/LanguageSelector';
+
 import { StoreProvider } from '@/lib/redux/StoreProvider';
 import { LocaleProvider } from '@/locales/localeProvider';
 import { Suspense } from 'react';
@@ -16,7 +16,6 @@ export default async function Welcome() {
           <Header />
         </Suspense>
         <div className="flex min-h-screen flex-col items-center">
-          <LanguageSelector />
           <WelcomeContent userId={userId} />
         </div>
       </LocaleProvider>

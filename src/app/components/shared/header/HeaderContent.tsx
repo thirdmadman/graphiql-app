@@ -1,8 +1,8 @@
-import { Link } from '@nextui-org/react';
 import { DecodedIdToken } from 'firebase-admin/auth';
 import { LanguageSelector } from '../LanguageSelector';
 import { Logout } from '../Logout';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export function HeaderContent({
   userId = null,
@@ -34,7 +34,6 @@ export function HeaderContent({
           ) : (
             <>
               <Link
-                size="md"
                 rel="noopener norefferer"
                 href="/auth/sign-in"
                 className="block px-6 py-3 text-center rounded-lg bg-purple-100 text-purple-700 shadow-md"
@@ -42,7 +41,6 @@ export function HeaderContent({
                 Sign In
               </Link>
               <Link
-                size="md"
                 rel="noopener norefferer"
                 href="/auth/sign-up"
                 className="block px-6 py-3 text-center rounded-lg bg-red-100 text-red-700 shadow-md"

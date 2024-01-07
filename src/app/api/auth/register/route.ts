@@ -4,7 +4,7 @@ import type { FirebaseAuthError } from '../../../../../node_modules/firebase-adm
 import { FirebaseError } from 'firebase/app';
 import { NextRequest, NextResponse } from 'next/server';
 
-interface IRegisterData {
+export interface IRegisterData {
   name: string;
   email: string;
   password: string;

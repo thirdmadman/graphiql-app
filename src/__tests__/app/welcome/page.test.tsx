@@ -1,9 +1,15 @@
 import Welcome from '@/app/welcome/page';
 import { render, screen } from '@testing-library/react';
 
-vi.mock('@/lib/firebase/getUser', () => {
+const mocks = vi.hoisted(() => {
   return {
     getUser: vi.fn(() => null),
+  };
+});
+
+vi.mock('@/lib/firebase/getUser', () => {
+  return {
+    getUser: mocks.getUser,
   };
 });
 
@@ -55,5 +61,11 @@ describe('Welcome page', () => {
   it('should contain our team section text', async () => {
     render(await Welcome());
     expect(screen.getByText('iamnkt')).not.toBeNull();
+  });
+
+  it('should contain main button title when user is authenticated', async () => {
+    mocks.getUser.mockReturnValueOnce({} as unknown as null);
+    render(await Welcome());
+    expect(screen.getByText('Main')).not.toBeNull();
   });
 });

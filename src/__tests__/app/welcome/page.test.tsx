@@ -1,4 +1,4 @@
-import Welcome from '@/app/welcome/page';
+import Welcome from '@/app/page';
 import { render, screen } from '@testing-library/react';
 
 const mocks = vi.hoisted(() => {

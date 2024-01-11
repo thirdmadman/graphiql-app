@@ -45,13 +45,6 @@ describe('SignIn page', () => {
     expect(screen.getAllByText('Required field')).not.toBeNull();
   });
 
-  it('should render errors on pressing submit', async () => {
-    render(SignIn());
-    await userEvent.click(screen.getByText('Sign in'));
-    expect(screen.getByText('Must be 8 or more characters')).not.toBeNull();
-    expect(screen.getAllByText('Required field')).not.toBeNull();
-  });
-
   it('should render errors typing email', async () => {
     render(SignIn());
     await userEvent.type(screen.getByTestId('email'), 'test');

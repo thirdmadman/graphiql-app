@@ -3,9 +3,7 @@ import { render, screen } from '@testing-library/react';
 
 describe('SimpleBlockComponent', () => {
   it('should render component and not fail', () => {
-    const { container } = render(
-      <SimpleBlockComponent title={'block title'} />
-    );
+    const { container } = render(<SimpleBlockComponent title="block title" />);
 
     expect(container.firstChild).not.toBeNull();
   });
@@ -17,7 +15,7 @@ describe('SimpleBlockComponent', () => {
   });
 
   it('should render title text', () => {
-    render(<SimpleBlockComponent title={'block title'} />);
+    render(<SimpleBlockComponent title="block title" />);
 
     expect(screen.getByText('block title')).not.toBeNull();
   });
@@ -30,21 +28,21 @@ describe('SimpleBlockComponent', () => {
 
   it('should not render inside if title undef or null', () => {
     const { container } = render(
-      <SimpleBlockComponent title={'title'} inside={undefined} />
+      <SimpleBlockComponent title="title" inside={undefined} />
     );
 
     expect(container.childNodes.length).toBe(1);
   });
 
   it('should render title text', () => {
-    render(<SimpleBlockComponent title={'block title'} inside={'inside'} />);
+    render(<SimpleBlockComponent title="block title" inside="inside" />);
 
     expect(screen.getByText('inside')).not.toBeNull();
   });
 
   it('should render title JSX', () => {
     render(
-      <SimpleBlockComponent title={'block title'} inside={<p>p inside</p>} />
+      <SimpleBlockComponent title="block title" inside={<p>p inside</p>} />
     );
 
     expect(screen.getByText('p inside')).not.toBeNull();

@@ -13,7 +13,7 @@ export function Footer() {
             <div className="flex items-center justify-center w-12 h-12 rounded-full dark:bg-violet-400">
               <Image
                 priority
-                src={'/images/svg/debug_dynasty_small.svg'}
+                src="/images/svg/debug_dynasty_small.svg"
                 alt="Logo"
                 width={32}
                 height={32}
@@ -98,7 +98,7 @@ export function Footer() {
                 data-testid="rss-link"
               >
                 <Image
-                  src={'/images/svg/rs_school.svg'}
+                  src="/images/svg/rs_school.svg"
                   width={64}
                   height={32}
                   alt="RS School logo"

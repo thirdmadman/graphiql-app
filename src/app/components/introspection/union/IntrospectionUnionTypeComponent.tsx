@@ -35,7 +35,7 @@ export function IntrospectionUnionTypeComponent({
           <DescriptionFieldComponent description={type.description} />
           {type.possibleTypes && type.possibleTypes.length > 0 && (
             <SimpleBlockComponent
-              title={'possible types:'}
+              title="possible types:"
               inside={type.possibleTypes?.map((possibleType) => (
                 <PossibleTypeFieldComponent
                   key={`${type.name}_${possibleType.name}`}

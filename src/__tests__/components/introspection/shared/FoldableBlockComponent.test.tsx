@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 describe('FoldableBlockComponent', () => {
   it('should render component and not fail', () => {
-    const { container } = render(<FoldableBlockComponent title={'title'} />);
+    const { container } = render(<FoldableBlockComponent title="title" />);
 
     expect(container.firstChild).not.toBeNull();
   });
@@ -15,7 +15,7 @@ describe('FoldableBlockComponent', () => {
   });
 
   it('should display title string', () => {
-    render(<FoldableBlockComponent title={'title'} />);
+    render(<FoldableBlockComponent title="title" />);
 
     expect(screen.getByText('title')).not.toBeNull();
   });
@@ -27,7 +27,7 @@ describe('FoldableBlockComponent', () => {
   });
 
   it('should hide inside on title click', () => {
-    render(<FoldableBlockComponent title={'title'} inside={'inside'} />);
+    render(<FoldableBlockComponent title="title" inside="inside" />);
 
     const title = screen.getByTestId('title');
     const inside = screen.getByTestId('inside');

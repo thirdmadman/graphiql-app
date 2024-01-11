@@ -21,7 +21,7 @@ export function HeaderContent({
         >
           <Image
             priority
-            src={'/images/svg/debug_dynasty_small.svg'}
+            src="/images/svg/debug_dynasty_small.svg"
             alt="Logo"
             width={32}
             height={32}

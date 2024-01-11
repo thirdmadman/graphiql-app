@@ -55,7 +55,7 @@ export default function Login() {
         <p className="text-sm text-center font-light text-gray-500 dark:text-gray-400 mb-10">
           {dontHaveAccount}
           <Link
-            href={'/auth/sign-up'}
+            href="/auth/sign-up"
             className="font-medium text-gray-700 dark:text-gray-400 focus:underline hover:underline"
             rel="noopener noreferrer"
             data-testid="sign-up-link"

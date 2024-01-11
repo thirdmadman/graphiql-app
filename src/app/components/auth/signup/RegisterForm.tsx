@@ -166,7 +166,7 @@ export function RegisterForm() {
       <p className="text-sm text-center font-light text-gray-500 dark:text-gray-400">
         {alreadyHaveAccount}{' '}
         <Link
-          href={'/auth/sign-in'}
+          href="/auth/sign-in"
           className="font-medium text-gray-700 dark:text-gray-400 focus:underline hover:underline"
           data-testid="signin"
         >
@@ -251,7 +251,7 @@ export function RegisterForm() {
           >
             {type === 'password' ? (
               <Image
-                src={'/images/svg/eye.svg'}
+                src="/images/svg/eye.svg"
                 width={25}
                 height={25}
                 alt="eye"
@@ -259,7 +259,7 @@ export function RegisterForm() {
               />
             ) : (
               <Image
-                src={'/images/svg/eye_slash.svg'}
+                src="/images/svg/eye_slash.svg"
                 width={25}
                 height={25}
                 alt="eye_slash"

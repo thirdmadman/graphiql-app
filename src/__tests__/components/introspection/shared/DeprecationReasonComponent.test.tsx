@@ -6,7 +6,7 @@ describe('DeprecationReasonComponent', () => {
     const { container } = render(
       <DeprecationReasonComponent
         isDeprecated
-        deprecationReason={'some reason'}
+        deprecationReason="some reason"
       />
     );
 
@@ -17,7 +17,7 @@ describe('DeprecationReasonComponent', () => {
     const { container } = render(
       <DeprecationReasonComponent
         isDeprecated={false}
-        deprecationReason={'some reason'}
+        deprecationReason="some reason"
       />
     );
 
@@ -39,7 +39,7 @@ describe('DeprecationReasonComponent', () => {
     render(
       <DeprecationReasonComponent
         isDeprecated={true}
-        deprecationReason={'some reason'}
+        deprecationReason="some reason"
       />
     );
 

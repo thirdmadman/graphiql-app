@@ -34,7 +34,7 @@ export function IntrospectionInputObjectTypeComponent({
         <>
           <DescriptionFieldComponent description={type.description} />
           <SimpleBlockComponent
-            title={'input fields:'}
+            title="input fields:"
             inside={type.inputFields?.map((inputValue) => (
               <IntrospectionInputValueComponent
                 key={`${type.name}_${inputValue.name}`}

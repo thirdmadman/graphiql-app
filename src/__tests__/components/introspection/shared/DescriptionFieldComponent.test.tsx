@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 describe('DescriptionFieldComponent', () => {
   it('should render component and not fail', () => {
     const { container } = render(
-      <DescriptionFieldComponent description={'some description'} />
+      <DescriptionFieldComponent description="some description" />
     );
 
     expect(container.firstChild).not.toBeNull();
@@ -19,7 +19,7 @@ describe('DescriptionFieldComponent', () => {
   });
 
   it('should render description text', () => {
-    render(<DescriptionFieldComponent description={'some description'} />);
+    render(<DescriptionFieldComponent description="some description" />);
 
     expect(screen.getByText('some description')).not.toBeNull();
   });

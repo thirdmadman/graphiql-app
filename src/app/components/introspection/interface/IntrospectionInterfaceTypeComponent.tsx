@@ -36,7 +36,7 @@ export function IntrospectionInterfaceTypeComponent({
         <>
           <DescriptionFieldComponent description={type.description} />
           <SimpleBlockComponent
-            title={'fields:'}
+            title="fields:"
             inside={type.fields?.map((inputValue) => (
               <IntrospectionFieldComponent
                 key={`${type.name}_${inputValue.name}`}
@@ -47,7 +47,7 @@ export function IntrospectionInterfaceTypeComponent({
           />
           {type.interfaces && type.interfaces.length > 0 && (
             <SimpleBlockComponent
-              title={'interfaces:'}
+              title="interfaces:"
               inside={type.interfaces?.map((interfaceType) => (
                 <InterfaceFieldComponent
                   key={`${type.name}_${interfaceType.name}`}
@@ -60,7 +60,7 @@ export function IntrospectionInterfaceTypeComponent({
 
           {type.possibleTypes && type.possibleTypes.length > 0 && (
             <SimpleBlockComponent
-              title={'possible types:'}
+              title="possible types:"
               inside={type.possibleTypes?.map((possibleType) => (
                 <PossibleTypeFieldComponent
                   key={`${type.name}_${possibleType.name}`}

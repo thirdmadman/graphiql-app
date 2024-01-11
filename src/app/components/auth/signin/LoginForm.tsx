@@ -142,7 +142,7 @@ export function LoginForm() {
           >
             {type === 'password' ? (
               <Image
-                src={'/images/svg/eye.svg'}
+                src="/images/svg/eye.svg"
                 width={25}
                 height={25}
                 alt="eye"
@@ -151,7 +151,7 @@ export function LoginForm() {
               />
             ) : (
               <Image
-                src={'/images/svg/eye_slash.svg'}
+                src="/images/svg/eye_slash.svg"
                 width={25}
                 height={25}
                 alt="eye_slash"

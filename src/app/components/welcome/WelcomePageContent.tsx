@@ -43,7 +43,7 @@ export function WelcomeContent({
       <section className="relative pb-32 gap-y-10 min-w-full flex flex-col-reverse items-center lg:flex-row lg:justify-between">
         <Image
           priority
-          src={'/images/svg/welcome_logo.svg'}
+          src="/images/svg/welcome_logo.svg"
           alt="Logo"
           width={450}
           height={450}
@@ -166,7 +166,7 @@ export function WelcomeContent({
         </div>
         <Image
           priority
-          src={'/images/svg/welcome_project.svg'}
+          src="/images/svg/welcome_project.svg"
           alt="Project"
           width={250}
           height={250}

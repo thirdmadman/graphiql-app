@@ -35,17 +35,17 @@ export function UrlInput({ urlOverwrite = '' }: UrlInputProps) {
       <Input
         type="url"
         label="URL"
-        labelPlacement={'outside'}
+        labelPlacement="outside"
         placeholder={locale.urlInputPlaceholder}
         className="mb-5 mr-5"
         value={url}
         onChange={(e) => setUrl(e.currentTarget.value)}
-        data-testid={'input'}
+        data-testid="input"
       />
       <Button
         color="primary"
         onClick={() => setNewUrl(url)}
-        data-testid={'button'}
+        data-testid="button"
       >
         {locale.urlInputSave}
       </Button>

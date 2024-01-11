@@ -9,7 +9,7 @@ describe('GetFieldWrapper', () => {
     const { container } = render(
       <GetFieldWrapper
         kind={undefined as unknown as string}
-        name={'name'}
+        name="name"
         schema={{} as unknown as IIntrospectionSchema}
       />
     );
@@ -20,7 +20,7 @@ describe('GetFieldWrapper', () => {
   it('should not render component if name not present', () => {
     const { container } = render(
       <GetFieldWrapper
-        kind={'OBJECT'}
+        kind="OBJECT"
         name={undefined as unknown as string}
         schema={{} as unknown as IIntrospectionSchema}
       />
@@ -32,8 +32,8 @@ describe('GetFieldWrapper', () => {
   it('should not render component schema s not present', () => {
     const { container } = render(
       <GetFieldWrapper
-        kind={'OBJECT'}
-        name={'name'}
+        kind="OBJECT"
+        name="name"
         schema={undefined as unknown as IIntrospectionSchema}
       />
     );
@@ -44,8 +44,8 @@ describe('GetFieldWrapper', () => {
   it('should render component and not fail', () => {
     const { container } = render(
       <GetFieldWrapper
-        kind={'OBJECT'}
-        name={'User'}
+        kind="OBJECT"
+        name="User"
         schema={mockGqlSchemaIntrospection as unknown as IIntrospectionSchema}
       />
     );
@@ -56,8 +56,8 @@ describe('GetFieldWrapper', () => {
   it('should not render component if type not found', () => {
     const { container } = render(
       <GetFieldWrapper
-        kind={'OBJECT'}
-        name={'UserNotFound'}
+        kind="OBJECT"
+        name="UserNotFound"
         schema={mockGqlSchemaIntrospection as unknown as IIntrospectionSchema}
       />
     );

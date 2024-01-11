@@ -13,25 +13,27 @@ export default function Login() {
   const router = useRouter();
 
   useEffect(() => {
-    auth &&
-      getRedirectResult(auth)
-        .then(async (userCred) => {
-          if (!userCred) {
-            return;
-          }
+    if (!auth) return;
 
-          await fetch('/api/auth/google', {
-            method: 'POST',
-            headers: {
-              Authorization: `Bearer ${await userCred.user.getIdToken()}`,
-            },
-          }).then((response) => {
-            if (response.status === 200) {
-              router.replace('/');
-            }
-          });
-        })
-        .catch(() => router.replace('/auth/sign-up'));
+    getRedirectResult(auth)
+      .then(async (userCred) => {
+        if (!userCred) {
+          return;
+        }
+
+        const googleFetchResponse = await fetch('/api/auth/google', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${await userCred.user.getIdToken()}`,
+          },
+        });
+
+        if (googleFetchResponse.status === 200) {
+          router.replace('/editor');
+        }
+      })
+      .catch(() => router.replace('/auth/sign-up'));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

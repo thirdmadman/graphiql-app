@@ -57,7 +57,7 @@
     "object-curly-newline": ["error", { "consistent": true }],
     "import/prefer-default-export": "off",
     "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
-    "react/jsx-props-no-spreading": ["error", { "custom": "ignore" }],
+    "react/jsx-props-no-spreading": "off",
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "no-param-reassign": [
       "error",

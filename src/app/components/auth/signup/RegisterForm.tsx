@@ -58,45 +58,12 @@ export function RegisterForm() {
     resolver: yupResolver(formSchema),
   });
 
-  const {
-    onChange: onNameChange,
-    onBlur: onNameBlur,
-    name: nameName,
-    ref: nameRef,
-  } = register('name');
-
-  const {
-    onChange: onEmailChange,
-    onBlur: onEmailBlur,
-    name: emailName,
-    ref: emailRef,
-  } = register('email');
-
-  const {
-    onChange: onPasswordChange,
-    onBlur: onPasswordBlur,
-    name: passwordName,
-    ref: passwordRef,
-  } = register('password');
+  const { onChange } = register('password');
 
   const onChangePassword = async (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-    await onPasswordChange(e);
+    await onChange(e);
   };
-
-  const {
-    onChange: onConfirmationChange,
-    onBlur: onConfirmationBlur,
-    name: confirmationName,
-    ref: confirmationRef,
-  } = register('passwordConfirmation');
-
-  const {
-    onChange: onTermsChange,
-    onBlur: onTermsBlur,
-    name: termsName,
-    ref: termsRef,
-  } = register('terms');
 
   const [signUpError, setSignUpError] = useState<
     SignUpErrorCodes | string | null
@@ -166,7 +133,7 @@ export function RegisterForm() {
       <p className="text-sm text-center font-light text-gray-500 dark:text-gray-400">
         {alreadyHaveAccount}{' '}
         <Link
-          href="/auth/sign-in"
+          href={'/auth/sign-in'}
           className="font-medium text-gray-700 dark:text-gray-400 focus:underline hover:underline"
           data-testid="signin"
         >
@@ -182,10 +149,7 @@ export function RegisterForm() {
         </label>
         <input
           type="text"
-          name={nameName}
-          ref={nameRef}
-          onChange={onNameChange}
-          onBlur={onNameBlur}
+          {...register('name')}
           className="mb-1 block w-full px-3 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           placeholder={namePlaceholder}
           aria-label="name"
@@ -208,10 +172,7 @@ export function RegisterForm() {
         </label>
         <input
           type="email"
-          name={emailName}
-          ref={emailRef}
-          onChange={onEmailChange}
-          onBlur={onEmailBlur}
+          {...register('email')}
           className="mb-1 block w-full px-3 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           placeholder="name@company.com"
           aria-label="email"
@@ -235,10 +196,8 @@ export function RegisterForm() {
         <div className="mb-1 flex">
           <input
             type={type}
-            name={passwordName}
-            ref={passwordRef}
+            {...register('password')}
             onChange={onChangePassword}
-            onBlur={onPasswordBlur}
             placeholder="••••••••"
             className="block w-full px-3 py-2 border rounded-lg text-security:disc dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
             aria-label="password"
@@ -251,7 +210,7 @@ export function RegisterForm() {
           >
             {type === 'password' ? (
               <Image
-                src="/images/svg/eye.svg"
+                src={'/images/svg/eye.svg'}
                 width={25}
                 height={25}
                 alt="eye"
@@ -259,7 +218,7 @@ export function RegisterForm() {
               />
             ) : (
               <Image
-                src="/images/svg/eye_slash.svg"
+                src={'/images/svg/eye_slash.svg'}
                 width={25}
                 height={25}
                 alt="eye_slash"
@@ -297,10 +256,7 @@ export function RegisterForm() {
         </label>
         <input
           type={type}
-          name={confirmationName}
-          ref={confirmationRef}
-          onChange={onConfirmationChange}
-          onBlur={onConfirmationBlur}
+          {...register('passwordConfirmation')}
           placeholder="••••••••"
           className="mb-1 block w-full px-3 py-2 border rounded-lg -webkit-text-security:disc dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
           aria-label="password-confirmation"
@@ -320,10 +276,7 @@ export function RegisterForm() {
         <div className="flex items-start">
           <div className="flex items-center h-5">
             <input
-              name={termsName}
-              ref={termsRef}
-              onChange={onTermsChange}
-              onBlur={onTermsBlur}
+              {...register('terms')}
               aria-describedby="terms"
               type="checkbox"
               className="mb-1 w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"

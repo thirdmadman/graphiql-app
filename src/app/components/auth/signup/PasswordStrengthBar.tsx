@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { ErrorMessage } from '../../shared/ErrorMessage';
 import { locale } from '@/locales/locale';
 import { localeContext } from '@/locales/localeProvider';
@@ -26,7 +26,7 @@ export function PasswordStrengthBar({
     has12digit: false,
   });
 
-  const validatePassword = () => {
+  const validatePassword = useCallback(() => {
     if (
       password.match(/\p{N}/gu) &&
       password.match(/\p{L}/gu) &&
@@ -59,12 +59,11 @@ export function PasswordStrengthBar({
     } else {
       setValidate((state) => ({ ...state, has12digit: false }));
     }
-  };
+  }, [password]);
 
   useEffect(() => {
     validatePassword();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [password]);
+  }, [password, validatePassword]);
 
   const strength = Object.values(validate).reduce(
     (acc, item) => acc + Number(item),

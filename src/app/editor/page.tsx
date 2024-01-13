@@ -24,9 +24,7 @@ export default function Home({
   return (
     <StoreProvider>
       <LocaleProvider>
-        <Suspense>
-          <Header />
-        </Suspense>
+        <Header />
         <main className="container flex min-h-screen flex-col items-center max-w-screen-xxl mx-auto py-24 px-2 sm:px-8 md:px-12 lg:px-24 xl:px-32 xl:py-32">
           <EditorTitle />
           <UrlInput

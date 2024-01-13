@@ -1,9 +1,7 @@
 import { getUser } from '@/lib/firebase/getUser';
 import { WelcomeContent } from './components/welcome/WelcomePageContent';
-
 import { StoreProvider } from '@/lib/redux/StoreProvider';
 import { LocaleProvider } from '@/locales/localeProvider';
-import { Suspense } from 'react';
 import { Header } from './components/shared/header/Header';
 
 export default async function Welcome() {
@@ -12,9 +10,7 @@ export default async function Welcome() {
   return (
     <StoreProvider>
       <LocaleProvider>
-        <Suspense>
-          <Header />
-        </Suspense>
+        <Header />
         <div className="flex min-h-screen flex-col items-center">
           <WelcomeContent userId={userId} />
         </div>

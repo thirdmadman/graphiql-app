@@ -106,7 +106,7 @@ export function RegisterForm() {
           });
 
           if (response.status === 200) {
-            router.replace('/');
+            router.replace('/editor');
           }
         } catch (e) {
           router.push('/auth/sign-in');

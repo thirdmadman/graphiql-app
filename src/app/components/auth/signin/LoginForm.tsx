@@ -67,7 +67,7 @@ export function LoginForm() {
       });
 
       if (response.status === 200) {
-        router.replace('/');
+        router.replace('/editor');
       } else {
         const data = (await response.json()) as errorResponse;
         response.status === 401

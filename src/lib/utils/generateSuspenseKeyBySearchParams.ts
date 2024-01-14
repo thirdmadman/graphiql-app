@@ -1,5 +1,7 @@
+import { ISearchParams } from '@/types/interfaces/ISearchParams';
+
 export function generateSuspenseKeyBySearchParams(
-  searchParams: { [key: string]: string | Array<string> | undefined },
+  searchParams: ISearchParams,
   toInclude: Array<string> | null = null
 ) {
   if (!searchParams) {

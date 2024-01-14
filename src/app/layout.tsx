@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google';
 import { UIProvider } from '@/lib/nextui/UIProvider';
 import './globals.css';
 import { Footer } from './components/shared/Footer';
+import { LocaleProvider } from '@/locales/localeProvider';
+import { StoreProvider } from '@/lib/redux/StoreProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -52,10 +54,14 @@ export default function RootLayout({
         <link rel="manifest" href="/favicons/manifest.json" />
       </head>
       <body className={inter.className}>
-        <UIProvider>
-          {children}
-          <Footer />
-        </UIProvider>
+        <LocaleProvider>
+          <StoreProvider>
+            <UIProvider>
+              {children}
+              <Footer />
+            </UIProvider>
+          </StoreProvider>
+        </LocaleProvider>
       </body>
     </html>
   );

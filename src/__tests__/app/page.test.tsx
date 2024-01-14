@@ -1,6 +1,12 @@
 import Home from '@/app/editor/page';
+import { StoreProvider } from '@/lib/redux/StoreProvider';
 import { en } from '@/locales/locale';
+import { ISearchParams } from '@/types/interfaces/ISearchParams';
 import { render, screen } from '@testing-library/react';
+
+const renderHome = (props: ISearchParams) => {
+  return render(<StoreProvider>{Home({ searchParams: props })}</StoreProvider>);
+};
 
 describe('Home page', () => {
   beforeAll(() => {
@@ -64,22 +70,22 @@ describe('Home page', () => {
   });
 
   it('should render without failing', () => {
-    const { container } = render(Home({ searchParams: { data: '' } }));
+    const { container } = renderHome({ data: '' });
     expect(container.firstElementChild).not.toBeNull();
   });
 
   it('should contain header', () => {
-    render(Home({ searchParams: { data: '' } }));
+    renderHome({ data: '' });
     expect(screen.getByText(en.editorTitle)).not.toBeNull();
   });
 
   it('should contain input from', () => {
-    render(Home({ searchParams: { data: '' } }));
+    renderHome({ data: '' });
     expect(screen.getByText('Write your query')).not.toBeNull();
   });
 
   it('should contain request box', () => {
-    render(Home({ searchParams: { data: '' } }));
+    renderHome({ data: '' });
     expect(screen.getByText('Server response')).not.toBeNull();
   });
 });

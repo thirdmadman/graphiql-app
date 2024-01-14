@@ -2,9 +2,10 @@ import { getGqlIntrospection } from '@/lib/utils/gql/introspection';
 import { IntrospectionRoot } from './introspection/IntrospectionRoot';
 import { getParsedQueryParam } from '@/lib/utils/getParsedQueryParam';
 import { LocaleByNameExtractor } from '@/locales/LocaleByNameExtractor';
+import { ISearchParams } from '@/types/interfaces/ISearchParams';
 
 interface IDocumentationComponentProps {
-  searchParams: { [key: string]: string | Array<string> | undefined };
+  searchParams: ISearchParams;
 }
 
 export async function DocumentationComponent({

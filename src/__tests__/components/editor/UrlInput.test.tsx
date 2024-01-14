@@ -61,7 +61,8 @@ describe('UrlInput', () => {
     fireEvent.click(button);
 
     expect(mocks.push).toBeCalledWith(
-      'https://main.com?url=https%3A%2F%2Fa.com'
+      'https://main.com?url=https%3A%2F%2Fa.com',
+      { scroll: false }
     );
   });
 });

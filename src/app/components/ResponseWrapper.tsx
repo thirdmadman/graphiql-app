@@ -1,9 +1,10 @@
 import { getGraphQLData } from '@/lib/utils/gql/getGraphQLData';
 import { TextareaField } from './editor/TextareaField';
 import { Mode } from './types';
+import { ISearchParams } from '@/types/interfaces/ISearchParams';
 
 interface IResponseFieldProps {
-  searchParams: { [key: string]: string | Array<string> | undefined };
+  searchParams: ISearchParams;
 }
 
 export async function ResponseWrapper({ searchParams }: IResponseFieldProps) {

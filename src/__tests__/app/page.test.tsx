@@ -1,91 +1,75 @@
-import Home from '@/app/editor/page';
-import { StoreProvider } from '@/lib/redux/StoreProvider';
-import { en } from '@/locales/locale';
-import { ISearchParams } from '@/types/interfaces/ISearchParams';
+import Welcome from '@/app/page';
 import { render, screen } from '@testing-library/react';
 
-const renderHome = (props: ISearchParams) => {
-  return render(<StoreProvider>{Home({ searchParams: props })}</StoreProvider>);
-};
+const mocks = vi.hoisted(() => {
+  return {
+    getUser: vi.fn(() => null),
+  };
+});
 
-describe('Home page', () => {
-  beforeAll(() => {
-    vi.mock('next/navigation', async () => {
-      const actual = await vi.importActual('next/navigation');
-      return {
-        ...actual,
-        useRouter() {
-          return {
-            route: '/',
-            pathname: '',
-            query: '',
-            asPath: '',
-          };
-        },
-        useSearchParams() {
-          return {
-            get(value: string) {
-              return value;
-            },
-          };
-        },
-      };
-    });
+vi.mock('@/lib/firebase/getUser', () => {
+  return {
+    getUser: mocks.getUser,
+  };
+});
 
-    vi.mock('../../app/components/ResponseWrapper.tsx', async () => {
-      const { ResponseWrapper } = await vi.importActual<
-        typeof import('../../app/components/ResponseWrapper')
-      >('../../app/components/ResponseWrapper');
+vi.mock('@/app/components/shared/header/Header', () => ({
+  Header: () => <div>HEADER</div>,
+}));
 
-      const { StoreProvider } = await vi.importActual<
-        typeof import('@/lib/redux/StoreProvider')
-      >('@/lib/redux/StoreProvider');
-
-      const RF = await ResponseWrapper({ searchParams: { data: '' } });
-
-      return {
-        ResponseWrapper: () => <StoreProvider>{RF}</StoreProvider>,
-      };
-    });
-
-    vi.mock('../../app/components/DocumentationComponent.tsx', async () => {
-      const { DocumentationComponent } = await vi.importActual<
-        typeof import('../../app/components/DocumentationComponent')
-      >('../../app/components/DocumentationComponent');
-
-      const { StoreProvider } = await vi.importActual<
-        typeof import('@/lib/redux/StoreProvider')
-      >('@/lib/redux/StoreProvider');
-
-      const DC = await DocumentationComponent({ searchParams: { data: '' } });
-
-      return {
-        DocumentationComponent: () => <StoreProvider>{DC}</StoreProvider>,
-      };
-    });
-
-    vi.mock('@/app/components/shared/header/Header', () => ({
-      Header: () => <div>HEADER</div>,
-    }));
-  });
-
-  it('should render without failing', () => {
-    const { container } = renderHome({ data: '' });
+describe('Welcome page', () => {
+  it('should render without failing', async () => {
+    const { container } = render(await Welcome());
     expect(container.firstElementChild).not.toBeNull();
   });
 
-  it('should contain header', () => {
-    renderHome({ data: '' });
-    expect(screen.getByText(en.editorTitle)).not.toBeNull();
+  it('should contain sign in button title', async () => {
+    render(await Welcome());
+    expect(screen.getByText('Sign In')).not.toBeNull();
   });
 
-  it('should contain input from', () => {
-    renderHome({ data: '' });
-    expect(screen.getByText(en.requestFieldLabel)).not.toBeNull();
+  it('should contain sign in button title', async () => {
+    render(await Welcome());
+    expect(screen.getByText('Sign Up')).not.toBeNull();
   });
 
-  it('should contain request box', () => {
-    renderHome({ data: '' });
-    expect(screen.getByText(en.responseFieldLabel)).not.toBeNull();
+  it('should contain welcome section text', async () => {
+    render(await Welcome());
+    expect(
+      screen.getByText(
+        'Our app easily allows you to make requests to the variety of open GraphQL APIs'
+      )
+    ).not.toBeNull();
+  });
+
+  it('should contain benefits section title', async () => {
+    render(await Welcome());
+    expect(screen.getByText('Why do people prefer our app?')).not.toBeNull();
+  });
+
+  it('should contain benefits section text', async () => {
+    render(await Welcome());
+    expect(screen.getByText('Extra fast performance')).not.toBeNull();
+  });
+
+  it('should contain motivation section title', async () => {
+    render(await Welcome());
+    expect(screen.getByText('Our motivation')).not.toBeNull();
+  });
+
+  it('should contain our team section title', async () => {
+    render(await Welcome());
+    expect(screen.getByText('Our team')).not.toBeNull();
+  });
+
+  it('should contain our team section text', async () => {
+    render(await Welcome());
+    expect(screen.getByText('iamnkt')).not.toBeNull();
+  });
+
+  it('should contain main button title when user is authenticated', async () => {
+    mocks.getUser.mockReturnValueOnce({} as unknown as null);
+    render(await Welcome());
+    expect(screen.getByText('Editor')).not.toBeNull();
   });
 });

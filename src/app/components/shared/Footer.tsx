@@ -101,6 +101,7 @@ export function Footer() {
                   src="/images/svg/rs_school.svg"
                   width={64}
                   height={32}
+                  style={{ width: 64, height: 32 }}
                   alt="RS School logo"
                   className="dark:invert"
                   data-testid="rss-logo"

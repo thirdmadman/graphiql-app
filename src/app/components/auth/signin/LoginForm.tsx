@@ -94,7 +94,9 @@ export function LoginForm() {
           {emailLabel}
         </label>
         <input
+          id="email"
           type="email"
+          autoComplete="email"
           data-testid="email"
           name={emailReg.name}
           aria-label="email"
@@ -128,6 +130,7 @@ export function LoginForm() {
             data-testid="password"
             id="password"
             aria-label="password"
+            autoComplete="current-password"
             placeholder="••••••••"
             name={passwordReg.name}
             onChange={passwordReg.onChange}

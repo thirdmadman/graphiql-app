@@ -27,7 +27,7 @@ export function UrlInput({ urlOverwrite = '' }: UrlInputProps) {
     const search = current.toString();
     const query = search ? `?${search}` : '';
 
-    router.push(`${pathname}${query}`);
+    router.push(`${pathname}${query}`, { scroll: false });
   };
 
   return (

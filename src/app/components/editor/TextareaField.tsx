@@ -113,7 +113,7 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
       const search = current.toString();
       const query = search ? `?${search}` : '';
 
-      router.push(`${pathname}${query}`);
+      router.push(`${pathname}${query}`, { scroll: false });
     }
   };
   const onChangeEvent = (value: string) => {

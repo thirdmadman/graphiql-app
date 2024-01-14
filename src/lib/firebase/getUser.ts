@@ -6,6 +6,10 @@ export async function getUser() {
   if (!session || !adminAuth) {
     return null;
   }
-  const user = await adminAuth.verifySessionCookie(session, true);
-  return user;
+
+  try {
+    return await adminAuth.verifySessionCookie(session, true);
+  } catch {
+    return null;
+  }
 }

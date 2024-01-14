@@ -1,4 +1,4 @@
-import { getAdminAuth } from '@/lib/firebase/firebase-admin-config';
+import { getAdminAuth } from '@/lib/firebase/firebaseAdminConfig';
 
 describe('getAdminAuth', () => {
   it('should return null if no SERVICE_ACCOUNT provided', () => {

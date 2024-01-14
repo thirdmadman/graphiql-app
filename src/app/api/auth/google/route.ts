@@ -1,5 +1,5 @@
 import { SESSION_EXPIRES_IN } from '@/constants';
-import { adminAuth } from '@/lib/firebase/firebase-admin-config';
+import { adminAuth } from '@/lib/firebase/firebaseAdminConfig';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {

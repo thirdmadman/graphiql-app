@@ -1,4 +1,4 @@
-import { getFirebaseConfig } from '@/lib/firebase/firebase-config';
+import { getFirebaseConfig } from '@/lib/firebase/firebaseConfig';
 
 describe('getFirebaseConfig', () => {
   beforeEach(() => {

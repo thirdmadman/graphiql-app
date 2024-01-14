@@ -8,7 +8,7 @@ const body = JSON.stringify({
 
 describe('register route', () => {
   it('should return error with status 401 if user data is incorrect', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: {},
     }));
 
@@ -27,7 +27,7 @@ describe('register route', () => {
   });
 
   it('should return response with status 200 if user is created', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: {
         createUser: () => ({ user: 'uid' }),
       },
@@ -48,7 +48,7 @@ describe('register route', () => {
   });
 
   it('should return response with status 401 if it was en error while user creating', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: {
         createUser: null,
       },
@@ -69,7 +69,7 @@ describe('register route', () => {
   });
 
   it('should return error with status 500 if adminAuth not present', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: null,
     }));
 
@@ -88,7 +88,7 @@ describe('register route', () => {
   });
 
   it('should return error resp with code 401 if any FirebaseAuthError thrown', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: {},
       createUser: () => {
         throw new Error();

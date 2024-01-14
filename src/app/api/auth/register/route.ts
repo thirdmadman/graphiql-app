@@ -1,4 +1,4 @@
-import { adminAuth } from '@/lib/firebase/firebase-admin-config';
+import { adminAuth } from '@/lib/firebase/firebaseAdminConfig';
 import { SignUpErrorCodes } from '@/locales/locale';
 import type { FirebaseAuthError } from '../../../../../node_modules/firebase-admin/lib/utils/error';
 import { FirebaseError } from 'firebase/app';

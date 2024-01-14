@@ -1,6 +1,6 @@
 import { SESSION_EXPIRES_IN } from '@/constants';
-import { adminAuth } from '@/lib/firebase/firebase-admin-config';
-import { auth } from '@/lib/firebase/firebase-config';
+import { adminAuth } from '@/lib/firebase/firebaseAdminConfig';
+import { auth } from '@/lib/firebase/firebaseConfig';
 import { FirebaseError } from 'firebase/app';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { NextRequest, NextResponse } from 'next/server';

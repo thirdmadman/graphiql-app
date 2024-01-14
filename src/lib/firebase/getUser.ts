@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { adminAuth } from './firebase-admin-config';
+import { adminAuth } from './firebaseAdminConfig';
 
 export async function getUser() {
   const session = cookies().get('session')?.value;

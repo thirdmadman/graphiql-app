@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-// app/api/users.page.ts
 import { NextRequest, NextResponse } from 'next/server';
 
 interface IResult {
@@ -31,7 +29,7 @@ describe('GET', () => {
   });
 
   test('should return 401 if session cookie is invalid', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: {
         verifyIdToken: () => false,
         verifySessionCookie: () => false,
@@ -56,7 +54,7 @@ describe('GET', () => {
   });
 
   test('should return 200 if session cookie is valid', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: {
         verifySessionCookie: vi.fn(() => ({ uid: 'uid' })),
       },
@@ -92,7 +90,7 @@ describe('POST', () => {
   });
 
   it('should return status code 500 in no firebase admin config', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: undefined,
     }));
 
@@ -108,13 +106,13 @@ describe('POST', () => {
   });
 
   it('should return status code 200 if auth ok ', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: {
         createSessionCookie: () => 'cookie',
       },
     }));
 
-    vi.doMock('@/lib/firebase/firebase-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseConfig', () => ({
       auth: {},
     }));
 
@@ -141,13 +139,13 @@ describe('POST', () => {
   });
 
   it('should return error with status code 401 if no login data ', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: {
         createSessionCookie: () => 'cookie',
       },
     }));
 
-    vi.doMock('@/lib/firebase/firebase-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseConfig', () => ({
       auth: {},
     }));
 
@@ -168,7 +166,7 @@ describe('POST', () => {
   });
 
   it('should return error with status code 401 if no id token ', async () => {
-    vi.doMock('@/lib/firebase/firebase-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseConfig', () => ({
       auth: {},
     }));
 
@@ -199,7 +197,7 @@ describe('POST', () => {
 
 describe('DELETE', () => {
   test('should return 500 if no firebase admin config', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: undefined,
     }));
 
@@ -212,7 +210,7 @@ describe('DELETE', () => {
     expect(response.status).toBe(500);
   });
   test('should return 500 if no auth', async () => {
-    vi.doMock('@/lib/firebase/firebase-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseConfig', () => ({
       auth: undefined,
     }));
 
@@ -225,11 +223,11 @@ describe('DELETE', () => {
     expect(response.status).toBe(500);
   });
   test('should return 401 if no token', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: {},
     }));
 
-    vi.doMock('@/lib/firebase/firebase-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseConfig', () => ({
       auth: {},
     }));
 
@@ -245,14 +243,14 @@ describe('DELETE', () => {
   });
 
   test('should return 200 if token exists', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: {
         verifySessionCookie: vi.fn(() => ({ uid: 'uid' })),
         revokeRefreshTokens: vi.fn(() => false),
       },
     }));
 
-    vi.doMock('@/lib/firebase/firebase-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseConfig', () => ({
       auth: {},
     }));
 

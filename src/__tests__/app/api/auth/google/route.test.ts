@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 describe('auth with google', () => {
   it('should at least return NextResponse', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: undefined,
     }));
 
@@ -16,7 +16,7 @@ describe('auth with google', () => {
   });
 
   it('should return status code 500 in no firebase admin config', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: undefined,
     }));
 
@@ -30,7 +30,7 @@ describe('auth with google', () => {
   });
 
   it('should return status code 401 if no Authorization token provided', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: {},
     }));
 
@@ -45,7 +45,7 @@ describe('auth with google', () => {
   });
 
   it('should return status code 401 if Authorization not verified', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: {
         verifyIdToken: () => false,
       },
@@ -62,7 +62,7 @@ describe('auth with google', () => {
   });
 
   it('should return status code 200 if auth ok', async () => {
-    vi.doMock('@/lib/firebase/firebase-admin-config', () => ({
+    vi.doMock('@/lib/firebase/firebaseAdminConfig', () => ({
       adminAuth: {
         verifyIdToken: () => true,
         createSessionCookie: () => 'createSessionCookie',

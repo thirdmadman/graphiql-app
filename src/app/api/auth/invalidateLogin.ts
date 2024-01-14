@@ -1,4 +1,4 @@
-import { adminAuth } from '@/lib/firebase/firebase-admin-config';
+import { adminAuth } from '@/lib/firebase/firebaseAdminConfig';
 import { NextResponse } from 'next/server';
 
 // Create a separate file for this utility function if you prefer that way

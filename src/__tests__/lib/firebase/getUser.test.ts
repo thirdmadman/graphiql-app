@@ -18,7 +18,7 @@ describe('getUser', () => {
     };
   });
 
-  vi.mock('@/lib/firebase/firebase-admin-config', () => {
+  vi.mock('@/lib/firebase/firebaseAdminConfig', () => {
     return { adminAuth: mocks.adminAuth() };
   });
 

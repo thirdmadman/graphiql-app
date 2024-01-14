@@ -81,11 +81,11 @@ describe('Home page', () => {
 
   it('should contain input from', () => {
     renderHome({ data: '' });
-    expect(screen.getByText('Write your query')).not.toBeNull();
+    expect(screen.getByText(en.requestFieldLabel)).not.toBeNull();
   });
 
   it('should contain request box', () => {
     renderHome({ data: '' });
-    expect(screen.getByText('Server response')).not.toBeNull();
+    expect(screen.getByText(en.responseFieldLabel)).not.toBeNull();
   });
 });

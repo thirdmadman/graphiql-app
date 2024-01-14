@@ -47,7 +47,7 @@ export function WelcomeContent({
           alt="Logo"
           width={450}
           height={450}
-          className=""
+          style={{ width: 450, height: 450 }}
         />
         <div className="w-full flex flex-col justify-center items-end">
           <div className="min-w-full flex flex-col py-4 space-y-4 sm:items-end sm:justify-end sm:flex-row sm:space-y-0 sm:space-x-6 lg:justify-end">
@@ -170,7 +170,7 @@ export function WelcomeContent({
           alt="Project"
           width={250}
           height={250}
-          className=""
+          style={{ width: 250, height: 250 }}
         />
       </section>
       <section className="min-w-full flex flex-col items-center justify-center">

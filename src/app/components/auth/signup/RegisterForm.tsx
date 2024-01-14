@@ -148,6 +148,8 @@ export function RegisterForm() {
           {nameLabel}
         </label>
         <input
+          id="name"
+          autoComplete="username"
           type="text"
           {...register('name')}
           className="mb-1 block w-full px-3 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
@@ -171,6 +173,8 @@ export function RegisterForm() {
           {emailLabel}
         </label>
         <input
+          id="email"
+          autoComplete="email"
           type="email"
           {...register('email')}
           className="mb-1 block w-full px-3 py-2 border rounded-lg dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
@@ -195,6 +199,8 @@ export function RegisterForm() {
         </label>
         <div className="mb-1 flex">
           <input
+            id="password"
+            autoComplete="current-password"
             type={type}
             {...register('password')}
             onChange={onChangePassword}
@@ -255,6 +261,8 @@ export function RegisterForm() {
           {confirmPasswordLabel}
         </label>
         <input
+          id="password-confirmation"
+          autoComplete="current-password"
           type={type}
           {...register('passwordConfirmation')}
           placeholder="••••••••"
@@ -278,6 +286,7 @@ export function RegisterForm() {
             <input
               {...register('terms')}
               aria-describedby="terms"
+              id="terms"
               type="checkbox"
               className="mb-1 w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
               aria-label="terms"

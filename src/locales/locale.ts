@@ -188,7 +188,7 @@ const formValidationErrorsRu = {
 
 export const en = {
   id: 'en',
-  requestFieldLabel: 'Write your query',
+  requestFieldLabel: 'GraphQl query',
   requestFieldPlaceholder: 'Write your gql request',
   responseFieldLabel: 'Server response',
   responseFieldPlaceholder: 'No data to show',
@@ -246,8 +246,8 @@ export const en = {
 
 export const ru = {
   id: 'ru',
-  requestFieldLabel: 'Напишите свой запрос',
-  requestFieldPlaceholder: 'Напишите свой graph-ql запрос',
+  requestFieldLabel: 'GraphQL запрос',
+  requestFieldPlaceholder: 'Напишите свой GraphQL запрос',
   responseFieldLabel: 'Ответ сервера',
   responseFieldPlaceholder: 'Отсутствуют данные для отображения',
   executeBtnTitle: 'Выполнить',

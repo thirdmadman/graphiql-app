@@ -190,7 +190,6 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
                 >
                   {executeBtnTitle}
                 </Button>
-                {executeBtnTitle && <p></p>}
                 <Button
                   color="primary"
                   onClick={() => onPrettifyBtnClick(textareaContent)}

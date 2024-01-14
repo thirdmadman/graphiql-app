@@ -150,7 +150,7 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
     <div className="min-w-[300px] w-[48%] min-h-full">
       <div className="mb-5">
         <label
-          htmlFor="gqlq"
+          htmlFor={mode === Mode.Edit ? 'request' : 'response'}
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
         >
           {mode === Mode.Edit ? requestFieldLabel : responseFieldLabel}
@@ -166,7 +166,7 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
               ? requestFieldPlaceholder
               : responseFieldPlaceholder
           }
-          id="gqlq"
+          id={mode === Mode.Edit ? 'request' : 'response'}
           onChange={(e) => onChangeEvent(e.target.value)}
           value={textareaContent ?? ''}
           aria-label="input from"

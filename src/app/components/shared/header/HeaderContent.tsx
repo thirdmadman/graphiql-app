@@ -1,9 +1,10 @@
 import { DecodedIdToken } from 'firebase-admin/auth';
-import { LanguageSelector } from '../LanguageSelector';
-import { Logout } from '../Logout';
+
+import { Logout } from '@/app/components/shared/Logout';
 import Image from 'next/image';
 import Link from 'next/link';
 import { LocaleByNameExtractor } from '@/locales/LocaleByNameExtractor';
+import { LanguageSelector } from '@/app/components/shared/header/LanguageSelector';
 
 export function HeaderContent({
   userId = null,

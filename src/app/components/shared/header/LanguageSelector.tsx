@@ -1,7 +1,7 @@
 'use client';
 
 import { useContext } from 'react';
-import { localeContext } from '../../../locales/localeProvider';
+import { localeContext } from '../../../../locales/localeProvider';
 import { Select, SelectItem } from '@nextui-org/select';
 import { useLocale } from '@/locales/useLocale';
 

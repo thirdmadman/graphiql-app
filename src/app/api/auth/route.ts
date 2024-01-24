@@ -34,8 +34,6 @@ export async function GET(request: NextRequest) {
       secure: true,
     };
 
-    console.error(session);
-
     const response = NextResponse.json({ isLogged: false }, { status: 400 });
 
     response.cookies.set(options);

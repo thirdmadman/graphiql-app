@@ -12,6 +12,20 @@ export interface MiddlewareRoute {
   handler: TMiddlewareRouteHandler | TMiddlewareAsyncRouteHandler;
 }
 
+export const clearCookies = (response: NextResponse) => {
+  const options = {
+    name: 'session',
+    value: '',
+    maxAge: -1,
+    httpOnly: true,
+    secure: true,
+  };
+
+  response.cookies.set(options);
+
+  return response;
+};
+
 export const isAuth = async (request: NextRequest) => {
   const session = request.cookies.get('session');
 
@@ -36,7 +50,9 @@ export const middlewareProtectedHandler = async (request: NextRequest) => {
   const isUserAuth = await isAuth(request);
 
   if (!isUserAuth) {
-    return NextResponse.redirect(new URL('/auth/sign-in', request.url));
+    return clearCookies(
+      NextResponse.redirect(new URL('/auth/sign-in', request.url))
+    );
   }
 
   return NextResponse.next();

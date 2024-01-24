@@ -14,16 +14,33 @@ interface ILoginData {
 
 export async function GET(request: NextRequest) {
   const session = request.cookies.get('session')?.value;
-
   if (!session) {
     return NextResponse.json({ isLogged: false }, { status: 401 });
   }
 
-  //Use Firebase Admin to validate the session cookie
-  const decodedClaims = await adminAuth?.verifySessionCookie(session, true);
+  try {
+    //Use Firebase Admin to validate the session cookie
+    const decodedClaims = await adminAuth?.verifySessionCookie(session, true);
 
-  if (!decodedClaims) {
-    return NextResponse.json({ isLogged: false }, { status: 401 });
+    if (!decodedClaims) {
+      return NextResponse.json({ isLogged: false }, { status: 401 });
+    }
+  } catch (e) {
+    const options = {
+      name: 'session',
+      value: '',
+      maxAge: -1,
+      httpOnly: true,
+      secure: true,
+    };
+
+    console.error(session);
+
+    const response = NextResponse.json({ isLogged: false }, { status: 400 });
+
+    response.cookies.set(options);
+
+    return response;
   }
 
   return NextResponse.json({ isLogged: true }, { status: 200 });

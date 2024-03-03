@@ -3,9 +3,11 @@
 import { useContext } from 'react';
 import { localeContext } from '../../../../locales/localeProvider';
 import { Select, SelectItem } from '@nextui-org/select';
+import { useLocale } from '@/locales/useLocale';
 
 export function LanguageSelector() {
   const { state, dispatch } = useContext(localeContext);
+  const locale = useLocale();
 
   const toggleLangEng = () => {
     dispatch({ type: 'toggleLocaleToEn' });
@@ -18,6 +20,7 @@ export function LanguageSelector() {
   return (
     <>
       <Select
+        aria-label={locale.languageSelectTitle}
         variant="bordered"
         className="min-w-20 max-w-20"
         size="sm"

@@ -3,7 +3,6 @@
 import { useContext } from 'react';
 import { localeContext } from '../../../../locales/localeProvider';
 import { Select, SelectItem } from '@nextui-org/select';
-import { useLocale } from '@/locales/useLocale';
 
 export function LanguageSelector() {
   const { state, dispatch } = useContext(localeContext);
@@ -16,21 +15,29 @@ export function LanguageSelector() {
     dispatch({ type: 'toggleLocaleToRu' });
   };
 
-  const locale = useLocale();
-
   return (
     <>
       <Select
-        label={locale.languageSelectTitle}
-        className="max-w-32"
+        variant="bordered"
+        className="min-w-20 max-w-20"
         size="sm"
         defaultSelectedKeys={[state.currentLocale.id]}
       >
-        <SelectItem key="en" value="en" onClick={() => toggleLangEng()}>
-          en
+        <SelectItem
+          className="text-center"
+          key="en"
+          value="en"
+          onClick={() => toggleLangEng()}
+        >
+          EN
         </SelectItem>
-        <SelectItem key="ru" value="ru" onClick={() => toggleLangRus()}>
-          ru
+        <SelectItem
+          className="text-center"
+          key="ru"
+          value="ru"
+          onClick={() => toggleLangRus()}
+        >
+          RU
         </SelectItem>
       </Select>
     </>

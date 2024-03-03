@@ -29,28 +29,32 @@ export function HeaderContent({
             className="dark:invert"
           />
         </Link>
-        <LanguageSelector />
 
-        {userId ? (
-          <Logout />
-        ) : (
-          <div className="justify-end sm:px-4 sm:w-full flex max-w-44 sm:justify-between items-center">
-            <Link
-              rel="noopener norefferer"
-              href="/auth/sign-in"
-              className="block px-3 py-2 text-center rounded-lg bg-purple-100 text-purple-700 shadow-md text-xs"
-            >
-              <LocaleByNameExtractor localeName="signinBtnTitle" />
-            </Link>
-            <Link
-              rel="noopener norefferer"
-              href="/auth/sign-up"
-              className="hidden sm:block px-3 py-2 text-center rounded-lg bg-red-100 text-red-700 shadow-md text-xs "
-            >
-              <LocaleByNameExtractor localeName="signupBtnTitle" />
-            </Link>
-          </div>
-        )}
+        <div className="flex gap-4">
+          <LanguageSelector />
+          {userId ? (
+            <Logout />
+          ) : (
+            <div className="justify-end sm:w-full flex sm:justify-between items-center gap-4">
+              <Link
+                rel="noopener norefferer"
+                href="/auth/sign-in"
+                className="block text-sm px-2 sm:px-5 py-2.5 text-center rounded-lg bg-purple-300/30 text-purple-700 shadow-md text-sm flex-shrink-0 hover:opacity-80 active:opacity-disabled transition-opacity 
+                dark:text-white"
+              >
+                <LocaleByNameExtractor localeName="signinBtnTitle" />
+              </Link>
+              <Link
+                rel="noopener norefferer"
+                href="/auth/sign-up"
+                className="hidden sm:block text-sm px-2 sm:px-5 py-2.5 text-center rounded-lg bg-blue-300/30 text-blue-700 shadow-md text-sm flex-shrink-0 hover:opacity-80 active:opacity-disabled transition-opacity 
+                dark:text-white"
+              >
+                <LocaleByNameExtractor localeName="signupBtnTitle" />
+              </Link>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );

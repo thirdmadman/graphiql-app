@@ -29,7 +29,7 @@ export function ThemeSwitcher() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return <div>{lightModeImage}</div>;
+  if (!mounted) return <div>{darkModeImage}</div>;
 
   const isDark = theme === 'dark';
 

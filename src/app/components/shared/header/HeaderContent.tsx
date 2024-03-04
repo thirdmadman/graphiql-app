@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { LocaleByNameExtractor } from '@/locales/LocaleByNameExtractor';
 import { LanguageSelector } from '@/app/components/shared/header/LanguageSelector';
+import { ThemeSwitcher } from './ThemeSwitcher';
 
 export function HeaderContent({
   userId = null,
@@ -30,8 +31,9 @@ export function HeaderContent({
           />
         </Link>
 
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           <LanguageSelector />
+          <ThemeSwitcher />
           {userId ? (
             <Logout />
           ) : (

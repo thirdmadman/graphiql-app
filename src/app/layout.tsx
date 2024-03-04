@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="light">
+    <html lang="en" className="light" style={{ colorScheme: 'light' }}>
       <head>
         <link rel="icon" href="/favicons/favicon.ico" sizes="any" />
         <link

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { UIProvider } from '@/lib/nextui/UIProvider';
 import './globals.css';
-import { Footer } from './components/shared/Footer';
+import { Footer } from './components/shared/footer/Footer';
 import { LocaleProvider } from '@/locales/localeProvider';
 import { StoreProvider } from '@/lib/redux/StoreProvider';
 

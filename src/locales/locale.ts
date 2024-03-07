@@ -186,6 +186,28 @@ const formValidationErrorsRu = {
   [formValidationErrors.Terms]: 'Вы должны принять условия и положения',
 };
 
+export const footerRu = {
+  app: 'Приложение',
+  mainPage: 'Главная страница',
+  editor: 'Редактор',
+  signIn: 'Войти',
+  signUp: 'Зарегистрироваться',
+  createdBy: 'Разработчики',
+  rsSchoolCourse: 'Курс RS-SCHOOl',
+  establishedIn2023: 'Cоздано в 2023',
+};
+
+export const footerEn = {
+  app: 'APP',
+  mainPage: 'Main page',
+  editor: 'Editor',
+  signIn: 'Sign in',
+  signUp: 'Sign up',
+  createdBy: 'Created by',
+  rsSchoolCourse: 'RS-school course',
+  establishedIn2023: 'Established in 2023',
+};
+
 export const en = {
   id: 'en',
   requestFieldLabel: 'GraphQl query',
@@ -242,6 +264,7 @@ export const en = {
   urlInputPlaceholder: 'Enter url of graphql endpoint',
   languageSelectTitle: 'Language',
   signOutButtonText: 'Sign out',
+  ...footerEn,
 };
 
 export const ru = {
@@ -300,6 +323,7 @@ export const ru = {
   languageSelectTitle: 'Язык',
   urlInputPlaceholder: 'Введите URL-адрес конечной точки GraphQL',
   signOutButtonText: 'Выйти',
+  ...footerRu,
 };
 
 export type TLocale = typeof en;

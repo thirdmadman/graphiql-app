@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { LocaleByNameExtractor } from '@/locales/LocaleByNameExtractor';
 
-export function Footer() {
+export function FooterContent() {
   return (
     <footer className="px-4 divide-y bg-gray-100 dark:bg-gray-800 dark:text-gray-100">
       <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
@@ -27,32 +28,36 @@ export function Footer() {
         </div>
         <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
           <div className="space-y-3">
-            <h3 className="tracki uppercase dark:text-gray-50">App</h3>
+            <h3 className="tracki uppercase dark:text-gray-50">
+              <LocaleByNameExtractor localeName="app" />
+            </h3>
             <ul className="space-y-1">
               <li>
                 <Link href="/" className="hover:underline">
-                  Main page
+                  <LocaleByNameExtractor localeName="mainPage" />
                 </Link>
               </li>
               <li>
                 <Link href="/editor" className="hover:underline">
-                  Editor
+                  <LocaleByNameExtractor localeName="editor" />
                 </Link>
               </li>
               <li>
                 <Link href="/auth/sign-in" className="hover:underline">
-                  Sign in
+                  <LocaleByNameExtractor localeName="signIn" />
                 </Link>
               </li>
               <li>
                 <Link href="/auth/sign-up" className="hover:underline">
-                  Sign up
+                  <LocaleByNameExtractor localeName="signUp" />
                 </Link>
               </li>
             </ul>
           </div>
           <div className="space-y-3">
-            <h3 className="uppercase dark:text-gray-50">Created by</h3>
+            <h3 className="uppercase dark:text-gray-50">
+              <LocaleByNameExtractor localeName="createdBy" />
+            </h3>
             <ul className="space-y-1">
               <li>
                 <a
@@ -87,7 +92,10 @@ export function Footer() {
             </ul>
           </div>
           <div className="space-y-3">
-            <div className="uppercase dark:text-gray-50">RS-school course</div>
+            <div className="uppercase dark:text-gray-50">
+              {' '}
+              <LocaleByNameExtractor localeName="rsSchoolCourse" />
+            </div>
             <div className="flex justify-start space-x-3">
               <Link
                 rel="noopener noreferrer"
@@ -112,7 +120,7 @@ export function Footer() {
         </div>
       </div>
       <div className="py-6 text-sm text-center dark:text-gray-400">
-        Established in 2023
+        <LocaleByNameExtractor localeName="establishedIn2023" />
       </div>
     </footer>
   );

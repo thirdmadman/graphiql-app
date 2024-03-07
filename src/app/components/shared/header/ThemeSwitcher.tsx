@@ -12,7 +12,8 @@ export function ThemeSwitcher() {
       src="images/svg/icons/icon-dark-mode.svg"
       width="24"
       height="24"
-      alt="light"
+      alt="dark"
+      className="min-w-6"
     />
   );
 
@@ -22,6 +23,7 @@ export function ThemeSwitcher() {
       width="24"
       height="24"
       alt="light"
+      className="min-w-6"
     />
   );
 
@@ -34,7 +36,7 @@ export function ThemeSwitcher() {
   const isDark = theme === 'dark';
 
   return (
-    <div>
+    <div className="flex items-center">
       <button onClick={() => setTheme(isDark ? 'light' : 'dark')}>
         {isDark ? lightModeImage : darkModeImage}
       </button>

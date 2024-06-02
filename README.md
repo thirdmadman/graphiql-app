@@ -10,6 +10,8 @@ This project bootstrapped with [`create-next-app`](https://github.com/vercel/nex
 - [React](https://react.dev/)
 - [NEXT.JS](https://nextjs.org/)
 - [NextUI](https://nextui.org/)
+- [Vitest](https://vitest.dev/)
+- [React Testing Library](https://testing-library.com/)
 
 ## Getting Started
 

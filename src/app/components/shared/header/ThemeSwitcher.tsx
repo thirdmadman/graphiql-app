@@ -9,7 +9,7 @@ export function ThemeSwitcher() {
 
   const darkModeImage = (
     <Image
-      src="images/svg/icons/icon-dark-mode.svg"
+      src="/images/svg/icons/icon-dark-mode.svg"
       width="24"
       height="24"
       alt="dark"

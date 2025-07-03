@@ -5,6 +5,7 @@ import './globals.css';
 import { Footer } from './components/shared/footer/Footer';
 import { LocaleProvider } from '@/locales/localeProvider';
 import { StoreProvider } from '@/lib/redux/StoreProvider';
+import { GoogleTagManager } from '@next/third-parties/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -53,6 +54,7 @@ export default function RootLayout({
         />
         <link rel="manifest" href="/favicons/manifest.json" />
       </head>
+      <GoogleTagManager gtmId="GTM-T7999C3W" />
       <body className={inter.className}>
         <LocaleProvider>
           <StoreProvider>

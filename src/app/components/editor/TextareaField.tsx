@@ -70,8 +70,8 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
       case Mode.Readonly:
         return data?.textareaData.error
           ? ''
-          : prettifyJSON(data?.textareaData.content as object)?.response ??
-              responseFieldPlaceholder;
+          : (prettifyJSON(data?.textareaData.content as object)?.response ??
+              responseFieldPlaceholder);
       default:
         return '';
     }
@@ -237,9 +237,9 @@ export function TextareaField({ mode, data, isLoading }: ITextareaFieldProps) {
               <p className="text-red-600 text-sm">{`${processingRequestError}: ${data.textareaData.error}`}</p>
             )}
             {prettifyJSON(data)?.error && (
-              <p className="text-red-600 pt-2 text-sm">{`${responseFormatError}: ${prettifyJSON(
-                data
-              )?.error}`}</p>
+              <p className="text-red-600 pt-2 text-sm">{`${responseFormatError}: ${
+                prettifyJSON(data)?.error
+              }`}</p>
             )}
           </div>
         )}

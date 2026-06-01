@@ -70,9 +70,11 @@ export function LoginForm() {
         router.replace('/editor');
       } else {
         const data = (await response.json()) as errorResponse;
-        response.status === 401
-          ? setSignInError(data.errorCode)
-          : setSignInError(UnknownError);
+        if (response.status === 401) {
+          setSignInError(data.errorCode);
+        } else {
+          setSignInError(UnknownError);
+        }
       }
     } catch (e) {
       if (e instanceof Error) {

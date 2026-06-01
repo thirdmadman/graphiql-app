@@ -3,9 +3,7 @@ import { getAuth } from 'firebase-admin/auth';
 
 export const getAdminAuth = () => {
   try {
-    const SERVICE_ACCOUNT = process.env.SERVICE_ACCOUNT
-      ? process.env.SERVICE_ACCOUNT
-      : '';
+    const SERVICE_ACCOUNT = process.env.SERVICE_ACCOUNT ?? '';
 
     if (!SERVICE_ACCOUNT || SERVICE_ACCOUNT.length <= 0) {
       return null;
@@ -30,6 +28,7 @@ export const getAdminAuth = () => {
 
     return getAuth(app);
   } catch (e) {
+    console.error(e);
     return null;
   }
 };

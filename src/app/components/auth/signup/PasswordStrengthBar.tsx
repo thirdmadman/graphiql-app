@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-regexp-exec */
 'use client';
 
 import React, { useCallback, useContext, useEffect, useState } from 'react';

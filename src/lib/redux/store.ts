@@ -7,7 +7,7 @@ const reducers = {
 
 const combinedReducer = combineReducers<typeof reducers>(reducers);
 
-const store = configureStore({
+export const store = configureStore({
   reducer: combinedReducer,
 });
 

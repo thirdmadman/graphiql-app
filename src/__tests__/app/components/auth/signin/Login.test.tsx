@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import Login from '@/app/components/auth/signin/Login';
 import { render, screen } from '@testing-library/react';
 import { en } from '@/locales/locale';

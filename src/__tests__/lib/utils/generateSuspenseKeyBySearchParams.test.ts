@@ -16,9 +16,7 @@ describe('generateSuspenseKeyBySearchParams', () => {
 
     expect(resultArray).toBe('');
 
-    const resultObjectEmpty = generateSuspenseKeyBySearchParams(
-      {} as unknown as { a: string }
-    );
+    const resultObjectEmpty = generateSuspenseKeyBySearchParams({});
 
     expect(resultObjectEmpty).toBe('');
   });

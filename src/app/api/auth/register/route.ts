@@ -11,6 +11,7 @@ interface IRegisterData {
 }
 
 function isFirebaseAuthError(error: FirebaseError): error is FirebaseAuthError {
+  console.error(error);
   return true;
 }
 

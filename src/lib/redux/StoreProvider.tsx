@@ -6,6 +6,7 @@ import { setupStore, TAppStore } from './store';
 
 export function StoreProvider({ children }: { children: React.ReactNode }) {
   const storeRef = useRef<TAppStore>();
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
   if (!storeRef.current) {
     storeRef.current = setupStore();
   }

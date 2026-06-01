@@ -26,6 +26,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ isLogged: false }, { status: 401 });
     }
   } catch (e) {
+    console.error(e);
     const options = {
       name: 'session',
       value: '',

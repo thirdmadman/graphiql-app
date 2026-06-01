@@ -1,4 +1,3 @@
-import { isAuth, middleware } from '@/middleware';
 import { NextRequest } from 'next/server';
 
 const fetchMock = vi.fn(() => ({
@@ -6,22 +5,27 @@ const fetchMock = vi.fn(() => ({
   status: 200,
 }));
 
-const urlPatternExecMock = vi.fn(() => ({}));
+const urlPatternExecMock = vi.fn();
+
+vi.mock('next/server', async () => {
+  const actual =
+    await vi.importActual<typeof import('next/server')>('next/server');
+
+  class MockURLPattern {
+    exec = urlPatternExecMock;
+  }
+
+  return {
+    ...actual,
+    URLPattern: MockURLPattern,
+  };
+});
+
+import { isAuth, middleware } from '@/middleware';
 
 vi.stubGlobal('fetch', fetchMock);
 
 describe('middleware', () => {
-  vi.mock('next/server', async () => {
-    const actual =
-      await vi.importActual<typeof import('next/server')>('next/server');
-    return {
-      ...actual,
-      URLPattern: vi.fn(() => ({
-        exec: urlPatternExecMock,
-      })),
-    };
-  });
-
   it('should return false if no cookies in request', async () => {
     const request = new NextRequest('http://localhost/');
 

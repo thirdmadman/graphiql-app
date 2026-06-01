@@ -51,6 +51,7 @@ export const prettifyGQLQuery = (query: string): IPrettifyQueryResult => {
       query: formattedQuery,
     };
   } catch (error) {
+    console.error(error);
     return {
       query,
       errorMessage: true,

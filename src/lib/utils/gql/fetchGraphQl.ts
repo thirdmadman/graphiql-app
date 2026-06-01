@@ -50,12 +50,13 @@ export async function gqlFetchApi<T extends object>(
       }
     }
 
-    if (!responseBody || !responseBody?.data) {
+    if (!responseBody?.data) {
       return { error: 'Server response is empty' };
     }
 
     return { resp: responseBody.data };
   } catch (err) {
+    console.error(err);
     return { error: 'ERROR DURING FETCH REQUEST' };
   }
 }

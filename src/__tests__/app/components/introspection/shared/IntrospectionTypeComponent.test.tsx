@@ -1,10 +1,8 @@
 import { IntrospectionTypeComponent } from '@/app/components/introspection/shared/IntrospectionTypeComponent';
 import {
-  IIntrospectionEnumType,
   IIntrospectionInputObjectType,
   IIntrospectionInterfaceType,
   IIntrospectionObjectType,
-  IIntrospectionScalarType,
   IIntrospectionSchema,
   IIntrospectionUnionType,
 } from '@/types/introspectionImportedTypes';
@@ -65,13 +63,11 @@ describe('IntrospectionTypeComponent', () => {
   it('should render IntrospectionEnumTypeComponent', () => {
     render(
       <IntrospectionTypeComponent
-        type={
-          {
-            name: 'NameOfEnm',
-            kind: 'ENUM',
-            enumValues: [],
-          } as IIntrospectionEnumType
-        }
+        type={{
+          name: 'NameOfEnm',
+          kind: 'ENUM',
+          enumValues: [],
+        }}
         schema={{} as unknown as IIntrospectionSchema}
       />
     );
@@ -134,12 +130,10 @@ describe('IntrospectionTypeComponent', () => {
   it('should render IntrospectionInterfaceTypeComponent', () => {
     render(
       <IntrospectionTypeComponent
-        type={
-          {
-            name: 'NameOfScal',
-            kind: 'SCALAR',
-          } as IIntrospectionScalarType
-        }
+        type={{
+          name: 'NameOfScal',
+          kind: 'SCALAR',
+        }}
         schema={{} as unknown as IIntrospectionSchema}
       />
     );

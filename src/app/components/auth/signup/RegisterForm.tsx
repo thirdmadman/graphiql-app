@@ -109,13 +109,16 @@ export function RegisterForm() {
             router.replace('/editor');
           }
         } catch (e) {
+          console.error(e);
           router.push('/auth/sign-in');
         }
       } else {
         const data = (await response.json()) as ErrorResponse;
-        response.status === 401
-          ? setSignUpError(data.errorCode)
-          : setSignUpError(SignUpErrorCodes.UnknownError);
+        if (response.status === 401) {
+          setSignUpError(data.errorCode);
+        } else {
+          setSignUpError(SignUpErrorCodes.UnknownError);
+        }
       }
     } catch (e) {
       if (e instanceof Error) {

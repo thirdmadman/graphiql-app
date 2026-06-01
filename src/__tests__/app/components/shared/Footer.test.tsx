@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { Footer } from '@/app/components/shared/footer/Footer';
 import { render, screen } from '@testing-library/react';
 
